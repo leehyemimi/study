@@ -2,7 +2,7 @@
 
 
 
-1. D3.js ::
+## D3.js 
 
 – <http://d3js.org/>
 
@@ -30,9 +30,7 @@
 
 
 
-
-
-2. Highcharts ::
+## Highcharts 
 
 – <http://www.highcharts.com/
 
@@ -50,7 +48,7 @@
 
 
 
-3. amCharts ::
+## amCharts 
 
 – <http://www.amcharts.com/
 
@@ -68,5 +66,9 @@
 
 
 
-4. Chart.js
+## Chart.js
+
+– https://www.chartjs.org/
+
+[튜토리얼](https://code.tutsplus.com/tutorials/getting-started-with-chartjs-introduction--cms-28278)
 
