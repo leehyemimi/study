@@ -1,7 +1,7 @@
-@charset "euc-kr";
+@charset "UTF-8";
 html{height:100%;}
-body {height:100%; margin:0; padding:0; font-size:12px; -webkit-text-size-adjust:none; font-family:"Malgun Gothic","∏º¿∫ ∞ÌµÒ",'Courier New',sans-serif; color:#666;font-weight:normal}
-* {margin:0; padding:0;   font-weight:600; font-family:"Malgun Gothic","∏º¿∫ ∞ÌµÒ",'Courier New',sans-serif; -webkit-print-color-adjust:exact; -webkit-text-size-adjust:none; font-weight:normal}
+body {height:100%; margin:0; padding:0; font-size:12px; -webkit-text-size-adjust:none; font-family:"Malgun Gothic","ÎßëÏùÄ Í≥†Îîï",'Courier New',sans-serif; color:#666;font-weight:normal}
+* {margin:0; padding:0;   font-weight:600; font-family:"Malgun Gothic","ÎßëÏùÄ Í≥†Îîï",'Courier New',sans-serif; -webkit-print-color-adjust:exact; -webkit-text-size-adjust:none; font-weight:normal}
 
 table {border-collapse: collapse}
 img,fieldset {border:0;}
@@ -16,8 +16,8 @@ var {padding:0 3px}
 legend, caption {display:none}
 input, select {vertical-align:middle}
 strong{font-weight:bold;}
-a {font-family:"Malgun Gothic","∏º¿∫ ∞ÌµÒ", Dotum, Gulim, Arial, AppleGothic, verdana !important; color:#444; text-decoration:none; }
-table,td,tr,div {font-family:"Malgun Gothic","∏º¿∫ ∞ÌµÒ", Dotum, Gulim, Arial, AppleGothic, verdana;  font-size:13px; color:#444;}
+a {font-family:"Malgun Gothic","ÎßëÏùÄ Í≥†Îîï", Dotum, Gulim, Arial, AppleGothic, verdana !important; color:#444; text-decoration:none; }
+table,td,tr,div {font-family:"Malgun Gothic","ÎßëÏùÄ Í≥†Îîï", Dotum, Gulim, Arial, AppleGothic, verdana;  font-size:13px; color:#444;}
 html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, address, big, cite, code, del, dfn, em, img, ins, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td {padding:0; margin:0; border:0 none}
 select, input, textarea {vertical-align:middle;font-family:Dotum, Gulim, Arial, AppleGothic, verdana, sans-serif}
 form {font-family:Gulim, Arial, AppleGothic, verdana, sans-serif}
@@ -204,7 +204,7 @@ img.big {max-width:inherit;}
 .study_list li dt span:before{content:"l";font-size:13px;color:#939393;margin:0 5px;}
 .study_list li dd{font-size:13px;margin-bottom:5px;}
 .study_list li a{text-decoration:underline;color:#009ac8;}
-.study_list li a:before{content:"¢÷";}
+.study_list li a:before{content:"‚Üó";}
 
 .link_list{position:absolute;right:50%;margin-right:-750px;top:23px;width:300px;height:500px;box-shadow:0 1px 3px rgba(0, 0, 0, 0.15);background:#fcfbb2;border:1px solid #ccc;}
 .link_list h2{padding:15px;background:#f8f7b6;letter-spacing:-3px;font-weight:bold;font-size:22px;text-align:center;margin-bottom:20px;}

@@ -1,3 +1,4 @@
+@charset "UTF-8";
 .site_guide {table-layout:fixed; border-top:1px solid #aaa; width:100%;}
 .site_guide tr th{background:#ddd; color:#444;}
 .site_guide thead tr th {border-right:1px solid #aaa; border-bottom:1px solid #aaa; background:#444; color:#fff; padding:7px 0px;}
