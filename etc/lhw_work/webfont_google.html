@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="utf-8">
+	<title>웹폰트 테스트</title>
+	<style type="text/css">
+		@font-face {
+			font-family: 'Nanum Gothic'; /* 폰트 명 */
+			font-style: normal;/* 폰트 스타일 설정 */
+			font-weight: 400; /* 폰트 굵기 */
+			src: url(//themes.googleusercontent.com/static/fonts/earlyaccess/nanumgothic/v3/NanumGothic-Regular.eot);/* IE9 호환성 보기 */
+			src: local("※"),/* 웹 브라우저가 지원하지 않는 불필요한 웹 폰트 호출을 막는데 사용 */
+			url(//themes.googleusercontent.com/static/fonts/earlyaccess/nanumgothic/v3/NanumGothic-Regular.eot?#iefix) format('embedded-opentype'), /* IE6-IE8 */
+			url(//themes.googleusercontent.com/static/fonts/earlyaccess/nanumgothic/v3/NanumGothic-Regular.woff) format('woff'); /* 표준 브라우저 */
+		}
+	</style>
+	<link href="css/comon0.css" rel="stylesheet">
+	<style type="text/css">
+		p{font-size:12px;text-align:center;}
+	</style>
+</head>
+<body>
+	<h4>webfont_google</h4>
+<p>가나다라마바사아자차카타파하</p>
+</body>
+</html>

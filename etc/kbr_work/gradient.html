@@ -1,0 +1,290 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="Generator" content="EditPlus®">
+<meta name="Author" content="">
+<meta name="Keywords" content="">
+<meta name="Description" content="">
+<title>gradient 활용</title>
+<script src="http://code.jquery.com/jquery-latest.js" type="text/javascript"></script>
+
+<style type="text/css">
+/*********************** 나눔바른고딕 ***********************/
+@import url(https://cdn.rawgit.com/openhiun/hangul/14c0f6faa2941116bb53001d6a7dcd5e82300c3f/nanumbarungothic.css);
+
+/* reset */
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,textarea,p,blockquote,th,td,input,select,textarea,button{margin:0;padding:0;}
+h1, h2, h2, h4, h5, h6, p {margin-top:0;font-weight:normal;}
+html,body{height:100%;}
+body,input,textarea,select,button,table{font-size:16px;color:#222;line-height:1.75;font-family:'Nanum Barun Gothic', '나눔바른고딕', 'Nanum Gothic', '나눔고딕', '맑은 고딕', Dotum, '돋움', Gulim, '굴림', verdana, HelveticaNeue, Apple-Gothic, Arial, sans-serif;}
+
+fieldset, img {border:0;vertical-align:top;}
+table {border-collapse:collapse; border-spacing:0; table-layout:fixed;}
+caption, th, td {text-align:left; vertical-align:top; font-weight:normal;}
+caption, label, legend {visibility:hidden;overflow:hidden;width:0;height:0;font-size:0;line-height:0}
+ul, ol, dl, li {list-style:none;}
+abbr, acronym {border-bottom:.1em dotted;cursor:help;}
+article, aside, details, figcaption, figure, footer, header, main, menu, nav, section {display:block;}
+a,a:hover,a:active,a:visited,a:focus{color:inherit;text-decoration:none}
+button{overflow:visible;margin:0;padding:0;border:0;outline:0;background:none;cursor:pointer;}
+button::-moz-focus-inner{padding:0;border:0}
+
+.mt30{margin-top:30px !important;}
+.mt60{margin-top:60px !important;}
+.mt100{margin-top:100px !important;}
+.mt200{margin-top:200px !important;}
+.mb100{margin-bottom:100px !important;}
+.mr10{margin-right:10px;}
+.ml0{margin-left:0 !important;}
+
+.tc{text-align:center;}
+.bold{color:#000;font-weight:bold;}
+.underline{text-decoration:underline;}
+.red{color:red;}
+.white{color:#fff;}
+
+body{background-color:#f1f1f1;}
+.wrap{width:70%;margin:50px auto;padding:30px 50px;box-shadow:0 1px 3px rgba(0, 0, 0, 0.15);background-color:#fff}
+
+h1{margin:50px 0 80px;font-size:40px;color:#000;text-align:center;font-weight:bold;}
+h2{margin:60px 0 10px;font-size:24px;}
+.txt{word-break:break-all;word-wrap:break-word;margin:15px 0;}
+
+.code_area .tit{margin:40px 0 20px;font-size:18px;}
+.code_area .code{display:block;border-left:10px solid #333;padding-left:50px;margin:10px 0;font-family:verdana;}
+
+.list li{list-style-type:disc;margin:30px 0 5px 15px;}
+.list li ul li{list-style-type:upper-roman;list-style-position:inside;margin:50px 0 5px 0;}
+
+.tbl_code{width:100%;}
+.tbl_code thead th{background-color:#444;height:50px;line-height:50px;color:#fff;font-weight:bold;vertical-align:middle;text-align:center;border:1px solid #aaa;}
+.tbl_code thead th img{vertical-align:middle;}
+.tbl_code tbody td{padding:10px;}
+.tbl_code tbody tr:nth-child(even){background-color:#eee;}
+.tbl_code tbody td{border:1px solid #aaa;}
+.tbl_code tbody td:first-child{text-align:center;}
+.tbl_code tbody.tc td{text-align:center;}
+
+.figure{margin:100px 0 40px;text-align:center;}
+.figure .figcaption{font-weight:bold;color:#000;margin-top:10px;}
+
+pre{background-color:#222;color:#fff;border-radius:10px;padding:10px 20px;font-family:verdana;}
+
+.box_area{overflow:hidden;width:80%;padding:2%;background:#ddd;}
+
+
+.question dt{margin:100px 0 40px;font-size:24px;cursor:pointer;transition:all .2s ease-in-out;}
+.question dt:hover {font-size:30px;color:red;}
+
+.question dd{display:none;}
+
+ul.list li .test_box{margin:10px 0 20px 0;width:60%;height:50px;background:linear-gradient(orange, yellow, green);}
+ul.list li ul li .test_box{background:linear-gradient(to right, black, #D5D5D5);}
+ul.list li ul li .test_box.type2{background:linear-gradient(to left, black, #D5D5D5);}
+ul.list li ul li + li .test_box{background:linear-gradient(to bottom right, red, yellow);}
+ul.list li ul li + li + li .test_box{background:linear-gradient(to top left, red, yellow);}
+
+ul.list li + li + li .test_box{background:linear-gradient(45deg, skyblue, yellow, green);}
+ul.list li + li + li .test_box.type2{background:linear-gradient(90deg, skyblue, yellow, green);}
+ul.list li + li + li .test_box.type3{background:linear-gradient(180deg, skyblue, yellow, green);}
+
+ul.list li + li + li + li .test_box{background:linear-gradient(to right, skyblue 5%, green 20%, white);}
+
+.etc_area .etc_list{overflow:hidden;}
+.etc_area .etc_list li{float:left;background:black;width:20%;height:250px;margin:0 10px;background: linear-gradient(180deg,#7b2be4 5%, #3ba2fe);}
+.etc_area .etc_list li:first-child{margin-left:0;}
+.etc_area .etc_list li + li {background: linear-gradient(180deg,#f5bc15 5%, #18a4a2);}
+.etc_area .etc_list li + li + li {
+background: linear-gradient(90deg,#7b2be4 50%, #3ba2fe 50%);
+background: -webkit-linear-gradient(180deg,#7b2be4 50%, #3ba2fe 50%); /* Safari 5.1 ~ 6.0, chrome 10.0~25 */
+background: -moz-linear-gradient(90deg,#7b2be4 50%, #3ba2fe 50%); /* Firefox 3.6 ~ 15 */
+filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#7b2be4', endColorstr='#3ba2fe',,GradientType=1); /*IE6~8*/
+zoom: 1;
+}
+.etc_area .etc_list li + li + li + li {background: linear-gradient(to left top,#f5bc15 50%, #18a4a2 50%);}
+</style>
+<script type="text/javascript">
+$(function() {
+	$(".question dt").on('click', function(){
+		$(".question dd").fadeToggle()
+	});
+});
+</script>
+</head>
+<body>
+
+<div class="wrap">
+
+<h1>Gradient (linear-gradient) 활용</h1>
+
+<h2>gradient의 종류</h2>
+<div class="txt">
+	- linear-gradient : 선형 그레디언트<br />
+	- radial-gradient : 반지름형 그레디언트<br />
+	- repeating-gradient : 반복형 그레디언트<br /><br />
+
+	css gradient는 색상이 아닌, 크기가 없는 이미지이다. 그래서 css로 색상을 지정할 때 background-color 혹은 단축 속성 background 속성을 사용했다면,<br />
+	그레디언트를 지정할 때, background-image 속성을 사용한다.<br />
+	그레디언트는 브라우저가 생성하는 것이기 때문에 이미지를 사용했을 때보다 용량이 훨씬 적고, 화면을 확대해도 이미지보다 선명하게 나오는 장점이 있다.
+</div>
+
+<h2>linear-gradient (선형 그레디언트)</h2>
+<ul class="list">
+	<li>
+		<strong>색상 선택(color stops)</strong><br />
+		우선 선을 그릴려면 색을 설정(color stop)해야 하고, 시작 색상, 끝 색상, 이 2가지는 필수로 선택한다. 그리고 여러 가지 색상을 넣을 때 쉼표로 분리해서 적는다.<br />
+		예) background-image:linear-gradient(orange, yellow, green);<br/ >
+		색상은, 영문 색상이름, rgba, hsla 등 가능하다.
+
+		<div class="test_box"></div>
+	</li>
+	<li>
+		<strong>방향 또는 각설정</strong><br />
+		방향을 지정할 때, 시작 지점을 생략하며, 도착 지점만  to를 사용 지정합니다.<br />
+		<ul>
+			<li>
+				<strong>왼쪽에서 오른쪽으로 지정</strong>
+				<p>linear-gradient(direction, color-stop1, color-stop2, ...);</p>
+				<p>background:linear-gradient(to right, black, #D5D5D5); (왼쪽에서 오른쪽)</p>
+
+				<div class="test_box"></div>
+
+				<p>background:linear-gradient(to left, black, #D5D5D5); (오른쪽에서 왼쪽)</p>
+
+				<div class="test_box type2"></div>
+			</li>
+			<li>
+				<strong>상단에서 오른쪽으로</strong>
+				<p>background:linear-gradient(to bottom right, red, yellow);</p>
+
+				<div class="test_box"></div>
+			</li>
+			<li>
+				<strong>하단에서 왼쪽으로</strong>
+				<p>background:linear-gradient(to top left, red, yellow);</p>
+
+				<div class="test_box"></div>
+			</li>
+		</ul>
+	</li>
+	<li>
+		<strong>각도 지정하기</strong>
+		<p>각도를 지정하지 않으면, 하나는 자동으로 주어진 방향에 기초하여 결정</p>
+		<p class="mt20">0deg는 아래에서 위 방향</p>
+		<p>45deg는 하단 왼쪽에서 상단 오른쪽 방향(즉 45도 방향임)</p>
+		<p>90deg는 왼쪽에서 오른쪽 방향</p>
+		<p>180deg는 상단에서 하단 방향</p>
+		<p>음수값도 가능함. -45deg </p>
+
+		<p>- background:linear-gradient(45deg, skyblue, yellow, green);}</p>
+
+		<div class="test_box"></div>
+
+		<p>- background:linear-gradient(90deg, skyblue, yellow, green);}</p>
+
+		<div class="test_box type2"></div>
+
+		<p>- background:linear-gradient(180deg, skyblue, yellow, green);}</p>
+
+		<div class="test_box type3"></div>
+	</li>
+	<li>
+		<strong>색상점 위치 지정하기(stop position)</strong>
+		<p>그레디언트 축에서 색상점(color stop)의 위치를 지정할 수 있는데 % 나 길이값(20px 등)도 가능하다.</p>
+		<p>background:linear-gradient(to right, skyblue 5%, green 20%, white);}</p>
+
+		<div class="test_box"></div>
+	</li>
+</ul>
+
+<h3 class="mt100">* linear-gradient 로 배경 디자인 만들기</h3>
+<div class="etc_area">
+	<ul class="etc_list">
+		<li>&nbsp;</li>
+		<li>&nbsp;</li>
+		<li>&nbsp;</li>
+		<li>&nbsp;</li>
+	</ul>
+</div>
+
+<h3 class="mt100">* linear-gradient 접두어(vendor prefix)</h3>
+<div class="box_area">
+	<p>background-color: skyblue; <br>
+	background: -webkit-linear-gradient(left top, white); /* Safari 5.1 ~ 6.0, chrome 10.0~25 */<br>
+	background: -o-linear-gradient(bottom right, white); /* Opera 11.1~ 12.0 */<br>
+	background: -moz-linear-gradient(bottom right, white); /* Firefox 3.6 ~ 15 */</p>
+	<p>filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='16진수 색상값', endColorstr='16진수 색상값'); /*IE6~8*/</p>
+	<p>-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='16진주', endColorstr='16진수')"; /*IE8+*/</p>
+	<p>background: linear-gradient(to bottom right, skyblue, white); /*표준 문법 */} </p>
+</div>
+
+<p class="mt20">참고 : <a href="http://angrytools.com/gradient/" target="_blank">http://angrytools.com/gradient/</a></p>
+
+
+<h2>Repeating gradient (반복형 그레디언트)</h2>
+<p>반복형 그레디언트는, 그레디언트를 반복 패턴으로 보여준다.</p>
+<p>예) #linear1{background:repeating-linear-gradient(white, yellow 20px, green 40px);}</p>
+<p>white가 시작점, yellow 20px는 중간색이며, green 40px는 마지막 색상점이다. 그레디언트 크기는 마지막 색상점 위치와 크기와 동일하다.</p>
+<style type="text/css">
+.repeat_list{margin-top:20px;}
+.repeat_list li{margin:20px 0;}
+.repeat_list li .test_box{margin:10px 0 20px 0;width:60%;height:150px;background:repeating-linear-gradient(white,white 5%, #18a4a2 5%, #18a4a2 10%);}
+.repeat_list li + li .test_box{background:repeating-linear-gradient(45deg, white, white 5%, #18a4a2 5%, #18a4a2 10%);}
+.repeat_list li + li .test_box.type2{background:repeating-linear-gradient(-45deg, #6dabdb, #6dabdb 12px, #fff 12px, #fff 20px, #d86e6d 20px, #d86e6d 32px, #fff 32px, #fff 40px);}
+</style>
+<ul class="repeat_list">
+	<li>
+		<strong>1. repeating-linear-gradient(white,white 5%, #18a4a2 5%, #18a4a2 10%)</strong><br />
+		<div class="test_box"></div>
+	</li>
+	<li>
+		<strong>2. repeating-linear-gradient(45deg, white, white 5%, #18a4a2 5%, #18a4a2 10%)</strong><br />
+		<div class="test_box"></div>
+
+		<div class="test_box type2"></div>
+	</li>
+</ul>
+<h2>브라우저 호환성</h2>
+<table class="tbl_code mt60">
+	<colgroup>
+		<col style="width:*" />
+		<col style="width:*" />
+	</colgroup>
+	<thead>
+		<tr>
+			<th scope="col"><img src="./images/icon-chrome.png" alt="Google Chrome"></th>
+			<th scope="col"><img src="./images/icon-ie.png" alt="Google Chrome"></th>
+			<th scope="col"><img src="./images/icon-firefox.png" alt="Google Chrome"></th>
+			<th scope="col"><img src="./images/icon-safari.png" alt="Google Chrome"></th>
+			<th scope="col"><img src="./images/icon-opera.png" alt="Google Chrome"></th>
+		</tr>
+	</thead>
+	<tbody class="tc">
+		<tr>
+			<td>지원</td>
+			<td>10</td>
+			<td>지원</td>
+			<td>지원</td>
+			<td>지원</td>
+		</tr>
+		<tr>
+			<td>-webkit-</td>
+			<td>-ms-</td>
+			<td>-moz-</td>
+			<td>-webkit-</td>
+			<td>-o-</td>
+		</tr>
+	</tbody>
+</table>
+
+<h2>참고자료</h2>
+<ul class="list">
+	<li><a href="http://www.colorzilla.com/gradient-editor/" target="_blank">CSS Gradient Generator (ie7 까지 지원)</a></li>
+	<li><a href="http://angrytools.com/gradient/" target="_blank">CSS Gradient Generator (각도지정 가능-ie7 지원)</a></li>
+	<li><a href="https://cssgradientbutton.com/" target="_blank">button css 자동생성</a></li>
+</ul>
+
+</div>
+</body>
+</html>

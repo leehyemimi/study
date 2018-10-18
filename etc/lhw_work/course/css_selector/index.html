@@ -1,0 +1,322 @@
+<!doctype html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<title>css_선택자</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<link rel="stylesheet" type="text/css" href="css/comon.css">
+	<script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$(".result_box").hide();
+			$(".result_btn").click(function(){
+				$(this).parent(".inner_content").find(".result_box").slideToggle(200);
+			});
+		});
+	</script>
+</head>
+<body>
+	<div class="wrap">
+		<h1>CSS Selector</h1>
+		
+		<!-- content -->
+		<div class="content">
+			<div class="inner_content">
+				<h3>형제 선택자</h3>
+				<p>
+					형제 선택자(Sibling Selector)는 어떤 요소의 형제 요소를 선택하는 선택자입니다.
+				</p>
+				<pre class="code_css">
+<span>h5 ~ p</span> : h5 요소의 형제 요소 중 p 요소를 선택
+
+<!-- &lt;div class="sibling_selector"&gt;
+	&lt;h5&gt;Lorem ipsum dolor sit amet.&lt;/h5&gt;
+	&lt;p&gt;Lorem ipsum dolor sit amet.&lt;/p&gt;
+	&lt;p&gt;Lorem ipsum dolor sit amet.&lt;/p&gt;
+	&lt;div&gt;
+		&lt;p&gt;Lorem ipsum dolor sit amet.&lt;/p&gt;
+	&lt;/div&gt;
+&lt;/div&gt; -->
+				</pre>
+			
+				<style type="text/css">
+					.ex1 h5 ~ p{color:red;}
+				</style>
+				<div class="ex_box ex1">
+					<h5>Lorem ipsum dolor sit amet.</h5>
+					<p>Lorem ipsum dolor sit amet.</p>
+					<p>Lorem ipsum dolor sit amet.</p>
+					<div>
+						<p>Lorem ipsum dolor sit amet.</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- //content -->
+
+		<!-- content -->
+		<div class="content">
+			<div class="inner_content">
+				<h3>인접 형제 선택자</h3>
+				<p>
+					인접 형제 선택자(Adjacent Sibling Selector)는 어떤 요소의 형제 요소 중 첫번째 요소를 선택합니다.
+				</p>
+				<pre class="code_css">
+<span>h5 + p</span> : h5 요소의 형제 요소 중 첫번째 p 요소를 선택
+				</pre>
+			
+				<style>
+					.ex2 h5 + p {color: red;}
+				</style>
+				<div class="ex_box ex2">
+					<h5>Lorem ipsum dolor sit amet.</h5>
+					<p>Lorem ipsum dolor sit amet.</p>
+					<p>Lorem ipsum dolor sit amet.</p>
+					<div>
+						<p>Lorem ipsum dolor sit amet.</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- //content -->
+
+		<!-- content -->
+		<div class="content">
+			<div class="inner_content">
+				<h3>속성선택자</h3>
+				<p>
+					속성 선택자(Attribute Selector)는 특정 속성(attribute)을 갖고 있거나 특정 속성이 특정 값 등을 갖고 있는 요소(element)를 선택합니다.
+				</p>
+
+				<h4>[attributename]</h4>
+				<p>
+					attributename 속성을 가진 요소를 선택합니다.
+				</p>
+				<pre class="code_css">
+<span>h5[class]</span> : class 속성을 가진 h5 요소를 선택합니다.
+				</pre>
+				<style>
+					.ex3 h5[class] {color: red;}
+				</style>
+				<div class="ex_box ex3">
+					<h5 class="tit">Lorem ipsum dolor sit amet.</h5>
+					<h5>Lorem ipsum dolor sit amet.</h5>
+				</div>
+
+				<h4>[attributename="value"]</h4>
+				<p>
+					attributename 속성을 가진 요소를 선택합니다. <strong class="txt_red">(속성값이 정확히 일치해야 함!!)</strong>
+				</p>
+				<pre class="code_css">
+<span>h5[class="tit"]</span> : class 속성의 값이 tit인 h5 요소를 선택
+&lt;h5 class="tit">Lorem ipsum dolor sit amet.&lt;/h5>
+&lt;h5 class="tit txt">Lorem ipsum dolor sit amet.&lt;/h5>
+				</pre>
+				<style>
+					.ex4 h5[class="tit"] {color: red;}
+				</style>
+				<div class="ex_box ex4">
+					<h5 class="tit">Lorem ipsum dolor sit amet.</h5>
+					<h5 class="tit txt">Lorem ipsum dolor sit amet.</h5>
+				</div>
+
+				<h4>[attributename~="value"]</h4>
+				<p>
+					attributename 속성의 값이 value를  <strong class="txt_red">포함한 요소</strong>를 선택합니다.
+				</p>
+				<pre class="code_css">
+<span>h5[class~="tit"]</span> : class 속성의 값이 tit 포함한 h5 요소를 선택(포함 여부는 단어 기준)
+&lt;h5 class="tit">Lorem ipsum dolor sit amet.&lt;/h5>
+&lt;h5 class="tit txt">Lorem ipsum dolor sit amet.&lt;/h5>
+				</pre>
+				<style>
+					.ex5 h5[class~="tit"] {color: red;}
+				</style>
+				<div class="ex_box ex5">
+					<h5 class="tit">Lorem ipsum dolor sit amet.</h5>
+					<h5 class="tit txt">Lorem ipsum dolor sit amet.</h5>
+				</div>
+
+				<h4>[attributename|="value"]</h4>
+				<p>
+					attributename 속성의 값이 value이거나 <strong class="txt_red">value-로 시작하는 요소</strong>를 선택합니다.
+				</p>
+				<pre class="code_css">
+<span>h5[class|="tit"]</span> : class 속성의 값이 tit이거나 tit-로 시작하는 h5 요소를 선택
+&lt;h5 class="tit">Lorem ipsum dolor sit amet.&lt;/h5>
+&lt;h5 class="tit txt">Lorem ipsum dolor sit amet.&lt;/h5>
+&lt;h5 class="tit-txt">Lorem ipsum dolor sit amet.&lt;/h5>
+				</pre>
+				<style>
+					.ex6 h5[class|="tit"] {color: red;}
+				</style>
+				<div class="ex_box ex6">
+					<h5 class="tit">Lorem ipsum dolor sit amet.</h5>
+					<h5 class="tit txt">Lorem ipsum dolor sit amet.</h5>
+					<h5 class="tit-txt">Lorem ipsum dolor sit amet.</h5>
+				</div>
+
+				<h4>[attributename^="value"]</h4>
+				<p>
+					attributename 속성의 값이 value로 시작하는 요소를 선택합니다. <strong class="txt_red">(css3)</strong>
+				</p>
+				<pre class="code_css">
+<span>h5[class^="tit"]</span> : class 속성의 값이 tit로 시작하는 h5 요소를 선택 (문자열 기준, 단어기준 X)
+&lt;h5 class="tit txt">Lorem ipsum dolor sit amet.&lt;/h5>
+&lt;h5 class="tit-txt">Lorem ipsum dolor sit amet.&lt;/h5>
+&lt;h5 class="tittxt">Lorem ipsum dolor sit amet.&lt;/h5>
+&lt;h5 class="txt-tIt">Lorem ipsum dolor sit amet.&lt;/h5>
+				</pre>
+				<style>
+					.ex7 h5[class^="tit"] {color: red;}
+				</style>
+				<div class="ex_box ex7">
+					<h5 class="tit txt">Lorem ipsum dolor sit amet.</h5>
+					<h5 class="tit-txt">Lorem ipsum dolor sit amet.</h5>
+					<h5 class="tittxt">Lorem ipsum dolor sit amet.</h5>
+					<h5 class="txt-tit">Lorem ipsum dolor sit amet.</h5>
+				</div>
+
+				<h4>[attributename$="value"]</h4>
+				<p>
+					attributename 속성의 값이 value로 끝나는 요소를 선택합니다. <strong class="txt_red">(css3)</strong>
+				</p>
+				<pre class="code_css">
+<span>h5[class$="txt"]</span> : class 속성의 값이txt로 끝나는  h5 요소를 선택 (문자열 기준)
+&lt;h5 class="tit txt">Lorem ipsum dolor sit amet.&lt;/h5>
+&lt;h5 class="tit-txt">Lorem ipsum dolor sit amet.&lt;/h5>
+&lt;h5 class="tittxt">Lorem ipsum dolor sit amet.&lt;/h5>
+&lt;h5 class="txt-tIt">Lorem ipsum dolor sit amet.&lt;/h5>
+				</pre>
+				<style>
+					.ex8 h5[class$="txt"] {color: red;}
+				</style>
+				<div class="ex_box ex8">
+					<h5 class="tit txt">Lorem ipsum dolor sit amet.</h5>
+					<h5 class="tit-txt">Lorem ipsum dolor sit amet.</h5>
+					<h5 class="tittxt">Lorem ipsum dolor sit amet.</h5>
+					<h5 class="txt-tit">Lorem ipsum dolor sit amet.</h5>
+				</div>
+
+
+				<h4>[attributename*="value"]</h4>
+				<p>
+					attributename 속성의 값이 value를 포함한 요소를 선택합니다. <strong class="txt_red">(css3)</strong>
+				</p>
+				<pre class="code_css">
+<span>h5[class*="tit"]</span> : class 속성의 값이 tit를 포함한 h5 요소를 선택 (문자열 기준)
+&lt;h5 class="tit txt">Lorem ipsum dolor sit amet.&lt;/h5>
+&lt;h5 class="tit-txt">Lorem ipsum dolor sit amet.&lt;/h5>
+&lt;h5 class="tittxt">Lorem ipsum dolor sit amet.&lt;/h5>
+&lt;h5 class="txt-tIt">Lorem ipsum dolor sit amet.&lt;/h5>
+				</pre>
+				<style>
+					.ex9 h5[class*="tit"] {color: red;}
+				</style>
+				<div class="ex_box ex9">
+					<h5 class="tit txt">Lorem ipsum dolor sit amet.</h5>
+					<h5 class="tit-txt">Lorem ipsum dolor sit amet.</h5>
+					<h5 class="tittxt">Lorem ipsum dolor sit amet.</h5>
+					<h5 class="txt-tit">Lorem ipsum dolor sit amet.</h5>
+				</div>
+			</div>
+		</div>
+		<!-- //content -->
+
+
+		<!-- content -->
+		<div class="content">
+			<div class="inner_content">
+				<h3>가상 요소(Pseudo Element)</h3>
+				<p>
+					가상 요소(Pseudo-elements)는 요소의 특정 부분을 선택합니다.
+				</p>
+
+				<h4>first-line</h4>
+				<p>
+					first-line은 요소의 첫번째 줄을 선택합니다.
+				</p>
+				<pre class="code_css">
+ p:first-line {
+   color: red;
+ }
+				</pre>
+				<style>
+					.ex10 p:first-line {color: red;}
+				</style>
+				<div class="ex_box ex10">
+					<p>
+						Lorem ipsum dolor sit amet. <br />
+						Lorem ipsum dolor sit amet.
+					</p>
+				</div>
+
+				<h4>first-letter</h4>
+				<p>
+					first-letter은 요소의 첫번째 단어를 선택합니다.
+				</p>
+				<pre class="code_css">
+ p:first-letter {
+   color: red;
+ }
+				</pre>
+				<style>
+					.ex11 p:first-letter {color: red;}
+				</style>
+				<div class="ex_box ex11">
+					<p>
+						Lorem ipsum dolor sit amet. <br />
+						Lorem ipsum dolor sit amet.
+					</p>
+				</div>
+
+				<h4>before</h4>
+				<p>
+					before는 요소의 앞을 선택합니다.
+				</p>
+				<pre class="code_css">
+p:before {
+   content: "xyz";
+   color: red;
+}
+				</pre>
+				<style>
+					.ex12 p:before {
+						content: "xyz";
+						color: red;
+					}
+				</style>
+				<div class="ex_box ex12">
+					<p>
+						Lorem ipsum dolor sit amet. <br />
+						Lorem ipsum dolor sit amet.
+					</p>
+				</div>
+
+				<h4>after</h4>
+				<p>
+					after는 요소의 뒤를 선택합니다.
+				</p>
+				<pre class="code_css">
+p:after {
+   content: "xyz";
+   color: red;
+}
+				</pre>
+				<style>
+					.ex13 p:after {
+						content: "xyz";
+						color: red;
+					}
+				</style>
+				<div class="ex_box ex13">
+					<p>
+						Lorem ipsum dolor sit amet. <br />
+						Lorem ipsum dolor sit amet.
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

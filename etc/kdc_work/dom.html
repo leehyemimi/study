@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>DOM이란 ?</title>
+<style>
+	/* reset */
+	body,p,h1,h2,h3,h4,h5,h6,ul,ol,li,dl,dt,dd,table,th,td,form,fieldset,legend,input,textarea,button,select{margin:0;padding:0}
+	body,input,textarea,select,button,table{font-family:/*"맑은 고딕",*/"돋움", Dotum, sans-serif;,sans-serif;font-size:16px;color:#000}
+	img,fieldset{border:0}
+	ul,ol{list-style:none}
+	em,address{font-style:normal}
+	a{text-decoration:none}
+	a:hover,a:active,a:focus{text-decoration:underline}
+
+	/* Common */
+	body{background-color:#f1f1f1;font-family:"Malgun Gothic", 맑은 고딕, 돋움, Dotum, sans-serif;}
+	h1,h2,h3,h4{font-weight:normal;letter-spacing:-1px}
+	h3{margin-bottom:15px;font-size:23px;color:#000}
+
+	.wrap{width:86%;margin:50px auto;padding:80px 50px;box-shadow:0 1px 3px rgba(0, 0, 0, 0.15);background-color:#fff}
+	.content{border-bottom:1px solid #ededed;margin-bottom:60px;padding-bottom:60px}
+	.inner_content ul{margin:10px 0;}
+	.content_text{padding:1% 1%; background:#eee; margin-bottom:20px;}
+	.content_text li{font-size:14px; line-height:30px;}
+	h3 a{display:inline-block; font-size:26px; color:#000; float:right;}
+	.plusText{color:#0d6aad;}
+
+	/* 팝업 */
+	.domClick_pop{display:none; }
+	.domPop_w{width:776px; overflow:hidden; z-index:2; background-color:#fff; border:1px solid #000; border-top:none; padding-bottom:2%; position:fixed; top:15%; left:50%; margin-left:-388px;}
+	.domPop_w h4{background-color:#000; color:#fff; padding:2% 2%; text-align:left; margin-bottom:4%; font-weight:bold;}
+	.domPop_w p{width:200px; margin:0 auto; background-color:#eee; padding:2% 0; text-align:center; border:1px solid #000;}
+	.domPop_w p em{display:block; font-size:13px; color:red;}
+	.domPop_w em{display:block; text-align:center;}
+	.red{color:red;}
+	.bgColor{background-color:#000; opacity: 0.8; position:fixed; left:0; top:0; width:100%; height:100%;}
+
+</style>
+<script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+<script>
+	function popUpselect(selection){
+		$('.domClick_pop').fadeOut();
+		$(selection).fadeIn().find('.bgColor').click(function(){
+			$('.domClick_pop').fadeOut();
+		})
+	}
+</script>
+</head>
+
+<body>
+	<div class="wrap">
+		<h3>DOM이란 ?</h3>
+		<div class="content_text">
+			<ul>
+				<li>
+					- 문서 객체 모델(Document Object Model, DOM)은 HTML과 XML 문서에 대한 프로그래밍 인터페이스입니다.
+				</li>
+				<li>
+					- DOM은 프로퍼티와 메소드를 가지는 객체와 노드의 트리형 구조로 표현됩니다. 웹 페이지를 스크립트나 다른 개발 언어로 접근할 때 필수 적입니다.
+				</li>
+				<li>
+					- 웹화면에 보이는 요소를 조작하기 위한 기능으로 가득 찬 라이브러리 덩어리입니다.
+				</li>
+			</ul>
+		</div>
+
+		<h3>
+			W3C DOM vs 브라우저 DOM
+		</h3>
+		<div class="content_text">
+			<ul>
+				<li>
+					- DOM은 정의 부분(명세서)과 구현부분으로 나눠집니다.
+				</li>
+				<li>
+					- 정의부분인 명세서에는 웹페이지(or XML)문서를 조작할때 지켜야 할 약속(규칙,규약)이 명시되어 있는 문서일뿐 실제<br />
+					동작하는 구현 소스코드는 전혀 존재하지않습니다.
+				</li>
+				<li>
+					- 명세서를 만드는곳은 웹 관련 표준 W3C협회입니다.
+				</li>
+				<li>
+					- IDL이란 ? (interface Definition Language) DOM의 정의부분을 만들때 사용하는 인터페이스 정의 전용 언어입니다.<br />
+					자바스크립트 프로그래밍처럼 IDL 역시 프로그래밍 언어중에 하나이며 고유문법으로 이루어져있습니다.
+				</li>
+			</ul>
+		</div>
+
+		<h3>
+			DOM과 HTML 페이지와의 관계
+			<a href="javascript:popUpselect('#passing')">
+				+
+			</a>
+		</h3>
+		<div class="content_text">
+			<ul>
+				<li>
+					- 웹페이지는 일종의 메타 데이터로써 태그 정보는 웹브라우저에의해 DOM 객체로 만들어지게됩니다.
+				</li>
+				<li>
+					<strong>- 웹페이지에 DOM객체로 표현되는 순서는<br />
+					01. 웹페이지 읽기 (브라우저 HTML 페이지 읽기)<br />
+					02. 파싱단계 03.출력 (작성한 마크업 태그와 1:1매칭 - DOM클래스의 객체를 생성합니다.)<br />
+					03. 출력 (웹브라우저는 DOM객체를 가지고 웹페이지 화면을 만들어냅니다.)</strong>
+				</li>
+				<li class="plusText">
+					추가설명 : 파싱<br />
+					웹브라우저가 HTML 페이지를 읽은후 파싱단계에서 div객체를 만나게되면 HTML Div Element 클래스의 인스턴스를 생성<br />
+					img객체를 만나게되면 HTML Image Element 클래스 인스턴스를 생성하는 의미입니다.<br />
+					일종의 DOM 클래스의 메타정보일 뿐이라는것 브라우저는 마크업 태그와 1:1매칭되는 DOM 클래스의 객체를 생성 보관하는것과 같습니다.
+				</li>
+				<li>
+					- jQurery 구문을 만들어 사용하게되더라도 var $test01 = $('#test01');<br />
+					자바스크립트 DOM 객체중 #test01이라는 이름을 가진 DOM객체에 접근하는것과 같습니다.
+				</li>
+			</ul>
+		</div>
+		<h3>
+			DOM객체 생성되는 순서
+			<a href="javascript:popUpselect('#generation')">
+				+
+			</a>
+		</h3>
+
+		<h3>
+			핵심 DOM 객체
+		</h3>
+		<div class="content_text">
+			<ul>
+				<li>
+					<strong>- Node 객체</strong><br />
+					Node객체는 노드를 조작하기 위한 가장 기본적인 프로퍼티와 메서드가 정의돼 있는 Node 인터페이스 구현한 객체입니다.<br />
+					DOM객체 가운데 가장최상위 객체이며, 모든 하위 노드객체들을 상속받는 객체입니다.
+				</li>
+				<li>
+					<strong>- Element 객체</strong><br />
+					노드중 주석 노드와 텍스트 노드를 제외한 나머지 노드를 통합해 부르는 용어입니다.<br />
+					Element 객체의 주요기능은 태그이름이 담긴 프로퍼티와 속성 attr를 알아내고 설정하는 기능과 이벤트를 추가/삭제 기능이있습니다.
+				</li>
+				<li>
+					<strong>- HTML Element 객체</strong><br />
+					HTML 문서에만 있는 노드 HTML 태그와 동일합니다.
+				</li>
+				<li>
+					<strong>- Document 객체</strong><br />
+					HTML 문서 XML문서의 루트객체로서 id , className , tagName 특정노드를 찾는기능을 합니다.
+				</li>
+				<li>
+					<strong>- HTML Document 객체</strong><br />
+					HTML 문서전용 Document 객체입니다. HTML Docuemnt 객체에는 HTML 페이지 로딩후 파싱단계에서 만들어지는<br />
+					html , head , body 객체를 비롯해 페이지에 작성된 태그와 일대일로 매칭되는 모든 Node객체를 가지고있는 객체입니다.
+				</li>
+			</ul>
+		</div>
+
+		<h3>
+			핵심내용
+		</h3>
+		<div class="content_text">
+			<ul>
+				<li class="plusText">
+					jQuery는 노드를 추가/삭제/이동한다거나 글자색을 변경하는 등의 작업을 처리할때 자바스크립트 DOM객체들의
+					프로퍼티와 메서드를 사용해처리합니다.<br />
+					jQuery는 단지 자바스크립트 DOM기능을 사용하기 쉽게 해주는 라이브러리입니다.<br />
+				</li>
+			</ul>
+		</div>
+
+		<h3>
+			참고url ( javascript DOM )
+		</h3>
+		<div class="content_text">
+			<ul>
+				<li>
+					https://developer.mozilla.org/ko/docs/Gecko_DOM_Reference
+				</li>
+			</ul>
+		</div>
+	</div>
+
+
+	<div class="domClick_pop" id="passing">
+		<div class="domPop_w">
+			<h4>
+				DOM > 파싱 > 출력까지의 구조
+			</h4>
+			<p>
+				DOM
+				<em>
+					페이지 읽기
+				</em>
+			</p>
+			<em>
+				↓
+			</em>
+			<p>
+				Node
+				<em>
+					페이지 읽기
+				</em>
+			</p>
+			<em>
+				↓
+			</em>
+			<p>
+				Document
+				<em>
+					페이지 읽기
+				</em>
+			</p>
+			<em>
+				↓
+			</em>
+			<p>
+				HTML Document
+				<em>
+					파싱 DOM 클래스의 객체생성
+				</em>
+			</p>
+			<em>
+				↓
+			</em>
+			<p>
+				Element
+				<em>
+					파싱 DOM 클래스의 객체생성
+				</em>
+			</p>
+			<em>
+				↓
+			</em>
+			<p>
+				HTML Element
+				<em>
+					파싱 DOM 클래스의 객체생성
+				</em>
+			</p>
+			<em>
+				↓
+			</em>
+			<p class="red">
+				브라우저 출력
+			</p>
+		</div>
+		<div class="bgColor"></div>
+	</div>
+
+	<div class="domClick_pop" id="generation">
+		<div class="domPop_w">
+			<h4>
+				Node 객체
+			</h4>
+			<img src="http://www.edu2080.co.kr/images/video/popImage_01.jpg" alt="">
+		</div>
+		<div class="bgColor"></div>
+	</div>
+
+
+</body>
+</html>

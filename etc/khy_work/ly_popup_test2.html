@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0">
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<title>word 공부</title>
+<style>
+/* Common */
+body,p,h1,h2,h3,h4,h5,h6,ul,ol,li,dl,dt,dd,table,th,td,form,fieldset,legend,input,textarea,button,select{margin:0;padding:0}
+body,input,textarea,select,button,table{font-family:'돋움',Dotum,AppleGothic,sans-serif;font-size:15px}
+img,fieldset{border:0}
+ul,ol{list-style:none}
+em,address{font-style:normal}
+a{text-decoration:none}
+a:hover,a:active,a:focus{text-decoration:underline}
+
+/* Layer Popup */
+.lypop {display:none}
+.lypop .bg {width:100%;height:100%;position:fixed;top:0;left:0;z-index:1;background-color:#000;opacity:.5;filter:alpha(opacity=50)}
+.lypop .wrap {width:100%;height:100%;position:fixed;top:0;left:0;z-index:8;text-align:center}
+.lypop .wrap:before {height:100%;content:'';display:inline-block;vertical-align:middle}
+.lypop .wrap .element {width:300px;display:inline-block;vertical-align:middle;margin:0 auto;text-align:left;background-color:#fff}
+.lypop .wrap2 {width:100%;height:100%;position:fixed;top:0;left:0;z-index:8;text-align:center}
+.lypop .wrap2:before {height:100%;content:'';display:inline-block;vertical-align:middle}
+.lypop .wrap2 .element {width:95%;position:relative;display:inline-block;vertical-align:middle;margin:0 auto;text-align:left;background-color:#fff}
+.lypop .top {height:50px;background-color:#efefef;padding:0 10px;position:relative}
+.lypop .top .lytit {line-height:50px}
+.lypop .cont { overflow-y: scroll;-webkit-overflow-scrolling: touch;padding:20px}
+.btn_detail{background:#f00;color:#fff}
+</style>
+<script>
+
+//Layer Popup
+function layer_open(obj) {
+    var temp = $('#' + obj);
+    var bg = temp.parent().parent().find(".bg").hasClass('bg');
+
+    if(bg) {
+		$("body").css({'overflow':'hidden','-webkit-overflow-scrolling':'auto'});
+		temp.parent().show();
+    }
+
+    temp.find('.lybtn_x').click(function(e){
+        if(bg) {
+			$('body').removeAttr('style');
+			temp.parent().hide();
+			temp.removeAttr('style');
+        }
+    });
+
+}
+</script>
+</head>
+
+<body>
+<div id="wrap">
+	<!-- content -->
+	<div class="content">
+		최상단<br/>
+		아<br/>
+		아<br/>
+		아<br/>
+		아<br/>
+		아<br/>
+		아<br/>
+		아<br/>
+		아<br/>
+		아<br/>
+		아<br/>
+		아<br/>
+		아<br/>
+		아<br/>
+		아<br/>
+		<div class="in_wrap"></div>
+			아<br/>
+			<a href="#;" class="btn_detail" onclick="layer_open('info');return false;">자세히보기</a>
+			아<br/>
+			아<br/>
+			아<br/>
+		
+		아<br/>
+		아<br/>
+		아<br/>
+		아<br/>
+		아<br/>
+		아<br/>
+		아<br/>
+		아<br/>
+		아<br/>
+		아<br/>
+		아<br/>
+		아<br/>
+		아<br/>
+		아<br/>
+		아<br/>
+		아<br/>
+		아<br/>
+		아<br/>
+		아<br/>
+		아<br/>
+		아<br/>
+		아<br/>
+		아<br/>
+		아<br/>
+		아<br/>
+		아<br/>
+		아<br/>
+		아<br/>
+		아<br/>
+		아<br/>
+		아<br/>
+		아<br/>
+		아<br/>
+		아<br/>
+		아<br/>
+		아<br/>
+		아<br/>
+		아<br/>
+		아<br/>
+		아<br/>
+		아<br/>
+		아<br/>
+		아<br/>
+		아<br/>
+		아<br/>
+		아<br/>
+		아<br/>
+		아<br/>
+		아<br/>
+		아<br/>
+	</div>
+	<!-- //content -->
+	<!-- lypop1 -->
+		<div class="lypop">
+			<div class="bg"></div>
+			<div id="info" class="wrap2">
+				<div class="element">
+					<!-- lypop_tit -->
+					<div class="top">
+						<h2 class="lytit">개인정보 수집/이용 동의 안내</h2>
+						<button type="button" class="btn_comm lybtn_x"><span class="sr">닫기</span></button>
+					</div>
+					<!-- //lypop_tit -->
+
+					<!-- lypop_cont -->
+					<div class="cont scroll_y" style="height:200px;">
+						<div class="coupon_txt" style="white-space:pre-wrap"><strong>1. 개인정보 수집목적</strong>
+		- 이벤트 참여 및 상품 발송
+		- 해커스교육그룹의 상품 및 이벤트 등 광고성 정보 제공
+		(해커스교육그룹 : 해커스어학원, 해커스영어, 해커스패스, 해커스유학, 해커스편입, 위더스교육)
+
+		<strong>2. 개인정보 수집항목</strong>
+		- 이름, 휴대폰번호
+
+		<strong>3. 개인정보 이용기간</strong>
+		- 개인정보 이용목적 달성 시 또는 참여자의 삭제요청 시까지
+
+		<strong>4. 참여자는 개인정보 수집/이용에 동의하지 않을 수 있습니다.</strong>
+		- 단, 동의 거부 시 이벤트 참여 및 상품 제공이 제한됩니다. 
+		</div>
+					</div>
+					<!-- //lypop_cont -->
+					<div class="txt_c pb20 "><a href="#;" class="btn_s btn_type2" style="width:80px;"><strong>동의</strong></a></div>
+				</div>
+			</div>
+		</div>
+		<!-- //lypop1 -->
+</div>
+</body>
+</html>

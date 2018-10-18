@@ -1,0 +1,520 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="Generator" content="EditPlus®">
+<meta name="Author" content="">
+<meta name="Keywords" content="">
+<meta name="Description" content="">
+<title>animation 활용</title>
+<script src="http://code.jquery.com/jquery-latest.js" type="text/javascript"></script>
+
+<style type="text/css">
+/*********************** 나눔바른고딕 ***********************/
+@import url(https://cdn.rawgit.com/openhiun/hangul/14c0f6faa2941116bb53001d6a7dcd5e82300c3f/nanumbarungothic.css);
+
+/* reset */
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,textarea,p,blockquote,th,td,input,select,textarea,button{margin:0;padding:0;}
+h1, h2, h2, h4, h5, h6, p {margin-top:0;font-weight:normal;}
+html,body{height:100%;}
+body,input,textarea,select,button,table{font-size:16px;color:#222;line-height:1.75;font-family:'Nanum Barun Gothic', '나눔바른고딕', 'Nanum Gothic', '나눔고딕', '맑은 고딕', Dotum, '돋움', Gulim, '굴림', verdana, HelveticaNeue, Apple-Gothic, Arial, sans-serif;}
+
+fieldset, img {border:0;vertical-align:top;}
+table {border-collapse:collapse; border-spacing:0; table-layout:fixed;}
+caption, th, td {text-align:left; vertical-align:top; font-weight:normal;}
+caption, label, legend {visibility:hidden;overflow:hidden;width:0;height:0;font-size:0;line-height:0}
+ul, ol, dl, li {list-style:none;}
+abbr, acronym {border-bottom:.1em dotted;cursor:help;}
+article, aside, details, figcaption, figure, footer, header, main, menu, nav, section {display:block;}
+a,a:hover,a:active,a:visited,a:focus{color:inherit;text-decoration:none}
+button{overflow:visible;margin:0;padding:0;border:0;outline:0;background:none;cursor:pointer;}
+button::-moz-focus-inner{padding:0;border:0}
+
+.mt30{margin-top:30px !important;}
+.mt60{margin-top:60px !important;}
+.mt100{margin-top:100px !important;}
+.mt200{margin-top:200px !important;}
+.mb100{margin-bottom:100px !important;}
+.mr10{margin-right:10px;}
+.ml0{margin-left:0 !important;}
+
+.tc{text-align:center;}
+.bold{color:#000;font-weight:bold;}
+.underline{text-decoration:underline;}
+.red{color:red;}
+.white{color:#fff;}
+
+body{background-color:#f1f1f1;}
+.wrap{width:75%;margin:50px auto;padding:80px 50px;box-shadow:0 1px 3px rgba(0, 0, 0, 0.15);background-color:#fff}
+
+h1{margin:50px 0 100px;font-size:40px;color:#000;text-align:center;font-weight:bold;}
+h2{margin:100px 0 40px;font-size:24px;}
+.txt{word-break:break-all;word-wrap:break-word;margin:15px 0;}
+
+.code_area .tit{margin:40px 0 20px;font-size:18px;}
+.code_area .code{display:block;border-left:10px solid #333;padding-left:50px;margin:10px 0;font-family:verdana;}
+
+.list li{list-style-type:disc;margin:0 0 5px 15px;}
+
+.tbl_code{width:100%;}
+.tbl_code thead th{background-color:#444;height:50px;line-height:50px;color:#fff;font-weight:bold;vertical-align:middle;text-align:center;border:1px solid #aaa;}
+.tbl_code thead th img{vertical-align:middle;}
+.tbl_code tbody td{padding:10px;}
+.tbl_code tbody tr:nth-child(even){background-color:#eee;}
+.tbl_code tbody td{border:1px solid #aaa;}
+.tbl_code tbody td:first-child{text-align:center;}
+.tbl_code tbody.tc td{text-align:center;}
+
+.figure{margin:100px 0 40px;text-align:center;}
+.figure .figcaption{font-weight:bold;color:#000;margin-top:10px;}
+
+pre{background-color:#222;color:#fff;border-radius:10px;padding:10px 20px;font-family:verdana;}
+
+.box_area{overflow:hidden;width:80%;margin:50px auto;}
+.box_area .box_list{ display : flex;flex-direction : row;   flex-wrap : nowrap;   justify-content : space-around; }
+.box_area .box_list pre.type01{background-color:#444;}
+.box_area .box_list pre.bg{background-color:#444;}
+
+.question dt{margin:100px 0 40px;font-size:24px;cursor:pointer;transition:all .2s ease-in-out;}
+.question dt:hover {font-size:30px;color:red;}
+
+.question dd{display:none;}
+
+
+</style>
+<script type="text/javascript">
+$(function() {
+	$(".question dt").on('click', function(){
+		$(".question dd").fadeToggle()
+	});
+});
+</script>
+</head>
+<body>
+
+<div class="wrap">
+
+<h1>Animation 활용</h1>
+<h2>애니메이션 활용하기</h2>
+<div class="txt">CSS 애니메이션을 만드려면 animation 속성과 그 속성의 하위 속성을 지정해야 하며, 애니메이션의 총 시간과 반복 여부등을 지정할 수 있습니다.<br /><span class="underline">애니메이션에서는 중간 상태</span>를 표현 할 수 없어 아래에서 다룰 <strong>@keyframes</strong> 규칙을 이용하여 표현합니다.</div>
+
+
+<h2>Animation 와 @keyframes</h2>
+<div class="txt">CSS 애니메이션에서 가장 중요한 요소는 @keyframes 입니다.<br />
+@keyframes은 CSS 문법 중 하나로 애니메이션이 만들어지는 부분입니다. @keyframes 을 타임라인 안의 하나의 스테이지(구간)들 이라고 생각하고, @keyframes 안에서 우리는 스테이지들을 정의하고 각 구간마다 다른 스타일을 적용 시킬 수 있습니다.</div>
+
+<h2>Animation 속성</h2>
+<ul class="list">
+	<li><strong class="mr10">animation-name:</strong> @keyframes 이름</li>
+	<li><strong class="mr10">animation-duration:</strong> 타임프레임 길이. 애니메이션 시작부터 마지막까지 총 지속시간</li>
+	<li><strong class="mr10">animation-timing-function:</strong> 애니메이션 속도 조절 ( linear | ease | ease-in | ease-out | ease-in-out | cubic-bezier )</li>
+	<li><strong class="mr10">animation-delay:</strong> 애니메이션이 시작하기 전 지연시간</li>
+	<li><strong class="mr10">animation-iteration-count:</strong> 반복 횟수</li>
+	<li><strong class="mr10">animation-direction:</strong> 루프 (loop) 방향. 정방향으로 반복, 역방향으로 반복, 번갈아가며 반복 등을 설정</li>
+	<!--
+	<li><strong class="mr10">animation-fill-mode:</strong> 애니메이션 시작/끝 상태 제어 ( none | forwards | backwards | both )</li>
+	-->
+</ul>
+<h2 class="mt30">단축형</h2>
+<pre>animation: name | duration | timing-function | delay | iteration-count | direction</pre>
+<h2>@keyframes</h2>
+<div class="box_area">
+	<div class="box_list ml0">
+<pre>
+@keyframes pulse {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+</pre>
+<pre>
+@keyframes pulse {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+</pre>
+<pre>
+@keyframes pulse {
+  to {
+    opacity: 0;
+  }
+}
+</pre>
+	</div>
+</div>
+<div class="txt tc"> 위의 세가지 방법 모두 동일한 결과로 나옵니다.</div>
+
+<h2>애니메이션 적용하기</h2>
+<div class="box_area">
+	<div class="box_list">
+<pre class="type01">
+.element {
+	width: 200px;
+	height: 200px;
+	background-color: red;
+	<mark>animation: 
+	pulse 3s ease infinite alternate</mark>
+}
+</pre>
+<pre>
+@keyframes <mark>pulse</mark> {
+	0%, 100% {
+	background-color: red;
+	}
+	25% {
+	background-color: orange;
+	}
+	50% {
+	background-color: yellow;
+	}
+	75% {
+	background-color: pink;
+	}
+}
+</pre>
+	</div>
+</div>
+<div class="mt200">
+	<iframe src="animation_test/test1.html" frameborder="0" width="100%" height="300px"></iframe>
+</div>
+
+<h2>여러개의 Animation</h2>
+<div class="txt">복수의 애니메이션을 추가하려면 쉼표를 사용하여 분리하면 되고, 예를들어 아까 만든 pulse에 변형시키고 싶으면 @keyframes를 하나 더 선언하고 element에도 쉼표를 사용하여 추가로 묶어줍니다.</div>
+
+<div class="box_area">
+	<div class="box_list">
+<pre class="type01">
+.element {
+	width: 200px;
+	height: 200px;
+	background-color: red;
+	animation: 
+	pulse 3s ease infinite alternate<mark>,
+	nudge 3s linear infinite alternate;
+	animation-play-state: paused;</mark>
+}
+<mark>
+.box1:hover {
+	animation-play-state: running;
+}
+</mark>
+</pre>
+<pre>
+@keyframes <mark>nudge</mark>{
+	0%, 100% {
+	border-radius:0 0 0 0;
+	transform: translate(-150px, 0);
+	}
+	25%, 75% {
+	border-radius:0 50%;
+	transform: translate(0, 150px);
+	}
+	50% {
+	border-radius:100%;
+	transform: translate(150px, 0);
+	}
+}
+</pre>
+	</div>
+</div>
+
+<div class="mt100">
+	<iframe src="animation_test/test2.html" frameborder="0" width="100%" height="400px"></iframe>
+</div>
+
+<h2>Timing-Function 기능 이용하기</h2>
+<div class="txt">사용자가 직접 커브를 조절해서 디테일한 애니메이션을 만들 수 있는데, 아주 자세한 값이 필요하여 수동으로 직접 계산하기 보다는 많은 무료 리소스 웹사이트를 사용하여 커스텀된 애니메이션 타이밍 기능을 사용하는 것이 안정적입니다.</div>
+<div class="mt60 tc"><img src="images/170731/timing1.jpg" alt=" " width="50%" /></div>
+
+<table class="tbl_code mt60">
+	<colgroup>
+		<col style="width:30%" />
+		<col style="width:*" />
+	</colgroup>
+	<thead>
+		<tr>
+			<th scope="col">속성</th>
+			<th scope="col">값</th>
+		</tr>
+	</thead>
+	<tbody>
+		  <tr>
+			<td>ease</td>
+			<td>기본값입니다. 처음과 끝이 부드러워 일반적으로 이 속성을 사용하면 대부분의 움직임이 자연스러움을 갖습니다.</td>
+		  </tr>
+		  <tr>
+			<td>linear</td>
+			<td>모든 속도가 같은 등속 운동입니다.</td>
+		  </tr>
+		  <tr>
+			<td>ease-in</td>
+			<td>느리게 시작한 후 일정한 속도에 다다르면 그 상태로 등속 운동합니다.</td>
+		  </tr>
+		  <tr>
+			<td>ease-out</td>
+			<td>일정한 속도의 등속으로 시작해서 점점 느려지면서 끝납니다.</td>
+		  </tr>
+		  <tr>
+			<td>ease-in-out</td>
+			<td>ease와 비슷합니다. 느리게 시작하여 느리게 끝납니다.</td>
+		  </tr>
+		  <tr>
+			<td>cubic-bezier(n,n,n,n)</td>
+			<td>처음과 끝의 속도를 0과 1 사이의 수치를 이용하여 4단계로 지정할 수 있습니다. 베지어(Bezier)라는 곡선 운동을 정의합니다.</td>
+		  </tr>
+	</tbody>
+</table>
+
+<h2>3차 베지어 곡선</h2>
+<div class="tc"><img src="images/170731/timing2.gif" alt=" " /></div>
+<div class="txt">
+	3차 베지어 곡선은 그리드상에 존재하는 4개의 점으로 만들어지며, 두 축을 따라 0부터 1까지의 좌표를 지닙니다.<br />
+	여기서 4개의 점은 p0, p1, p2, p3 로 부르는데, 이 점은 두 쌍의 (x, y) 좌표로 표시되고, 그 위치에 따라 곡선의 굽음의 정도(곡률)를 나타낼 수 있습니다.<br />
+	이때 첫 번째 점(p0)은 (0,0) 마지막 점(p3)은 (1, 1)이고 p1인 (x1, y1)과 p2 (x1, y1) 인 다른 2개의 점을 함수에 정의합니다.<br />
+	p0, p3 는 항상 같은 값을 의미하므로 별도로 지정하지 않아도 됩니다.<br />
+	<br />
+	<a href="http://easings.net/ko" target="_blank">http://easings.net/ko</a><br />
+	<a href="http://matthewlein.com/ceaser/" target="_blank">http://matthewlein.com/ceaser/</a>
+</div>
+
+<div class="mt100">
+	<iframe src="animation_test/test3.html" frameborder="0" width="100%" height="300px"></iframe>
+</div>
+
+
+
+<h1 class="mt200">transition</h1>
+
+<dl class="question">
+	<dt>Animation vs Transition 차이점??</dt>
+	<dd>
+		transition 속성은 그 자체로도 애니메이션 효과를 가지고는 있지만, <br/ >
+		transition은 animation 속성보다는 제한적인 기능을 가지고 있습니다. 그래서 하나의 줄거리를 이루기 위한 애니메이션 보다는 특정 객체를 부각시키는 인스턴트적인 상황이나 화면 전환에 더 적합합니다.<br/ >
+	<br/ >
+	<strong>transition</strong><br/ >
+	:hover 같은 마우스 사용시, 또는 클래스를 넣고 빼는 등의 동작에 의해서 동작한다.<br/ >
+	물론 엘리먼트의 인라인 스타일을 변경해서도 동작하게 할 수 있다.<br/ >
+	<br/ >
+	<strong>animation</strong><br/ >
+	animation은 시작하기 위해 별도의 설정이 필요없다.<br/ >
+	한 번 정의하면 자동으로 시작한다.<br/ >
+	애니메이션은 `animation-iteration-count` 속성으로 쉽게 반복할 수 있다.<br/ >
+	애니메이션은 키프레임을 지정할 수 있다.<br/ >
+	</dd>
+</dl>
+
+<h2>애니메이션 효과를 가지고 있는 transition</h2>
+<div class="txt">
+	예를들어, 객체의 모양을 왜곡시킨다던가 혹은, 같은 동작을 무한 반복시키는 기능(Film Loop)은 없습니다.<br />
+	transition은 <strong>객체가 기존에 가지고 있던 속성의 값이 다른 값으로 변할 때</strong>만 표현됩니다.
+</div>
+<ul class="list mt100">
+	<li>transition-property: 애니메이션이 적용될 속성 (width, height, background-color 등) (none | all | property)</li>
+	<li>transition-duration: 애니메이션 지속 시간 (0.4s 는 0.4초를 의미). <span class="red">항상 지정해줘야함 그렇지 않을경우 기본값(0s)으로 인해 효과 없음</span></li>
+	<li>transition-timing-function: 가속곡선 (liniar | ease | ease-in | ease-out | ease-in-out 등)</li>
+	<li>transition-delay: 애니메이션이 시작되기 전 딜레이</li>
+</ul>
+
+<h2 class="mt30">단축형</h2>
+<pre>transition: property | duration | timing-function | delay </pre>
+<div class="txt">단축형 사용시 property 딱 1개만 적을 수 있습니다. 1개의 속성 이름만 적어주든지, 아니면 all을 써서 모든 속성을 변경시키는 값을 써야합니다.</div>
+
+<h2>발동조건</h2>
+<div class="txt">transition은 페이지가 로드되면서 자동으로 시작되지 않습니다.<br />
+:hover와 같은 가상 클래스 선택자(Pseudo-Classes) 혹은, 자바스크립트의 onclick 이벤트의 부수적인 액션에 의해 발동합니다. 그리고 마우스가 올라갔을 때에는 어떤 속성으로 변할 것인지 정의해 주어야 합니다.</div>
+
+
+<h2>확장 단축형</h2>
+<pre>
+div {
+	transition: background 2s ease 1s<mark>,</mark>
+	padding 1s linear 2s;
+}
+</pre>
+
+<div class="txt">
+	transition 장점은 각 속성별로 지연시간이나 다른 값을 따로 두어 독립적인 움직임을 줄 수 있습니다.<br />
+	반면, 변경할 속성은 많은데 그 외에 사용하는 값들은 대체적으로 공통된 경우, 동일한 값을 계속 써주는 비능률적인 상황이 발생할 수 있습니다.
+</div>
+
+<!--
+<table class="tbl_code">
+	<colgroup>
+		<col style="width:30%" />
+		<col style="width:*" />
+	</colgroup>
+	<thead>
+		<tr>
+			<th scope="col">속성</th>
+			<th scope="col">값</th>
+		</tr>
+	</thead>
+	<tbody>
+	<tbody>
+		<tr>
+			<td>transition-property</td>
+			<td>transition 효과를 적용할 속성들을 나열합니다. 2개 이상일 경우는 쉼표(,)로 구분합니다.</td>
+		</tr>
+		<tr>
+			<td>transition-duration</td>
+			<td>transition 효과의 지속 시간을 표기합니다. 1s는 1초입니다. 만일 1초로 설정했다면, 모든 변화가 1초 안에 끝납니다.</td>
+		</tr>
+		<tr>
+			<td>transition-timing-function</td>
+			<td>변화의 시작과 끝 타이밍을 정의합니다. 예를들면, 빠르게 시작해서 느리게 끝나는 등의 효과가 그것입니다.</td>
+		</tr>
+		<tr>
+			<td>transition-delay</td>
+			<td>효과의 지연시간을 정의합니다. 만일 3초(3s)로 설정했다면, 페이지가 로드되고 나서 3초 후에 transition 효과가 시작됩니다.</td>
+		</tr>
+	</tbody>
+	</tbody>
+</table>
+-->
+
+<h2>브라우저 호환성</h2>
+<table class="tbl_code mt60">
+	<colgroup>
+		<col style="width:*" />
+		<col style="width:*" />
+	</colgroup>
+	<thead>
+		<tr>
+			<th scope="col"><img src="images/170731/icon-chrome.png" alt="Google Chrome"></th>
+			<th scope="col"><img src="images/170731/icon-ie.png" alt="Google Chrome"></th>
+			<th scope="col"><img src="images/170731/icon-firefox.png" alt="Google Chrome"></th>
+			<th scope="col"><img src="images/170731/icon-safari.png" alt="Google Chrome"></th>
+			<th scope="col"><img src="images/170731/icon-opera.png" alt="Google Chrome"></th>
+		</tr>
+	</thead>
+	<tbody class="tc">
+		<tr>
+			<td>지원</td>
+			<td>10</td>
+			<td>지원</td>
+			<td>지원</td>
+			<td>지원</td>
+		</tr>
+		<tr>
+			<td>-webkit-</td>
+			<td>-ms-</td>
+			<td>-moz-</td>
+			<td>-webkit-</td>
+			<td>-o-</td>
+		</tr>
+	</tbody>
+</table>
+
+<h2>버그 - 파이어폭스</h2>
+<div class="txt">최신 브라우저들에서는 모두 잘 작동하지만, 파이어폭스에서는 변형하는 오브젝트를 아래 그림과 같이 삐죽삐죽한 라인처리를 합니다.</div>
+<pre><strong>해결방안:</strong> outline: 1px solid transparent;</pre>
+<div><img src="images/170731/ff.png" alt=" " /></div>
+
+
+
+<h1 class="mt200">Transform</h1>
+<h2>2D Transform + 3D Transform</h2>
+<table class="tbl_code">
+	<colgroup>
+		<col style="width:30%" />
+		<col style="width:*" />
+	</colgroup>
+	<thead>
+		<tr>
+			<th scope="col">메소드</th>
+			<th scope="col">설명</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>translate3d(x,y,z)</td>
+			<td>객체의 위치를 가로(x), 세로(y), 깊이(z) 방향으로 정의하여 이동시킵니다. 단위로는 px, %, em 따위를 사용할 수 있습니다. 예를들어, <code>translate(60px, 60px, 60px)</code>은 객체를 우측으로 60px, 하단으로 60px, 그리고 사용자와 60px만큼 가까운 위치로 이동시킵니다. 또한, 양수와 음수를 사용할 수 있습니다.</td>
+		</tr>
+		<tr>
+			<td>translateX(n)</td>
+			<td>객체의 위치를 가로 방향으로만 이동시킵니다. <code>translateX(100px)</code>은 우측으로 100px만큼 이동합니다. -100px과 같이 음수로 기재하면 반대방향인 좌측으로 100px만큼 이동합니다.</td>
+		</tr>
+		<tr>
+			<td>translateY(n)</td>
+			<td>객체의 위치를 세로 방향으로만 이동시킵니다. -100px과 같이 음수로 기재하면 반대방향인 상단으로 100px만큼 이동합니다.</td>
+		</tr>
+		<tr>
+			<td>scale3d(x,y,z)</td>
+			<td>객체의 세 방향을 한번에 늘이거나 줄일 수 입니다.
+			</td>
+		</tr>
+		<tr>
+			<td>scaleX(n)</td>
+			<td>객체를 x축 중심으로 늘이거나 줄입니다.</td>
+		</tr>
+		<tr>
+			<td>scaleY(n)</td>
+			<td>객체를 y축 중심으로 늘이거나 줄입니다.</td>
+		</tr>
+		<tr>
+			<td>scaleZ(n)</td>
+			<td>객체를 z축 중심으로 늘이거나 줄입니다. CSS에는 두께라는 개념이 없습니다.</td>
+		</tr>
+		<tr>
+			<td>rotate3d(x,y,z)</td>
+			<td>객체의 세 방향을 한번에 회전 시킵니다.
+			</td>
+		</tr>
+		<tr>
+			<td>rotateX(n)</td>
+			<td>X축을 중심으로 객체를 회전시킵니다.</td>
+		</tr>
+		<tr>
+			<td>rotateY(n)</td>
+			<td>Y축을 중심으로 객체를 회전시킵니다.</td>
+		</tr>
+		<tr>
+			<td>rotateZ(n)</td>
+			<td>2D Transform의 Rotate와 동일합니다.</td>
+		</tr>
+		<tr>
+			<td>perspective(n)</td>
+			<td>객체를 바라보는 원근을 입니다. 화면을 바라보는 사용자로부터 얼마나 멀리에 위치하는가를 나타냅니다. px을 사용하며, 수치가 낮을수록 가깝기 때문에 왜곡도 심하게 일어납니다.
+			</td>
+		</tr>
+		<tr>
+			<td>matrix3d(nx16)</td>
+			<td> 모든 값을 한번에 지정할 수 있고 16개의 값이 존재합니다.
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<!--
+<h2>참고</h2>
+<div class="txt">
+	다음은 layout을 변경하는 메소드를 대처할 수 있는 속성들이다.<br />
+	이 속성들은 모두 composite layer를 구성한다.<br />
+	<br />
+	left => translateX<br />
+	top => translateY<br />
+	filter:fade => opacity<br />
+	<br />
+	안타깝게도 width, height를 변경하는 경우에는 어쩔수 없이 layout이 변경되기 때문에 가능하면 사용을 지양하도록 한다.<br />
+</div>
+-->
+
+
+<h2>참고자료</h2>
+<ul class="list">
+	<li><a href="http://easings.net/ko" target="_blank">easings</a></li>
+	<li><a href="http://matthewlein.com/ceaser/" target="_blank">ceaser</a></li>
+	<li><a href="http://cubic-bezier.com/#.17,.67,.83,.67" target="_blank">cubic-bezier</a></li>
+	<li><a href="https://css-tricks.com/almanac/properties/a/animation/" target="_blank">animation</a></li>
+</ul>
+
+</div>
+</body>
+</html>

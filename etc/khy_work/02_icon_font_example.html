@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<link rel="shortcut icon" href="https://img.hackers.com/user/images/common/ico/favicon.ico">
+<title>CSS3 - icon</title>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.9/css/all.css" integrity="sha384-5SOiIsAziJl6AWe0HWRKTXlfcSHKmYV4RBF18PPJ173Kzn7jzMyFuTtk8JA7QQG1" crossorigin="anonymous">
+<style>
+	/* reset */
+	body,p,h1,h2,h3,h4,h5,h6,ul,ol,li,dl,dt,dd,table,th,td,form,fieldset,legend,input,textarea,button,select,pre{margin:0;padding:0;font-family: 'Malgun Gothic','맑은고딕','맑은 고딕',sans-serif;color:#000;line-height:1.5}
+	img,fieldset{border:0}
+	ul,ol{list-style:none}
+	em,address{font-style:normal}
+	a{text-decoration:none;color:#333}
+	a:hover,a:active,a:focus{text-decoration:underline;color:#333}
+	body{background-color:#f1f1f1}
+	h1,h2,h3,h4{font-family:'Jeju Gothic',serif;font-weight:normal;letter-spacing:-1px;line-height:1.2}
+	h1{margin-bottom:100px;font-size:50px;text-align:center}
+	h2{margin-bottom:30px;font-size:36px;color:#ff5d70}
+	h3{margin-bottom:15px;font-size:23px;color:#333}
+	h4{padding:30px 0;font-size:23px;color:#f00;text-align:center}
+	table{margin-top:10px;border-collapse:collapse}
+	table th{background-color:#ededed}
+	table th,table td{padding:10px;border:1px solid #999;word-break:keep-all;word-wrap:break-word}
+
+	@font-face {
+		font-family: 'Jeju Gothic';
+		font-style: normal;
+		font-weight: 400;
+		src: url(//fonts.gstatic.com/ea/jejugothic/v3/JejuGothic-Regular.eot);
+		src: local("※"),
+		url(//fonts.gstatic.com/ea/jejugothic/v3/JejuGothic-Regular.eot?#iefix) format('embedded-opentype'),
+		url(//fonts.gstatic.com/ea/jejugothic/v3/JejuGothic-Regular.woff2) format('woff2'),
+		url(//fonts.gstatic.com/ea/jejugothic/v3/JejuGothic-Regular.woff) format('woff');
+	}
+	
+	.wrap{width:1000px;margin:50px auto;padding:80px 50px;box-shadow:0 1px 3px rgba(0, 0, 0, 0.15);background-color:#fff}
+	.content{border-bottom:1px solid #ededed;margin-bottom:80px;padding-bottom:80px}
+	.example-box{overflow:hidden;padding:0 30px 50px}
+
+</style>
+</head>
+
+<body>
+	<div class="wrap">
+
+		<h1>Font Awesome</h1>
+		
+		<div class="content">
+			<h2>기본</h2>
+			<div class="example-box">
+				  <i class="fas fa-user"></i>
+				  <br>
+				  <span class="f-icon-user">고객정보</span>
+			</div>
+
+			<h2>사이즈</h2>
+			<div class="example-box">
+				<i class="fas fa-user" style="font-size:20px"></i>
+				<i class="fas fa-user" style="font-size:30px"></i>
+				<i class="fas fa-user" style="font-size:40px"></i>
+				<i class="fas fa-user" style="font-size:50px"></i>
+				<i class="fas fa-user" style="font-size:60px"></i>
+				<i class="fas fa-user" style="font-size:70px"></i>
+				<i class="fas fa-user" style="font-size:80px"></i>
+				<i class="fas fa-user" style="font-size:90px"></i>
+				<i class="fas fa-user" style="font-size:100px"></i>
+			</div>
+
+			<div class="example-box">
+				<i class="fas fa-user fa-xs"></i>
+				<i class="fas fa-user fa-sm"></i>
+				<i class="fas fa-user fa-lg"></i>
+				<i class="fas fa-user fa-2x"></i>
+				<i class="fas fa-user fa-3x"></i>
+				<i class="fas fa-user fa-5x"></i>
+				<i class="fas fa-user fa-7x"></i>
+				<i class="fas fa-user fa-10x"></i>
+			</div>
+
+			<h2>색상</h2>
+			<div class="example-box">
+				<i class="fas fa-user fa-5x" style="color:#ff5d70"></i>
+			</div>
+
+			<h2>배경색</h2>
+			<div class="example-box">
+				<i class="fas fa-user fa-5x" style="background:#ff5d70"></i>
+			</div>
+
+			<h2>회전</h2>
+			<div class="example-box">
+				<i class="fas fa-user fa-rotate-90"></i>
+				<i class="fas fa-user fa-rotate-180"></i>
+				<i class="fas fa-user fa-rotate-270"></i>
+				<i class="fas fa-user fa-flip-horizontal"></i>
+				<i class="fas fa-user fa-flip-vertical"></i>
+			</div>
+
+			<h2>Styles & Prefixes</h2>
+			<div class="example-box">
+				<i class="fas fa-user fa-5x"></i>
+				<i class="far fa-user fa-5x"></i>
+			</div>
+
+			<h2>List</h2>
+			<div class="example-box">
+				<ul class="fa-ul">
+					<li><span class="fa-li"><i class="fas fa-check-square"></i></span>List icons can</li>
+					<li><span class="fa-li"><i class="fas fa-check-square"></i></span>be used to</li>
+					<li><span class="fa-li"><i class="fas fa-spinner fa-pulse"></i></span>replace bullets</li>
+					<li><span class="fa-li"><i class="far fa-square"></i></span>in lists</li>
+				</ul>
+			</div>
+
+			<h2>Border / float</h2>
+			<div class="example-box">
+				<i class="fas fa-quote-left fa-2x fa-pull-left fa-border"></i>
+					Gatsby believed in the green light, the orgastic future that year by year recedes before us.
+					It eluded us then, but that’s no matter — tomorrow we will run faster, stretch our arms further...
+					And one fine morning — So we beat on, boats against the current, borne back ceaselessly into the past.
+			</div>
+
+			<h2>Animated</h2>
+			<div class="example-box">
+				<div class="fa-3x">
+				  <i class="fas fa-spinner fa-spin"></i>
+				  <i class="fas fa-circle-notch fa-spin"></i>
+				  <i class="fas fa-sync fa-spin"></i>
+				  <i class="fas fa-cog fa-spin"></i>
+				  <i class="fas fa-spinner fa-pulse"></i>
+				</div>
+			</div>
+			
+			
+
+		</div>
+	</div>
+</body>
+</html>

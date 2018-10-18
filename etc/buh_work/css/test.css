@@ -1,0 +1,71 @@
+/*basic css*/
+.Cwrap{width: 1000px;margin: 0 auto;}
+.dist{margin: 0px 5px 2px 5px;}
+.plus{position:absolute;top:0;right:0;cursor:pointer;}
+.sectionBox{margin-top:15px; overflow:hidden;}
+/*header*/
+.headerWrap div{position:relative;padding-top:23px;}
+.headerWrap ul{margin-top: 3px;}
+.headerWrap div div ul li{font-size: 12px;float:left;padding: 0 7px;border-right: 1px solid #c9bfbe;margin:0;}
+.headerWrap .headerId{border: 0;}
+.headerWrap li a{color: #78665a;}
+.headerWrap div li input{position: relative;top:-2px;}
+.headerWrap>div>div{position: absolute;right: 0;bottom: -3px;margin-left: 8px;}
+.headerWrap div div *{margin-left: 6px;float:left}
+.headerWrap input::-webkit-input-placeholder {color:#d1cfd2;}
+.headerWrap input::-moz-placeholder {color:#d1cfd2;}
+.headerWrap>div>div>input{padding: 0 0 0 8px;width: 87px;height: 20px;font-size:10px;box-sizing: border-box;}
+.headerWrap>div>div>a{width: 60px;background: #6d6966;color: white;font-size: 10px;text-align: center;padding:5px 0;}
+
+/*navigation*/
+.nav{position:relative;margin-top: 30px;height: 45px;background: #2c3c78;}
+.nav ul li{position:relative;margin-right: 44px;float: left;line-height: 45px;}
+.nav ul li.navLast{margin: 0;float: right;}
+.nav ul li a{color: #fef9ff;font-size: 15px;font-weight:bold;padding:15px 0; }
+.nav ul li ul{display:none; position: absolute;bottom: -40px;left:0;width:500px;}
+.nav ul li li{float: left;margin-right: 15px;}
+.nav ul li li a{background: url(http://gscdn.hackers.co.kr/publish/img/dist.jpg) left center;background-repeat: no-repeat;color: black;font-size: 13px;padding-left: 8px;}
+
+/*mainBanner*/
+.mainBanner{margin-top: 56px;}
+.mainBanner>div{position:relative;}
+.mainBanner>div>a{margin-left: 5px;}
+
+/*rightBox*/
+.rightBox{position: absolute;left: 50%;margin-left: 530px;top: 195px;width: 100px;}
+.rightBox ul{border: 1px solid #cacacc;    text-align: center;}
+.rightBox li{height: 35px;text-align: center;font-size: 12px;line-height: 35px;}
+.rightBox li:first-child{color: white;background: #303435;font-size: 15px;}
+.rightBox li:not(:first-child){border-top: 1px solid #cdcbce;}
+.rightBox li img{margin: 10px 5px -4px -10px;}
+.rightBox a{color:black;}
+.rightBox>img{margin-top: 10px;}
+
+/*KBS 한국어능력시험 한국어 교양과목*/
+.menu>div>div{width:458px;padding: 25px 20px 20px 20px;border:1px solid #d5d5d5;border-left:0;float:left;}
+.menu>div>div:first-child{border-left:1px solid #d5d5d5;}
+.menu .menu_t{overflow:hidden;    padding-bottom: 15px;}
+.menu div div p{font-size: 16px;font-weight: bold;}
+.menu_h1{float:left;color: black;font-weight: bold;}
+.menu .menuUl li{float:left;}
+.menu .menuUl li:first-child{padding-right: 19px;margin-right: 18px;border-right: 1px solid #ccc;}
+.menuMore{float:right;background:url(http://gscdn.hackers.co.kr/publish/img/plus.jpg) no-repeat;width: 15px;height: 15px;}
+
+/*공지사항  자주묻는 질문  후기게시판*/
+.QnA dl{float: left;width: 291px;padding: 20px;border:1px solid #d5d5d5;border-left:0;zoom: 1;bo}
+.QnA dl:first-child{width:293px;border-left:1px solid #d5d5d5;}
+.QnA dt{position:relative;overflow:hidden;font-size: 16px;font-weight: bold;padding-bottom: 10px;border-bottom: 1px solid #eaeaea;margin-bottom: 10px;}
+.QnA dd{background: url(http://gscdn.hackers.co.kr/publish/img/dist.jpg) left center;background-repeat: no-repeat;padding-left:10px;font-size: 12px;line-height: 20px;cursor:pointer;}
+.QnA dd:hover{text-decoration: underline;font-weight: bold;}
+.QnA dd a{color:black;}
+
+/*footer*/
+.footerWrap:after{content:"";display:block;clear:both;}
+.footerWrap{border-top: 1px solid #e5e5e5;margin-top: 75px;padding: 15px 0 35px 0;}
+.footerWrap>div{position:relative}
+.footerWrap img:first-child{float: left;}
+.footerWrap div div{width: 600px;font-size: 11px;line-height: 20px;margin: 10px 0 0 30px;float: left;}
+.footerWrap div div a{color: #7e7e7e;font-size: 11px;height: 15px;width: 50px;border: 1px solid #c1c1c1;text-align: center;line-height: 15px;}
+.footerWrap .fPartner{position:absolute;top:14px;;right:0;}
+
+

@@ -1,0 +1,129 @@
+@charset "utf-8";
+
+/* table */
+[class^='tbl']{width:100%;table-layout:fixed;border-top:1px solid #ccc}
+[class^='tbl'] th{background:#f5f5f5}
+[class^='tbl'] th,
+[class^='tbl'] td{border-bottom:1px solid #e7e7e7;line-height:1.5}
+[class^='tbl'] .sbj{text-align:left}
+[class^='tbl'] .tit{display:block;font-size:19px;font-weight:400}
+[class^='tbl-col'] td{padding:14px 20px}
+[class^='tbl-row'] th{padding:14px 0}
+[class^='tbl-row'] td{padding:14px 0 14px 28px}
+.tbl-row-c td{padding:14px 0;text-align:center}
+
+/* table - bbs */
+.tbl-bbs th{padding:13px 0}
+.tbl-bbs td{text-align:center}
+.tbl-bbs tr.bbs-sbj td a{display:block;overflow:hidden;padding:15px 0;white-space:nowrap;text-overflow:ellipsis;text-align:left}
+.tbl-bbs tr.bbs-con{display:none}
+.tbl-bbs tr.bbs-con .txt{padding:18px 2% 18px 6%;border-width:0 1px 1px 1px;border-style:solid;border-color:#019c98;background:#f2fefd;text-align:left}
+.tbl-bbs tr.on.bbs-sbj td{border-width:1px 0 0 0;border-style:solid;border-color:#019c98}
+.tbl-bbs tr.on.bbs-sbj td:first-child{border-width:1px 0 0 1px;border-style:solid;border-color:#019c98}
+.tbl-bbs tr.on.bbs-sbj td.last{border-width:1px 1px 0 0;border-style:solid;border-color:#019c98}
+.tbl-bbs tr.on.bbs-con{display:table-row}
+.ie7 .tbl-bbs tr.on.bbs-con{display:block}
+
+/* graph */
+.star-rating, 
+.star-rating .star-inner{display:inline-block;overflow:hidden;height:14px;background:transparent url(//www.hackershrd.com/html/images/star.png) no-repeat;text-align:left}
+.star-rating{width:83px}
+.star-rating .star-inner{background-position:0 -15px;vertical-align:top}
+.bar-graph,
+.bar-graph .graph-inner{display:inline-block;height:20px;text-align:left;vertical-align:middle}
+.bar-graph{width:98px;margin:0 5px;border:1px solid #e7e7e7}
+.bar-graph .graph-inner{background-color:#ffc939}
+
+/* tab - list */
+.tab-list{margin-bottom:20px;border-bottom:1px solid #019a99}
+.ie7 .tab-list{zoom:1}
+.tab-list:after{content:'';display:block;clear:both}
+.tab-list li{float:left;width:50%}
+.tab-list li a{display:block;height:45px;background:#fff;border:1px solid #e7e7e7;border-left:0;line-height:45px;font-weight:700;text-align:center}
+.tab-list li:first-child a{border-left:1px solid #e7e7e7}
+.tab-list li.on a{background:#019a99;border-color:#019a99;color:#fff}
+.tab-list.tab3 li{width:33.333%}
+.tab-list.tab4 li{width:25%}
+.tab-list.tab5 li{width:20%}
+
+/* left-menu */
+.nav-left-tit{width:180px;height:130px;background:url('//img.hackershrd.com/sub/bg_nav_left.gif');border-bottom:1px solid #e7e7e7;text-align:center}
+.ie7 .nav-left-tit{zoom:1;line-height:130px}
+.nav-left-tit span{display:inline-block;vertical-align:middle;font-size:24px;letter-spacing:-2px;color:#fff;font-weight:500}
+.ie7 .nav-left-tit span{line-height:30px}
+.nav-left-tit:after{content:"";overflow:hidden;display:inline-block;width:0px;height:100%;vertical-align:middle;font-size:0px}
+.nav-left-lst li{position:relative;border-bottom:1px solid #e7e7e7}
+.nav-left-lst li a{display:block;height:50px;padding:0 15px;line-height:50px;font-size:15px;color:#333}
+.nav-left-lst li.on a,
+.nav-left-lst li a:hover{color:#019a99;font-weight:700}
+.nav-left-lst li .icon-nav-arr{position:absolute;top:0;right:15px;width:6px;height:9px;margin-top:20px;background-position:-184px 0}
+.nav-left-lst li.on .icon-nav-arr,
+.nav-left-lst li a:hover .icon-nav-arr{background-position:-176px 0}
+
+/* lecture - list */
+.search-box{border:1px solid #dcdcdc}
+.search-top{position:relative;padding:13px 20px;border-bottom:1px solid #e7e7e7;background:#f5f5f5;color:#333;font-weight:600}
+.search-refresh{position:absolute;top:0;right:0;width:126px;height:43px;line-height:43px}
+.search-refresh .icon-refresh{margin-left:5px}
+.lst-search{padding:0 20px}
+.ie7 .lst-search{zoom:1}
+.lst-search:after{display:block;content:'';clear:both}
+.ie7 .lst-search li{zoom:1}
+.lst-search li:after{display:block;content:'';clear:both}
+.lst-search > li{padding:10px 0;border-top:1px solid #e7e7e7}
+.lst-search > li:first-child{border-top:0}
+.search-tit{float:left;width:135px;margin:5px 0}
+.lst-search-chk{float:left;width:603px}
+.ie7 .lst-search-chk{zoom:1}
+.lst-search-chk:after{display:block;content:'';clear:both}
+.lst-search-chk li{float:left;width:25%;padding:5px 0}
+.lst-search-chk .input-control{margin-right:3px}
+.ie7 .lst-search-chk .input-control{margin-right:7px}
+.search-info{overflow:hidden;padding-bottom:15px;margin-top:40px;border-bottom:1px solid #ccc;line-height:30px;font-weight:600}
+.search-form label{margin-right:10px}
+.search-form input{margin-left:8px}
+.tbl-lecture-list{border-top:0;line-height:1.5}
+.tbl-lecture-list td{padding:30px 0}
+.tbl-lecture-list .lecture-txt{padding-right:20px}
+.tbl-lecture-list .btn-m{width:90px;height:60px;padding:20px 0 0 0;line-height:20px;font-size:16px}
+.sample-lecture{display:block;width:144px;height:126px;border:1px solid #bbb}
+.sample-lecture span{display:block;text-align:center;line-height:24px;font-size:12px}
+.txt-align.all-price{padding-top:10px;margin-top:10px;border-top:1px solid #e7e7e7;color:#019a99}
+
+/* lecture - summary */
+.lecture-summary{padding-bottom:20px;border-bottom:1px solid #ccc}
+.lecture-summary:after{display:block;content:'';clear:both}
+.ie7 .lecture-summary{zoom:1}
+.lecture-img{float:left;width:300px}
+.lecture-img img{border:1px solid #bbb}
+.lecture-info{float:right;width:450px}
+.tbl-row-lecture{border:0}
+.tbl-row-lecture th{background:#fff}
+.tbl-row-lecture th,
+.tbl-row-lecture td{padding:14px 0;border:0;border-top:1px solid #e7e7e7;vertical-align:top;text-align:left}
+.tbl-inner{border:0}
+.tbl-inner th{background:#fff;color:#888;font-weight:normal}
+.tbl-inner th,
+.tbl-inner td{padding:0;border:0;text-align:left}
+.lecture-notice{margin-bottom:20px;padding:18px;background:#f5f5f5}
+.lecture-notice > strong{color:#333}
+.lecture-btn a{width:170px;font-size:15px}
+.lecture-btn .btn-m{height:50px;line-height:50px}
+.lecture-btn .btn-m-line{height:48px;line-height:48px}
+.icon-dot{width:3px;height:3px;margin-right:6px;background-position:-199px 0}
+.icon-movie{width:18px;height:18px;margin-right:3px;background-position:-30px 0}
+.icon-course{width:18px;height:18px;margin-right:3px;background-position:-48px 0}
+.lecture-detail{padding-top:60px}
+
+/* list-dot */
+.list-guide{padding-left:18px;list-style:square}
+.list-guide li{font-size:13px;line-height:24px}
+
+/* paging */
+.box-paging{margin-top:30px;text-align:center}
+.box-paging a{display:inline-block;width:28px;height:28px;margin:0 2px;line-height:27px}
+.box-paging .active{background-color:#555;color:#fff}
+.icon-first{width:28px;height:28px;background-position:0 -24px}
+.icon-prev{width:28px;height:28px;background-position:-30px -24px}
+.icon-next{width:28px;height:28px;background-position:-60px -24px}
+.icon-last{width:28px;height:28px;background-position:-90px -24px}

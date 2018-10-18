@@ -1,0 +1,114 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>CSS Selector</title>
+		<!---css--->
+		<link rel="stylesheet" type="text/css" href="./css/common.css">
+		<link rel="stylesheet" type="text/css" href="css/css_selector.css">
+		<!---js--->
+		<script src="https://code.jquery.com/jquery-1.9.1.min.js"
+		  integrity="sha256-wS9gmOZBqsqWxgIVgA8Y9WcQOa7PgSIX+rPA0VL2rbQ="
+		  crossorigin="anonymous"></script> 
+		<script src="./js/test.js"></script></body>
+	</head>
+	<body>
+		<div class="wrap">
+			<h1>CSS Selector</h1>
+			<h2>[css] :not 선택자</h2>
+				<p><b>:not 선택자</b>는 이미 지정된 css 스타일에서 특정한 요소를 제외시킬 경우 사용합니다.<br/> 일반적으로 선택자는 선택을 하지 않기위해 사용하지만 이 경우는 선택을 하지 않기 위해서 사용합니다.
+				</p>
+
+			<div class="cssNot">
+				<p>.CLASS li:not(:nth-child(~)){ CSS }</p>
+<!---textarea--->
+				<textarea readonly>
+/*html*/
+<ul class="notNth">
+	<li>Css Selector1</li>
+	<li>Css Selector2</li>
+	<li>Css Selector3</li>
+	<li>Css Selector4</li>
+	<li>Css Selector5</li>
+</ul>
+
+
+/*css*/
+.notNth li:not(:nth-child(3)){color:red;}
+				</textarea>
+<!---//textarea--->
+				<ul class="notNth">
+					<li>Css Selector1</li>
+					<li>Css Selector2</li>
+					<li>Css Selector3</li>
+					<li>Css Selector4</li>
+					<li>Css Selector5</li>
+				</ul>				
+			</div>
+
+
+			<div class="cssNot">
+				<p>.CLASS li:not(.classname){ CSS }<br/>.CLASS li:not(.classname1 , classname2){ CSS } </p>
+<!---textarea--->
+				<textarea readonly>
+/*html*/
+<ul class="notClass">
+	<li>Css Selector1</li>
+	<li class="this">Css Selector2</li>
+	<li>Css Selector3</li>
+	<li>Css Selector4</li>
+	<li>Css Selector5</li>
+</ul>
+
+
+/*css*/
+.notClass li:not(.this){color:blue;}
+				</textarea>
+<!---//textarea--->
+
+				<ul class="notClass">
+					<li>Css Selector1</li>
+					<li class="this">Css Selector2</li>
+					<li>Css Selector3</li>
+					<li>Css Selector4</li>
+					<li>Css Selector5</li>
+				</ul>				
+			</div>
+
+
+			<div class="cssNot">
+				<p>.CLASS input:not([type="password"]){ CSS }</p>
+<!---textarea--->
+				<textarea readonly>
+/*html*/
+<form class="notInput">
+	<input type="text"		value="TEXT Input">
+	<input type="text"		value="TEXT Input">
+	<input type="password"	value="PASSWORD Input">
+	<input type="text"		value="TEXT Input">
+	<input type="text"		value="TEXT Input">
+</form>		
+
+
+/*css*/
+.notInput input:not([type="password"]) { border:1px solid red; color:red; }
+				</textarea>
+<!---//textarea--->
+				<form class="notInput">
+					<input type="text" value="TEXT Input">
+					<input type="text" value="TEXT Input">
+					<input type="password" value="PASSWORD Input">
+					<input type="text" value="TEXT Input">
+					<input type="text" value="TEXT Input">
+				</form>				
+			</div>
+
+			<div class="browserS">
+				<p>Browser Support</p>
+				<img src="images/css_browser.jpg" alt="" />
+			</div>
+		</div>
+		
+	</body>
+</html>
+

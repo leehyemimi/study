@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+	<link rel="shortcut icon" href="https://img.hackers.com/user/images/common/ico/favicon.ico">
+	<script src="http://champ.hackers.com/plugins/jquery/1.11.2/jquery-1.11.2.min.js"></script>
+	<title>CSS3 - icon</title>
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.9/css/all.css" integrity="sha384-5SOiIsAziJl6AWe0HWRKTXlfcSHKmYV4RBF18PPJ173Kzn7jzMyFuTtk8JA7QQG1" crossorigin="anonymous">
+<style>
+	/* reset */
+	body,p,h1,h2,h3,h4,h5,h6,ul,ol,li,dl,dt,dd,table,th,td,form,fieldset,legend,input,textarea,button,select,pre{margin:0;padding:0;font-family: 'Malgun Gothic','맑은고딕','맑은 고딕',sans-serif;color:#000;line-height:1.5}
+	img,fieldset{border:0}
+	ul,ol{list-style:none}
+	em,address{font-style:normal}
+	a{text-decoration:none;color:#333}
+	a:hover,a:active,a:focus{text-decoration:underline;color:#333}
+	body{background-color:#f1f1f1}
+	h1,h2,h3,h4{font-family:'Jeju Gothic',serif;font-weight:normal;letter-spacing:-1px;line-height:1.2}
+	h1{margin-bottom:50px;font-size:50px;text-align:center}
+	h2{margin-bottom:30px;font-size:36px;color:#ff5d70}
+	h3{margin-bottom:15px;font-size:23px;color:#333}
+	h4{padding:30px 0;font-size:23px;color:#f00;text-align:center}
+	table{margin-top:10px;border-collapse:collapse}
+	table th{background-color:#ededed}
+	table th,table td{padding:10px;border:1px solid #999;word-break:keep-all;word-wrap:break-word}
+
+	@font-face {
+		font-family: 'Jeju Gothic';
+		font-style: normal;
+		font-weight: 400;
+		src: url(//fonts.gstatic.com/ea/jejugothic/v3/JejuGothic-Regular.eot);
+		src: local("※"),
+		url(//fonts.gstatic.com/ea/jejugothic/v3/JejuGothic-Regular.eot?#iefix) format('embedded-opentype'),
+		url(//fonts.gstatic.com/ea/jejugothic/v3/JejuGothic-Regular.woff2) format('woff2'),
+		url(//fonts.gstatic.com/ea/jejugothic/v3/JejuGothic-Regular.woff) format('woff');
+	}
+	
+	.wrap{width:1000px;margin:50px auto;padding:80px 50px;box-shadow:0 1px 3px rgba(0, 0, 0, 0.15);background-color:#fff}
+	.content{border-bottom:1px solid #ededed;margin-bottom:80px;padding-bottom:80px}
+	.example-box{position:relative;overflow:hidden;padding:0 30px 50px;text-align:center}
+
+	[class^='f-icon-']:before,
+	[class^='f-icon-']:after{font-size:2em;font-family:"Font Awesome 5 Free";font-weight:900;vertical-align:middle}
+	.f-icon-user:before{content:'\f007'}
+
+	/* icons */
+	[class^='icon-'] { display: inline-block; position: relative; width: 2.5em; height: 2.5em; font-size: 30px; box-sizing: border-box; vertical-align: middle; }
+	[class^='icon-']:before, [class^='icon-']:after { display: block; content: ""; }
+
+	.icon-menu:before { position: absolute; top: 0.2em; left: 0.1em; width: 2.3em; height: 0.2em; background: #333; -webkit-box-shadow: 0 0.9em #333, 0 1.8em #333; -moz-box-shadow: 0 0.9em #333, 0 1.8em #333; box-shadow: 0 0.9em #333, 0 1.8em #333; }
+
+	[class^='icon-arr-top']:before, .arrow_btn.on [class^='icon-arr-bt']:before { position: absolute; top: 0.9em; left: 0.6em; width: 1.0em; height: 1.0em; border: 0.2em solid #333; border-right-width: 0; border-bottom-width: 0; transform: rotate(45deg); -webkit-transform: rotate(45deg); -moz-transform: rotate(45deg); -o-transform: rotate(45deg); -ms-transform: rotate(45deg); }
+
+	.arrow_btn.on [class^='icon-arr-top']:before, [class^='icon-arr-bt']:before { position: absolute; top: 0.3em; left: 0.7em; width: 1.0em; height: 1.0em; border: 0.2em solid #333; border-right-width: 0; border-bottom-width: 0; transform: rotate(-135deg); -webkit-transform: rotate(-135deg); -moz-transform: rotate(-135deg); -o-transform: rotate(-135deg); -ms-transform: rotate(-135deg); }
+
+	[class^='icon-arr-left']:before { position: absolute; top: 0.7em; left: 0.9em; width: 1.0em; height: 1.0em; border: 0.2em solid #4a7a8a; border-right-width: 0; border-bottom-width: 0; transform: rotate(-45deg); -webkit-transform: rotate(-45deg); -moz-transform: rotate(-45deg); -o-transform: rotate(-45deg); -ms-transform: rotate(-45deg); }
+
+	[class^='icon-arr-right']:before { position: absolute; top: 0.7em; left: 0.5em; width: 1.0em; height: 1.0em; border: 0.2em solid #333; border-right-width: 0; border-bottom-width: 0; transform: rotate(135deg); -webkit-transform: rotate(135deg); -moz-transform: rotate(135deg); -o-transform: rotate(135deg); -ms-transform: rotate(135deg); }
+
+	.icon-arr-top-w:before, .icon-arr-bt-w:before, .icon-arr-left-w:before, .icon-arr-right-w:before { border-color: #fff; }
+
+	.icon-arr-top-g:before, .icon-arr-bt-g:before, .icon-arr-left-g:before, .icon-arr-right-g:before { border-color: #c2c2c2; }
+
+	[class^='icon-close']:before, [class^='icon-close']:after { position: absolute; top: 1.2em; left: 0.1em; width: 2.4em; height: 0.2em; background-color: #333; -webkit-border-radius: 0.2em; -moz-border-radius: 0.2em; border-radius: 0.2em; transform: rotate(-45deg); -webkit-transform: rotate(-45deg); -moz-transform: rotate(-45deg); -o-transform: rotate(-45deg); -ms-transform: rotate(-45deg); }
+	[class^='icon-close']:after { transform: rotate(45deg); -webkit-transform: rotate(45deg); -moz-transform: rotate(45deg); -o-transform: rotate(45deg); -ms-transform: rotate(45deg); }
+
+	.icon-close-w:before, .icon-close-w:after { background-color: #fff; }
+
+	.icon-user { overflow: hidden; background-color: #fff; -webkit-border-radius: 50%; -moz-border-radius: 50%; border-radius: 50%; border: 0.1em solid #333; }
+	.icon-user:after, .icon-user:before { position: absolute; -webkit-border-radius: 50%; -moz-border-radius: 50%; border-radius: 50%; border-width: 0.1em; border-color: #333; border-style: solid; }
+	.icon-user:after { top: 0.5em; left: 0.7em; width: 0.7em; height: 0.7em; }
+	.icon-user:before { top: 1.3em; left: 0.4em; width: 1.3em; height: 1.5em; }
+
+	.icon-user2, .icon-user2-w { overflow: hidden; background-color: #4c4c4c; -webkit-border-radius: 50%; -moz-border-radius: 50%; border-radius: 50%; }
+	.icon-user2:after, .icon-user2-w:after, .icon-user2:before, .icon-user2-w:before { position: absolute; left: 50%; transform: translateX(-50%); background-color: #fff; }
+	.icon-user2:after, .icon-user2-w:after { top: 0.6em; width: 0.7em; height: 0.7em; -webkit-border-radius: 50%; -moz-border-radius: 50%; border-radius: 50%; }
+	.icon-user2:before, .icon-user2-w:before { top: 1.4em; width: 1.2em; height: 0.4em; -webkit-border-radius: 100% 100% 0 0; -moz-border-radius: 100% 100% 0 0; border-radius: 100% 100% 0 0; }
+	.icon-user2-w { background-color: #fff; }
+	.icon-user2-w:after, .icon-user2-w:before { background-color: #c2c2c2; }
+
+	.icon-more:before { position: absolute; top: 0.3em; left: 1.1em; width: 0.4em; height: 0.4em; background: #c2c2c2; -webkit-border-radius: 0.6em; -moz-border-radius: 0.6em; border-radius: 0.6em; -webkit-box-shadow: 0 0.8em 0 #c2c2c2, 0 1.6em 0 #c2c2c2; -moz-box-shadow: 0 0.8em 0 #c2c2c2, 0 1.6em 0 #c2c2c2; box-shadow: 0 0.8em 0 #c2c2c2, 0 1.6em 0 #c2c2c2; }
+
+	.icon-search:before, .icon-search:after { position: absolute; top: 0.3em; left: 0.3em; }
+	.icon-search:before { width: 1.1em; height: 1.1em; border: 0.1em #888 solid; -webkit-border-radius: 100%; -moz-border-radius: 100%; border-radius: 100%; }
+	.icon-search:after { top: 1.3em; left: 1.6em; width: 0.2em; height: 0.8em; border: 0.1em solid #888; -webkit-border-radius: 0.5em; -moz-border-radius: 0.5em; border-radius: 0.5em; transform: rotate(-45deg); -webkit-transform: rotate(-45deg); -moz-transform: rotate(-45deg); -o-transform: rotate(-45deg); -ms-transform: rotate(-45deg); }
+
+	[class^='icon-mark-'] { background: transparent; -webkit-border-radius: 50%; -moz-border-radius: 50%; border-radius: 50%; border: 0.1em solid #4A7A8A; box-sizing: border-box; }
+	[class^='icon-mark-']:before { content: ''; position: absolute; left: 0; width: 100%; color: #4A7A8A; font-family: Helvetica, sans-serif; font-weight: bold; font-size: 1.7em; text-align: center; }
+	[class^='icon-mark-'].fill, [class^='icon-mark-'].fill-g { border: 0; background: #0488b3; }
+	[class^='icon-mark-'].fill:before, [class^='icon-mark-'].fill-g:before { color: #FFF; }
+	[class^='icon-mark-'].fill-g { background: #c2c2c2; }
+	[class^='icon-mark-'].small { width: 1.6em; height: 1.6em; font-weight: normal; font-size: 8px; }
+	
+	.icon-mark-notice:before { content: '!'; }
+
+	.icon-mark-question:before { content: '?'; }
+
+	.icon-reset { background-color: #c2c2c2; -webkit-border-radius: 50%; -moz-border-radius: 50%; border-radius: 50%; }
+	.icon-reset:after { position: absolute; top: 0.5em; left: 0.5em; width: 1.1em; height: 1.1em; -webkit-border-radius: 50%; -moz-border-radius: 50%; border-radius: 50%; border-width: 0.2em; border-color: #fff; border-style: solid; border-right-color: transparent; }
+	.icon-reset:before { position: absolute; top: 0.6em; right: 0.1em; width: 0; height: 0; border-width: 0.4em; border-color: #fff; border-style: solid; border-right-color: transparent; border-left-color: transparent; border-bottom-color: transparent; transform: rotate(-58deg); -webkit-transform: rotate(-58deg); -moz-transform: rotate(-58deg); -o-transform: rotate(-58deg); -ms-transform: rotate(-58deg); }
+
+	.icon-check { background-color: #c2c2c2; -webkit-border-radius: 50%; -moz-border-radius: 50%; border-radius: 50%; }
+	.icon-check:after, .icon-check:before { position: absolute; width: 0.2em; background: #fff; -webkit-border-radius: 10px; -moz-border-radius: 10px; border-radius: 10px; }
+	.icon-check:after { top: 0.6em; left: 1.5em; height: 1.5em; transform: rotate(45deg); -webkit-transform: rotate(45deg); -moz-transform: rotate(45deg); -o-transform: rotate(45deg); -ms-transform: rotate(45deg); }
+	.icon-check:before { top: 1em; left: 0.7em; height: 1em; transform: rotate(-45deg); -webkit-transform: rotate(-45deg); -moz-transform: rotate(-45deg); -o-transform: rotate(-45deg); -ms-transform: rotate(-45deg); }
+	
+	/* animation */
+	.navTrigger{
+		cursor:pointer;
+		width:30px;
+		height:25px;
+		margin:auto;
+		position:absolute;
+		left:0;
+		right:0;
+		bottom:0;
+		top:0;
+	}
+	.navTrigger i {
+		background-color: #000;
+		border-radius: 2px;
+		content: '';
+		display: block;
+		width: 100%;
+		height: 4px;
+	}
+	.navTrigger i:nth-child(1) {
+		-webkit-animation:outT 0.8s backwards;
+		animation:outT 0.8s backwards;
+		-webkit-animation-direction:reverse;
+		animation-direction:reverse;
+	}
+	.navTrigger i:nth-child(2) {
+		margin: 5px 0;
+		-webkit-animation:outM 0.8s backwards;
+		animation:outM 0.8s backwards;
+		-webkit-animation-direction:reverse;
+		animation-direction:reverse;
+	}
+	.navTrigger i:nth-child(3) {
+		-webkit-animation:outBtm 0.8s backwards;
+		animation:outBtm 0.8s backwards;
+		-webkit-animation-direction:reverse;
+		animation-direction:reverse;
+	}
+	.navTrigger.active i:nth-child(1) {
+		-webkit-animation:inT 0.8s forwards;
+		animation:inT 0.8s forwards;
+	}
+	.navTrigger.active i:nth-child(2) {
+		-webkit-animation:inM 0.8s forwards;
+		animation:inM 0.8s forwards;
+	}
+	.navTrigger.active i:nth-child(3) {
+		-webkit-animation:inBtm 0.8s forwards;
+		animation:inBtm 0.8s forwards;
+	}
+	
+	
+	@keyframes inM{
+		50%{transform:rotate(0deg);}
+		100%{transform:rotate(45deg);}
+	}
+	
+	@keyframes outM{
+		50%{transform:rotate(0deg);}
+		100%{transform:rotate(45deg);}
+	}
+
+	@keyframes inT{
+		0%{transform: translateY(0px) rotate(0deg);}
+		50%{transform: translateY(9px) rotate(0deg);}
+		100%{transform: translateY(9px) rotate(135deg);}
+	}
+	
+	@keyframes outT{
+		0%{transform: translateY(0px) rotate(0deg);}
+		50%{transform: translateY(9px) rotate(0deg);}
+		100%{transform: translateY(9px) rotate(135deg);}
+	}
+	
+	@keyframes inBtm{
+		0%{transform: translateY(0px) rotate(0deg);}
+		50%{transform: translateY(-9px) rotate(0deg);}
+		100%{transform: translateY(-9px) rotate(135deg);}
+	}
+	
+	
+	@keyframes outBtm{
+		0%{transform: translateY(0px) rotate(0deg);}
+		50%{transform: translateY(-9px) rotate(0deg);}
+		100%{transform: translateY(-9px) rotate(135deg);}
+	}
+	
+	/* animation */
+	.ani .icon-arr-right{transition:all .5s;}
+	.ani .icon-arr-right:hover{transform:translateX(60%)}
+	.ani .icon-mark-notice:hover{animation:push 1s infinite both}
+	
+	@keyframes push { 50% { -webkit-transform: scale(0.8); transform: scale(0.8); }
+	  100% { -webkit-transform: scale(1); transform: scale(1); } }
+</style>
+<script>
+	$(function(){
+		$('.navTrigger').on('click',function(e){
+			e.preventDefault()
+			$(this).toggleClass('active');
+		});
+	});
+	
+</script>
+</head>
+
+<body>
+	<div class="wrap">
+
+		<h1>CSS Icon</h1>
+		
+		<div class="example-box" style="margin-bottom:200px;padding:30px;background:#00ff12">
+			<a href="#" class="icon-menu"></a>
+			<a href="#" class="icon-user"></a>
+			<a href="#" class="icon-user2"></a>
+			<a href="#" class="icon-user2-w"></a>
+			<a href="#" class="icon-arr-top"></a>
+			<a href="#" class="icon-arr-bt"></a>
+			<a href="#" class="icon-arr-left"></a>
+			<a href="#" class="icon-arr-right"></a>
+
+			<a href="#" class="icon-close"></a>
+			<a href="#" class="icon-close-w"></a>
+			<a href="#" class="icon-more"></a>
+			<a href="#" class="icon-reset"></a>
+			<a href="#" class="icon-search"></a>
+			<a href="#" class="icon-check"></a>
+
+			<a href="#" class="icon-mark-notice"></a>
+			<a href="#" class="icon-mark-question"></a>
+
+			<a href="#" class="icon-mark-notice fill"></a>
+			<a href="#" class="icon-mark-question fill"></a>
+		</div>
+		
+		<div class="example-box ani">
+			<a href="#" class="icon-arr-right" style="font-size:50px"></a>
+		</div>
+		
+		<div class="example-box ani">
+			<a href="#" class="icon-mark-notice fill" style="font-size:50px"></a>
+		</div>
+		
+		<div class="example-box ani">
+			<a href="#" class="navTrigger">
+			  <i></i><i></i><i></i>
+			</a>
+		</div>
+		
+		
+		
+		
+
+	</div>
+</body>
+</html>

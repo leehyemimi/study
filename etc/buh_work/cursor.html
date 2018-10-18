@@ -1,0 +1,139 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Untitled Document</title>
+<script
+  src="https://code.jquery.com/jquery-1.8.0.js"
+  integrity="sha256-00Fh8tkPAe+EmVaHFpD+HovxWk7b97qwqVi7nLvjdgs="
+  crossorigin="anonymous"></script>
+<style>
+.wrap_btn,.wrap_btnB{position:relative;float:left;display:block;}
+.cursor,.cursorB{position:absolute;}
+.wrap_btnB{cursor:none;}
+img{border:0;}
+a{display:block;}
+</style>
+</head>
+<body>
+	<a href="#;" class="wrap_btn">
+    	<img class="btn" src="images/btn.png" />
+        <img class="cursor" src="images/cursor.png" />
+    </a><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+
+	<a href="#;" class="wrap_btnB">
+    	<img class="btnB" src="images/btn.png" />
+        <img class="cursorB" src="images/cursor.png" />
+    </a>
+
+<script>
+var cursorMotionA=function(wrapDiv, btn, cursor){//감싼 a태그 , 버튼img , 커서img 
+	var wrap=$(wrapDiv);
+	var btn=wrap.find(btn);
+	var cursor=wrap.find(cursor);
+	var curWid=cursor.width();
+
+	var curMap=function(){//원 cursor 위치조정
+		setTimeout(function(){
+			cursor.stop().animate({
+				'left':btn.width()-50+'px',
+				'top':btn.height()-50+'px'
+			});
+		},0);
+	};
+	curMap();
+	
+		wrap.on({
+			'mousemove': function(e){
+				var that=$(this);
+				var target=that.find(cursor);
+				var _top=that.offset().top;
+				var _left=that.offset().left;
+				
+				that.data({
+					'X' : e.pageX,
+					'Y' : e.pageY
+				});
+				
+				if(_top < that.data('Y') && 
+				_top+that.height() > that.data('Y') && 
+				_left < that.data('X') && 
+				_left+that.width() > that.data('X')){//버튼밖으로 나갈때에..
+					target.stop().animate({
+						top : that.data('Y') - _top +'px',
+						left : that.data('X') - _left +'px'
+					},300);
+				}
+			},
+			'mouseleave': function(){
+				curMap();
+				$(this).find(cursor).css('width', curWid);
+			},
+			'mousedown': function(){
+				$(this).find(cursor).css('width', curWid/1.2);
+			},
+			'mouseup' : function(){
+				$(this).find(cursor).css('width', curWid);
+			}
+		});
+	}
+cursorMotionA('.wrap_btn','.btn','.cursor');
+
+var cursorMotionB=function(wrapDiv, btn, cursor){//감싼 a태그 , 버튼img , 커서img 
+	var wrap=$(wrapDiv);
+	var btn=wrap.find(btn);
+	var cursor=wrap.find(cursor);
+	var curWid=cursor.width();
+
+	var curMap=function(){//원 cursor 위치조정
+		setTimeout(function(){
+			cursor.css({
+				'left':btn.width()-50+'px',
+				'top':btn.height()-50+'px'
+			});
+		},0);
+	};
+	curMap();
+	
+		wrap.on({
+			'mousemove': function(e){
+				var that=$(this);
+				var target=that.find(cursor);
+				var _top=that.offset().top;
+				var _left=that.offset().left;
+				
+				that.data({
+					'X' : e.pageX,
+					'Y' : e.pageY
+				});
+				
+				if(_top < that.data('Y') && 
+				_top+that.height() > that.data('Y') && 
+				_left < that.data('X') && 
+				_left+that.width() > that.data('X')){//버튼밖으로 나갈때에..
+					target.css({
+						top : that.data('Y') - _top +'px',
+						left : that.data('X') - _left +'px'
+					},300);
+				}
+			},
+			'mouseleave': function(){
+				curMap();
+				$(this).find(cursor).css('width', curWid);
+			},
+			'mousedown': function(){
+				$(this).find(cursor).css('width', curWid/1.2);
+			},
+			'mouseup' : function(){
+				$(this).find(cursor).css('width', curWid);
+			}
+		});
+	}
+
+cursorMotionB('.wrap_btnB','.btnB','.cursorB');
+
+
+</script>
+
+</body>
+</html>

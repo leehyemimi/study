@@ -1,0 +1,657 @@
+<!doctype html>
+<html lang="en">
+ <head>
+	<meta charset="utf-8">
+	<title>IR(Image Replacement)기법</title>
+	<link href="css/comon.css" rel="stylesheet">
+	<style type="text/css">
+/* reset */
+@import url('webfont.css');
+
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,textarea,p,blockquote,th,td,input,select,textarea,button {margin:0;padding:0}
+fieldset,img {border:0 none}
+blockquote, q {quotes:none}
+blockquote:before, blockquote:after,q:before, q:after {content:'';content:none}
+input,select,textarea,button {font-size:100%;vertical-align:middle}
+button {border:0 none;background-color:transparent;cursor:pointer}
+table {border-collapse:collapse;border-spacing:0}
+body {-webkit-text-size-adjust:none;} /* 뷰표트 변환시 폰트크기 자동확대 방지 */
+input[type='text'],input[type='password'],input[type='submit'],input[type='search'] {-webkit-appearance:none; border-radius:0}
+input:checked[type='checkbox'] {background-color:#666; -webkit-appearance:checkbox}
+button,input[type='button'],input[type='submit'],input[type='reset'],input[type='file'] {-webkit-appearance:button; border-radius:0;}
+input[type='search']::-webkit-search-cancel-button {-webkit-appearance:none}
+input, button, textarea {font-family:/*"맑은 고딕",*/"돋움", Dotum, sans-serif;}
+address,caption,cite,code,dfn,em,var {font-style:normal;font-weight:normal}
+header, footer, section, article, aside, nav, hgroup, details, menu, figure, figcaption, main {display:block;margin:0;padding:0;}
+img{width:100%;vertical-align:middle;}
+
+/* 아래 설정은 디자인가이드에 맞게사용 */
+body {font-family:Nanum Gothic,"돋움", Dotum, sans-serif;color:#333;font-size:14px;line-height:1.5;}
+body *{font-family:Nanum Gothic,"돋움", Dotum, sans-serif;}
+body,th,td,input,select,textarea,button {}
+a {color:#1b52b1;text-decoration:underline}
+a:active, a:hover {text-decoration:underline}
+
+:lang(zh) {font-family:"微软雅黑","Microsoft Yahei Font", Arial, Verdana, "宋体", "돋움", sans-serif;}
+:lang(en) {font-family: "Segoe UI", Verdana;}
+
+/* global */
+#skipNavi {overflow:hidden;position:absolute;left:-9999px;width:0;height:1px;margin:0;padding:0} /* 스킵네비게이션 */
+.ir-pm {display:block;overflow:hidden;font-size:0px;line-height:0;text-indent:-9999px} /* 사용된 이미지내 의미있는 텍스트의 대체텍스트를 제공할때 */
+.ir-wa {display:block;overflow:hidden;position:relative;z-index:-10;width:100%;height:100%} /* 중요한 이미지 대체텍스트로 이미지off시에도 대체 텍스트를 보여주고자 할때 */
+.screen-out {overflow:hidden;position:absolute;width:0;height:0;line-height:0;text-indent:-9999px} /* 대체텍스트가 아닌 접근성을 위한 숨김텍스트를 제공할때 */
+
+.f-l {float:left}
+.f-r {float:right}
+.show {display:block}
+.none,.hide {display:none !important;}
+.tbl {border-collapse:collapse;border-spacing:0} /* 테이블 초기화 */
+.clear {display:block;overflow:visible;width:auto;clear:both;}
+.clear:after {display:block;visibility:hidden;height:0;font-size:0;clear:both;content:''}
+.fixed{position: fixed;}
+.of-h{overflow: hidden;}
+.of-a{overflow: auto;}
+/* Background Image - common 요소 */
+.btn-comm {background:url() no-repeat} /* 버튼 */
+.ico-comm {background:url() no-repeat} /* 아이콘 */
+.tit-comm {background:url() no-repeat} /* 타이틀 */
+.line-comm {background:url() no-repeat} /* 라인 */
+
+/* border round 3px button style */
+.bround {display:inline-block;padding:0;border:1px solid #d0d0d0;border-radius:3px;font-size:12px;text-decoration:none;text-align:center;}
+
+h1 {font-size:18px;padding-top:10px;}
+h2 {color:#000b72;font-size:16px;padding-bottom:10px;padding-top:10px;border-bottom:1px solid #d0d0d0;}
+h3 {font-size:14px;padding:10px 20px;background:#d0d0d0;}
+h4 {color:#000;padding:10px 20px;border:1px solid #d0d0d0;}
+.notbold {font-weight:normal}
+
+section {padding:10px;}
+article {padding:20px;}
+xmp {margin:2%;background:#f1f1f1;white-space:pre-line;padding:0 2% 1% 2%;}
+pre{margin-bottom:20px;background:#f1f1f1;white-space:pre-line;padding:1% 2% 1% 2%;}
+
+div{margin-bottom:20px;border:1px solid #d0d0d0;padding:5px 30px;}
+div.nomg{margin-bottom:0;}
+ul {padding:10px 0;}
+ol {padding-left:20px;}
+ol li a{text-decoration:none;}
+p {padding-top:10px;}
+
+.tit {display:block;font-size:14px;padding:5px 0;}
+
+.scpt1 xmp {margin-bottom:5px;}
+.scpt1 p {margin:0 0 0 2%;font-size:14px;}
+
+em {display:inline-block;padding-bottom:1px;border-bottom:1px solid #666;}
+
+.f_point{color:#ff2165;}
+.f_b{color:blue;}
+
+.bg_point{background:#f9f2f4;color:#c7254e;}
+
+table{width:100%;border-top:1px solid #d0d0d0;border-right:1px solid #d0d0d0;}
+table tr th,
+table tr td{font-size:12px;border-bottom:1px solid #d0d0d0;border-left:1px solid #d0d0d0;padding:10px 0;text-align:center;}
+table tr th{background:#a7a7a7;color:#fff;}
+	</style>
+</head>
+ <body cz-shortcut-listen="true">
+<section>
+	<h1>스크린리더 사용자를 위한 IR(Image Replacement)기법</h1>
+	<br>
+	<h3>목차</h3>
+	<div>
+		<ol>
+			<li><a href="#con1">IR(Image Replacement) 기법이란?</a></li>
+			<li><a href="#con2">IR을 위한 여러 가지 방법들</a></li>
+			<li><a href="#con3">각 방법들의 장단점</a></li>
+			<li><a href="#con4">title의 대안</a></li>
+			<li><a href="#con5">사이트점검사항 *</a></li>
+		</ol>
+	</div>
+	<p>
+		웹 접근성을 준수하기 위한 필수 사항 중 하나는 이미지에 대체 텍스트를 제공하는 것입니다.<br>
+		HTML의  요소를 사용할 경우 보통 alt 속성으로 대체 텍스트를 제공합니다. 특히 링크나 버튼 등의 컨트롤 요소에 이미지+대체 텍스트를 제공해야 하는 경우 alt 속성이 가장 적합하다고 할 수 있습니다. (* title은 예외사항이므로 추후 논의하겠습니다.)<br><br>
+
+		그러나 안내문구를 디자인상의 이유로 일반 텍스트가 아닌 이미지로 게시해야 하는 등의 상황이 종종 발생합니다. (또는 웹 페이지를 개발할 때 스크린리더 사용자에게 특정 이미지에 대한 추가 설명을 제공해야 할 때도 있습니다.)<br>
+		이렇게 이미지를 볼 수 없는 사용자에게 대체된 텍스트를 제공하는 것을 IR(Image Replacement)라고 합니다.<br><br>
+
+		IR에는 여러 가지 방법이 있는데, 각 방법의 특징 및 장단점을 정리하고 파악하여 공유해드리려고 합니다.<br>
+		취지에 맞으면서도 더욱 간결하게 대체텍스트를 제공하는데 조금이나마 도움이 되었으면 좋겠습니다.<br><br>
+
+			<strong>[참고 사이트]</strong><br>
+			<a href="http://darum.daum.net/convention/css/css_ir" target="_blank">+ 다룸 IR 관련 링크</a> <br>
+			<a href="http://nuli.navercorp.com/sharing/blog/post/1132804" target="_blank">+ 널리 IR 관련 링크</a> <br>
+			<a href="http://nuli.navercorp.com/sharing/blog/post/1132645" target="_blank">+ 널리 스크린리더 관련 내용</a><br>
+			<a href="http://leroro.net/blog/115" target="_blank">+ text-indent:-9999px를 활용하는 IR기법의 고도화</a><br>
+		<br>
+	</p>
+
+	<article>
+		<h2 id="con1">IR(Image Replacement) 기법이란?</h2>
+		<div>
+			IR 기법은 이미지를 볼 수 없는 사용자에게 대체된 텍스트를 제공하는 것으로, <strong>이미지 대체텍스트 제공을 위한 CSS 기법</strong>이다.<br/>
+			다양한 CSS 기법을 사용하여 이미지 대체텍스트를 제공할 수 있으며 각 방법의 장단점이 다르므로 접근성 및 이슈를 고려하여 사용하여야 한다.<br/>
+			(Daum의 경우 Phark Method와 WA IR 기법을 주로 사용하여 대체텍스트를 제공하고 있다.)
+		</div>
+
+		<h2 id="con2">IR을 위한 여러 가지 방법들</h2>
+		<div class="nomg">
+			<ul>
+				<li><strong>Farhner Image Replacement</strong> : display:none;</li>
+				<li><strong>Gilder/Levin Method</strong> : 빈 &lt;span&gt; 추가, position:absolute;</li>
+				<li><strong>script replace Method</strong> : 자바스크립트 이용하여 text를 img로 교체</li>
+				<li><strong>Leahy/Langridge Method</strong> : 배경이미지 설정 후 padding-top으로 글자 밀어내기</li>
+				<li><strong>span padding</strong> : 글자를 &lt;span&gt;으로 감싼 후 블럭화 하여 padding-top으로 글자 밀어내기</li>
+				<li><strong>Dwyer Method</strong> : 글자를 &lt;span&gt;으로 감싼 후 width/height을 0</li>
+				<li><strong>WA IR*</strong> : 글자를 &lt;span&gt;으로 감싼 후 z-index:-1;으로 화면숨김</li>
+				<li><strong>Phark Method*</strong> : text-indent 이용, 화면 밖으로 빼내기</li>
+			</ul>
+		</div>
+		<span>* 각 방법들의 naming은 '다룸'에서 차용하였으며, 아래 항목일수록 권장하는 방식입니다.</span><br/><br/>
+		
+		<h2 id="con3">각 방법들의 장단점</h2>
+		<h3>Farhner Image Replacement</h3>
+		<h4>
+			1. display:none;<br/>
+			<span class="notbold">
+				글자를 span태그로 감싼 후 display:none 이용하여 화면에 안 보이게 처리<br/>
+				IR 기법으로 잘못 사용하고 있는 대표적인 예. 스크린리더에서도 읽지 않는 것을 원칙으로 하기 때문에 대체텍스트 제공의 의미가 없음.<br/>tab 처럼 사용자의 조작에 따라 노출/비노출 해야하는 컨텐츠까지 모두 스크린리더가 출력한다면 사용자는 화면에 어떤 컨텐츠가 보여지고 있는지 구별이 어렵기 때문.
+			</span><br/><br/>
+			2. visibility:hidden;<br/>
+			<span class="notbold">
+				글자를 span태그로 감싼 후 visibility:hidden 이용하여 화면에 안 보이게 처리<br/>
+				브라우저 또는 모바일 기기에 따라 숨겨지지 않기도 한다.<br/><br/>
+
+				1. display:none는 센스리더, Jaws, NVDA에서 모두 내용을 읽지 못한다.<br/>
+				2. visibility: hidden은 센스리더에서는 내용을 읽을 수 있으나 Jaws, NVDA는 모두 내용을 읽지 못한다.<br/>
+				3. overflow:hidden의 경우 센스, Jaws, NVDA 모두 내용을 읽을 수 있다.<br/>
+				(*출처 : NULL, 스크린리더 세팅 및 향후 바뀔 수 있음에 주의)<br/><br/>
+				▷ 국내 스크린리더만 생각한다면 visibility:hidden만 적용시켜도 내용을 읽는데에는 문제가 없으나 국외 스크린리더 사용자까지 생각 한다면 visibility:hidden 역시 사용하지 않는 것이 좋아보인다.<br/><br/>
+
+				<strong>[KWCAG 2.1 개정 지침]</strong><br/>
+				1. IR(Image Replacement) 기법 사용시 display:none;, visibility:hidden; 사용금지<br/>
+					• W3C 표준에 맞게 스크린리더에서 display : none ; , visibility : hidden ; 은 인식하지 않도록 개선 됨<br/>
+					• 방법1 : text-indent, position 등에 음수를 사용하거나 Box 요소 크기를 작게 하고 overflow : hidden ; 사용<br/>
+					• 방법2 : longdesc 사용(html5 제외)<br/>
+			</span>
+		</h4>
+		<pre>	<strong>[css]</strong>
+				button {width:49px;height:36px;marign:0;padding:0;border:none;background:url("btn_search.gif") no-repeat 0 0;}
+				a {display:block;width:49px;height:36px;background:url("btn_search.gif") no-repeat 0 0;}
+				span {<strong>display;none;</strong>} 혹은, span {<strong>visibility:hidden;</strong>}
+
+				<strong>[html]</strong>
+					&lt;button&gt;
+						&nbsp;&nbsp;&nbsp;&nbsp;&lt;span&gt;검색&lt;/span&gt;
+					&lt;/button&gt;
+
+					&lt;a href="#"&gt;
+						&nbsp;&nbsp;&nbsp;&nbsp;&lt;span&gt;검색&lt;/span&gt;
+					&lt;/a&gt;
+		</pre>
+		<div>
+			<table>
+				<caption><i class="fa fa-smile-o"></i>장단점</caption>
+				<colgroup>
+					<col width="30%"/>
+					<col width="*"/>
+					<col width="*"/>
+				</colgroup>
+				<tbody>
+				<tr>
+					<th scope="col">항목</th>
+					<th scope="col">장점</th>
+					<th scope="col">단점</th>
+				</tr>
+				<tr>
+					<th scope="row">스크린리더기 읽어줌</th>
+					<td>&nbsp;</td>
+					<td>O</td>
+				</tr>
+				<tr>
+					<th scope="row">CSS on / Image off 시 텍스트 안보임</th>
+					<td>&nbsp;</td>
+					<td>O</td>
+				</tr>
+				<tr>
+					<th scope="row">추가적인 태그 사용</th>
+					<td>&nbsp;</td>
+					<td>O</td>
+				</tr>
+				</tbody>
+			</table>
+		</div>
+
+		<h3>Gilder/Levin Method</h3>
+		<h4>
+			position:absolute;<br/>
+			<span class="notbold">
+				빈 &lt;span&gt; 추가하여 배경이미지를 설정하고, position을 이용하여 글자를 덮는 방법
+			</span>
+		</h4>
+		<pre>	<strong>[css]</strong>
+				button {display;block;position:relative;width:49px;height:36px;border:0 none;sbackground-color:transparent;cursor:pointer}
+				button span {position:absolute;top:0;left:0;width:100%;height:100%;background:url("btn_search.gif") no-repeat 0 0;}
+				a {display:block;position:relative;width:49px;height:36px;}
+				a span {position:absolute;top:0;left:0;width:100%;height:100%;background:url("btn_search.gif") no-repeat 0 0;}
+
+				<strong>[html]</strong>
+					&lt;button type="button"&gt;
+						&nbsp;&nbsp;&nbsp;&nbsp;&lt;span&gt;&lt;/span&gt;검색
+					&lt;/button&gt;
+
+					&lt;a href="#"&gt;
+						&nbsp;&nbsp;&nbsp;&nbsp;&lt;span&gt;&lt;/span&gt;검색
+					&lt;/a&gt;
+		</pre>
+		<div>
+			<table>
+				<caption><i class="fa fa-smile-o"></i>장단점</caption>
+				<colgroup>
+					<col width="30%"/>
+					<col width="*"/>
+					<col width="*"/>
+				</colgroup>
+				<tbody>
+				<tr>
+					<th scope="col">항목</th>
+					<th scope="col">장점</th>
+					<th scope="col">단점</th>
+				</tr>
+				<tr>
+					<th scope="row">스크린리더기 읽어줌</th>
+					<td>O</td>
+					<td>&nbsp;</td>
+				</tr>
+				<tr>
+					<th scope="row">CSS on / Image off 시 텍스트 보임</th>
+					<td>O</td>
+					<td>&nbsp;</td>
+				</tr>
+				<tr>
+					<th scope="row">추가적인 태그 사용</th>
+					<td>&nbsp;</td>
+					<td>O</td>
+				</tr>
+				<tr>
+					<th scope="row">파폭2.0/크롬/IE5.0에서 button 내 span 위치가 약간 밀림</th>
+					<td>&nbsp;</td>
+					<td>O</td>
+				</tr>
+				<tr>
+					<th scope="row">투명한 이미지인 경우 텍스트가 비칠 수 있음</th>
+					<td>&nbsp;</td>
+					<td>O</td>
+				</tr>
+				</tbody>
+			</table>
+		</div>
+
+		<h3>script replace Method</h3>
+		<h4>
+			자바스크립트를 이용하여 이미지로 대체할 엘리먼트의 텍스트를 img태그로 교체하는 방법<br/>
+		</h4>
+		<pre>	사용하실 것 같지 않아 skip 하겠습니다. (* 상세 소스는 상단에 공유해드린 '다룸' 링크에서 확인하실 수 있습니다.)
+		</pre>
+		<div>
+			<table>
+				<caption><i class="fa fa-smile-o"></i>장단점</caption>
+				<colgroup>
+					<col width="30%"/>
+					<col width="*"/>
+					<col width="*"/>
+				</colgroup>
+				<tbody>
+				<tr>
+					<th scope="col">항목</th>
+					<th scope="col">장점</th>
+					<th scope="col">단점</th>
+				</tr>
+				<tr>
+					<th scope="row">스크린리더기 읽어줌</th>
+					<td>O</td>
+					<td>&nbsp;</td>
+				</tr>
+				<tr>
+					<th scope="row">CSS on / Image off 시 텍스트 보임</th>
+					<td>O</td>
+					<td>&nbsp;</td>
+				</tr>
+				<tr>
+					<th scope="row">추가적인 태그 사용</th>
+					<td>&nbsp;</td>
+					<td>O</td>
+				</tr>
+				<tr>
+					<th scope="row">파폭2.0/크롬/IE5.0에서 button 내 img 위치가 약간 밀림</th>
+					<td>&nbsp;</td>
+					<td>O</td>
+				</tr>
+				<tr>
+					<th scope="row">이미지 절대경로를 포함한 class명과 별도의 script 필요로 함</th>
+					<td>&nbsp;</td>
+					<td>O</td>
+				</tr>
+				</tbody>
+			</table>
+		</div>
+
+		<h3>Leahy/Langridge Method</h3>
+		<h4>
+			padding-top<br/>
+			<span class="notbold">
+				이미지 높이만큼 padding-top을 주어, 글자를 밑으로 밀어내어 숨기는 방법
+			</span>
+		</h4>
+		<pre>	<strong>[css]</strong>
+				button {display:block;overflow:hidden;width:49px;height:36px;padding:36px 0 0 0;border:0 none;background:url(btn_search.gif) no-repeat}
+				a {display:block;overflow:hidden;width:49px;height:0px !important;height:36px;padding:36px 0 0 0;background:url(btn_search.gif) no-repeat}
+
+				<strong>[html]</strong>
+					&lt;button type="button"&gt;검색&lt;/button&gt;
+
+					&lt;a href="#"&gt;검색&lt;/a&gt;
+		</pre>
+		<div>
+			<table>
+				<caption><i class="fa fa-smile-o"></i>장단점</caption>
+				<colgroup>
+					<col width="30%"/>
+					<col width="*"/>
+					<col width="*"/>
+				</colgroup>
+				<tbody>
+				<tr>
+					<th scope="col">항목</th>
+					<th scope="col">장점</th>
+					<th scope="col">단점</th>
+				</tr>
+				<tr>
+					<th scope="row">스크린리더기 읽어줌</th>
+					<td>O</td>
+					<td>&nbsp;</td>
+				</tr>
+				<tr>
+					<th scope="row">CSS on / Image off 시 텍스트 안보임</th>
+					<td>&nbsp;</td>
+					<td>O</td>
+				</tr>
+				<tr>
+					<th scope="row">추가적인 태그 사용</th>
+					<td>O</td>
+					<td>&nbsp;</td>
+				</tr>
+				<tr>
+					<th scope="row">IE 5 - button 제외한 다른 요소에서는 Box model heck 사용해야 함</th>
+					<td>&nbsp;</td>
+					<td>O</td>
+				</tr>
+				</tbody>
+			</table>
+		</div>
+
+		<h3>span padding : applied Method</h3>
+		<h4>
+			padding-top<br/>
+			<span class="notbold">
+				이미지 높이만큼 padding-top을 주어, 글자를 밑으로 밀어내어 숨기는 방법
+			</span>
+		</h4>
+		<pre>	<strong>[css]</strong>
+				button {display:block;overflow:hidden;width:49px;height:36px;margin:0;padding:0;border:none;background:url(btn_search.gif) no-repeat}
+				a {display:block;overflow:hidden;width:49px;height:36px;background:url(btn_search.gif) no-repeat}
+				span {display:block;padding-top:40px}
+
+				<strong>[html]</strong>
+					&lt;button type="button"&gt;검색&lt;/button&gt;
+
+					&lt;a href="#"&gt;검색&lt;/a&gt;
+		</pre>
+		<div>
+			<table>
+				<caption><i class="fa fa-smile-o"></i>장단점</caption>
+				<colgroup>
+					<col width="30%"/>
+					<col width="*"/>
+					<col width="*"/>
+				</colgroup>
+				<tbody>
+				<tr>
+					<th scope="col">항목</th>
+					<th scope="col">장점</th>
+					<th scope="col">단점</th>
+				</tr>
+				<tr>
+					<th scope="row">스크린리더기 읽어줌</th>
+					<td>O</td>
+					<td>&nbsp;</td>
+				</tr>
+				<tr>
+					<th scope="row">CSS on / Image off 시 텍스트 안보임</th>
+					<td>&nbsp;</td>
+					<td>O</td>
+				</tr>
+				<tr>
+					<th scope="row">추가적인 태그 사용</th>
+					<td>&nbsp;</td>
+					<td>O</td>
+				</tr>
+				</tbody>
+			</table>
+		</div>
+
+		<h3>Dwyer Method</h3>
+		<h4>
+			overflow:hidden; width:0;height:0; (font-size:0;)<br/>
+			<span class="notbold">
+				글자를 span으로 감싸고 widh와 height를 각각 0으로 하여 숨기는 방법
+			</span>
+		</h4>
+		<pre>	<strong>[css]</strong>
+				button {width:49px;height:36px;margin:0;padding:0;border:none;border:0 none;background:url("btn_search.gif") no-repeat 0 0;}
+				a {display:block;width:49px;height:36px;background:url("btn_search.gif") no-repeat 0 0;}
+				span {display:block;overflow:hidden;width:0;height:0;}
+
+				<strong>[html]</strong>
+					&lt;button type="button"&gt;
+						&nbsp;&nbsp;&nbsp;&nbsp;&lt;span&gt;검색&lt;/span&gt;
+					&lt;/button&gt;
+
+					&lt;a href="#"&gt;
+						&nbsp;&nbsp;&nbsp;&nbsp;&lt;span&gt;검색&lt;/span&gt;
+					&lt;/a&gt;
+		</pre>
+		<div>
+			<table>
+				<caption><i class="fa fa-smile-o"></i>장단점</caption>
+				<colgroup>
+					<col width="30%"/>
+					<col width="*"/>
+					<col width="*"/>
+				</colgroup>
+				<tbody>
+				<tr>
+					<th scope="col">항목</th>
+					<th scope="col">장점</th>
+					<th scope="col">단점</th>
+				</tr>
+				<tr>
+					<th scope="row">스크린리더기 읽어줌</th>
+					<td>O</td>
+					<td>&nbsp;</td>
+				</tr>
+				<tr>
+					<th scope="row">CSS on / Image off 시 텍스트 안보임</th>
+					<td>&nbsp;</td>
+					<td>O</td>
+				</tr>
+				<tr>
+					<th scope="row">추가적인 태그 사용</th>
+					<td>&nbsp;</td>
+					<td>O</td>
+				</tr>
+				</tbody>
+			</table>
+		</div>
+
+		<h3>WA IR</h3>
+		<h4>
+			z-index:-1;<br/>
+			<span class="notbold">
+				글자를 span 태그로 감싼 후 z-index:-1을 이용하여 화면에 안보이게 처리<br/><br/>
+
+				브라우저에서 css를 끄거나, 어떠한 이유로 적용된 css가 정상적으로 로드되지 않을 떄 숨겨진 텍스트가 화면에 노출.<br/>
+				또한, position 사용하기 때문에 디바이스의 사양에 따라 성능에 영향을 줄 수 있음.
+			</span>
+		</h4>
+		<pre>	<strong>[css]</strong>
+				body {position:relative;z-index:0;margin:15px;padding:0;background-color:#fafafa}
+				button {width:49px;height:36px;margin:0;padding:0;border:none;background:url(btn_search.gif) no-repeat}
+				a {display:block;width:49px;height:36px;font-weight:bold;font-size:13px;background:url(btn_search.gif) no-repeat;color:#4b5bc9;text-decoration:none}
+				span {display:block;position:relative;z-index:-1;padding:8px 0;border:1px solid #bcc1ec;background-color:#F1F3FF;text-align:center}
+
+				<strong>[html]</strong>
+					&lt;button type="button"&gt;
+						&nbsp;&nbsp;&nbsp;&nbsp;&lt;span&gt;검색&lt;/span&gt;
+					&lt;/button&gt;
+
+					&lt;a href="#"&gt;
+						&nbsp;&nbsp;&nbsp;&nbsp;&lt;span&gt;검색&lt;/span&gt;
+					&lt;/a&gt;
+		</pre>
+		<div>
+			<table>
+				<caption><i class="fa fa-smile-o"></i>장단점</caption>
+				<colgroup>
+					<col width="30%"/>
+					<col width="*"/>
+					<col width="*"/>
+				</colgroup>
+				<tbody>
+				<tr>
+					<th scope="col">항목</th>
+					<th scope="col">장점</th>
+					<th scope="col">단점</th>
+				</tr>
+				<tr>
+					<th scope="row">스크린리더기 읽어줌</th>
+					<td>O</td>
+					<td>&nbsp;</td>
+				</tr>
+				<tr>
+					<th scope="row">CSS on / Image off 시 텍스트 보임</th>
+					<td>O</td>
+					<td>&nbsp;</td>
+				</tr>
+				<tr>
+					<th scope="row">추가적인 태그 사용</th>
+					<td>&nbsp;</td>
+					<td>O</td>
+				</tr>
+				<tr>
+					<th scope="row">position 속성 사용(성능 관련 이슈)</th>
+					<td>&nbsp;</td>
+					<td>O</td>
+				</tr>
+				</tbody>
+			</table>
+		</div>
+
+		<h3>Phark Method</h3>
+		<h4>
+			text-indent:-9999px;<br/>
+			<span class="notbold">
+				글자를 text-indent를 이용하여 화면 바깥으로(-9999px만큼 내어 쓰기) 빼내어 보이지 않게 하는 방법.<br/>
+				가장 범용적으로 사용되는 방법으로 text-indent: -9999px와 같은 매우 큰 수치를 주어 화면 밖으로 밀어내버리는 원리이다.
+
+				이는 화면상에 보이지 않더라도 실제 캔버스는 지정한 영역까지 뻗어있는 꼴이므로 text-indent: -9999px은 성능상 좋지 않다고 한다.<br/>
+				text-indent를 요소의 너비와 동일하게 설정하면 텍스트가 첫 줄을 비우고 그 다음 행으로 개행하게 되는데 white-space: nowrap;를 이용해 이를 막고, 요소의 우측으로 텍스트가 삐져나가게 한 다음 해당 부분은 overflow: hidden; 처리하여 숨긴다. 이렇게 하면 실제 생성되는 캔버스 영역은 -9999px일 때보다 훨씬 작아지게 될 것이다.
+			</span>
+		</h4>
+		<pre>	-기본-
+				<strong>[css]</strong>
+				button {display:block;width:49px;height:36px;margin:0;padding:0;border:none;background:url(btn_search.gif) no-repeat;text-indent:-9999px}
+				a {display:block;overflow:hidden;float:left;width:49px;height:36px;background:url(btn_search.gif) no-repeat;text-indent:-9999px}
+
+				<strong>[html]</strong>
+					&lt;button type="button"&gt;검색&lt;/button&gt;
+					&lt;a href="#"&gt;검색&lt;/a&gt;
+
+
+				-보완-
+				<strong>[css]</strong>
+				.ir {display: inline-block;width: 200px;text-indent: 100%;white-space: nowrap;background: url(../images/blank.gif);overflow: hidden;}
+
+				<strong>이슈 및 해결</strong>
+					- background를 지정하지 않고 본 기법을 활용하려는 경우, ie에서는 해당 영역을 감지하지 못하여 클릭할 수 없는 버그
+					&nbsp;&nbsp;: 투명한 2px*2px짜리 blank.gif를 만들어 배경으로 지정하여 해결.
+					- ie7에서 해당 요소에 padding 값이 좌측 또는 우측에 적용되어있을 때 text-indent: 100%;로 지정하면 글씨가 삐져나오는 버그
+					&nbsp;&nbsp;: 이 경우 %가 아닌 너비와 동일한 px로 지정하여 해결.
+		</pre>
+		<div>
+			<table>
+				<caption><i class="fa fa-smile-o"></i>장단점</caption>
+				<colgroup>
+					<col width="30%"/>
+					<col width="*"/>
+					<col width="*"/>
+				</colgroup>
+				<tbody>
+				<tr>
+					<th scope="col">항목</th>
+					<th scope="col">장점</th>
+					<th scope="col">단점</th>
+				</tr>
+				<tr>
+					<th scope="row">스크린리더기 읽어줌</th>
+					<td>O</td>
+					<td>&nbsp;</td>
+				</tr>
+				<tr>
+					<th scope="row">CSS on / Image off 시 텍스트 안보임</th>
+					<td>&nbsp;</td>
+					<td>O</td>
+				</tr>
+				<tr>
+					<th scope="row">추가적인 태그 사용</th>
+					<td>O</td>
+					<td>&nbsp;</td>
+				</tr>
+				</tbody>
+			</table>
+		</div>
+
+
+
+
+		<br>
+		<h2 id="con4">title의 대안</h2>
+		<div>
+			웹 페이지의 컨트롤 특성에 따라 스크린리더 사용자에게 추가 설명이 필요한 경우가 있습니다. 가장 간단한 예를 찾아보자면 국내에서 널리 접근성 기준으로 사용되고 있는 KWCAG의 지침 중 새창이 열릴 때 이것을 사용자에게 알려야 한다는 것이 좋은 예입니다. 보통 스크린리더 사용자가 특정 링크를 눌렀을 때 해당 링크에 연결된 페이지가 새창으로 열린다는 정보를 주기 위해 title 속성을 사용합니다. 그밖에 사용자에게 특정 행동을 지시하는 용도로도 title 속성을 사용하는데요. title 속성이 과연 스크린리더 사용자에게 보편적으로 적당한지 생각해 볼 필요가 있습니다.<br/><br/>
+
+			Title 속성으로 스크린리더 사용자에게 추가 설명을 제공하는 것의 문제는 스크린리더 대부분이 폼 요소를 제외한 링크 등의 컨트롤에 적용된 title 속성을 무시한다는 것입니다. 아울러 title 속성은 국내 웹 접근성 지침과는 달리 WEBAIM은 폼 요소 등으로 제한하여 사용할 것을 권고하고 있습니다.<br/><br/>
+
+			현재 요소와 관계없이 기본적으로 적용된 title 속성을 출력하는 스크린리더는 국내의 센스리더가 거의 유일하다고 할 수 있습니다. 물론 JAWS는 사용자의 설정에 따라 title을 출력하도록 설정할 수 있습니다. 그러나 JAWS 역시 기본적으로 title을 출력하지 않는 것은 NVDA 등의 스크린리더와 같습니다.<br/><br/>
+
+			<strong>ARIA-label</strong><br/>
+			다만 ARIA-label을 사용할 때는 title 처럼 추가 설명만을 속성 값에 넣으면 안 됩니다. 링크 또는 버튼 등의 컨트롤 텍스트와 함께 기입해야 합니다. 이를테면 ‘ARIA-label=”네이버 – 새 창이 열립니다”’와 같이 해야 합니다.<br/>
+			링크에 적용된 title 속성값은 센스리더를 제외한 다른 스크린리더들은 읽지 못 합니다. 따라서 스크린리더 사용자에게 별도의 추가 설명이 제공되는 컨트롤을 사용할 때는 ARIA-label을 사용해야만 모든 스크린리더에서 컨트롤명과 추가 정보를 읽을 수 있습니다.
+
+		</div>
+
+		<h3 class="f_b" id="con5">* 사이트 적용 (점검사항)</h3>
+		<div>
+			<ol>
+				<li>사이트에서 적용 가능한 부분 찾기</li>
+				<li>적용 후 또 다른 이슈는 없는지 확인 후 공유</li>
+			</ol>
+		</div>
+
+	</article>
+
+</section>
+
+	</body>
+</html>

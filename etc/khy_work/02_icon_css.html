@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<link rel="shortcut icon" href="https://img.hackers.com/user/images/common/ico/favicon.ico">
+<title>CSS3 - icon</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+	/* reset */
+	body,p,h1,h2,h3,h4,h5,h6,ul,ol,li,dl,dt,dd,table,th,td,form,fieldset,legend,input,textarea,button,select,pre{margin:0;padding:0;font-family:'Nanum Gothic',sans-serif;color:#000;line-height:1.5}
+	img,fieldset{border:0}
+	ul,ol{list-style:none}
+	em,address{font-style:normal}
+	a{text-decoration:none;color:#333}
+	a:hover,a:active,a:focus{text-decoration:underline;color:#333}
+
+	@font-face {
+		font-family: 'Jeju Gothic';
+		font-style: normal;
+		font-weight: 400;
+		src: url(//fonts.gstatic.com/ea/jejugothic/v3/JejuGothic-Regular.eot);
+		src: local("※"),
+		url(//fonts.gstatic.com/ea/jejugothic/v3/JejuGothic-Regular.eot?#iefix) format('embedded-opentype'),
+		url(//fonts.gstatic.com/ea/jejugothic/v3/JejuGothic-Regular.woff2) format('woff2'),
+		url(//fonts.gstatic.com/ea/jejugothic/v3/JejuGothic-Regular.woff) format('woff');
+	}
+
+	@font-face {
+		font-family: 'Nanum Gothic';
+		font-style: normal;
+		font-weight: 400;
+		src: url(//fonts.gstatic.com/ea/nanumgothic/v5/NanumGothic-Regular.eot);
+		src: local("※"),
+		url(//fonts.gstatic.com/ea/nanumgothic/v5/NanumGothic-Regular.eot?#iefix) format('embedded-opentype'),
+		url(//fonts.gstatic.com/ea/nanumgothic/v5/NanumGothic-Regular.woff2) format('woff2'),
+		url(//fonts.gstatic.com/ea/nanumgothic/v5/NanumGothic-Regular.woff) format('woff');
+	}
+/* 테스트입니다. */
+/* 테스트입니다. */
+	body{background-color:#f1f1f1}
+	h1,h2,h3,h4{font-family:'Jeju Gothic',serif;font-weight:normal;letter-spacing:-1px;line-height:1.2}
+	h1{margin-bottom:100px;font-size:50px;text-align:center}
+	h2{margin-bottom:30px;font-size:36px;color:#ff5d70}
+	h3{margin-bottom:15px;font-size:23px;color:#333}
+	h4{padding:30px 0;font-size:23px;color:#f00;text-align:center}
+	table{margin-top:10px;border-collapse:collapse}
+	table th{background-color:#ededed}
+	table th,table td{padding:10px;border:1px solid #999;word-break:keep-all;word-wrap:break-word}
+	.wrap{width:1000px;margin:50px auto;padding:80px 50px;box-shadow:0 1px 3px rgba(0, 0, 0, 0.15);background-color:#fff}
+	.content{border-bottom:1px solid #ededed;margin-bottom:80px;padding-bottom:80px}
+
+	/* icons */
+	[class^='icon-'] { display: inline-block; position: relative; width: 2.5em; height: 2.5em; font-size: 15px; box-sizing: border-box; vertical-align: middle; }
+	[class^='icon-']:before, [class^='icon-']:after { display: block; content: ""; }
+	.icon-menu:before { position: absolute; top: 0.2em; left: 0.1em; width: 2.3em; height: 0.2em; background: #333; -webkit-box-shadow: 0 0.9em #333, 0 1.8em #333; -moz-box-shadow: 0 0.9em #333, 0 1.8em #333; box-shadow: 0 0.9em #333, 0 1.8em #333; }
+	[class^='icon-arr-top']:before { position: absolute; top: 0.9em; left: 0.6em; width: 1.0em; height: 1.0em; border: 0.2em solid #333; border-right-width: 0; border-bottom-width: 0; transform: rotate(45deg); -webkit-transform: rotate(45deg); -moz-transform: rotate(45deg); -o-transform: rotate(45deg); -ms-transform: rotate(45deg); }
+	[class^='icon-arr-bt']:before { position: absolute; top: 0.3em; left: 0.7em; width: 1.0em; height: 1.0em; border: 0.2em solid #333; border-right-width: 0; border-bottom-width: 0; transform: rotate(-135deg); -webkit-transform: rotate(-135deg); -moz-transform: rotate(-135deg); -o-transform: rotate(-135deg); -ms-transform: rotate(-135deg); }
+	[class^='icon-arr-left']:before { position: absolute; top: 0.7em; left: 0.9em; width: 1.0em; height: 1.0em; border: 0.2em solid #4a7a8a; border-right-width: 0; border-bottom-width: 0; transform: rotate(-45deg); -webkit-transform: rotate(-45deg); -moz-transform: rotate(-45deg); -o-transform: rotate(-45deg); -ms-transform: rotate(-45deg); }
+	[class^='icon-arr-right']:before { position: absolute; top: 0.7em; left: 0.5em; width: 1.0em; height: 1.0em; border: 0.2em solid #333; border-right-width: 0; border-bottom-width: 0; transform: rotate(135deg); -webkit-transform: rotate(135deg); -moz-transform: rotate(135deg); -o-transform: rotate(135deg); -ms-transform: rotate(135deg); }
+	.icon-arr-top-w:before, .icon-arr-bt-w:before, .icon-arr-left-w:before, .icon-arr-right-w:before { border-color: #fff; }
+	.icon-arr-top-g:before, .icon-arr-bt-g:before, .icon-arr-left-g:before, .icon-arr-right-g:before { border-color: #c2c2c2; }
+	[class^='icon-close']:before, [class^='icon-close']:after { position: absolute; top: 1.2em; left: 0.1em; width: 2.4em; height: 0.2em; background-color: #333; -webkit-border-radius: 0.2em; -moz-border-radius: 0.2em; border-radius: 0.2em; transform: rotate(-45deg); -webkit-transform: rotate(-45deg); -moz-transform: rotate(-45deg); -o-transform: rotate(-45deg); -ms-transform: rotate(-45deg); }
+	[class^='icon-close']:after { transform: rotate(45deg); -webkit-transform: rotate(45deg); -moz-transform: rotate(45deg); -o-transform: rotate(45deg); -ms-transform: rotate(45deg); }
+	.icon-close-w:before, .icon-close-w:after { background-color: #fff; }
+	.icon-user { overflow: hidden; background-color: #fff; -webkit-border-radius: 50%; -moz-border-radius: 50%; border-radius: 50%; border: 0.1em solid #333; }
+	.icon-user:after, .icon-user:before { position: absolute; -webkit-border-radius: 50%; -moz-border-radius: 50%; border-radius: 50%; border-width: 0.1em; border-color: #333; border-style: solid; }
+	.icon-user:after { top: 0.5em; left: 0.7em; width: 0.7em; height: 0.7em; }
+	.icon-user:before { top: 1.3em; left: 0.4em; width: 1.3em; height: 1.5em; }
+	.icon-more:before { position: absolute; top: 0.3em; left: 1.1em; width: 0.4em; height: 0.4em; background: #c2c2c2; -webkit-border-radius: 0.6em; -moz-border-radius: 0.6em; border-radius: 0.6em; -webkit-box-shadow: 0 0.8em 0 #c2c2c2, 0 1.6em 0 #c2c2c2; -moz-box-shadow: 0 0.8em 0 #c2c2c2, 0 1.6em 0 #c2c2c2; box-shadow: 0 0.8em 0 #c2c2c2, 0 1.6em 0 #c2c2c2; }
+	.icon-search:before, .icon-search:after { position: absolute; top: 0.3em; left: 0.3em; }
+	.icon-search:before { width: 1.1em; height: 1.1em; border: 0.1em #888 solid; -webkit-border-radius: 100%; -moz-border-radius: 100%; border-radius: 100%; }
+	.icon-search:after { top: 1.3em; left: 1.6em; width: 0.2em; height: 0.8em; border: 0.1em solid #888; -webkit-border-radius: 0.5em; -moz-border-radius: 0.5em; border-radius: 0.5em; transform: rotate(-45deg); -webkit-transform: rotate(-45deg); -moz-transform: rotate(-45deg); -o-transform: rotate(-45deg); -ms-transform: rotate(-45deg); }
+	.icon-mark:before { content: '?'; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: #c2c2c2; -webkit-border-radius: 50%; -moz-border-radius: 50%; border-radius: 50%; color: #fff; font-family: Helvetica, sans-serif; font-weight: bold; font-size: 1.8em; text-align: center; line-height: 1.5em; }
+	.icon-notice:before { content: '!'; position: absolute; top: 0.2em; left: 0.2em; width: 80%; height: 80%; background: transparent; -webkit-border-radius: 50%; -moz-border-radius: 50%; border-radius: 50%; border: 0.1em solid #4a7a8a; box-sizing: border-box; color: #4a7a8a; font-family: Helvetica, sans-serif; font-weight: bold; font-size: 1.4em; text-align: center; line-height: 1.4em; }
+	.icon-reset { background-color: #c2c2c2; -webkit-border-radius: 50%; -moz-border-radius: 50%; border-radius: 50%; }
+	.icon-reset:after { position: absolute; top: 0.5em; left: 0.5em; width: 1.1em; height: 1.1em; -webkit-border-radius: 50%; -moz-border-radius: 50%; border-radius: 50%; border-width: 0.2em; border-color: #fff; border-style: solid; border-right-color: transparent; }
+	.icon-reset:before { position: absolute; top: 0.6em; right: 0.1em; width: 0; height: 0; border-width: 0.4em; border-color: #fff; border-style: solid; border-right-color: transparent; border-left-color: transparent; border-bottom-color: transparent; transform: rotate(-58deg); -webkit-transform: rotate(-58deg); -moz-transform: rotate(-58deg); -o-transform: rotate(-58deg); -ms-transform: rotate(-58deg); }
+</style>
+</head>
+
+<body>
+	<div class="wrap">
+
+		<h1>icon</h1>
+		
+		<div class="content">
+			<h2>Font Awesome</h2>
+			<div class="inner_content">
+				<h3>1. Font Awesome 이란?</h3>
+				
+				웹 글꼴(Web Font)의 일종
+
+				장점:
+				벡터 그래픽 방식으로 확대해도 깨지지않음
+				자바스크립트가 사용되지 않기때문에 호환성 문제가 적음
+				상업적 용도로도 무료로 사용할수있음
+				크기조절/색상/배경색 바꾸기가 자유로움
+				
+
+				단점:
+				ie7 지원안됨[지원하려면 아래링크 삽입(3.2.1버전) 단, 4.3.0버전은 지원하지않음]
+				&lt;!--[if IE 7]&gt;<br>&nbsp; &lt;link rel="stylesheet" href="path/to/font-awesome/css/font-awesome-ie7.min.css"&gt;<br>&lt;![endif]--&gt;
+				
+				<br>
+				
+				<h3>2. 적용방법</h3>
+				ㄱ. 웹폰트 사용하는 방법으로 호출<br>
+				ㄴ. 적용하려는 아이콘을 확인한후 클래스명이나 유니코드값을 확인 - Font Awesome Icons<br>
+				ㄷ. 아이콘을 태그에 직접 적용하려는 경우 클래스명을 이용하여 아이콘 적용<br>
+				ㄹ. css를 이용하여 문서에 아이콘을 삽입하려는 경우 :before, :after를 이용하여 content: 값에 유니코드값을 지정<br>
+				<br>
+
+				<i class="fa fa-pencil" aria-hidden="true"></i>
+
+				<!-- 활용하는 자세한 방법
+				https://junistory.blogspot.kr/2017/08/font-awesome.html -->
+
+				<!-- 사용하는 간단한설명
+				http://www.dontorz.com/bbs/?mode=view&bbsid=study&ctg_cd=html&bltn_seq=490 -->
+
+				<!-- 설명
+				http://aboooks.tistory.com/388 -->
+
+				<!-- 아이콘 애니메이션
+				https://tympanus.net/Development/IconHoverEffects/#set-1 -->
+
+			</div>
+		</div>
+
+		<div class="content">
+			<h2>CSS3</h2>
+			<div class="inner_content">
+				최근 이미지를 쓰지 않고 웹폰트를 이용해 아이콘을 표현하는 사이트가 많아졌습니다. <br>
+				하지만, 몇 개의 아이콘을 쓰기 위해서 많은 아이콘이 들어있는 폰트파일을 불러오는 것도 좋다고만은 할 수 없겠지요. <br>
+				이미지로 만들지도, 웹폰트를 전부 불러오지 않아도 아이콘을 CSS로 표현할 수 있다면 좋지 않을까요?<br>
+				
+				<br>
+
+				<div class="inner_content">
+					<a href="#" class="icon-menu"></a>
+					<a href="#" class="icon-user"></a>
+					<a href="#" class="icon-arr-top"></a>
+					<a href="#" class="icon-arr-bt"></a>
+					<a href="#" class="icon-arr-left"></a>
+					<a href="#" class="icon-arr-right"></a>
+					<a href="#" class="icon-notice"></a>
+					<a href="#" class="icon-close"></a>
+					<a href="#" class="icon-close-w"></a>
+					<a href="#" class="icon-mark"></a>
+					<a href="#" class="icon-more"></a>
+					<a href="#" class="icon-reset"></a>
+					<a href="#" class="icon-search"></a>
+				</div>
+			</div>
+		</div>
+
+		<div class="content">
+			<h2>참고사이트</h2>
+			<div class="inner_content">
+				<a href="http://www.uiplayground.in/css3-icons/" target="_blank">http://www.uiplayground.in/css3-icons/</a>
+				<br>
+				<a href="https://saeedalipoor.github.io/icono/" target="_blank">https://saeedalipoor.github.io/icono/</a>
+				<br>
+				<a href="http://fontawesome.io/icons/" target="_blank">http://fontawesome.io/icons/</a>
+			</div>
+		</div>
+
+	</div>
+</body>
+</html>

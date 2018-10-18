@@ -1,0 +1,20 @@
+@charset "UTF-8";
+
+//reset
+html{ font-size:16px }
+body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, fieldset, legend, textarea, p, blockquote, th, td, input, select, textarea, button{ margin:0; padding:0; line-height:1.25 }
+fieldset, img{ border:0 none }
+dl, ul, ol, menu, li{ list-style:none }
+blockquote, q{ quotes:none }
+input:focus, button:focus, textarea:focus{ outline:none }
+button{ border:0 none; background-color:transparent; cursor:pointer }
+body{ background:#FFF; -webkit-text-size-adjust:none }
+html, body, th, td, input, select, textarea, button{ font-size:16px; font-family:$font; font-weight:400; color:#000 }
+a{ color:#010101; text-decoration:none }
+address, caption, cite, code, dfn, em, var{ font-style:normal; font-weight:400 }
+figure{ line-height:0 }
+table caption{ display:none }
+.blind, legend{ display:block; overflow:hidden; position:absolute; top:-1000em; left:0 }
+h1, h2, h3, h4, h5, h6, strong{ font-weight:600 }
+table{ table-layout:fixed; border-collapse:collapse; width:100% }
+

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>rem테스트</title>
+<style>
+/* reset */
+body,p,h1,h2,h3,h4,h5,h6,ul,ol,li,dl,dt,dd,table,th,td,form,fieldset,legend,input,textarea,button,select{margin:0;padding:0;line-height:1.25}
+body,input,textarea,select,button,table,pre{font-family:'Nanum Gothic',sans-serif}
+img,fieldset{border:0}
+ul,ol{list-style:none}
+em,address{font-style:normal}
+a{text-decoration:none}
+a:hover,a:active,a:focus{text-decoration:underline}
+@font-face {
+	font-family: 'Nanum Gothic';
+	font-style: normal;
+	font-weight: 400;
+	src: url(//fonts.gstatic.com/ea/nanumgothic/v5/NanumGothic-Regular.eot);
+	src: local("※"),
+	url(//fonts.gstatic.com/ea/nanumgothic/v5/NanumGothic-Regular.eot?#iefix) format('embedded-opentype'),
+	url(//fonts.gstatic.com/ea/nanumgothic/v5/NanumGothic-Regular.woff2) format('woff2'),
+	url(//fonts.gstatic.com/ea/nanumgothic/v5/NanumGothic-Regular.woff) format('woff');
+}
+
+.content{display:table;width:100%;text-align:center}
+.content img{width:100%}
+.inner{position:relative;display:table-cell;vertical-align:middle}
+.inner .title{position:absolute;top:10rem;left:0;width:100%;text-align:center}
+.inner em{display:block;font-size:2.2rem;color:#363636;font-weight:bold}
+.inner strong{display:block;margin-top:0.5rem;font-size:4.8rem;color:#860250}
+
+.price_wrap{position:relative;font-size:1.6rem}
+.price_wrap a{display:table;width:100%;background:#0b15dc;box-sizing:border-box}
+.price_wrap a > span{display:table-cell;width:50%;vertical-align:middle;color:#fff;text-align:center}
+.price_wrap .end_day{display:inline-block;margin-bottom:0.6rem;padding:0.2rem 1rem;background:#fff;color:#0b15dc}
+.price_wrap .price{position:relative;font-size:2rem}
+.price_wrap .arr{display:inline-block;position:absolute;top:0.5rem;left:2.5rem;width:12rem;height:1.3rem;background:url('http://image.champstudy.com/img/event/2017/06/1900/m/v2/arr_price.png') no-repeat;background-size:12rem 1.3rem}
+
+/* body기본 폰트사이즈 16px설정 
+body{font-size:1.6rem}*/
+ /* 브라우저 기본글꼴크기 16px 기준으로 10xp == 1rem이 되도록 맞춤값 */
+@media (min-width:320px) and (max-width:352px){html{font-size:0.625rem}}
+@media (min-width:353px) and (max-width:384px){html{font-size:0.6875rem}}
+@media (min-width:385px) and (max-width:416px){html{font-size:0.75rem}}
+@media (min-width:417px) and (max-width:448px){html{font-size:0.8125rem}}
+@media (min-width:449px) and (max-width:480px){html{font-size:0.875rem}}
+@media (min-width:481px) and (max-width:512px){html{font-size:0.9375rem}}
+@media (min-width:513px) and (max-width:544px){html{font-size:1rem}}
+@media (min-width:545px) and (max-width:576px){html{font-size:1.063rem}}
+@media (min-width:577px) and (max-width:608px){html{font-size:1.125rem}}
+@media (min-width:609px) and (max-width:639px){html{font-size:1.188rem}}
+@media (min-width:640px) and (max-width:672px){html{font-size:1.25rem}}
+@media (min-width:673px) and (max-width:723px){html{font-size:1.313rem}}
+@media (min-width:724px) and (max-width:773px){html{font-size:1.375rem}}
+@media (min-width:774px) and (max-width:823px){html{font-size:1.438rem}}
+@media (min-width:824px) and (max-width:873px){html{font-size:1.5rem}}
+@media (min-width:874px) and (max-width:923px){html{font-size:1.563rem}}
+@media (min-width:924px) and (max-width:973px){html{font-size:1.625rem}}
+@media (min-width:974px) and (max-width:1023px){html{font-size:1.688rem}}
+@media (min-width:1024px){html{font-size:1.75rem}}
+
+</style>
+</head>
+<body>
+<div class="event_wrap">
+	<div class="content">
+		<div class="inner">
+			<img src="img/bg_cont.jpg" alt="">
+			<div class="title">
+				<em>토스+오픽+취업스펙</em>
+				<strong>0원 프리패스</strong>
+			</div>
+		</div>
+	</div>
+	<div class="content">
+		<div class="inner">
+			<div class="price_wrap">
+				<a href="#">
+					<span>
+						<span class="end_day">마감하루전</span><br>출석만해도<br>
+						<strong class="price">399,000원<span class="arr"></span></strong>
+					</span>
+					<span class="txt_r"><img src="http://image.champstudy.com/img/event/2017/06/1900/m/v2/btn_lect01.png" alt=""/></span>
+				</a>
+			</div>
+		</div>
+	</div>
+</div>
+</body>
+</html>
+

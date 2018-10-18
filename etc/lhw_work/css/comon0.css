@@ -1,0 +1,84 @@
+/* reset */
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,textarea,p,blockquote,th,td,input,select,textarea,button {margin:0;padding:0}
+fieldset,img {border:0 none}
+blockquote, q {quotes:none}
+blockquote:before, blockquote:after,q:before, q:after {content:'';content:none}
+input,select,textarea,button {font-size:100%;vertical-align:middle}
+button {border:0 none;background-color:transparent;cursor:pointer}
+table {border-collapse:collapse;border-spacing:0}
+body {-webkit-text-size-adjust:none;} /* 뷰표트 변환시 폰트크기 자동확대 방지 */
+input[type='text'],input[type='password'],input[type='submit'],input[type='search'] {-webkit-appearance:none; border-radius:0}
+input:checked[type='checkbox'] {background-color:#666; -webkit-appearance:checkbox}
+button,input[type='button'],input[type='submit'],input[type='reset'],input[type='file'] {-webkit-appearance:button; border-radius:0;}
+input[type='search']::-webkit-search-cancel-button {-webkit-appearance:none}
+input, button, textarea {font-family:/*"맑은 고딕",*/"돋움", Dotum, sans-serif;}
+address,caption,cite,code,dfn,em,var {font-style:normal;font-weight:normal}
+header, footer, section, article, aside, nav, hgroup, details, menu, figure, figcaption, main {display:block;margin:0;padding:0;}
+img{width:100%;vertical-align:middle;}
+
+/* 아래 설정은 디자인가이드에 맞게사용 */
+body {font-family:"Nanum Gothic","돋움", Dotum, sans-serif;color:#333;font-size:14px;line-height:1.5;}
+body *{font-family:"Nanum Gothic","돋움", Dotum, sans-serif;}
+body,th,td,input,select,textarea,button {}
+a {color:#1b52b1;text-decoration:underline}
+a:active, a:hover {text-decoration:underline}
+
+:lang(zh) {font-family:"微软雅黑","Microsoft Yahei Font", Arial, Verdana, "宋体", "돋움", sans-serif;}
+:lang(en) {font-family: "Segoe UI", Verdana;}
+
+/* global */
+#skipNavi {overflow:hidden;position:absolute;left:-9999px;width:0;height:1px;margin:0;padding:0} /* 스킵네비게이션 */
+.ir-pm {display:block;overflow:hidden;font-size:0px;line-height:0;text-indent:-9999px} /* 사용된 이미지내 의미있는 텍스트의 대체텍스트를 제공할때 */
+.ir-wa {display:block;overflow:hidden;position:relative;z-index:-10;width:100%;height:100%} /* 중요한 이미지 대체텍스트로 이미지off시에도 대체 텍스트를 보여주고자 할때 */
+.screen-out {overflow:hidden;position:absolute;width:0;height:0;line-height:0;text-indent:-9999px} /* 대체텍스트가 아닌 접근성을 위한 숨김텍스트를 제공할때 */
+
+.f-l {float:left}
+.f-r {float:right}
+.show {display:block}
+.none,.hide {display:none !important;}
+.tbl {border-collapse:collapse;border-spacing:0} /* 테이블 초기화 */
+.clear {display:block;overflow:visible;width:auto;clear:both;}
+.clear:after {display:block;visibility:hidden;height:0;font-size:0;clear:both;content:''}
+.fixed{position: fixed;}
+.of-h{overflow: hidden;}
+.of-a{overflow: auto;}
+/* Background Image - common 요소 */
+.btn-comm {background:url() no-repeat} /* 버튼 */
+.ico-comm {background:url() no-repeat} /* 아이콘 */
+.tit-comm {background:url() no-repeat} /* 타이틀 */
+.line-comm {background:url() no-repeat} /* 라인 */
+
+/* border round 3px button style */
+.bround {display:inline-block;padding:0;border:1px solid #d0d0d0;border-radius:3px;font-size:12px;text-decoration:none;text-align:center;}
+
+h1 {font-size:18px;padding-top:10px;}
+h2 {color:#000b72;font-size:16px;padding-bottom:10px;padding-top:10px;border-bottom:1px solid #d0d0d0;}
+h3 {font-size:14px;padding:10px 20px;background:#d0d0d0;}
+h4 {color:#000;padding:10px 20px;border:1px solid #d0d0d0;}
+
+section {padding:10px;}
+article {padding:20px;}
+xmp {margin:2%;background:#f1f1f1;white-space:pre-line;padding:0 2% 1% 2%;}
+pre{margin-bottom:20px;background:#f1f1f1;white-space:pre-line;padding:1% 2% 1% 2%;}
+
+div{margin-bottom:20px;border:1px solid #d0d0d0;padding:5px 30px;}
+ul {padding:10px 0;}
+ol {padding-left:20px;}
+p {padding-top:10px;}
+
+.tit {display:block;font-size:14px;padding:5px 0;}
+
+.scpt1 xmp {margin-bottom:5px;}
+.scpt1 p {margin:0 0 0 2%;font-size:14px;}
+
+em {display:inline-block;padding-bottom:1px;border-bottom:1px solid #666;}
+
+.f_point{color:#ff2165;}
+.f_b{color:blue;}
+
+.bg_point{background:#f9f2f4;color:#c7254e;}
+
+table{width:100%;border-top:1px solid #d0d0d0;border-right:1px solid #d0d0d0;}
+table tr th,
+table tr td{font-size:12px;border-bottom:1px solid #d0d0d0;border-left:1px solid #d0d0d0;padding:10px 0;text-align:center;}
+table tr th{background:#a7a7a7;color:#fff;}

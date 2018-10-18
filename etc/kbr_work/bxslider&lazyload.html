@@ -1,0 +1,290 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="Generator" content="EditPlus®">
+<meta name="Author" content="">
+<meta name="Keywords" content="">
+<meta name="Description" content="">
+<title>bxslider &amp; lazyload</title>
+<script src="http://code.jquery.com/jquery-latest.js" type="text/javascript"></script>
+
+<style type="text/css">
+/*********************** 나눔바른고딕 ***********************/
+@import url(https://cdn.rawgit.com/openhiun/hangul/14c0f6faa2941116bb53001d6a7dcd5e82300c3f/nanumbarungothic.css);
+
+/* reset */
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,textarea,p,blockquote,th,td,input,select,textarea,button{margin:0;padding:0;}
+h1, h2, h2, h4, h5, h6, p {margin-top:0;font-weight:normal;}
+html,body{height:100%;}
+body,input,textarea,select,button,table{font-size:16px;color:#222;line-height:1.75;font-family:'Nanum Barun Gothic', '나눔바른고딕', 'Nanum Gothic', '나눔고딕', '맑은 고딕', Dotum, '돋움', Gulim, '굴림', verdana, HelveticaNeue, Apple-Gothic, Arial, sans-serif;}
+
+fieldset, img {border:0;vertical-align:top;}
+table {border-collapse:collapse; border-spacing:0; table-layout:fixed;}
+caption, th, td {text-align:left; vertical-align:top; font-weight:normal;}
+caption, label, legend {visibility:hidden;overflow:hidden;width:0;height:0;font-size:0;line-height:0}
+ul, ol, dl, li {list-style:none;}
+abbr, acronym {border-bottom:.1em dotted;cursor:help;}
+article, aside, details, figcaption, figure, footer, header, main, menu, nav, section {display:block;}
+a,a:hover,a:active,a:visited,a:focus{color:inherit;text-decoration:none}
+button{overflow:visible;margin:0;padding:0;border:0;outline:0;background:none;cursor:pointer;}
+button::-moz-focus-inner{padding:0;border:0}
+
+.mt30{margin-top:30px !important;}
+.mt60{margin-top:60px !important;}
+.mt100{margin-top:100px !important;}
+.mt200{margin-top:200px !important;}
+.mb100{margin-bottom:100px !important;}
+.mr10{margin-right:10px;}
+.ml0{margin-left:0 !important;}
+
+.tc{text-align:center;}
+.bold{color:#000;font-weight:bold;}
+.underline{text-decoration:underline;}
+.red{color:red;}
+.white{color:#fff;}
+
+body{background-color:#f1f1f1;}
+.wrap{width:70%;margin:50px auto;padding:30px 50px;box-shadow:0 1px 3px rgba(0, 0, 0, 0.15);background-color:#fff}
+
+h1{margin:50px 0 80px;font-size:40px;color:#000;text-align:center;font-weight:bold;}
+h2{margin:60px 0 10px;font-size:24px;}
+.txt{word-break:break-all;word-wrap:break-word;margin:15px 0;}
+
+.code_area .tit{margin:40px 0 20px;font-size:18px;}
+.code_area .code{display:block;border-left:10px solid #333;padding-left:50px;margin:10px 0;font-family:verdana;}
+
+.list li{list-style-type:disc;margin:30px 0 5px 15px;}
+.list li ul li{list-style-type:upper-roman;list-style-position:inside;margin:50px 0 5px 0;}
+
+.tbl_code{width:100%;}
+.tbl_code thead th{background-color:#444;height:50px;line-height:50px;color:#fff;font-weight:bold;vertical-align:middle;text-align:center;border:1px solid #aaa;}
+.tbl_code thead th img{vertical-align:middle;}
+.tbl_code tbody td{padding:10px;}
+.tbl_code tbody tr:nth-child(even){background-color:#eee;}
+.tbl_code tbody td{border:1px solid #aaa;}
+.tbl_code tbody td:first-child{text-align:center;}
+.tbl_code tbody.tc td{text-align:center;}
+
+.figure{margin:100px 0 40px;text-align:center;}
+.figure .figcaption{font-weight:bold;color:#000;margin-top:10px;}
+.txt_point{background:#ffff00;color:#000;}
+pre{background-color:#222;color:#fff;border-radius:10px;padding:10px 20px;font-family:verdana;font-size:14px;}
+.box_area{overflow:hidden;width:80%;padding:2%;background:#ddd;}
+.etc_box{background:#cacaca;color:#000;padding:20px;margin-top:10px;margin-bottom:20px;}
+</style>
+<script type="text/javascript">
+$(function() {
+	$(".question dt").on('click', function(){
+		$(".question dd").fadeToggle()
+	});
+});
+</script>
+</head>
+<body>
+
+<div class="wrap">
+
+<h1>bxslider</h1>
+
+<h2>bxslider 란 무엇인가?</h2>
+<div class="txt">
+	홈페이지에 이미지를 바꿔가며 보여주는 이미지 슬라이더 중 하나이다.<br />
+	활용가능한 option의 종류도 많고 반응형 지원을 하며 무료(The MIT License)로 배포되고 있어 부담이 없는 슬라이더이다.<br />
+	bxSlider는 jQuery 플러그인으로 작성되어 있어 필요하다면 소스를 직접 수정하거나 기능을 확장하는 것도 그렇게 어렵지 않다.<br /><br />
+
+	현재 해커스에서는 bxSlider 사용 시 슬라이드 옵션 중복선언을 막고 간편하게 슬라이드 옵션 설정을 할 수 있도록 attribute를 활용하여 작업을 하고 있다.<br /><br />
+
+	<span style="color:red;">* 현재(2017.11.30 기준) jquery.bxslider.min.js (4.2.12) 버전 사용</span>
+</div>
+
+<h2>Attribute를 이용한 bxslider 사용방법</h2>
+
+<div class="txt">
+	1. jquery.bxslider.min.js 라이브러리를 사용합니다.<br />
+	2. bxslider.js 는 자유롭게 옵션을 추가하여 사용합니다.<br />
+	3. 사용하려는 슬라이드에 class="bxslider-default" 를 선언하고 ul에 class="bxslider"를 선언합니다.<br />
+	4. class="bxslider-default"가 선언된 곳에 내가 원하는 스타일에 맞게<br />
+	data-mode="fade" data-auto="true" data-pager="true" data-controls="true"등을 선언합니다. <span style="color:red;">(default == false)</span><br /><br />
+
+<pre>
+&lt;div class="bxslider-default" data-mode="fade" data-auto="true" data-pager="true" data-controls="true"&gt;
+	&lt;ul class="bxslider"&gt;
+</pre>
+
+	<div class="etc_box">
+	ex) data-speed="500" data-control="true" 라고 기입하여 컨트롤 하시면 됩니다.<br /><br />
+
+	data-mode     // 슬라이드 효과 - horizontal,vertical,fade<br />
+	data-maxSlides     // 최대 보여지는 갯수<br />
+	data-slideMargin     // 슬라이드 사이 margin 값<br />
+	data-speed     // 슬라이드 속도 설정<br />
+	data-autoBtn     // play / stop / puase<br />
+	data-auto     // 자동슬라이드 여부<br />
+	data-pager      // 페이지 동그란 버튼 설정 여부<br />
+	data-control     //자동 슬라이드 화살표버튼 설정 여부<br />
+	</div>
+</div>
+
+<h2>bxslider.js 추가 된 script</h2>
+<div class="txt">
+	1. fade효과 대신 display: none , display: block 될수 있게 하는 방법 : &nbsp;&nbsp;this.speed=0 추가<br /><br />
+
+	2. bxSlider 재 실행 :  __globalBxslider.init(".bxslider-default");<br /><br />
+
+	3. tab 내부에 슬라이드가 있을경우 : __globalBxslider.resize()<br />
+	ex) $('[class*="js-tab-type1"] a[href*="#"]').on('click', function(){__globalBxslider.resize()});<br /><br />
+
+	4.  만약, 처음 시작되지 말아야할 개체들을 정의 slide 오작동될 가능성이 있을 경우:<br />
+		var exceptElements = [ <br />
+		&nbsp;&nbsp;'.top_open_box'<br />
+		];<br />
+
+</div>
+<h2 style="color:#0000ff;">* jquery.bxslider.js (4.2.12) 기준 수정/추가 공유</h2>
+<div class="txt">
+	<h3>① pager mouseover 효과 추가 (click 이 default 인 경우 사용하지 않음)</h3>
+	<div class="etc_box">slider.pagerEl.on('click touchend <span class="txt_point">mouseover</span>', 'a', clickPagerBind);</div><br />
+
+	<h3>② page mouseover bug - pager mouseover 시 <span class="txt_point">autoplay와 충돌!</span> mouseover시 stop / mouseout시 play 되도록 추가</h3>
+	<div class="etc_box">
+	if( slider.settings.auto == 1){<br />
+	&nbsp;slider.pagerEl.on('click touchend mouseover', function(){<br />
+	&nbsp;&nbsp;<span class="txt_point">el.stopAuto();</span><br />
+	&nbsp;}).mouseleave(function(){<br />
+	&nbsp;&nbsp;<span class="txt_point">el.startAuto();</span><br />
+	&nbsp;});<br />
+	&nbsp;};<br />
+	}
+	</div><br />
+
+	<h3>③ controls click bug - 위 내용과 동일 현상</h3>
+	<div class="etc_box">
+	  if( slider.settings.auto == 1 ){<br />
+		&nbsp;slider.controls.next.on('click touchend', function(){<br />
+	&nbsp;&nbsp;<span class="txt_point">el.stopAuto();</span><br />
+	&nbsp;}).mouseleave(function(){<br />
+	&nbsp;&nbsp;<span class="txt_point">el.startAuto();</span><br />
+	&nbsp;});<br /><br />
+
+	&nbsp;slider.controls.prev.on('click touchend', function(){<br />
+	&nbsp;&nbsp;<span class="txt_point">el.stopAuto();</span><br />
+	&nbsp;}).mouseleave(function(){<br />
+	&nbsp;&nbsp;<span class="txt_point">el.startAuto();</span><br />
+	&nbsp;});<br />
+	  }
+	</div>
+	<p style="border:1px solid #ccc;"><img src="http://gscdn.hackers.co.kr/publish/img/img_bxslider_test01.jpg" alt="" style="max-width:100%;"></p><br />
+
+
+	<h3>④ pagecustom 사용시 위 이미지의 배너처럼 pager가 display none / block 되어 5번째 pager가 보여야 하는데 jquery.bxslider.js (4.2.12) 에서는<br />
+	class="active" 만 추가되어 5번째 pager가 보이지 않는 현상 해결!</h3>
+	<div class="etc_box">
+		<strong>수정 전</strong>
+		ex) &lt;a data-slide-index="0" href="#;" target="_self" class="" <span class="txt_point">class="active"</span>&gt;<br />
+		<strong>수정 후</strong>
+		ex) &lt;a data-slide-index="0" href="#;" target="_self" class="" <span class="txt_point">style="display:block;" class="active"</span>&gt;<br /><br />
+
+		<strong>아래 코드 수정/추가</strong><br />
+		slider.pagerEl.each(function(i, el) {<br />
+		&nbsp;$(el).find('a').eq(slideIndex).addClass('active');<br />
+		&nbsp;if( slider.settings.cutLimit ) {<br />
+		&nbsp;&nbsp;var startIdx = slideIndex - slider.settings.cutLimit + 1;<br />
+		&nbsp;&nbsp;if( startIdx < 0 ) {startIdx = 0;}<br />
+		&nbsp;&nbsp;var aTags = $(el).find('a');<br />
+		&nbsp;&nbsp;aTags.hide();<br />
+		&nbsp;&nbsp;aTags.slice(startIdx, startIdx + slider.settings.cutLimit).show();<br />
+		&nbsp;&nbsp;}<br />
+		&nbsp;});<br />
+		}
+	</div><br />
+
+	<h3>⑤ pagecustom index class로 css 추가 하고 싶을 경우!</h3>
+	<div class="etc_box">
+		.bxslider-default.tab_slide .bx-pager .bx-pager-item <span class="txt_point">a[data-slide-index="0"]</span>{}<br />
+		.bxslider-default.tab_slide .bx-pager .bx-pager-item <span class="txt_point">a[data-slide-index="1"]</span>{}<br />
+		.bxslider-default.tab_slide .bx-pager .bx-pager-item <span class="txt_point">a[data-slide-index="2"]</span>{}<br />
+	</div><br />
+
+	<h3>⑥ Chrome emulator mobile touch 시 console 에러 해결! - 아래 코드 추가</h3>
+	<div class="etc_box">
+		var chromePointerEvents = typeof PointerEvent === 'function'; if (chromePointerEvents) { if (orig.pointerId === undefined) { return; } }<br />
+		touchPoints = (typeof orig.changedTouches !== 'undefined') ? orig.changedTouches : [orig];
+	</div>
+	<p style="border:1px solid #ccc;"><img src="http://gscdn.hackers.co.kr/publish/img/img_bxslider_test02.jpg" alt="" style="max-width:100%;"></p><br />
+<div>
+<h1>lazyload</h1>
+<div class="txt">
+제이쿼리의 lazyload 플러그인의 역할은 단순히 이미지를 페이지의 load시 호출이 아닌 동적인 호출로 바꿔준다는 점 하나뿐이다.<br />
+(이미지가 현재 보고있는 스크롤에 도달하면 호출 시작)<br /><br />
+
+단순히 생각하면 이미지를 늦게 호출해 주는것뿐인 플러그인이지만<br />
+이미지를 동적으로 호출해 주는것 하나만으로<br />
+페이지 최초 로딩 속도 향상, 필요없는 이미지에 대한 트래픽 절감 효과등을 기대할수있어<br />
+스크롤이 긴 갤러리형 페이지에 적용할 경우 페이지 속도 향상에 큰 기대를 할수있다.
+</div>
+
+<h2>lazyload bxslider에 적용하는 방법</h2>
+<div class="txt">
+	1. &lt;script type="text/javascript" src="/js/modules.min.js"&gt; &lt;/script&gt; header에 추가<br />
+	2. 공통 js파일에 아래 함수 호출<br /><br />
+<pre>
+$(document).ready(function() {
+	$('.bxslider-lazy').setBxSlider();
+	$('.bxslider-lazy').each(function(){
+		$(this).data('slider').reloadSlider();
+	});
+})
+</pre>
+<br /><br />
+	3. bxslider html code 변경<br />
+
+	<strong>* 변경 전</strong>
+<pre>
+&lt;div class="bxslider-default" data-mode="horizontal" data-auto="true" data-controls="true"&gt;
+	&lt;ul class="bxslider"&gt;
+		&lt;li&gt;&lt;img src="http://image.hackers.ac/images/event/2017/0508/img_07_01.jpg"&gt;&lt;/li&gt;
+		&lt;li&gt;&lt;img src="http://image.hackers.ac/images/event/2017/0508/img_07_02.jpg"&gt;&lt;/li&gt;
+		&lt;li&gt;&lt;img src="http://image.hackers.ac/images/event/2017/0508/img_07_03.jpg"&gt;&lt;/li&gt;
+	&lt;/ul&gt;
+&lt;/div&gt;
+</pre>
+<br /><br />
+	<strong>* 변경 후</strong>
+<pre>
+&lt;div class="bxslider-default"&gt;
+	&lt;ul class="bxslider-lazy" data-mode="horizontal" data-auto="true" data-controls="true"&gt;
+		&lt;li&gt;&lt;img class="bx-lazy" src="" data-original="http://image.hackers.ac/images/event/2017/0508/img_07_01.jpg"&gt;&lt;/li&gt;
+		&lt;li&gt;&lt;img class="bx-lazy" src="" data-original="http://image.hackers.ac/images/event/2017/0508/img_07_02.jpg"&gt;&lt;/li&gt;
+		&lt;li&gt;&lt;img class="bx-lazy" src="" data-original="http://image.hackers.ac/images/event/2017/0508/img_07_03.jpg"&gt;&lt;/li&gt;
+	&lt;/ul&gt;
+&lt;/div&gt;
+</pre>
+</div>
+
+<h2 style="color:#0000ff;">* modules.min.js 수정 공유</h2>
+<div class="txt">
+	<h3>① 화면에 보이는 bxslider만 이미지가 보이고 scroll 이동시 slider 이미지 보이지 않는 현상 해결</h3>
+	<div class="etc_box">
+		<strong> 아래코드 삭제</strong><br />
+		onScroll: function() {<br />
+			$.inScreen($owner) ? c.initialized ? $owner.startAuto() : c.init() : c.initilized && $owner.stopAuto()},<br />
+
+		<strong> 아래코드 수정</strong><br />
+		$win.on("scroll", c.onScroll), $owner.data("slider", c), $win.trigger("scroll"), $.emitScroll()<br />
+
+		<span class="txt_point">$owner.data("slider", c), $win.trigger("scroll")</span>
+	</div>
+</div>
+
+<h2>참고자료</h2>
+<ul class="list">
+	<li><a href="https://jscompress.com/" target="_blank">js 압축시켜주는 사이트</a></li>
+	<li><a href="http://jsbeautifier.org/" target="_blank">압축되어 있는 js 잘보이게 풀어주는 사이트</a></li>
+	<li><a href="https://bxslider.com/options/" target="_blank">bxslider option 정보</a></li>
+	<li><a href="http://222.122.229.21/guide/modules/tree/master" target="_blank">lazyload  - modules.js guide</a></li>
+</ul>
+
+</div>
+</body>
+</html>

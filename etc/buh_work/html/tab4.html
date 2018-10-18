@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Untitled Document</title>
+<script
+  src="https://code.jquery.com/jquery-1.8.0.js"
+  integrity="sha256-00Fh8tkPAe+EmVaHFpD+HovxWk7b97qwqVi7nLvjdgs="
+  crossorigin="anonymous"></script>
+<script>
+	$(function(){
+		var btn=$('.js-tab-type1 li a');
+		
+		btn.on('click',function(){
+			var nm=$(this).index();
+			$(this).parent().addClass('on').siblings().removeClass('on');
+		});
+	});
+</script>
+<style>
+*{margin:0;padding:0;}
+li{list-style-type: none;}
+.js-tab-type1{width:100%;margin:0 auto 0px;}
+.js-tab-type1 li{float:left;width:25%;}
+.js-tab-type1 li a{display:block;width:100%;height:15.625vw;background:url(btn_tab4.jpg) 0 0 no-repeat;text-indent:-9999px;background-size:400%;}
+.js-tab-type1 li.m1 a{background-position-x:0%}
+.js-tab-type1 li.m2 a{background-position-x:33.33%}
+.js-tab-type1 li.m3 a{background-position-x:66.66%}
+.js-tab-type1 li.m4 a{background-position-x:100%}
+.js-tab-type1 li.on a{background-position-y:100%;}
+</style>
+</head>
+
+<body>
+<div class="tab_section">
+	<ul class="js-tab-type1">
+		<li class="on m1">
+        	<a href="#tab_1">aa</a>
+        </li>
+		<li class="m2">
+        	<a href="#tab_2">bb</a>
+        </li>
+        <li class="m3">
+        	<a href="#tab_2">bb</a>
+        </li>
+        <li class="m4">
+        	<a href="#tab_2">bb</a>
+        </li>
+	</ul>
+</div>
+</body>
+</html>

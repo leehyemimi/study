@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="ko">
+<!--[if (IE 7)]><html class="no-js ie7" lang="ko"><![endif]-->
+<!--[if (IE 8)]><html class="no-js ie8" lang="ko"><![endif]-->
+<head>
+	<meta charset="utf-8">
+	<title>테스트</title>
+	<link rel="stylesheet" href="./style.css" />
+	<script src="./jquery-1.12.4.min.js"></script>
+	<script src="./place_holder.js"></script>
+	<script src="./ui.js"></script>
+</head>
+<body>
+	<!-- input -->
+		<!-- input -->
+		<div class="guide_tit">
+			<h2>input</h2>
+		</div>
+		<ul class="row_group">
+			<li>
+				<input type="text" placeholder="이름" />
+				<p class="tip error">조건 별 주의 사항 노출</p>
+			</li>
+			<li>
+				<input type="text" placeholder="생년월일" />
+				<p class="tip">생년월일 8자리 입력 예시) 20000101</p>
+			</li>
+			<li>
+				<input type="text" placeholder="생년월일" />
+				<p class="tip success">인증번호 발송 요청이 성공하였습니다</p>
+			</li>
+		</ul>
+
+		<ul class="row_group">
+			<li>
+				<input type="text" placeholder="아이디" />
+			</li>
+			<li>
+				<input type="password" placeholder="비밀번호" />
+			</li>
+			<li class="ps_box">
+				<span class="ps_box mr100">
+					<input type="text" placeholder="휴대폰번호 (-제외)" />
+				</span>
+				<a href="#" class="s-btn">인증번호 받기</a>
+			</li>
+		</ul>
+		
+		<div class="guide_tit">
+			<h3>흰색일때</h3>
+		</div>
+		<ul class="row_group intxt_w">
+			<li>
+				<input type="text" placeholder="이름" />
+				<p class="tip error">조건 별 주의 사항 노출</p>
+			</li>
+			<li>
+				<input type="text" placeholder="생년월일 8자리 입력 예시) 20000101" />
+			</li>
+			<li>
+				<input type="text" placeholder="휴대폰 인증(-제외)" />
+			</li>
+		</ul>
+
+		<ul class="row_group login_box">
+			<li>
+				<input type="text" placeholder="아이디" />
+			</li>
+			<li>
+				<input type="password" placeholder="비밀번호" />
+			</li>
+		</ul>
+
+		<ul class="row_group">
+			<li class="ps_box">
+				<span class="ps_box mr100">
+					<em class="tit">이름</em> <strong>이혜원</strong>
+				</span>
+				<div class="jender_box">
+					<span class="jender">
+						<input type="radio" id="men" name="gender">
+						<label for="men">남자</label>
+					</span>
+					<span class="jender">
+						<input type="radio" id="woman" name="gender">
+						<label for="woman">여자</label>
+					</span>
+				</div>
+			</li>
+			<li>
+				<em class="tit">생년월일</em> <strong>1998.01.01</strong>
+			</li>
+			<li>
+				<em class="tit">아이디</em> <strong>kimareum</strong>
+			</li>
+		</ul>
+		<!-- //input -->
+		
+		<!-- input_checkbox -->
+		<div class="guide_tit">
+			<h2>input</h2>
+		</div>
+
+		<div class="guide_tit">
+			<h3>checkbox</h3>
+		</div>
+
+		<p>
+			<label class="input_chk input_chk_single">
+				<input type="checkbox">
+				<span class="input_chk_ico"><i class="blind">상품 선택</i></span>
+			</label>
+		</p>
+
+		<br />
+
+		<p>
+			<label class="input_chk input_chk_single small">
+				<input type="checkbox">
+				<span class="input_chk_ico"><i class="blind">상품 선택</i></span>
+			</label>
+		</p>
+
+		<br />
+
+		<span class="input_chk">
+			<i class="ico_input"></i>
+			<input type="checkbox" id="terms_sms">
+			<label for="terms_sms">해커스 경찰공무원</label>
+		</span>
+
+		<br />
+
+		<span class="input_chk small">
+			<i class="ico_input"></i>
+			<input type="checkbox" id="terms_sms2">
+			<label for="terms_sms2">해커스 경찰공무원</label>
+		</span>
+
+		<br />
+
+		<span class="input_chk right">
+			<i class="ico_input"></i>
+			<input type="checkbox" id="terms_sms222">
+			<label for="terms_sms222">해커스 경찰공무원</label>
+		</span>
+
+		<br />
+
+		<p class="chk_area input_chk">
+			<i class="ico_input"></i>
+			<input type="checkbox" id="chk_all">
+			<label for="chk_all">통합 회원 이용약관, 개인정보 수집 및 이용, <br />개인정보 처리업무 위탁(선택),이벤트 및 광고<br /> 알림 SMS/메일 수신 (선택)에 모두 동의 합니다.</label>
+		</p>
+		
+		<br />
+		<div class="chk_area input_chk blue_bg">
+			<i class="ico_input"></i>
+			<input type="checkbox" id="chk_area2" onclick="toggle_btn('chk_area_view')">
+			<label for="chk_area2">
+				<strong>회원 정보에 등록하신 <em class="f_point">휴대폰</em>으로 인증</strong>
+				<em class="sub_txt">회원가입 시 등록한 휴대폰 번호와 일치해야 합니다.</em>
+			</label>
+		</div>
+		<div id="chk_area_view" style="display:none;">
+			내용
+		</div>
+</body>
+</html>

@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="utf-8">
+	<title>Angular vs React vs Vue</title>
+	<style>
+		/* reset */
+		body,p,h1,h2,h3,h4,h5,h6,ul,ol,li,dl,dt,dd,table,th,td,form,fieldset,legend,input,textarea,button,select{margin:0;padding:0}
+		body,input,textarea,select,button,table{font-family:/*"맑은 고딕",*/"돋움", Dotum, sans-serif;,sans-serif;font-size:16px;color:#5c5c5c;}
+		img,fieldset{border:0}
+		ul,ol{list-style:none}
+		em,address{font-style:normal}
+		a{text-decoration:none}
+		a:hover,a:active,a:focus{text-decoration:underline}
+		
+		/* Common */
+		body{background-color:#f1f1f1;font-family:"Malgun Gothic", 맑은 고딕, 돋움, Dotum, sans-serif;}
+		h1,h2,h3,h4{font-weight:normal;letter-spacing:-1px}
+		h3{margin-bottom:15px;font-size:23px;color:#5c5c5c; font-weight:bold; letter-spacing:-1px;}
+		
+		.wrap{width:86%;margin:50px auto;padding:80px 50px;box-shadow:0 1px 3px rgba(0, 0, 0, 0.15);background-color:#fff}
+		.content{border-bottom:1px solid #ededed;margin-bottom:60px;padding-bottom:60px}
+		.inner_content ul{margin:10px 0;}
+		.content_text{padding:1% 1%; background:#eee; margin-bottom:20px;}
+		.content_text li{font-size:14px; line-height:30px;}
+		h3 a{display:inline-block; font-size:26px; color:#5c5c5c; float:right;}
+		.plusText{color:#0d6aad;}
+		
+		/* 팝업 */
+		.domClick_pop{display:none; }
+		.domPop_w{width:842px; overflow:hidden; z-index:2; background-color:#fff; border:1px solid #000; border-top:none; padding-bottom:2%; position:fixed; top:10%; left:50%; margin-left:-421px;}
+		.domPop_w2{width:772px; overflow:hidden; z-index:2; background-color:#fff; border:1px solid #000; border-top:none; padding-bottom:2%; position:fixed; top:10%; left:50%; margin-left:-386px;}
+		.domPop_w3{width:542px; overflow:hidden; z-index:2; background-color:#fff; border:1px solid #000; border-top:none; padding-bottom:2%; position:fixed; top:10%; left:50%; margin-left:-271px;}
+		.domPop_w h4{background-color:#000; color:#fff; padding:2% 2%; text-align:left; margin-bottom:4%; font-weight:bold;}
+		.domPop_w p{width:200px; margin:0 auto; background-color:#eee; padding:2% 0; text-align:center; border:1px solid #000;}
+		.domPop_w p em{display:block; font-size:13px; color:red;}
+		.domPop_w em{display:block; text-align:center;}
+		.black{color:#000;}
+		.bgColor{background-color:#000; opacity: 0.8; position:fixed; left:0; top:0; width:100%; height:100%;}
+		
+		.contentTitle{text-align:center; font-size:30px; font-weight:bold; margin-bottom:20px;}
+		.logoList{overflow:hidden; width:478px; margin:0 auto 20px;}
+		.logoList li{float:left; margin-left:20px;}
+		.logoList li:first-child{margin:0;}
+		
+		.urlList{overflow:hidden;}
+		.urlList li{margin-top:10px;}
+		.urlList li em{display:inline-block; color:#000; font-weight:bold;}
+	</style>
+	<script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+</head>
+<script>
+	function popUpselect(selection){
+		$('.domClick_pop').fadeOut();
+		$(selection).fadeIn().find('.bgColor').click(function(){
+			$('.domClick_pop').fadeOut();
+		})
+	}
+</script>
+<body>
+<div class="wrap">
+	<ul class="logoList">
+		<li><img src="http://image.hackerschina.co.kr/images/project_kdc/angularIcon.png" alt="Angular JS"></li>
+		<li><img src="http://image.hackerschina.co.kr/images/project_kdc/reactIcon.png" alt="React JS"></li>
+		<li><img src="http://image.hackerschina.co.kr/images/project_kdc/vueIcon.png" alt="Vue JS"></li>
+	</ul>
+	
+	<p class="contentTitle">Angular JS / React JS / Vue JS</p>
+	
+	<h3>라이브러리 / 프레임워크 시작으로~</h3>
+	<div class="content_text">
+		<ul>
+			<li>- 라이브러리는 개발자가 필요한것을 빌려와서 쓰는 대상이고 프레임워크는 개발자가 어떻게 개발할 것인지 결정해주는 틀이다.</li>
+			<li>- 프레임워크는 개발자들이 이미 만들어 놓은 함수들의 집합이고, 만들고자 하는 프로그램의 전체적인 틀을 제공해주는 틀이다.</li>
+		</ul>
+	</div>
+	
+	<h3>앵귤러(Angular JS)특징</h3>
+	<div class="content_text">
+		<ul>
+			<li>
+				앵귤러는 <strong class="black">구글</strong>이 <strong class="black">만든 단일 페이지 웹 애플리케이션</strong> 개발을 위한 <strong class="black">자바스크립트 프레임워크</strong>이다.<br />
+				구글은 브라우저를 만드는 벤더사로 앵귤러 역시 이러한 개발 표준에 따라 개발되었으며 기본적으로 사용하는 모든 것들이 표준이다.<br />
+				그래서 HTML 표준 템플릿, 웹 컴포넌트 , 웹 애니메이션 API 등 직접적으로 표준을 따르고 있다.<br /><br />
+				
+				Angular JS의 특징은 기존의 프레임워크들과는 달리 <strong class="black">DOM조작과 제어</strong>가 아닌 <strong class="black">데이터 변화에 포커스</strong>를 맞춘 방식을 사용하고 있다.<br />
+				때문에 자바스크립트에서 작업해야하는 코드는 상당히 간단해 졌고 개발속도도 빨라졌다.<br />
+				유지보수 또한 쉬우며 모듈별로 테스트 코드를 작성하는게 쉬어졌다는 장점이 있으며 <strong class="black">백엔드와 프론트엔드단을 완전히 분리가 가능하다.</strong><br />
+				또한 버전 업그레이드를 통해 서버사이드 랜더링 지원과 타입스크립트를 도입하였다.<br /><br />
+				
+				- 서버사이드 렌더링방식<br />
+				1. 최초 페이지 접속시 유저가 보는 속도가 빨라짐<br />
+				2. 검색엔진 최적화에도 문제 없음<br />
+				3. <a href="http://asfirstalways.tistory.com/244" target="_blank">서버와 클라이언트 사이드 코드</a>를 하나로 합칠 수 있음<br />
+				Angular JS 버전 1점때 ~ Angular 2~7 이렇게 불리우고있다.( * Angular는 Node JS 기반으로 작업되어있다. )
+			</li>
+		</ul>
+	</div>
+	
+	<h3>리액트(React JS)특징</h3>
+	<div class="content_text">
+		<ul>
+			<li>
+				리액트는 <strong class="black">페이스북</strong> 자사 서비스의 UI를 효율적으로 만들기 위해 제작한 <strong class="black">자바스크립트 라이브러리이다.</strong> (프레임워크 라고도함..의견차이)<br />
+				가장큰 특징은 <strong class="black">MVC (Model View Controller)</strong> 패턴에서 컴포넌트를 통해 <strong class="black">View</strong>를 표현한 것만 집중하고 있다.<br />
+				따라서 UI개발자의 경우 리액트를 사용했을 때 큰 메리트를 느낄 수 있다.<br />
+				또다른 장점으로는 커스텀마이징으로 나만의 태그를 만들 수 있는 커스텀 태그가 있다.<br />
+				이를 통해 웹개발이 가능한 방식을 지원한다.<br />
+				기능을 모듈화 할 수 있고 코드를 이해하기 간단하고 쉬울 뿐만 아니라 개발자가 코드를 수정하거나 다시 사용하기 쉽다는 특징을 가지고 있다.<br /><br />
+				
+				React 는 다른 JavaScript 프레임웍들이 겪었던, 다량의 데이터셋을 효율적으로 처리하는 것을 목표로 만들어졌다.<br />
+				<strong><a href="https://velopert.com/3236" target="_blank">virtual DOM (가상 DOM)</a></strong> 을 사용하고, 변동사항이 있을 때 전체 페이지를 다시 렌더링 하는 방식 대신에, 관련있는 부분만 갱신하는 메카니즘을 사용한다. ( SPA방식 )
+			</li>
+			<li>
+				- <a href="javascript:popUpselect('#React_JS')">XML과 비슷한 JSX를 사용</a>
+			</li>
+			<li>
+				- <strong class="black">JSX는 마크업과 로직을 분리하지 않고 XML스타일의 언어를 사용</strong>하여 자바스크립트코드에서 직접 마크업을 작성할 수 있다.<br />
+				JSX는 정적페이지이기 때문에 컴파일러에서 지속적으로 오류를 잡아줄 수 있다.<br />
+				Flow라는 자바스크립트용 유형확인 도구를 사용한다. redux라는 단순한 상태변경 라이브러리가 있다. 이는 프로젝트의 구조를 명확하게 해준다.
+			</li>
+		</ul>
+	</div>
+	
+	<div class="domClick_pop" id="React_JS">
+		<div class="domPop_w">
+			<img src="http://image.hackerschina.co.kr/images/project_kdc/react_s.jpg" alt="">
+		</div>
+		<div class="bgColor"></div>
+	</div>
+	
+	<h3>어플리케이션 구조</h3>
+	<div class="content_text">
+		<ul>
+			<li>
+				AngularJS 와 React 의 또 다른 점은 각 프레임워크를 표현하는 구조의 방식에 있다.<br />
+				AngularJS 는 <strong class="black">MVC(Model - View - Controller)</strong> 구조를 처리하는 데에서부터 시작했고, <strong class="black">MVVM(Model - View - ViewModel)</strong> 으로도 발전했다.<br />
+				반면에 React 는 MVC 의 <strong class="black">"V"</strong> 에만 집중하며 데이터 표현에만 집중하도록 설계되었고<br />
+				다른 어플리케이션 구조적인 부분은 개발자의 선택으로 남겨두었다.<br />
+				이런 아키텍처의 유연함 덕분에 생기는 재미있는 점은, AngularJS 어플리케이션의 성능 향상을 위해 일부 <a href="http://asfirstalways.tistory.com/65" target="_blank">컴포넌트(또다른 프레임워크 JS)</a>를 React 로 구성할 수 있다는 것이다.
+			</li>
+		</ul>
+	</div>
+	
+	<h3>Angular JS vs React JS</h3>
+	<div class="content_text">
+		<ul>
+			<li>
+				선택은 결국 개발자의 몫이다.<br />
+				앵귤러는 MVC를 표방하나 리액트는 그중에서 View에 집중한다는 점이며<br />
+				앵귤러는 트렌디한 프레임워크로 재사용 가능한 UI 경험을 제공하고 개발 프로세스에 대한 수준을 향상, 웹과 모바일 그리고 데스크탑, 애플리케이션에 모두 적용이 가능하다는 것이 큰 특징이다.<br /><br />
+				
+				AngularJS 와 React 를 선택하는 것....<br />
+				React 를 공부하고 사용하는 노력만큼의 잠재적인 성능 향상이 고려되어야 하는가?<br />
+				아니면 AngularJS 구조 위에 React 컴포넌트를 올리는 것이 시너지 효과를 가져다 주는가?<br />
+				당신의 어플리케이션에 가장 적합한 선택이 필요할 것이다.
+			</li>
+		</ul>
+	</div>
+	
+	<h3>Vue JS 특징</h3>
+	<div class="content_text">
+		<ul>
+			<li>
+				Vue JS는 Angular JS / React와 다르게 기업소유가 아닌 개인소유자 에반 유(Evan You)이다.<br />
+				2013년에 발표되어 GitHub에서도 별을 많이받은 프레임워크이다.<br />
+				Vue JS는 Angular의 <strong class="black">양방향 데이터 바인딩</strong>과 React의 <strong class="black">가상 DOM</strong>을 가지고 있으며,<br />
+				<a href="javascript:popUpselect('#Vue_JS')">Vue는 React 소스</a>와 달리 배우기쉽고 바로 프로덕션에서 사용할수있습니다.<br />
+				대규모 코드베이스 관리에 유용합니다.
+			</li>
+		</ul>
+	</div>
+	
+	<h3>React vs Vue JS</h3>
+	<div class="content_text">
+		<ul>
+			<li>
+				Vue JS로 작업시에 별도의 변환작업이 없어도 브라우저에서 바로동작이되기때문에, JQuery처럼 쉽게 프로젝트에 적용이 가능합니다.<br />
+				React도 가능하나 JSX와 ES6(class, non-mutating array method)에 의존성이 많아 어렵습니다.<br />
+				Vue JS에서 새로운 객체를 생성하게되면 getter / setter로 변환하여, Vue 모든 상태를 모니터링하여 변경이 일어날때마다 자동으로 DOM을 다시 랜더링합니다.<br />
+				Vue에서는 간단하게 객체변경을 할수있으며, <strong class="black">렌더링 시스템</strong>이 React보다 빠르고 더효율적입니다.<br />
+				Vue 의 라이브러리 <strong class="black">크기 25.6KB</strong> / React 라이브러리 (React DOM 37.4KB + React Addons Library 11.4KB) <strong class="black">크기 48.8KB</strong><br /><br />
+				
+				큰규모의 프로젝트앱을 만들시에는 React를 사용하야합니다.<br />
+				Javascript로 만들어진 React Template은 <strong class="black">컴포넌트</strong>로 구성하기 쉽고, <strong class="black">소스 재사용성</strong>이 높으며 테스트하기 쉽습니다.<br />
+				Vue JS 보다 React JS는 보다 정밀한 렌더링 시스템을 가지고있어 렌더링될시 테스팅 도구와 결합하여 테스트하기 수월하며, 유지보수 가능한 코드를 만들수있습니다.
+			</li>
+		</ul>
+	</div>
+	
+	<div class="domClick_pop" id="Vue_JS">
+		<div class="domPop_w2">
+			<img src="http://image.hackerschina.co.kr/images/project_kdc/vue_s.jpg" alt="">
+		</div>
+		<div class="bgColor"></div>
+	</div>
+	<div class="domClick_pop" id="jsList">
+		<div class="domPop_w3">
+			<img src="http://image.hackerschina.co.kr/images/project_kdc/jsList.jpg" alt="">
+		</div>
+		<div class="bgColor"></div>
+	</div>
+	
+	
+	
+	<strong>참고 : URL</strong>
+	<ul class="urlList">
+		<li>
+			<a href="javascript:popUpselect('#jsList')">JS 프레임워크 표</a>
+		</li>
+		<li>
+			<a href="http://han41858.tistory.com/8" target="_blank">
+				<em>React / Angular</em>
+				http://han41858.tistory.com/8
+			</a>
+		</li>
+		<li>
+			<a href="http://jayzzz.tistory.com/60" target="_blank">
+				<em>React / Angular</em>
+				http://jayzzz.tistory.com/60
+			</a>
+		</li>
+		<li>
+			<a href="http://blog.jeonghwan.net/vue/2017/03/29/is-vue-better-than-angular-react.html" target="_blank">
+				<em>Vue JS</em>
+				http://blog.jeonghwan.net/vue/2017/03/29/is-vue-better-than-angular-react.html
+			</a>
+		</li>
+		<li>
+			<a href="https://joshua1988.github.io/web_dev/vue-or-react/" target="_blank">
+				<em>React vs Vue JS</em>
+				https://joshua1988.github.io/web_dev/vue-or-react/
+			</a>
+		</li>
+	</ul>
+
+
+</body>
+</html>

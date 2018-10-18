@@ -1,0 +1,299 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>YOUTUBE parameter</title>
+		<script src="https://code.jquery.com/jquery-1.9.1.min.js"
+		  integrity="sha256-wS9gmOZBqsqWxgIVgA8Y9WcQOa7PgSIX+rPA0VL2rbQ="
+		  crossorigin="anonymous"></script> 
+	</head>
+	<body>
+		<style>
+		*{margin:0;padding:0;box-sizing:border-box;}
+		li{list-style:none;}
+		.wrap{}
+		.wrap .inner{width:1200px;margin:0 auto;}
+		.wrap .inner .header{background:#f1f1f1;text-align:center;padding:50px 0;}
+		.wrap .inner .section{background:#f1f1f1;margin:5px 0;padding:50px;}
+		.wrap .inner .section img{width:100%;}
+		.wrap .inner .section .tit_sub{color: darkcyan;}
+		.wrap .inner .section .txt_sub{font-size: 20px;line-height: 30px;margin: 10px 0 10px 10px;}
+		.wrap .inner .section .ex_sub{position:relative;background:white;width:100%;padding:50px;font-size:20px;}
+		.wrap .inner .section .ex_sub:after{content:"example";position:absolute;color:gray;left:10px;top:10px;}
+ 
+		
+		#popup{display:none;position:fixed;width:100%;height:100%;left:0;top:0;z-index:100000;}
+		#popup .bg{position:fixed;background:black;opacity:0.3;left:0;top:0;width:100%;height:100%;opacity: 0.3;filter: Alpha(opacity=30);-webkit-filter: Alpha(opacity=30);}
+		#popup .con{position:fixed;margin-left:-250px;margin-top:-250px;background:#fff;width:500px;height:500px;left:50%;top:50%;text-align:center;font-size:50px;font-weight:bold;line-height:500px;}
+
+		.poiner{color:red;}
+		.line{text-decoration: line-through;}
+		.label{font-size:0.8em;color:#333;}
+		</style>
+		<div class="wrap">
+			<div class="inner">
+				<div class="header">
+					<h1>Youtube</h1>
+					<a href="https://developers.google.com/youtube/player_parameters?hl=ko">관련링크</a>
+				</div>
+				<div class="section">
+					<h2 class="tit_sub">KEY</h2>
+					
+					<p class="txt_sub">
+						http://www.youtube.com/embed/<span class="poiner">Video-key</span><br/>
+						동영상 고유의 key값입니다.
+					</p>
+
+					<div class="ex_sub">
+						<iframe width="560" height="315"
+						src="http://www.youtube.com/embed/YXGSPaTV_6Y" frameborder="0" allowfullscreen></iframe>
+						<div class="box_text">
+						&lt;iframe width=&quot;560&quot; height=&quot;315&quot;<br/>
+						src=&quot;http://www.youtube.com/embed/<span class="poiner">YXGSPaTV_6Y</span>&quot; frameborder=&quot;0&quot; allowfullscreen&gt;&lt;/iframe&gt;
+						</div>
+					</div>
+				</div>
+
+				<div class="section">
+					<h2 class="tit_sub">전체화면(allowfullscreen)</h2>
+					
+					<p class="txt_sub">
+						<span class="poiner">allowfullscreen</span> 추가할시 전체화면 버튼 활성화 <span class="label">- default -</span><br/>
+						<span class="poiner">allowfullscreen</span> 제거할시 전체화면 버튼 비활성화
+					</p>
+
+					<div class="ex_sub">
+						<iframe width="560" height="315"
+						src="http://www.youtube.com/embed/YXGSPaTV_6Y" frameborder="0"></iframe>
+						<div class="box_text">
+						&lt;iframe width=&quot;560&quot; height=&quot;315&quot;<br/>
+						src=&quot;http://www.youtube.com/embed/YXGSPaTV_6Y&quot; frameborder=&quot;0&quot; <span class="poiner line">allowfullscreen</span>&gt;&lt;/iframe&gt;
+						</div>
+					</div>
+				</div>
+
+				<div class="section">
+					<h2 class="tit_sub">전체화면 버튼 표시(fs)</h2>
+					
+					<p class="txt_sub">
+						<span class="poiner">fs=1</span> 전체화면 버튼 보여주기<span class="label">- default -</span><br/>
+						<span class="poiner">fs=0</span> 전체화면 버튼 없애기
+					</p>
+
+					<div class="ex_sub">
+						<iframe width="560" height="315"
+						src="http://www.youtube.com/embed/YXGSPaTV_6Y?fs=0" frameborder="0"></iframe>
+						<div class="box_text">
+						&lt;iframe width=&quot;560&quot; height=&quot;315&quot;<br/>
+						src=&quot;http://www.youtube.com/embed/YXGSPaTV_6Y<span class="poiner">?fs=0</span>&quot; frameborder=&quot;0&quot;allowfullscreen&gt;&lt;/iframe&gt;
+						</div>
+					</div>
+				</div>
+
+				<div class="section">
+					<h2 class="tit_sub">자동재생(autoplay)</h2>
+					
+					<p class="txt_sub">
+						<span class="poiner">autoplay=0</span> 수동재생<span class="label">- default -</span><br/>
+						<span class="poiner">autoplay=1</span> 자동재생
+					</p>
+
+					<div class="ex_sub">
+						<iframe width="560" height="315"
+						src="http://www.youtube.com/embed/YXGSPaTV_6Y?autoplay=1" frameborder="0"></iframe>
+						<div class="box_text">
+						&lt;iframe width=&quot;560&quot; height=&quot;315&quot;<br/>
+						src=&quot;http://www.youtube.com/embed/YXGSPaTV_6Y<span class="poiner">?autoplay=1</span>&quot; frameborder=&quot;0&quot; allowfullscreen&gt;&lt;/iframe&gt;
+						</div>
+					</div>
+				</div>
+
+				<div class="section">
+					<h2 class="tit_sub">컨트롤바(controls)</h2>
+					
+					<p class="txt_sub">
+						<span class="poiner">controls=1</span> 컨트롤바 나타내기<span class="label">- default -</span><br/>
+						<span class="poiner">controls=0</span> 컨트롤바 숨기기
+					</p>
+
+					<div class="ex_sub">
+						<iframe width="560" height="315"
+						src="http://www.youtube.com/embed/YXGSPaTV_6Y?controls=0" frameborder="0"></iframe>
+						<div class="box_text">
+						&lt;iframe width=&quot;560&quot; height=&quot;315&quot;<br/>
+						src=&quot;http://www.youtube.com/embed/YXGSPaTV_6Y<span class="poiner">?controls=0</span>&quot; frameborder=&quot;0&quot; allowfullscreen&gt;&lt;/iframe&gt;
+						</div><br/><br/>
+
+						<iframe width="560" height="315"
+						src="http://www.youtube.com/embed/YXGSPaTV_6Y?controls=1" frameborder="0"></iframe>
+						<div class="box_text">
+						&lt;iframe width=&quot;560&quot; height=&quot;315&quot;<br/>
+						src=&quot;http://www.youtube.com/embed/YXGSPaTV_6Y<span class="poiner">?controls=1</span>&quot; frameborder=&quot;0&quot; allowfullscreen&gt;&lt;/iframe&gt;
+						</div>
+					</div>
+				</div>
+
+				<div class="section">
+					<h2 class="tit_sub">영상 반복(loop)</h2>
+					
+					<p class="txt_sub">
+						<span class="poiner">loop=0</span> 반복재생 안함<span class="label">- default -</span><br/>
+						<span class="poiner">loop=1&playlist=키값</span> 반복재생 실행
+					</p>
+
+					<div class="ex_sub">
+						<iframe width="560" height="315"
+						src="http://www.youtube.com/embed/YXGSPaTV_6Y?loop=0" frameborder="0"></iframe>
+						<div class="box_text">
+						&lt;iframe width=&quot;560&quot; height=&quot;315&quot;<br/>
+						src=&quot;http://www.youtube.com/embed/YXGSPaTV_6Y<span class="poiner">?loop=0</span>&quot; frameborder=&quot;0&quot; allowfullscreen&gt;&lt;/iframe&gt;
+						</div><br/><br/>
+						<iframe width="560" height="315"
+						src="http://www.youtube.com/embed/YXGSPaTV_6Y?loop=1&playlist=YXGSPaTV_6Y" frameborder="0"></iframe>
+						<div class="box_text">
+						&lt;iframe width=&quot;560&quot; height=&quot;315&quot;<br />
+						src=&quot;http://www.youtube.com/embed/YXGSPaTV_6Y<span class="poiner">?loop=1&playlist=YXGSPaTV_6Y?YXGSPaTV_6Y</span>&quot; frameborder=&quot;0&quot;&gt;&lt;/iframe&gt;
+						</div>
+					</div>
+				</div>
+
+				<div class="section">
+					<h2 class="tit_sub">관련동영상(rel)</h2>
+					
+					<p class="txt_sub">
+						<span class="poiner">rel=1</span> 관련동영상 표시 함<span class="label">- default -</span><br/>
+						<span class="poiner">rel=0</span> 관련동영상 표시 안함
+					</p>
+
+					<div class="ex_sub">
+						<iframe width="560" height="315"
+						src="http://www.youtube.com/embed/YXGSPaTV_6Y?rel=0" frameborder="0"></iframe>
+						<div class="box_text">
+						&lt;iframe width=&quot;560&quot; height=&quot;315&quot;<br/>
+						src=&quot;http://www.youtube.com/embed/YXGSPaTV_6Y<span class="poiner">?rel=0</span>&quot; frameborder=&quot;0&quot; 
+						&gt;&lt;/iframe&gt;
+						</div><br/><br/>
+						<iframe width="560" height="315"
+						src="http://www.youtube.com/embed/YXGSPaTV_6Y?rel=1" frameborder="0"></iframe>
+						<div class="box_text">
+						&lt;iframe width=&quot;560&quot; height=&quot;315&quot;<br />
+						src=&quot;http://www.youtube.com/embed/YXGSPaTV_6Y<span class="poiner">?rel=1</span>&quot; frameborder=&quot;0&quot;
+						&gt;&lt;/iframe&gt;
+						</div>
+					</div>
+				</div>
+
+				<div class="section">
+					<h2 class="tit_sub">시작(start)/끝(end)</h2>
+					
+					<p class="txt_sub">
+						<span class="poiner">start= 시작할 초</span><br/>
+						<span class="poiner">end= 끝낼초</span>
+					</p>
+
+					<div class="ex_sub">
+						<iframe width="560" height="315"
+						src="http://www.youtube.com/embed/YXGSPaTV_6Y?start=5&end=8" frameborder="0"></iframe>
+						<div class="box_text">
+						&lt;iframe width=&quot;560&quot; height=&quot;315&quot;<br/>
+						src=&quot;http://www.youtube.com/embed/YXGSPaTV_6Y<span class="poiner">?start=5&end=8</span>&quot; frameborder=&quot;0&quot; 
+						&gt;&lt;/iframe&gt;
+						</div><br/>
+
+						<span class="poiner">*매개변수 중첩적용 하는방법</span><br/>
+							&nbsp?매개변수&매개변수&매개변수...
+					</div>
+				</div>
+
+				<div class="section">
+					<h2 class="tit_sub">z-index 최고순위(&wmode=transparent)</h2>
+					
+					
+
+					<p class="txt_sub">
+						<span class="poiner">유튜브 매개변수 wmode=transparent</span><br/>
+						<button onclick="document.getElementById('popup').style.display='block'">팝업</button>
+					</p>
+
+					<div class="ex_sub">
+						<iframe src='http://serviceapi.rmcnmv.naver.com/flash/outKeyPlayer.nhn?vid=51C5D6C81F6222B4D63D094D0787416655BF&outKey=V1282c7aae12648c952334f3d181e67d1bf1e79e179652ca060424f3d181e67d1bf1e&wmode=transparent' frameborder='no' scrolling='no' marginwidth='0' marginheight='0' WIDTH='560' HEIGHT='315' allowfullscreen></iframe>
+						<div class="box_text">
+						&lt;iframe src='http://serviceapi.rmcnmv.naver.com/flash/outKeyPlayer.nhn?vid=51C5D6C81F6222B4D63D094D0787416655BF&amp;outKey=<br/>V1282c7aae12648c952334f3d181e67d1bf1e79e179652ca060424f3d181e67d1bf1e<span class="poiner">&amp;wmode=transparent</span>' frameborder='no' scrolling='no' marginwidth='0' marginheight='0' WIDTH='560' HEIGHT='315' allowfullscreen&gt;&lt;/iframe&gt;
+						</div><br/><br/>
+						<iframe src='http://serviceapi.rmcnmv.naver.com/flash/outKeyPlayer.nhn?vid=51C5D6C81F6222B4D63D094D0787416655BF&outKey=V1282c7aae12648c952334f3d181e67d1bf1e79e179652ca060424f3d181e67d1bf1e' frameborder='no' scrolling='no' marginwidth='0' marginheight='0' WIDTH='560' HEIGHT='315' allowfullscreen></iframe>
+						<div class="box_text">
+						&lt;iframe src='http://serviceapi.rmcnmv.naver.com/flash/outKeyPlayer.nhn?vid=51C5D6C81F6222B4D63D094D0787416655BF&amp;outKey=<br/>V1282c7aae12648c952334f3d181e67d1bf1e79e179652ca060424f3d181e67d1bf1e<span class="poiner line">&amp;wmode=transparent</span>' frameborder='no' scrolling='no' marginwidth='0' marginheight='0' WIDTH='560' HEIGHT='315' allowfullscreen&gt;&lt;/iframe&gt;
+						</div>
+					</div>
+					<div id="popup">
+						<div class="bg" onclick="document.getElementById('popup').style.display='none'"></div>
+						<div class="con">
+							팝업
+						</div>
+					</div>
+				</div>
+
+				<div class="section">
+					<h2 class="tit_sub">유튜브 로고 비표시(modestbranding)</h2>
+					
+					<p class="txt_sub">
+						<span class="poiner">modestbranding=0 유튜브 로고 표시<span class="label">- default -</span></span><br/>
+						<span class="poiner">modestbranding=1 유튜브 로고 비표시</span>
+					</p>
+
+					<div class="ex_sub">
+						<iframe width="560" height="315"
+						src="http://www.youtube.com/embed/YXGSPaTV_6Y?modestbranding=1" frameborder="0"></iframe>
+						<div class="box_text">
+						&lt;iframe width=&quot;560&quot; height=&quot;315&quot;<br/>
+						src=&quot;http://www.youtube.com/embed/YXGSPaTV_6Y<span class="poiner">?modestbranding=1</span>&quot; frameborder=&quot;0&quot; 
+						&gt;&lt;/iframe&gt;
+						</div><br/>
+					</div>
+				</div>
+
+				<div class="section">
+					<h2 class="tit_sub">제목 및 비표시(showinfo)</h2>
+					
+					<p class="txt_sub">
+						<span class="poiner">showinfo=1 제목 및 정보 표시<span class="label">- default -</span></span><br/>
+						<span class="poiner">showinfo=0 제목 및 정보 비표시</span>
+					</p>
+
+					<div class="ex_sub">
+						<iframe width="560" height="315"
+						src="http://www.youtube.com/embed/YXGSPaTV_6Y?showinfo=0" frameborder="0"></iframe>
+						<div class="box_text">
+						&lt;iframe width=&quot;560&quot; height=&quot;315&quot;<br/>
+						src=&quot;http://www.youtube.com/embed/YXGSPaTV_6Y<span class="poiner">?showinfo=0</span>&quot; frameborder=&quot;0&quot; 
+						&gt;&lt;/iframe&gt;
+						</div><br/>
+					</div>
+				</div>
+
+				<div class="section">
+					<h2 class="tit_sub">아이폰 YOUTUBE 전체화면(playsinline)</h2>
+					
+					<p class="txt_sub">
+						<span>*IOS에서 유튜브 클릭시 자동 전체화면으로 디폴트 됩니다.</span><br/>
+						<span class="poiner">playsinline=0 전체화면으로 재생됩니다.<span class="label">- default -</span></span><br/>
+						<span class="poiner">playsinline=1 인라인으로 재생됩니다.</span>
+					</p>
+
+					<div class="ex_sub">
+						<iframe width="560" height="315"
+						src="http://www.youtube.com/embed/YXGSPaTV_6Y?playsinline=1" frameborder="0"></iframe>
+						<div class="box_text">
+						&lt;iframe width=&quot;560&quot; height=&quot;315&quot;<br/>
+						src=&quot;http://www.youtube.com/embed/YXGSPaTV_6Y<span class="poiner">?playsinline=1</span>&quot; frameborder=&quot;0&quot; 
+						&gt;&lt;/iframe&gt;
+						</div><br/>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		
+	</body>
+</html>
+

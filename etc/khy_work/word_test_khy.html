@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0">
+
+<title>word 공부</title>
+
+<style>
+body *{font-family:dotum,'돋움'}
+.content{width:1000px;margin:0 auto}
+.tbl_type{width:100%;border-collapse:collapse;table-layout:fixed}
+.tbl_type caption{display:none}
+.tbl_type th,.tbl_type td{padding:10px;border:2px solid #e7e7e7;vertical-align:top}
+.bx_type{width:200px;margin:5px 0;border:1px solid #104791}
+.tbl_type dl dt{color:#104791;font-weight:bold}
+</style>
+</head>
+
+<body>
+<div id="wrap">
+	<!-- content -->
+	<div class="content">
+		<h1>영역에 맞춰서 줄바꿈 제어</h1>
+
+		<ol>
+			<li>숫자나 영어를 띄어쓰기 없이 입력했을때 영역을 벗어나는 문제</li>
+			<li>글자단위로 개행할것인지, 띄어쓰기 기준으로 개행할것인지! </li>
+		</ol>
+
+		<!--table-->
+		<table border="0" cellpadding="0" cellspacing="0" class="tbl_type">
+		<caption>word-wrap/word-break 공부</caption>
+		<colgroup>
+			<col style="width:50%">
+			<col style="width:50%">
+		</colgroup>
+
+		<thead>
+			<tr>
+				<th scope="col">word-wrap<br/>(띄어쓰기 없는 비아시아 언어 줄바꿈 제어 <span style="font-size:12px">[ex:영어,숫자,url])</span></th>
+				<th scope="col">word-break<br/>(아시아,비아시아 언어 줄바꿈 제어)</th>
+			</tr>
+		</thead>
+
+		<tbody>
+			<tr>
+				<td>
+					<dl>
+						<dt>- word-wrap : normal (기본)</dt>
+						<dd>
+							<div class="bx_type" style="word-wrap : normal">
+								11111111111111111111111111111111111111
+							</div>
+							<div class="bx_type" style="word-wrap : normal">
+								We’llbewithyouuntiltheconfettifallsandMVPisname
+							</div>
+						</dd>
+					</dl>
+
+					<dl>
+						<dt>- word-wrap : break-word</dt>
+						<dd>
+							<div class="bx_type" style="word-wrap : break-word">
+								1111111111111111111111111111111111111111111111111111111111111
+							</div>
+							<div class="bx_type" style="word-wrap : break-word">
+								We’llbewithyouuntiltheconfettifallsandMVPisnamedinHouston,butthecoveragewon’tstopthere.
+							</div>
+						</dd>
+					</dl>
+				</td>
+
+				<td>
+					<dl>
+						<dt>- word-break : normal (기본)</dt>
+						<dd>
+							<div class="bx_type" style="word-break : normal">
+								11111111111111111111111111111111111111
+							</div>
+							<div class="bx_type" style="word-break : normal">
+								We’llbewithyouuntiltheconfettifallsandMVPisname
+							</div>
+						</dd>
+					</dl>
+
+					<dl>
+						<dt>- word-break : break-all</dt>
+						<dd>
+							* <strong style="color:#f00">글자 단위</strong>로 개행(가득참)
+							<div class="bx_type" style="word-break : break-all">
+								안녕 좋은 아침인것같아요. 화이팅 합시다. 안녕 좋은 아침인것같아요. 화이팅 합시다.
+							</div>
+							<div class="bx_type" style="word-break : break-all">
+								안녕좋은아침인것같아요.화이팅 합시다.안녕좋은아침인것같아요.화이팅 합시다.
+							</div>
+							<div class="bx_type" style="word-break : break-all">
+								We’ll be with you until the confetti falls and MVP is named in Houston, but the coverage won’t stop there.
+							</div>
+							<div class="bx_type" style="word-break : break-all ">
+								We’llbewithyouuntiltheconfettifallsandMVPisnamedinHouston,butthecoveragewon’tstopthere.
+							</div>
+							<div class="bx_type" style="word-break : break-all ">
+								11111111111111111111111111111111111111111111111111111111111
+							</div>
+						</dd>
+					</dl>
+
+					<dl>
+						<dt>- word-break : keep-all<br/><span style="font-size:12px">(ie계열/아시아(K,J,C) 언어만 지원,파폭 3.5이상에서는 지원)</span></dt>
+						<dd>
+							* <strong style="color:#f00">한글 단어 띄어쓰기</strong> 기준 개행<br/>
+							<div class="bx_type" style="word-break : keep-all">
+								안녕 좋은 아침인것같아요. 화이팅 합시다. 안녕 좋은 아침인것같아요. 화이팅 합시다.
+							</div>
+							<p>▼ 익스7이상,파폭 띄어쓰기없을때는 개행되지않음 word-wrap :break-word 같이 써줘야 영역을 안벗어남 </p>
+							<div class="bx_type" style="word-break : keep-all">
+								안녕좋은아침인것같아요.화이팅 합시다.안녕좋은아침인것같아요.화이팅 합시다.
+							</div>
+							
+						</dd>
+					</dl>
+
+					<dl>
+						<dt>- word-break : nowrap  </dt>
+						<dd>
+							* 줄바꿈 하지 않음
+						</dd>
+					</dl>
+				</td>
+			</tr>
+		</tbody>
+		</table>
+		<h2>결론</h2>
+		<ol>
+			<li>기본적으로 띄어쓰기 있으면 영역을 벗어나지않음</li>
+			<li>띄어쓰기 없는 비아시아언어 강제 줄바꿈을 위해 <strong>word-wrap:break-word</strong></li>
+			<li>
+				한글 띄어쓰기 기준 개행을 위해 <strong>word-break : keep-all</strong><br/>
+				익스7,파폭에서 띄어쓰기 없을때 적용되지 않으므로 <strong>word-wrap:break-word</strong>같이 써줘야함
+			</li>
+		</ol>
+<br/><br/>
+		<!--table-->
+		<table border="0" cellpadding="0" cellspacing="0" class="tbl_type">
+		<caption>white-Space /text-overflow 공부</caption>
+		<colgroup>
+			<col style="width:50%">
+			<col style="width:50%">
+		</colgroup>
+
+		<thead>
+			<tr>
+				<th scope="col">white-space (공백문자 처리)</th>
+				<th scope="col">text-overflow (텍스트 넘칠 때 처리방법)</th>
+			</tr>
+		</thead>
+
+		<tbody>
+			<tr>
+				<td>
+					<dl>
+						<dt>- white-space:pre (원문 그대로 출력)</dt>
+						<dd>
+<div class="bx_type" style="white-space:pre">안녕                                 좋은            
+아침인것같아요
+.                    화이팅 합시다. 
+안녕 좋은 아침인것같아요. 화이팅 합시다.</div>
+						</dd>
+					</dl>
+					<dl>
+						<dt>- white-space:pre-line (원문 그대로[공백문자 1회인정] 출력하면서 영역내 줄바꿈)</dt>
+						<dd>
+<div class="bx_type" style="white-space:pre-line">안녕                                 좋은            
+아침인것같아요
+.                    화이팅 합시다. 
+안녕 좋은 아침인것같아요. 화이팅 합시다.</div>
+						</dd>
+					</dl>
+					<dl>
+						<dt>- white-space:pre-wrap (원문 그대로[공백문자 모두인정] 출력하면서 영역내 줄바꿈)</dt>
+						<dd>
+<div class="bx_type" style="white-space:pre-wrap">안녕                                 좋은            
+아침인것같아요
+.                    화이팅 합시다. 
+안녕 좋은 아침인것같아요. 화이팅 합시다.</div>
+						</dd>
+					</dl>
+					<dl>
+						<dt>- white-space:nowrap (줄바꿈을 하지 않음)</dt>
+						<dd>
+							<div class="bx_type" style="white-space:nowrap">
+								안녕 좋은 아침인것같아요. 화이팅 합시다. 안녕 좋은 아침인것같아요. 화이팅 합시다.
+							</div>
+						</dd>
+					</dl>
+				</td>
+
+				<td>
+					<dl>
+						<dt>- text-overflow:clip(기본:normal)</dt>
+						<dd>
+							<div class="bx_type" style="overflow:hidden;white-space:nowrap;text-overflow:clip">
+								안녕 좋은 아침인것같아요.화이팅 합시다. 안녕 좋은 아침인것같아요. 화이팅 합시다.
+							</div>
+						</dd>
+					</dl>
+					<dl>
+						<dt>- text-overflow:ellipsis(잘린 텍스트를 ...표시함/ie6이상)</dt>
+						<dd>
+							<p><strong>* 1줄 말줄임 처리할때 사용함</strong></p>
+							<div class="bx_type" style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis">
+								안녕 좋은 아침인것같아요. 화이팅 합시다. 안녕 좋은 아침인것같아요. 화이팅 합시다.
+							</div>
+						</dd>
+					</dl>
+	
+				</td>
+			</tr>
+		</tbody>
+		</table>
+
+		
+		<br/>
+		<br/>
+	</div>
+	<!-- //content -->
+</div>
+</body>
+</html>

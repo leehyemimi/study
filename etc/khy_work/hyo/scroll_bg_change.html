@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>테스트</title>
+<script type="text/javascript" charset="utf-8" src="http://redev.champstudy.com/_core/js/jquery-1.11.2.min.js"></script>
+<style type="text/css">
+html, body{height:100%;padding:0;margin:0}
+body{background-color:#1E1F29;-webkit-transition:background-color 0.2s ease-in-out;transition:background-color 0.2s ease-in-out;}
+section{position:relative;clear:both;min-height:100%;border-top:1px solid #f00}
+.section-bg1{background-color:#F7CE68}
+.section-bg2{background-color:#DDD6F3}
+.section-bg3{background-color:#8EC5FC}
+.section-bg4{background-color:#E0C3FC}
+.section-bg5{background-color:#FBAB7E}
+.section-bg6{background-color:#F7CE68}
+.section-inner{/*position:absolute;left:50%;top:50%;-webkit-transform:translate3d(-50%, -50%, 0);transform:translate3d(-50%, -50%, 0);*/width:100%;font-size:50px}
+</style>
+
+<script type="text/javascript">
+$(function(){
+
+	$(window).scroll(function(){
+		var _scroll = $(window).scrollTop();
+		var _pos = [];
+		var _h = [];
+		var _result = [];
+
+		for(var i=0; i < $('section').length; i++){
+			_pos[i] = $('section').eq(i).offset().top;
+			_h[i] = $('section').eq(i).outerHeight() * 0.8;
+			_result[i] = (_pos[i]+_h[i]);
+		}
+
+		$('body').removeAttr('class');
+
+		for(var j=0; j < $('section').length; j++){
+			if(_scroll > _result[j]){
+				$('body').removeAttr('class');
+				$('body').addClass('section-bg'+(j+1));
+			}
+		}
+
+	});
+})
+</script>
+
+</head>
+<body>
+
+	<section>
+		<div class="section-inner">
+			01
+		</div>
+	</section>
+	<section>
+		<div class="section-inner">
+			02
+		</div>
+	</section>
+	<section>
+		<div class="section-inner">
+			03
+		</div>
+	</section>
+	<section>
+		<div class="section-inner">
+			04<br/>
+			04<br/>
+			04<br/>
+			04<br/>
+			04<br/>
+			04<br/>
+			04<br/>
+			04<br/>
+			04<br/>
+			04<br/>
+			04<br/>
+			04<br/>
+			04<br/>
+			04<br/>
+			04<br/>
+			04<br/>
+			04<br/>
+			04<br/>
+			04<br/>
+			04<br/>
+			04<br/>
+			04<br/>
+			04<br/>
+			04<br/>
+			04<br/>
+			04<br/>
+			04<br/>
+			04<br/>
+			04<br/>
+			04<br/>
+			04<br/>
+			04<br/>
+			04<br/>
+			04<br/>
+			04<br/>
+			04<br/>
+			04<br/>
+			04<br/>
+			04<br/>
+			04<br/>
+			04<br/>
+			04<br/>
+			04<br/>
+			04<br/>
+			04<br/>
+			04<br/>
+			04<br/>
+			04<br/>
+			04<br/>
+			04<br/>
+			04<br/>
+			04<br/>
+			04<br/>
+			04<br/>
+		</div>
+	</section>
+	<section>
+		<div class="section-inner">
+			05
+		</div>
+	</section>
+	<section>
+		<div class="section-inner">
+			06<br/>
+			06<br/>
+			06<br/>
+			06<br/>
+			06<br/>
+			06<br/>
+			06<br/>
+			06<br/>
+			06<br/>
+			06<br/>
+			06<br/>
+			06<br/>
+			06<br/>
+			06<br/>
+			06<br/>
+			06<br/>
+			06<br/>
+			06<br/>
+			06<br/>
+			06<br/>
+			06<br/>
+			06<br/>
+			06<br/>
+			06<br/>
+			06<br/>
+			06<br/>
+			06<br/>
+			06<br/>
+			06<br/>
+			06<br/>
+			06<br/>
+			06<br/>
+			06<br/>
+			06<br/>
+			06<br/>
+			06<br/>
+		</div>
+	</section>
+
+</body>
+</html>

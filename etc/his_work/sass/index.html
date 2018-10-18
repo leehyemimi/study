@@ -1,0 +1,920 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>Sass</title>
+<style>
+	/* reset */
+	body,p,h1,h2,h3,h4,h5,h6,ul,ol,li,dl,dt,dd,table,th,td,form,fieldset,legend,input,textarea,button,select{margin:0;padding:0}
+	body,input,textarea,select,button,table{font-family:/*"맑은 고딕",*/"돋움", Dotum, sans-serif;,sans-serif;font-size:16px;color:#000}
+	img,fieldset{border:0}
+	ul,ol{list-style:none}
+	em,address{font-style:normal}
+	a{text-decoration:none}
+	a:hover,a:active,a:focus{text-decoration:underline}
+	/* Common */
+	body{background-color:#f1f1f1;font-family:"Malgun Gothic", 맑은 고딕, 돋움, Dotum, sans-serif;}
+	h1,h2,h4{font-weight:normal;letter-spacing:-1px}
+	h1{margin-bottom:100px;font-size:50px;text-align:center}
+	h2{margin-bottom:20px;font-size:27px;font-weight:bold;}
+	h3{margin-bottom:15px;font-size:23px;color:#000}
+	h4{margin:25px 0 15px 0;font-size:23px;color:#d20000}
+	h5{padding:30px 0;font-size:23px;color:#f00;text-align:center}
+	table{margin-top:10px;border-collapse:collapse}
+	table th{background-color:#ededed}
+	table th,table td{padding:10px;border:1px solid #999;word-break:keep-all;word-wrap:break-word;}
+	pre{font-family:"Malgun Gothic", 맑은 고딕, 돋움, Dotum, sans-serif}
+	.txt_red{color:red;}
+	.hide{display:none;}
+	ul.has_blit li{list-style-type:disc;list-style-position:inside;line-height:26px;}
+	.ta_l{text-align:left;}
+	.ta_c{text-align:center;}
+	.mt20{margin-top:20px;}
+	.mb20{margin-bottom:20px;}
+	.dis_block{display:block;}
+	.fs24{font-size:24px}
+
+	.wrap{width:86%;margin:50px auto;padding:80px 50px;box-shadow:0 1px 8px rgba(0, 0, 0, 0.15);background-color:#fff}
+	.content{border-bottom:1px solid #ededed;margin-bottom:60px;padding-bottom:60px}
+	.inner_content{margin-top:40px;font-size:18px;}
+	.inner_content ul{margin:10px 0;}
+	.summary{margin-bottom:30px;padding:10px;background:#ececec;font-size:20px}
+	.code_css{padding:15px 0 0 0;background:#3f3f3f;color:#fff;text-align:left;}
+	.code_css span{background:#5a5a5a;}
+	
+	p.pseudo{padding-left:10px;}
+	p.pseudo.test1::first-line{color: red;}
+	p.pseudo.test2::first-letter{color: red;}
+	p.pseudo.test3::before{content: "xyz";color: red;}
+	p.pseudo.test4::after{content: "백슬러시A 와 white-space:pre를\A사용하면 줄바꿈 가능";color: red;display:inline-block;white-space:pre;}
+	p.pseudo.test4.va_m::after{vertical-align:middle;}
+
+	.empty_test li:empty{width:50px;height:20px;background:#ccc;}
+	.first-child_test li:first-child{color:red;}
+	.nth-child_test li:nth-child(2n+1){color:red;}
+	.hover_test:hover{color: red;}
+
+	.inner_content .box{background:#ededed;padding:10px;}
+	.img_box{overflow:hidden;border-bottom:2px solid black;padding:20px;}
+	.img_box .txt{float:left;font-size:22px;font-weight:bold;}
+	.img_box img{float:left}
+
+	.o_hidden{overflow:hidden;}
+	.f_l{float:left;}
+	.f_r{float:right;}
+	.box_info{border-bottom:1px dashed #ccc;padding-bottom:20px}
+	.box_info > div{width:50%;}
+
+	ul.list{margin-left:40px;}
+	ul.list li{list-style:disc;}
+
+	.ex_box{padding:20px 0}
+	.line{background:yellowgreen;padding:20px;font-weight:bold;}
+</style>
+
+<script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+ <link rel="stylesheet" href="./event.css" type="text/css"> 
+<!-- <link rel="stylesheet" href="./stylesheets/event.scss" type="text/css"> 변수 선언 안먹  -->
+
+</head>
+<script type="text/javascript">
+	$(function(){
+
+		$('.click_evt h4').click(function(){
+			$(this).siblings('.hide').show();
+		})
+
+		$('.bar').click(function(){
+			$(this).find('span').toggleClass('line');
+		});
+	})
+</script>
+<body>
+	<div class="wrap">
+		<h1>Sass (1)</h1>
+
+		<div class="content">
+			<h2>Sass</h2>
+			<div class="summary ta_c">
+				Sass는 Syntactically Awesome Style Sheet라는 단어의 줄임말이며, <br />
+				사스는 기초 언어에 힘과 우아함을 더해주는 CSS의 확장이다.
+			</div>
+
+			<!-- content -->
+			<div class="inner_content">
+				<h3>Sass에 대해</h3>
+				<div class="box">
+					"Sass(Syntactically Awesome Stylesheets)는 CSS 상위에 있는 메타언어(meta-language)로 보다 간결하고 격식을 갖춘 CSS 문법을 사용합니다." <br />
+					<br />
+					Sass의 궁극적인 목적은 CSS의 결함을 보정하는 것입니다. <br />
+					우리 모두 알듯이, CSS는 세계 최고의 언어는 못 됩니다. 배우기엔 매우 간단한 반면, 금세 아주 지저분해질 수 있습니다. <br />
+					특히 큰 프로젝트에서 더 그렇습니다. <br />
+					Sass는 이런 상황에서, 초언어 로서, 추가 기능과 유용한 도구를 제공하기 위해 CSS의 구문을 개선하는 역할을 합니다.<br />
+					한편, Sass는 CSS 언어에 대해 보수적인 입장을 취하려 합니다. <br />
+					핵심은 CSS를 완전한 기능을 갖춘 프로그래밍 언어로 바꾸지 않는 것입니다. <br />
+					Sass는 단지 CSS에게서 부족한 부분만을 돕길 원합니다. 때문에, Sass를 시작하는 것은 CSS를 배우는 것보다 더 어려울 게 없습니다.<br />
+					CSS 위에 몇 가지의 추가 기능을 더할 뿐입니다. <br />
+					그렇다고는 하나, 이 기능들을 사용하는 데에는 많은 방법들이 있습니다. 좋은 것도 있고, 나쁜 것도, 예외적인 것도 있습니다. 
+				</div>
+			</div>
+			<!-- //content -->
+			
+			<!-- sass/scss -->
+			<div class="inner_content">
+				<h3>Sass/Scss 차이</h3>
+				<div class="box">
+					우선 두 파일의 차이점은 중괄호{} 와 세미콜론; 의 유무라고 할 수 있습니다. <br />
+					Sass 파일은 중괄호와 세미콜론이 존재하지 않고, Scss는 존재합니다. <br />
+					기존에는 sass 문법이 따로 존재했으나 개발자들이 사용하기에 css 문법과 많이 달라  <br />
+					  차후 기존 css문법과 거의 흡사한 scss 문법으로 바뀌었습니다 .
+
+
+					
+				</div>
+				<div class="o_hidden box_info">
+					<div class="f_l bar">
+						<h4>Scss</h4>
+						$font-stack: Helvetica, sans-serif<span>;</span> <br />
+						$primary-color: #333<span>;</span> <br /><br />
+						body <span>{</span> <br />
+						&nbsp;&nbsp;font: 100% $font-stack;<br />
+						&nbsp;&nbsp;color: $primary-color;<br />
+						<span>}</span>
+					</div>
+					<div class="f_l">
+						<h4>Sass</h4>
+						$font-stack: Helvetica, sans-serif <br />
+						$primary-color: #333<br /><br />
+						body <br />
+						&nbsp;&nbsp;font: 100% $font-stack<br />
+						&nbsp;&nbsp;color: $primary-color
+					</div>
+				</div>
+				<div class="mt20">
+					<strong>1. Sass의 장점</strong>
+					<ul>
+						<li>
+							1 문법이 간결하다.
+
+							세미콜론과 중괄호가 없다.
+
+							믹스인할때 @indclude대신 +를 사용한다.
+						</li>
+						<li>
+							2 읽기쉽다.
+
+							인덴테이션 룰이 스트릭트해서 작성하기는 어려우나 읽기는 쉽다.
+						</li>
+						<li>
+							3 세미콜론이 없는것에 대해서 에러를내지 않는다.
+
+							세미콜론이 없어도 자동으로 인식함
+						</li>
+					</ul>
+
+					<strong>2. Scss의 장점</strong>
+					<ul>
+						<li>
+							1. 더 표현적이다.
+
+							attribute/value의 쌍들을 한줄에 쓸수 있다.
+						</li>
+						<li>
+							2. 고유한 nesting룰(중첩)을 장려한다.
+
+							selector에 이름을 만들어 element명을 변경할때 관리가 쉽다.(한번에 여러군대 변경가능)
+						</li>
+						<li>
+							3. 더 모듈화된 코드 장려 @extend사용
+						</li>
+						<li>
+							4. 더 나은 인라인 문서를 작성하게 한다.
+							괄호가 코드와 코멘트를 그룹해준다.
+						</li>
+						<li>
+							5. css 툴이 scss에서도 사용가능하다.
+							css 툴들은 scss에서도 종종 사용이 가능하다.
+						</li>
+						<li>
+							6. <strong>css와 통합하기가 훨씬 쉽다.</strong>
+						</li>
+						<li>
+							7. 진입장벽이 낮다.
+						</li>
+						<li>
+							8. css의 다름 버전이 될수도있다.
+						</li>
+					</ul>
+				
+				</div>
+			</div>
+			<!-- //sass/scss -->
+	
+			<div class="inner_content">
+				<h3>Sass 컴파일러란?</h3>
+				<div class="box">
+					<strong>사스의 포멧으로 만들어진 파일을 CSS로 변환해주는 도구</strong> <br /><br />
+					Sass 컴파일러는<br />
+						--watch 옵션을 통해서 사스파일을 감시하다가 그 파일이 수정되면 자동으로 CSS로 변환해주기 때문에 <br />
+						html에서는 컴파일된 CSS를 인클루드해서 페이지가 잘 렌더링되는지 확인하고, <br />
+						이 CSS파일을 그대로 서버에 반영하면 된다.<br /><br />
+						<strong>
+							여기서!잠깐 Sass파일은 에러가 나면 기존에 있던 css파일 모두 실행이 안됩니다. (에러 메시지)
+						</strong>
+					<img src="http://gscdn.hackers.co.kr/publish/img/img1.jpg" alt="" />
+					<div class="inner mt20">
+						<strong>윈도우에서 설치</strong>
+						<ul>
+							<li>
+								1. <a href="http://rubyinstaller.org/"target="_blank">http://rubyinstaller.org/</a>에 방문해서 ruby를 설치한다.
+							</li>
+							<li>
+								2. 윈도우키+R키를 누르고 cmd를 입력한다.
+							</li>
+							<li>
+								3. gem install sass 를 입력해서 sass 컴파일러를 설치한다.
+							</li>
+						</ul>
+					</div>
+					<div class="inner">
+						<strong>맥과 리눅스에서 설치</strong>
+						<ul>
+							<li>
+								1. 맥과 리눅스에는 ruby가설치 되어 있기 때문에 gem install sass를 입력해서 sass 컴파일러를 설치한다. 
+							</li>
+							
+						</ul>
+					</div>
+
+					
+				</div>
+			</div>
+			<div class="inner_content">
+				<h3>사용법</h3>
+				<div class="box">
+					<div class="inner">
+						<strong>1</strong>
+						<div class="img_box">
+							<img src="http://gscdn.hackers.co.kr/publish/img/step1.gif" alt="" />
+							<span class="txt">http://rubyinstaller.org/에 방문해서 ruby를 설치한다.</span>
+						</div>
+						<strong>2</strong>
+						<div class="img_box">
+							<img src="http://gscdn.hackers.co.kr/publish/img/step2.jpg" alt="" />
+							<span class="txt"></span>
+						</div>
+						<strong>3</strong>
+						<div class="img_box">
+							<img src="http://gscdn.hackers.co.kr/publish/img/step3.jpg" alt="" />
+							<span class="txt">
+								윈도우  + R
+							</span>
+						</div>
+						<strong>4</strong>
+						<div class="img_box">
+							<img src="http://gscdn.hackers.co.kr/publish/img/step4.gif" alt="" />
+							<span class="txt">
+								gem install sass <br />
+								사스 설치 명령어 입력
+							</span>
+						</div>
+						<strong>5</strong>
+						<div class="img_box">
+							<img src="http://gscdn.hackers.co.kr/publish/img/step5.jpg" alt="" />
+							<span class="txt">
+								작업 경로 생성(내 작업폴더 임의 생성)
+							</span>
+						</div>
+						<strong>6</strong>
+						<div class="img_box">
+							<img src="http://gscdn.hackers.co.kr/publish/img/step6.jpg" alt="" />
+							<span class="txt"></span>
+						</div>
+						<strong>7</strong>
+						<div class="img_box">
+							<img src="http://gscdn.hackers.co.kr/publish/img/step7.jpg" alt="" />
+							<span class="txt"></span>
+						</div>
+						<strong>8</strong>
+						<div class="img_box">
+							<img src="http://gscdn.hackers.co.kr/publish/img/step8.jpg" alt="" />
+							<span class="txt">
+								현재 D드라이브에 작업 폴더 생성 했기에
+								d:  &lt;- D드라이브로 이동한다.
+							</span>
+						</div>
+						<strong>9</strong>
+						<div class="img_box">
+							<img src="http://gscdn.hackers.co.kr/publish/img/step9.jpg" alt="" />
+							<span class="txt">
+								scss --watch stylesheets:stylesheet/compiled <br />
+								작업 경로 stylecheets 라는 폴더안에 있는 모든 scss 파일을 <br />
+								compiled 라는 폴더 생성 후 그 폴더 안에 css 파일을 저장한다.
+							</span>
+						</div>
+						<strong>10</strong>
+						<div class="img_box">
+							<img src="http://gscdn.hackers.co.kr/publish/img/step10.jpg" alt="" />
+							<span class="txt">
+								자동변환
+							</span>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<!-- 변수 -->
+			<div class="inner_content">
+				<h3>변수(Variables)</h3>
+				<div class="box">
+					변수는 모든 프로그래밍 언어의 정수라고 할 수 있습니다. 복사를 반복하지 않고도 값을 재사용할 수 있게 해줍니다.<br />
+					가장 중요한 점은 값 수정을 매우 쉽게 만들어준다는 것입니다.<br />
+					더 이상 찾아서 바꾸기나 하나하나 고칠 필요가 없는 것입니다.<br />
+					변수이름은 '$'로 시작해야 하고, 변수의 값으로 올 수 있는 것은 문자, 숫자(px, em포함), 칼러(#ce4dd6)가 있습니다. <br />
+					변수를 이용하면 크기나 색상과 같은 값을 일괄적으로 변경할 수 있습니다. <br /><br />
+					새로운 변수는 다음의 기준이 충족될 때에만 생성되어야 합니다.
+
+					<ul class="list">
+						<li>
+							값이 적어도 두 번 반복된다
+						</li>
+						<li>
+							값이 적어도 한 번은 수정될 가능성이 크다
+						</li>
+						<li>
+							값의 실현은 모두 변수와 관련되어 있다(즉, 우연에 의한 것이 아니라).
+						</li>
+					</ul>
+
+				</div>
+				<div class="o_hidden box_info">
+					<div class="f_l">
+						<h4>scss</h4>
+						$primary-color: #333; <br /><br />
+
+						body {<br />
+						  background-color: $primary-color;<br />
+						}
+					</div>
+					
+					<div class="f_l click_evt">
+						<h4 >css</h4>
+						<div class="hide">
+						body { <br />
+						  background-color: #333;<br />
+						}
+						</div>
+					</div>
+				</div>
+				<div class="o_hidden box_info">
+					<div class="f_l">
+						<h4>scss</h4>
+						$primary-color: #333; <br /><br />
+
+						body {<br />
+						  $primary-color: #eee;<br />
+						  background-color: $primary-color;<br />
+						}<br /><br />
+
+						p {<br />
+						  color: $primary-color;<br />
+						}
+					</div>
+					<div class="f_l click_evt">
+						<h4>css</h4>
+						<div class="hide">
+						body {<br />
+						  background-color: #eee;<br />
+						}<br /><br />
+
+						p {<br />
+						  color: #333;<br />
+						}
+						</div>
+					</div>
+				</div>
+				<div class="o_hidden box_info">
+					<div class="f_l">
+						<h4>scss</h4>
+						$primary-color: #333; <br /><br />
+
+						body {<br />
+						  $primary-color: #eee !global;<br />
+						  background-color: $primary-color;<br />
+						}<br /><br />
+						
+
+						p {<br />
+						  color: $primary-color;<br />
+						}<br /><br />
+						<span>!global 전역변수로 사용하겠다.</span>	
+					</div>
+					<div class="f_l">
+						<h4>css</h4>
+						body {<br />
+						  background-color: #eee;<br />
+						}<br /><br />
+
+						p {<br />
+						  color: #eee;<br />
+						}
+					</div>
+				</div>
+
+				 <div class="o_hidden box_info">
+					<div class="f_l">
+						<h4>scss</h4>
+						$primary-color: #333; <br /><br />
+
+						$primary-color: $eee !default;<br /><br />
+
+						p {<br />
+						  color: $primary-color;<br />
+						}<br /><br />
+						<span>
+						전역 변수로 선언되어도 사용이 안 된다<br />
+						변수 선언 뒤에 !default<br />
+						</span>
+					</div>
+
+					<div class="f_l">
+						<h4>css</h4>
+						p {<br />
+						  color: #333;<br />
+						}
+					</div>
+				</div>
+
+				<div class="o_hidden box_info">
+					<div class="f_l">
+						<h4>scss</h4>
+						#main { <br />
+						&nbsp;$padding: 2em; // 지역 변수 정의<br />
+						&nbsp;&nbsp;padding: $padding;<br />
+					&nbsp;&nbsp;.content22 {<br />
+					&nbsp;&nbsp;&nbsp;padding: $padding; // 하위 규칙에도 사용 가능<br />
+					&nbsp;&nbsp;}<br />
+					&nbsp;}<br /><br />
+
+						#sidebar {<br />
+						 padding: $padding; // 지역 변수의 범위를 벗어났습니다. 해당 변수가 없으므로 에러가 발생합니다.<br />
+						}<br />
+					</div>
+
+					<div class="f_l">
+						<h4>css</h4>
+							Error: Undefined variable: \"$padding\ <br />
+							(css아예 적용안됨)
+					</div>
+				</div>
+
+
+
+
+
+
+
+
+
+
+
+				
+			</div>
+			<!-- //변수 -->
+			
+			<!-- 수학 연산자 -->
+			<div class="inner_content">
+				<h3>수학 연산자(Math Operators)</h3>
+				<div class="box">
+					Sass는 프로그래밍적 요소가 있기 때문에 간단한 사칙연산이 가능합니다. <br />
+					즉 더하기,빼기,곱하기,나누기 그리고 퍼센트 처리가 가능합니다. 이 연산 기능은 CSS를 사용하여 레이아웃을 작업할 때 정말 편리하게 사용할 수 있고,<br />
+					기타 여러 용도로 사용이 가능합니다.<br />
+					예를 들어 색상을 섞는 기능도 가능합니다. white와 back을 혼합하면 회색이 나오는데, 이런 용도로도 사용이 가능합니다.
+				</div>
+				<div class="ex_box">
+					<table style="width:100%; " class="easy-table easy-table-default ">
+						<thead>
+						<tr><th>Operator</th>
+						<th> Description</th>
+						</tr>
+						</thead>
+						<tbody>
+						<tr><td>+</td>
+						<td>&nbsp;addition</td>
+						</tr>
+						<tr><td>-</td>
+						<td> subtraction</td>
+						</tr>
+						<tr><td>/</td>
+						<td> division</td>
+						</tr>
+						<tr><td>*</td>
+						<td> multiplication</td>
+						</tr>
+						<tr><td>%</td>
+						<td> modulo</td>
+						</tr>
+						<tr><td>==</td>
+						<td> equality</td>
+						</tr>
+						<tr><td>!=</td>
+						<td> inequality</td>
+						</tr>
+						</tbody>
+					</table>
+					<div class="box mt20">
+						주의하실점은, +, - operator 를 사용 할 떄는 단위를 언제나 통일시켜야합니다. <br />
+
+						예를들어, 다음과 같은 코드는 오류가 발생하게됩니다: $box-width: 100% - 20px<br />
+
+						이런 작업을 해야한다면 css 의 calc() 함수를 사용해야합니다.<br />
+
+						<!-- 다음과 같은 식은 오류 없이 작동합니다: $box-width: 300px / 960px * 100% <br /> -->
+						calc()함수 사용법 -&gt; 
+						<a href="https://www.w3schools.com/cssref/func_calc.asp" target="_blank">
+							https://www.w3schools.com/cssref/func_calc.asp
+						</a>
+					</div>
+				</div>
+				<div class="ex_box">
+					<strong>
+						1. 단위
+					</strong>
+					<div>
+						<p>
+						- 단위를 숫자에 붙이기 위해서는, 이 숫자에 1 단위를 곱해야 합니다. <br /> <br />
+						$value : 4; <br />
+						.baa{font-size:$value*1em;}
+
+						-&gt;.baa {font-size: 4em;}
+						</p><br /> <br />
+						<p> - 단위를 숫자에 붙이기 위해서는, + 단위도 사용가능 합니다. <br /> <br />
+							$value : 10; <br />
+							.baa{font-size:$value + em;}
+							
+							-&gt;.baa {font-size: 10em;}
+						</p><br /> <br />
+						<p>
+						- 값의 단위를 제거하기 위해서는, 그 종류의 한 단위로 나누어야 합니다 <br /> <br />
+						$value : 10px;<br />
+						.baa{font-size:$value/1px;}
+						-&gt;.baa {font-size: 10;}
+						</p>
+					</div>
+				
+				</div>
+				<div class="o_hidden box_info">
+					<div class="f_l">
+						<h4>scss</h4>
+						#navbar { <br />
+						&nbsp;$navbar-width: 1000px;<br />
+						&nbsp;$items: 5;<br /><br />
+							 &nbsp;&nbsp;li {<br />
+							&nbsp;&nbsp;width: $navbar-width/$items - 10px; <br />
+						&nbsp;&nbsp;}<br />
+						}
+					</div>
+					<div class="f_l click_evt">
+						<h4>css</h4>
+						<div class="hide">
+						#navbar li {
+							width: 190px;
+						}
+						</div>
+					</div>
+				</div>
+
+				<div class="o_hidden box_info">
+					<div class="f_l">
+						<h4>scss</h4>
+						h1{<br />
+						&nbsp;color:#333333 + #111111;<br />
+						&nbsp;border-color:#023012 * 2;<br />
+						&nbsp;background-color:rgba( 255, 0, 0, 0.75 ) + rgba( 0, 100, 100, 0.75 );
+						}
+					</div>
+					<div class="f_l click_evt">
+						<h4>css</h4>
+						<div class="hide">
+						h1 { <br />
+						&nbsp;color: #444444;<br />
+						&nbsp;border-color: #046024;<br />
+						&nbsp;background-color: rgba(255, 100, 100, 0.75); <br />
+						} <br />
+						<span>
+						rgb값 maximum 255 <br />
+						rgba 값에서 투명도는 더해지지 않는다.(투명도가 다르면 에러)</span>
+						</div>
+					</div>
+				</div>
+			
+			</div>
+			<!-- //수학 연산자 --> 
+			
+			<!-- 중첩 -->
+			<div class="inner_content">
+				<h3>중첩(Nesting)</h3>
+				<div class="box">
+					HTML 코딩을 하다 보면 중첩적인 표현을 위해 하위 선택자를 많이 사용할 수 밖에 없습니다. <br />
+					예를 들어, nav 태그를 이용해서 네비게이션을 만들 때 ui와 li라는 태그 선택자가 있는데, 이 두 선택자는 nav의 하위 선택자입니다.
+				</div>
+				<div class="o_hidden box_info">
+					<div class="f_l">
+						<h4>scss</h4>
+						.container { <br />
+						&nbsp;width: 100%;<br />
+						&nbsp;h1 {<br />
+						&nbsp;&nbsp;color: red;<br />
+						&nbsp;}<br />
+						}
+					</div>
+					<div class="f_l">
+						<h4>css</h4>
+						.container {<br />
+						&nbsp;width: 100%;<br />
+						}<br /><br />
+
+						.container h1 {<br />
+						&nbsp;color: red;<br />
+						}
+					</div>
+				</div>
+				<div class="o_hidden box_info">
+					<div class="f_l">
+						<h4>scss</h4>
+<pre>
+	a {
+	  color: black;
+	  &:hover {
+		text-decoration: underline;
+		color: gray;
+	  }
+	  &:visited {
+		color: purple;
+	  }
+	}
+</pre>
+					</div>
+					<div class="f_l">
+					
+						<h4>css</h4>
+<pre>
+	a {
+	  color: black;
+	}
+	a:hover {
+	  text-decoration: underline;
+	  color: gray;
+	}
+	a:visited {
+	  color: purple;
+	}
+</pre>
+						<span>부모 선택자를 리퍼런스 할때는 & 문자를 사용합니다.</span>	
+					</div>
+					
+				</div><!-- //o_hidden/box_info -->
+
+				<div class="o_hidden box_info">
+					<div class="f_l">
+						<h4>scss</h4>
+						.funky { <br />
+						&nbsp;font: {<br />
+							&nbsp;&nbsp;family: fantasy;<br />
+							&nbsp;&nbsp;size: 30em;<br />
+							&nbsp;&nbsp;weight: bold;<br />
+						&nbsp; }<br />
+							}
+					</div>
+					<div class="f_l">
+						<h4>css</h4>
+							.funky {<br />
+							&nbsp;font-family: fantasy;<br />
+							&nbsp;font-size: 30em;<br />
+							&nbsp;font-weight: bold;<br />
+							}
+					</div>
+					
+				</div><!-- //o_hidden/box_info -->
+
+				<div class="box">
+	<pre>	
+		<span>&lt;<span >header</span>&gt;</span>
+			<span >&lt;<span >nav</span>&gt;</span>
+				<span >&lt;<span >ul</span>&gt;</span>
+					<span >&lt;<span >li</span>&gt;</span><span >&lt;<span >a</span> <span >href</span>=<span  >"#"</span>&gt;</span>Header1<span >&lt;/<span >a</span>&gt;</span><span >&lt;/<span >li</span>&gt;</span>
+					<span >&lt;<span >li</span>&gt;</span><span >&lt;<span >a</span> <span >href</span>=<span  >"#"</span>&gt;</span>Header2<span >&lt;/<span >a</span>&gt;</span><span >&lt;/<span >li</span>&gt;</span>
+					<span >&lt;<span >li</span>&gt;</span><span >&lt;<span >a</span> <span >href</span>=<span  >"#"</span>&gt;</span>Header3<span >&lt;/<span >a</span>&gt;</span><span >&lt;/<span >li</span>&gt;</span>
+				<span >&lt;/<span >ul</span>&gt;</span>
+			<span >&lt;/<span >nav</span>&gt;</span>
+		<span >&lt;/<span >header</span>&gt;</span>
+	
+		<span >&lt;<span >aside</span>&gt;</span>
+			<span >&lt;<span >nav</span>&gt;</span>
+				<span >&lt;<span >ul</span>&gt;</span>
+					<span >&lt;<span >li</span>&gt;</span><span >&lt;<span >a</span> <span >href</span>=<span  >"#"</span>&gt;</span>Aside1<span >&lt;/<span >a</span>&gt;</span><span >&lt;/<span >li</span>&gt;</span>
+					<span >&lt;<span >li</span>&gt;</span><span >&lt;<span >a</span> <span >href</span>=<span  >"#"</span>&gt;</span>Aside2<span >&lt;/<span >a</span>&gt;</span><span >&lt;/<span >li</span>&gt;</span>
+					<span >&lt;<span >li</span>&gt;</span><span >&lt;<span >a</span> <span >href</span>=<span  >"#"</span>&gt;</span>Aside3<span >&lt;/<span >a</span>&gt;</span><span >&lt;/<span >li</span>&gt;</span>
+				<span >&lt;/<span >ul</span>&gt;</span>
+			<span >&lt;/<span >nav</span>&gt;</span>
+		<span >&lt;/<span >aside</span>&gt;</span>
+	
+		<span >&lt;<span >article</span>&gt;</span>
+			<span >&lt;<span >h1</span>&gt;</span>SASS 컨텐츠<span >&lt;/<span >h1</span>&gt;</span>
+		<span >&lt;/<span >article</span>&gt;</span>
+	
+	</pre>
+				</div>
+				<div class="box mt20 ">
+	<pre>
+		<strong class="mb20 dis_block" >Scss</strong>
+		$default_color: #000;
+		$header_color: #009ac8;
+		$aside_color: #ff0000;
+		$header_back: #ff6868;
+		$aside_hover: #382494;
+	
+		header {
+			background-color: $header_back;
+			display: block;
+			height: 100px;
+	
+			nav {
+				ul {
+					list-style: none;
+					float: right;
+	
+					li {
+						display: inline-block;
+	
+						a {
+							display: block;
+							padding: 5px 3px;
+							margin: 10px 20px;
+							text-decoration: none;
+							color: $default_color;
+	
+							&:hover {
+								border-bottom: 1px dotted $header_color;
+							}
+						}
+					}
+				}
+			}
+		}
+	
+		aside {
+			width: 250px;
+			float: left;
+	
+			nav {
+				ul {
+					list-style: none;
+					padding: 0;
+					margin-top: 30px;
+	
+					li {
+						a {
+							display: block;
+							padding:5px 10px;
+							text-decoration: none;
+							color: $default_color;
+							width: 100px;
+	
+							&:hover {
+								border: 1px solid $aside_hover;
+								color: $aside_color;
+							}
+						}
+					}
+				}
+			}
+		}
+	</pre>
+				</div> <!-- //box -->
+				<div class="box mt20">
+<pre>
+<strong class="mb20 dis_block" >css</strong>
+	header {
+	  background-color: #ff6868;
+	  display: block;
+	  height: 100px; }
+	header nav ul {
+		list-style: none;
+		float: right; }
+	header nav ul li {
+		display: inline-block; }
+	header nav ul li a {
+		display: block;
+		padding: 5px 3px;
+		margin: 10px 20px;
+		text-decoration: none;
+		color: #000; }
+	header nav ul li a:hover {
+		border-bottom: 1px dotted #009ac8; }
+
+	aside {
+	  width: 250px;
+	  float: left; }
+	aside nav ul {
+		list-style: none;
+		padding: 0;
+		margin-top: 30px; }
+	aside nav ul li a {
+		  display: block;
+		  padding: 5px 10px;
+		  text-decoration: none;
+		  color: #999;
+		  width: 100px; }
+	aside nav ul li a:hover {
+			border: 1px solid #382494;
+			color: #ff0000; }
+
+	/*# sourceMappingURL=sass_test.css.map */
+</pre>
+
+				</div>
+				<div class="">
+					<strong class="fs24">결과</strong>
+					 <header>
+						<nav>
+							<ul>
+								<li><a href="#">Header1</a></li>
+								<li><a href="#">Header2</a></li>
+								<li><a href="#">Header3</a></li>
+							</ul>
+						</nav>
+					</header>
+				
+					<aside>
+						<nav>
+							<ul>
+								<li><a href="#">Aside1</a></li>
+								<li><a href="#">Aside2</a></li>
+								<li><a href="#">Aside3</a></li>
+							</ul>
+						</nav>
+					</aside>
+				
+					<article>
+						<h1>SASS 컨텐츠</h1>
+					</article>
+				</div>
+			</div><!-- //inner_content -->
+
+			
+			<!-- //중첩 -->
+			<hr />
+			<ul class="">
+				<li>
+					 Mixin (믹스인)
+				</li>
+				<li>
+					Extend (상속)
+				</li>
+				<li>
+					Function (함수)
+				</li>
+				<li>
+					Built-in Functions (내장함수)
+				</li>
+				<li>
+					if,for,while
+				</li>
+			</ul>
+			<div class="mt20">
+				 참고 사이트 <br />
+				<a href="https://opentutorials.org/course/470/2490" target="_blank">https://opentutorials.org/course/470/2490</a> <br />
+				<a href="http://webruden.tistory.com/48" target="_blank">http://webruden.tistory.com/48</a> <br />
+				<a href="https://velopert.com/1712" target="_blank">https://velopert.com/1712</a> <br />
+				<a href="https://sass-guidelin.es/ko/" target="_blank">https://sass-guidelin.es/ko/</a><br />
+
+				<strong>Sass 홈페이지</strong>
+				<a href="http://sass-lang.com/" target="_blank">http://sass-lang.com/</a>
+			</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		
+	
+
+
+
+			
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>테스트</title>
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0">
+<script type="text/javascript" charset="utf-8" src="http://redev.champstudy.com/_core/js/jquery-1.11.2.min.js"></script>
+<!-- <script src="http://www.champstudy.com/plugins/jquery-bxslider/4.1.2/jquery.bxslider.min.js"></script>
+<script src="http://www.champstudy.com/layouts/champstudy/_js/bxslider.js"></script>
+<link href="http://www.champstudy.com/layouts/champstudy/_css/bxslider.css" rel="stylesheet"> -->
+<style type="text/css">
+html, body {
+  height: 100%;
+}
+
+body {
+  font-family: "Open Sans", "Helvetica Neue", Arial, sans-serif;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 1.2;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  background: #2d2d2d;
+}
+
+form {
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: 5px 5px 15px rgba(107, 173, 182, 0.6);
+  padding: 1rem 2rem;
+  min-width: 30vw;
+}
+form li {
+  margin: 1rem 0;
+}
+form div {
+  margin: 1.5rem 0;
+}
+
+ul ,li{
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* ------------------------------------------------------------------------------------------------- */
+/* input-common */
+@-moz-keyframes borderscale {
+  50% {
+    box-shadow: 0 0 0 2px #999;
+  }
+}
+@-webkit-keyframes borderscale {
+  50% {
+    box-shadow: 0 0 0 2px #999;
+  }
+}
+@keyframes borderscale {
+  50% {
+    box-shadow: 0 0 0 2px #999;
+  }
+}
+[class^='inp-'],
+[class^='inp-'] input,
+[class^='inp-'] input:after,
+[class^='inp-'] input:before{display:inline-block;vertical-align:middle}
+[class^='inp-'] input{position:relative;width:auto;height:auto;margin:0 4px;padding:0;background:transparent;border:0;-webkit-appearance:none;-moz-appearance:none;appearance:none;outline:0}
+[class^='inp-'] input:before,
+[class^='inp-'] input:after{content: '';border-radius:50%}
+[class^='inp-'] input:before{width:22px;height:22px;border-radius:50%;box-sizing:border-box}
+[class^='inp-'] input:after{
+	display:block;
+	position:absolute;top:50%;left:50%;width:11px;height:11px;
+	transform:scale(0);
+	transform-origin:50%;transition:transform 200ms ease-out;
+	background-color:#00bad2
+}
+[class^='inp-rdo'] input:before{width:22px;height:22px;border:1px solid #d9d9d9}
+[class^='inp-rdo'] input:checked:before {
+	background-color: #fff;
+	-moz-animation: borderscale 300ms ease-in;
+	-webkit-animation: borderscale 300ms ease-in;
+	animation: borderscale 300ms ease-in;
+}
+[class^='inp-rdo'] input:checked:after {
+	transform: scale(1);
+	transform:translateY(-50%) translateX(-50%);
+	-webkit-transform:translateY(-50%) translateX(-50%);
+}
+
+[class^='inp-chk'] input:before{width:24px;height:24px;border:2px solid #d9d9d9}
+[class^='inp-chk'] input:after{
+	width:10px;height:6px;margin:0 0 0 0;
+	background-color:transparent;
+	border-style:solid;border-color:#d9d9d9;border-radius:0;border-width:0 0 2px 2px;
+	-moz-transform: rotate(-45deg) scale(1) translateY(-90%) translateX(0%);
+	-ms-transform: rotate(-45deg) scale(1) translateY(-90%) translateX(0%);
+	-webkit-transform: rotate(-45deg) scale(1) translateY(-90%) translateX(0%);
+	transform: rotate(-45deg) scale(1) translateY(-90%) translateX(0%);
+	-moz-transition: -moz-transform 200ms ease-out;
+	-o-transition: -o-transform 200ms ease-out;
+	-webkit-transition: -webkit-transform 200ms ease-out;
+	transition: transform 200ms ease-out;
+}
+[class^='inp-chk'] input:checked:before {
+	background-color:#3bb2d9;
+	border-color:#3bb2d9;
+	-moz-animation: borderscale 200ms ease-in;
+	-webkit-animation: borderscale 200ms ease-in;
+	animation: borderscale 200ms ease-in;
+}
+[class^='inp-chk'] input:checked:after {
+	border-color:#fff;
+}
+/* input-resize */
+.inp-rdo-s input:before{width:18px;height:18px}
+.inp-rdo-s input:after{width:9px;height:9px}
+.inp-rdo-l input:before{width:32px;height:32px}
+.inp-rdo-l input:after{width:16px;height:16px}
+.inp-chk-s input:before{width:18px;height:18px}
+.inp-chk-s input:after{width:7px;height:4px}
+.inp-chk-l input:before{width:32px;height:32px;background-color:#d9d9d9}
+.inp-chk-l input:after{width:13px;height:9px;border-color:#fff}
+
+</style>
+</head>
+<body>
+
+<form action="">
+    <h2>Form Element Transitions</h2>
+	<div>
+		<ul>
+			<li><label class="inp-rdo-s"><input name="radio" type="radio" checked="checked">로그인 상태 유지</label></li>
+			<li><label class="inp-rdo"><input name="radio" type="radio">동의합니다.</label></li>
+			<li><label class="inp-rdo-l"><input name="radio" type="radio">설정</label></li>
+		</ul>
+	</div>
+	<div>
+		<ul>
+			<li><label class="inp-chk-s"><input type="checkbox" checked="checked">Option 1</label></li>
+			<li><label class="inp-chk"><input type="checkbox">Option 2</label></li>
+			<li><label class="inp-chk-l"><input type="checkbox">Option 3</label></li>
+		</ul>
+	</div>
+
+	<div style="text-align:right">
+		<label class="inp-chk-s">Option 1<input type="checkbox" checked="checked"></label>
+		<label class="inp-chk-s">Option 2<input type="checkbox" checked="checked"></label>
+		<label class="inp-chk-s">Option 3<input type="checkbox" checked="checked"></label>
+	</div>
+
+</form>
+</body>
+</html>

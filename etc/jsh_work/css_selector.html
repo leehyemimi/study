@@ -1,0 +1,1198 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>CSS Selector</title>
+<style>
+	/* reset */
+	body,p,h1,h2,h3,h4,h5,h6,ul,ol,li,dl,dt,dd,table,th,td,form,fieldset,legend,input,textarea,button,select{margin:0;padding:0}
+	body,input,textarea,select,button,table{font-family:/*"맑은 고딕",*/"돋움", Dotum, sans-serif;,sans-serif;font-size:16px;color:#000}
+	img,fieldset{border:0}
+	ul,ol{list-style:none}
+	em,address{font-style:normal}
+	a{text-decoration:none}
+	a:hover,a:active,a:focus{text-decoration:underline}
+	/* Common */
+	body{background-color:#f1f1f1;font-family:"Malgun Gothic", 맑은 고딕, 돋움, Dotum, sans-serif;}
+	h1,h2,h3,h4{font-weight:normal;letter-spacing:-1px}
+	h1{margin-bottom:100px;font-size:50px;text-align:center}
+	h2{margin-bottom:20px;font-size:27px}
+	h3{margin-bottom:15px;font-size:23px;color:#000}
+	h4{margin:25px 0 15px 0;font-size:23px;}
+	h5{padding:30px 0;font-size:23px;color:#f00;text-align:center}
+	table{margin-top:10px;border-collapse:collapse}
+	table th{background-color:#ededed}
+	table th,table td{padding:10px;border:1px solid #999;word-break:keep-all;word-wrap:break-word;}
+	.txt_red{color:red;}
+	ul.has_blit li{list-style-type:disc;list-style-position:inside;line-height:26px;}
+	.ta_l{text-align:left;}
+	.ta_c{text-align:center;}
+
+	.wrap{width:86%;margin:50px auto;padding:80px 50px;box-shadow:0 1px 3px rgba(0, 0, 0, 0.15);background-color:#fff}
+	.content{border-bottom:1px solid #ededed;margin-bottom:60px;padding-bottom:60px}
+	.inner_content{margin-top:40px;padding-left:20px;font-size:18px;}
+	.inner_content ul{margin:10px 0;}
+	.summary{margin-bottom:30px;padding:10px;background:#ececec;}
+	.code_css{padding:15px 0 0 0;background:#3f3f3f;color:#fff;text-align:left;}
+	.code_css span{background:#5a5a5a;}
+	
+	p.pseudo{padding-left:10px;}
+	p.pseudo.test1::first-line{color: red;}
+	p.pseudo.test2::first-letter{color: red;}
+	p.pseudo.test3::before{content: "xyz";color: red;}
+	p.pseudo.test4::after{content: "백슬러시A 와 white-space:pre를\A사용하면 줄바꿈 가능";color: red;display:inline-block;white-space:pre;}
+	p.pseudo.test4.va_m::after{vertical-align:middle;}
+
+	.empty_test li:empty{width:50px;height:20px;background:#ccc;}
+	.first-child_test li:first-child{color:red;}
+	.nth-child_test li:nth-child(2n+1){color:red;}
+	.hover_test:hover{color: red;}
+</style>
+<script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$(".result_box").hide();
+		$(".result_btn").click(function(){
+			$(this).parent(".inner_content").find(".result_box").slideToggle(200);
+		});
+	});
+</script>
+</head>
+
+<body>
+	<div class="wrap">
+		<h1>CSS Selector</h1>
+
+		<div class="content">
+			<h2>선택자(Selector)</h2>
+			<div class="summary ta_c">
+				전체 선택자 / 타입 선택자 / 클래스 선택자 / 아이디 선택자 / 속성 선택자 / 가상 요소 / 가상 클래스 / 하위 선택자 / 자식 선택자 / 형제 선택자 / 인접 형제 선택자
+			</div>
+
+			<!-- content -->
+			<div class="inner_content">
+				<h3>&gt; 전체 선택자</h3>
+				<p>
+					전체 선택자(Universal Selector)는 모든 HTML 요소를 선택합니다. 별표(*)로 나타냅니다.
+				</p>
+				<pre class="code_css">
+ 1) <span>*{ color : blue; }</span>
+
+ 2) <span>*.abc { color: blue; }</span>
+
+ 3) <span>.abc { color: blue; }</span>
+				</pre>
+				<button type="button" class="result_btn">자세히보기</button>
+				<div class="result_box">
+					1) 모든 요소의 글씨색 blue<br/>
+					2) .abc 클래스를 가진 모든 요소의 글씨색 blue<br/>
+					3) .abc 클래스를 가진 요소들의 글씨색 blue
+				</div>
+			</div>
+			<!-- //content -->
+
+			<!-- content -->
+			<div class="inner_content">
+				<h3>&gt; 타입 선택자</h3>
+				<p>
+					타입 선택자(Type Selector)는 h1, p, div, span 등 HTML 요소(Element)를 선택하는 선택자입니다.
+				</p>
+				<pre class="code_css">
+ 1) <span>p { color: blue; }</span>
+
+ 2) <span>h1 { color: blue; }</span>
+
+ 3) <span>blockquote { font-style: italic; }</span>
+				</pre>
+				<button type="button" class="result_btn">자세히보기</button>
+				<div class="result_box">
+					1) 모든 p태그의 글씨색 blue<br/>
+					2) 모든 h1태그의 글씨색 blue<br/>
+					3) 모든 blockquote태그의 글씨를 기울인다
+				</div>
+			</div>
+			<!-- //content -->
+
+			<!-- content -->
+			<div class="inner_content">
+				<h3>&gt; class / id 선택자</h3>
+				<p>
+					특정 값을 class 속성(attribute) / id 속성(attribute)의 값으로 갖는 요소(element)를 선택합니다.
+				</p>
+				<pre class="code_css">
+ 1) <span>.abc / #abc</span>
+
+ 2) <span>p.abc / div#abc</span>
+				</pre>
+				<button type="button" class="result_btn">자세히보기</button>
+				<div class="result_box">
+					1) class 가 abc / id가 abc인 요소<br/>
+					2) 모든 p태그 중 abc라는 class를 가진 요소 / 모든 div태그 중 abc라는 id를 가진 요소
+				</div>
+			</div>
+			<!-- //content -->
+
+			<!-- content -->
+			<div class="inner_content">
+				<h3>&gt; 하위 선택자</h3>
+				<p>
+					하위 선택자(Descendant Selector)는 특정 요소의 하위에 있는 요소를 선택합니다.
+				</p>
+				<pre class="code_css">
+ 1) <span>div blockquote</span> (ex. <span>div .test</span> VS <span>div.test</span> )
+
+ 2) 선택될까요?
+    &lt;div&gt;
+       <span>&lt;blockquote&gt;...&lt;/blockquote&gt;</span>
+    &lt;/div&gt;
+
+ 3) 선택될까요?
+    &lt;div&gt;
+       &lt;aside&gt;
+          <span>&lt;blockquote&gt;...&lt;/blockquote&gt;</span>
+       &lt;/aside&gt;
+    &lt;/div&gt;
+				</pre>
+				<button type="button" class="result_btn">자세히보기</button>
+				<div class="result_box">
+					1) 모든 div 요소 안에 있는 모든 blockquote <br/>
+					&nbsp; &nbsp; ex → 모든 div 안에 test라는 클래스를 가진 모든 요소 VS test라는 클래스를 가진 모든 div 요소<br/>
+					2) yes<br/>
+					3) yes
+				</div>
+			</div>
+			<!-- //content -->
+
+			<!-- content -->
+			<div class="inner_content">
+				<h3>&gt; 자식 선택자</h3>
+				<p>
+					자식 선택자(Child Selector)는 특정 요소의 자식 요소를 선택합니다.<br/>
+					( *하위 선택자와 다른 점 : 한단계 아래에 있는 요소만 선택 )
+				</p>
+				<pre class="code_css">
+ 1) <span>div > blockquote</span> 
+
+ 2) 선택될까요?
+    &lt;div&gt;
+       <span>&lt;blockquote&gt;...&lt;/blockquote&gt;</span>
+    &lt;/div&gt;
+
+ 3) 선택될까요?
+    &lt;div&gt;
+       &lt;aside&gt;
+          <span>&lt;blockquote&gt;...&lt;/blockquote&gt;</span>
+       &lt;/aside&gt;
+    &lt;/div&gt;
+				</pre>
+				<button type="button" class="result_btn">자세히보기</button>
+				<div class="result_box">
+					1) 모든 div 요소 안에 있는 모든 blockquote <br/>
+					&nbsp; &nbsp; ex → 모든 div 안에 test라는 클래스를 가진 모든 요소 VS test라는 클래스를 가진 모든 div 요소<br/>
+					2) yes<br/>
+					3) no
+				</div>
+			</div>
+			<!-- //content -->
+
+			<!-- content -->
+			<div class="inner_content">
+				<h3>&gt; 형제 선택자</h3>
+				<p>
+					형제 선택자(Sibling Selector)는 어떤 요소의 형제 요소를 선택하는 선택자입니다. 
+				</p>
+				<pre class="code_css">
+ 1) <span>h1 ~ p</span> : h1 요소의 형제 요소 중 p 요소를 선택
+
+ 2) 
+ &lt;body&gt;
+    &lt;h1&gt;Lorem ipsum dolor sit amet.&lt;/h1&gt;
+    &lt;p&gt;Lorem ipsum dolor sit amet.&lt;/p&gt;
+    &lt;p&gt;Lorem ipsum dolor sit amet.&lt;/p&gt;
+    &lt;div&gt;
+      &lt;p&gt;Lorem ipsum dolor sit amet.&lt;/p&gt;
+    &lt;/div&gt;
+ &lt;/body&gt;
+
+ Q) 예상되는 결과는?
+				</pre>
+				<button type="button" class="result_btn">자세히보기</button>
+				<div class="result_box">
+					&lt;body&gt;<br/>
+						&nbsp; &nbsp;&lt;h1&gt;Lorem ipsum dolor sit amet.&lt;/h1&gt;<br/>
+						<span class="txt_red">&nbsp; &nbsp;&lt;p&gt;Lorem ipsum dolor sit amet.&lt;/p&gt;</span><br/>
+						<span class="txt_red">&nbsp; &nbsp;&lt;p&gt;Lorem ipsum dolor sit amet.&lt;/p&gt;</span><br/>
+						&nbsp; &nbsp;&lt;div&gt;<br/>
+						&nbsp; &nbsp;&nbsp; &nbsp; &lt;p&gt;Lorem ipsum dolor sit amet.&lt;/p&gt;<br/>
+						&nbsp; &nbsp;&lt;/div&gt;<br/>
+					 &lt;/body&gt;<br/>
+				</div>
+			</div>
+			<!-- //content -->
+
+			<!-- content -->
+			<div class="inner_content">
+				<h3>&gt; 인접 형제 선택자</h3>
+				<p>
+					인접 형제 선택자(Adjacent Sibling Selector)는 어떤 요소의 형제 요소 중 첫번째 요소를 선택합니다. 
+				</p>
+				<pre class="code_css">
+ 1) <span>h1 + p</span> : h1 요소의 형제 요소 중 첫번째 p 요소를 선택
+
+ 2) 
+ &lt;style&gt;
+   h1 + p {color: red;}
+ &lt;/style&gt;
+ &lt;body&gt;
+    &lt;h1&gt;Lorem ipsum dolor sit amet.&lt;/h1&gt;
+    &lt;p&gt;Lorem ipsum dolor sit amet.&lt;/p&gt;
+    &lt;p&gt;Lorem ipsum dolor sit amet.&lt;/p&gt;
+    &lt;div&gt;
+      &lt;p&gt;Lorem ipsum dolor sit amet.&lt;/p&gt;
+    &lt;/div&gt;
+ &lt;/body&gt;
+
+ Q) 예상되는 결과는?
+				</pre>
+				<button type="button" class="result_btn">자세히보기</button>
+				<div class="result_box">
+					&lt;body&gt;<br/>
+						&nbsp; &nbsp;&lt;h1&gt;Lorem ipsum dolor sit amet.&lt;/h1&gt;<br/>
+						<span class="txt_red">&nbsp; &nbsp;&lt;p&gt;Lorem ipsum dolor sit amet.&lt;/p&gt;</span><br/>
+						&nbsp; &nbsp;&lt;p&gt;Lorem ipsum dolor sit amet.&lt;/p&gt;<br/>
+						&nbsp; &nbsp;&lt;div&gt;<br/>
+						&nbsp; &nbsp;&nbsp; &nbsp; &lt;p&gt;Lorem ipsum dolor sit amet.&lt;/p&gt;<br/>
+						&nbsp; &nbsp;&lt;/div&gt;<br/>
+					 &lt;/body&gt;<br/>
+				</div>
+			</div>
+			<!-- //content -->
+
+			<!-- content -->
+			<div class="inner_content">
+				<h3>&gt; 속성선택자</h3>
+				<p>
+					속성 선택자(Attribute Selector)는 특정 속성(attribute)을 갖고 있거나 특정 속성이 특정 값 등을 갖고 있는 요소(element)를 선택합니다.<br/><br/>
+					속성선택자는 7가지 형태가 있습니다. 
+					<ul class="has_blit">
+						<li>[attribute]</li>
+						<li>[attribute="value"]</li>
+						<li>[attribute~="value"]</li>
+						<li>[attribute|="value"]</li>
+						<li>[attribute^="value"]</li>
+						<li>[attribute$="value"]</li>
+						<li>[attribute*="value"]</li>
+					</ul>
+				</p>
+			</div>
+			<div class="inner_content">
+				<h4>[attributename]</h4>
+				<p>attributename 속성을 가진 요소를 선택합니다. </p>
+				<pre class="code_css">
+ <span>h1[title]</span>  → title 속성을 가진 h1 요소를 선택합니다.
+				</pre>
+			</div>
+
+			<div class="inner_content">
+				<h4>[attributename="value"]</h4>
+				<p>attributename 속성의 값이 value인 요소를 선택합니다.</p>
+				<pre class="code_css">
+ <span>h1[title="abc"]</span> → title 속성의 값이 abc인 h1 요소를 선택
+
+ 1) &lt;h1 title="abc"&gt; Lorem &lt;/h1&gt;
+ 2) &lt;h1 title="abc xyz"&gt; Lorem &lt;/h1&gt;
+				</pre>
+				<button type="button" class="result_btn">자세히보기</button>
+				<div class="result_box">
+					<span class="txt_red">* 주의 : 속성값이 정확히 일치해야 함!!!</span><br/>
+					1) 선택됨<br/>
+					2) 선택되지 않음
+				</div>
+			</div>
+
+			<div class="inner_content">
+				<h4>[attributename~="value"]</h4>
+				<p>attributename 속성의 값이 value를 포함한 요소를 선택합니다.</p>
+				<pre class="code_css">
+ <span>h1[title~="abc"]</span> → title 속성의 값이 abc를 포함한 h1 요소를 선택(포함 여부는 단어 기준)
+
+ 1) &lt;h1 title="abc xyz"&gt; Lorem &lt;/h1&gt;
+ 2) &lt;h1 title="abcxyz"&gt; Lorem &lt;/h1&gt;
+				</pre>
+				<button type="button" class="result_btn">자세히보기</button>
+				<div class="result_box">
+					1) 선택됨<br/>
+					2) 선택되지 않음
+				</div>
+			</div>
+
+			<div class="inner_content">
+				<h4>[attributename|="value"]</h4>
+				<p>attributename 속성의 값이 value이거나 value-로 시작하는 요소를 선택합니다.</p>
+				<pre class="code_css">
+ <span>h1[title|="abc"]</span> → title 속성의 값이 abc이거나 abc-로 시작하는 h1 요소를 선택
+
+ 1) &lt;h1 title="abc"&gt; Lorem &lt;/h1&gt;
+ 2) &lt;h1 title="abc-xyz"&gt; Lorem &lt;/h1&gt;
+ 3) &lt;h1 title="abc xyz"&gt; Lorem &lt;/h1&gt;
+				</pre>
+				<button type="button" class="result_btn">자세히보기</button>
+				<div class="result_box">
+					1) 선택됨<br/>
+					2) 선택됨<br/>
+					3) 선택되지 않음
+				</div>
+			</div>
+
+			<div class="inner_content">
+				<h4>[attributename^="value"] <span class="txt_red">*css3</span></h4>
+				<p>attributename 속성의 값이 value로 시작하는 요소를 선택합니다.</p>
+				<pre class="code_css">
+ <span>h1[title^="abc"]</span> → title 속성의 값이 abc로 시작하는 h1 요소를 선택 (문자열 기준, 단어기준 X)
+
+ 1) &lt;h1 title="abc xyz"&gt; Lorem &lt;/h1&gt;
+ 2) &lt;h1 title="abc-xyz"&gt; Lorem &lt;/h1&gt;
+ 3) &lt;h1 title="xyz-abc"&gt; Lorem &lt;/h1&gt;
+				</pre>
+				<button type="button" class="result_btn">자세히보기</button>
+				<div class="result_box">
+					1) 선택됨<br/>
+					2) 선택됨<br/>
+					3) 선택되지 않음
+				</div>
+			</div>
+
+			<div class="inner_content">
+				<h4>[attributename$="value"] <span class="txt_red">*css3</span></h4>
+				<p>attributename 속성의 값이 value로 끝나는 요소를 선택합니다.</p>
+				<pre class="code_css">
+ <span>h1[title$="abc"]</span> → title 속성의 값이 abc로 끝나는 h1 요소를 선택 (문자열 기준)
+
+ 1) &lt;h1 title="abc xyz"&gt; Lorem &lt;/h1&gt;
+ 2) &lt;h1 title="abc-xyz"&gt; Lorem &lt;/h1&gt;
+ 3) &lt;h1 title="xyz abc"&gt; Lorem &lt;/h1&gt;
+ 4) &lt;h1 title="xyz-abc"&gt; Lorem &lt;/h1&gt;
+				</pre>
+				<button type="button" class="result_btn">자세히보기</button>
+				<div class="result_box">
+					1) 선택되지 않음<br/>
+					2) 선택되지 않음<br/>
+					3) 선택됨<br/>
+					4) 선택됨
+				</div>
+			</div>
+
+			<div class="inner_content">
+				<h4>[attributename*="value"] <span class="txt_red">*css3</span></h4>
+				<p>attributename 속성의 값이 value를 포함한 요소를 선택합니다.</p>
+				<pre class="code_css">
+ <span>h1[title*="abc"]</span> → title 속성의 값이 abc를 포함한 h1 요소를 선택 (문자열 기준)
+
+ 1) &lt;h1 title="abc xyz"&gt; Lorem &lt;/h1&gt;
+ 2) &lt;h1 title="abcxyz"&gt; Lorem &lt;/h1&gt;
+ 3) &lt;h1 title="lmn abc-xyz"&gt; Lorem &lt;/h1&gt;
+ 4) &lt;h2 title="xyz-abc"&gt; Lorem &lt;/h2&gt;
+				</pre>
+				<button type="button" class="result_btn">자세히보기</button>
+				<div class="result_box">
+					1) 선택됨<br/>
+					2) 선택됨<br/>
+					3) 선택됨<br/>
+					4) 선택되지 않음
+				</div>
+			</div>
+			<!-- //content -->
+
+			<!-- content -->
+			<div class="inner_content">
+				<h3>&gt; 가상 요소(Pseudo Element)</h3>
+				<p>
+					가상 요소(Pseudo-elements)는 요소의 특정 부분을 선택합니다.<br/>
+					<ul class="has_blit">
+						<li>::first-line</li>
+						<li>::first-letter</li>
+						<li>::before</li>
+						<li>::after</li>
+					</ul>
+					<span class="txt_red">→ CSS3부터, 가상 클래스는 콜론을 한 개(:), 가상 요소는 콜론을 두 개(::) 씁니다.<br/>
+					단, IE8 이전은 더블콜론이 지원되지 않고, 대부분의 브라우저에서 콜론을 한 개(:)만 써도 문제가 없으므로 주로 단일 콜론을 사용합니다.
+					</span>
+				</p>
+			</div>
+			<div class="inner_content">
+				<h4>::first-line</h4>
+				<p>::first-line은 요소의 첫번째 줄을 선택합니다.</p>
+				<pre class="code_css">
+ p::first-line {
+   color: red;
+ }
+				</pre>
+				→ p 요소의 첫번째 줄의 글자색을 빨간색으로 만듭니다.<br/>
+				<button type="button" class="result_btn">자세히보기</button>
+				<div class="result_box">
+					&lt;p&gt;<br/>
+					<p class="test1 pseudo">
+						첫번째 줄 입니다.<br/>
+						두번째 줄 입니다.
+					</p>
+					&lt;/p&gt;
+				</div>
+			</div>
+
+			<div class="inner_content">
+				<h4>::first-letter</h4>
+				<p>::first-letter는 요소의 첫번째 문자를 선택합니다.</p>
+				<pre class="code_css">
+ p::first-letter {
+   color: red;
+ }
+				</pre>
+				→ p 요소의 첫번째 문자의 색을 빨간색으로 만듭니다.<br/>
+				<button type="button" class="result_btn">자세히보기</button>
+				<div class="result_box">
+					&lt;p&gt;<br/>
+					<p class="test2 pseudo">
+						첫번째 줄 입니다.<br/>
+						두번째 줄 입니다.
+					</p>
+					&lt;/p&gt;
+				</div>
+			</div>
+
+			<div class="inner_content">
+				<h4>::before</h4>
+				<p>::before는 요소의 앞을 선택합니다.</p>
+				<pre class="code_css">
+ p::before {
+   content: "xyz";
+   color: red;
+ }
+				</pre>
+				→ p 요소 앞에 xyz라는 단어를 넣고 색을 빨간색으로 만듭니다.<br/>
+				<button type="button" class="result_btn">자세히보기</button>
+				<div class="result_box">
+					&lt;p&gt;<br/>
+					<p class="test3 pseudo">
+						첫번째 줄 입니다.<br/>
+						두번째 줄 입니다.
+					</p>
+					&lt;/p&gt;
+				</div>
+			</div>
+
+			<div class="inner_content">
+				<h4>::after</h4>
+				<p>::after는 요소의 뒤를 선택합니다.</p>
+				<pre class="code_css">
+ p::after {
+   content: "\A 와 white-space:pre를 사용하면 줄바꿈 가능";
+   color: red;
+ }
+				</pre>
+				→ p 요소 뒤에 content에 적은 글자가 빨간색 글씨로 노출됩니다.<br/>
+				<button type="button" class="result_btn">자세히보기</button>
+				<div class="result_box">
+					&lt;p&gt;<br/>
+					<p class="test4 pseudo va_m">
+						첫번째 줄 입니다.<br/>
+						두번째 줄 입니다.
+					</p>
+					&lt;/p&gt;
+				</div>
+			</div>
+
+            <div class="inner_content">
+				<div class="summary">
+					* 가상요소를 사용하여 붙여넣은 부분은 text로 인식하지 않는 <span class="txt_red">'가상'</span>의 요소<br/>
+					=> 선택하거나 복사 및 붙여 넣기를 할 수 없다. 즉, 드래그로 긁히지 않으며 소스보기에도 나타나지 않는다. <br/><br/>
+					* 마크업 수정이나 태그/class 추가를 하지 않고서도 사용이 가능하다.<br/><br/>
+					* 줄바꿈/vetical-align속성 다 먹으므로, 아이콘 형식으로도 사용이 가능하다.<br/><br/>
+					* 가상요소를 아이콘 넣는 용도로 사용한 예시 : <br/>
+					1) css 아이콘 예시 : <a href="http://uxuiz.cafe24.com/wp/?p=4726" target="_blank">http://uxuiz.cafe24.com/wp/?p=4726</a><br/>
+					2) img 아이콘 예시 : <a href="http://10.100.0.65/kbr_work/css_selector/index.html" target="_blank">http://10.100.0.65/kbr_work/css_selector/index.html</a>, (출처 : 보라주임님 작업폴더)
+				</div>
+			</div>
+			<!-- //content -->
+		</div>
+
+		<div class="content">
+			<h2>2. 가상 클래스(Pseudo-classes)</h2>
+	
+			<!-- content -->
+			<div class="inner_content">
+				<h3>&gt; :empty</h3>
+				<p>
+					:empty는 내용이 없는 비어있는 요소를 선택합니다.
+				</p>
+				<pre class="code_css">
+ &lt;ul class="empty_test"&gt;
+   &lt;li&gt;내용1&lt;/li&gt;
+   &lt;li&gt;&lt;/li&gt;
+ &lt;/ul&gt;
+
+ .empty_test li:empty{width:50px;height:20px;background:#ccc;}
+				</pre>
+				<button type="button" class="result_btn">자세히보기</button>
+				<div class="result_box">
+					<ul class="empty_test">
+						<li>내용1</li>
+						<li></li>
+					 </ul>
+				</div>
+			</div>
+			<!-- //content -->
+
+			<!-- content -->
+			<div class="inner_content">
+				<h3>&gt; :first-child</h3>
+				<p>
+					:first-child는 형제 요소 중 첫번째 요소를 선택합니다.
+				</p>
+				<pre class="code_css">
+ &lt;ul class="first-child_test"&gt;
+   &lt;li&gt;요소1&lt;/li&gt;
+   &lt;li&gt;요소2&lt;/li&gt;
+   &lt;li&gt;요소3&lt;/li&gt;
+ &lt;/ul&gt;
+
+ .first-child_test li:first-child{color:red;}
+				</pre>
+				<button type="button" class="result_btn">자세히보기</button>
+				<div class="result_box">
+					<ul class="first-child_test">
+						<li>요소1</li>
+						<li>요소2</li>
+						<li>요소3</li>
+					 </ul>
+				</div>
+			</div>
+			<!-- //content -->
+			<!-- content -->
+			<div class="inner_content">
+				<h3>&gt; :nth-child</h3>
+				<p>
+					:nth-child는 형제 요소 중 an+b번째 요소들을 선택합니다.<br/>
+					(지원 브라우저 : Chrome : 4.0, Firefox : 3.5, IE 9.0, Opera : 9.6, Safari : 3.2 이상)<br/><br/>
+
+					사용법 → <strong>selector:nth-child(an+b){ ... }</strong><br/>
+					an+b에서 a와 b는 상수로 수의 범위는 정수입니다. n은 변수로 음이 아닌 정수가 차례대로 대입됩니다.<br/><br/>
+					예를 들어 2n+1은,<br/>
+					n이 0일 때 2 × 0 + 1 = 1<br/>
+					n이 1일 때 2 × 1 + 1 = 3<br/>
+					n이 2일 때 2 × 2 + 1 = 5 ... 이므로<br/><br/>
+
+					:nth-child(2n+1)은 형제 요소 중 1, 3, 5, …번째 요소들을 선택합니다.
+				</p>
+				<pre class="code_css">
+ &lt;ul class="nth-child_test"&gt;
+   &lt;li&gt;요소1&lt;/li&gt;
+   &lt;li&gt;요소2&lt;/li&gt;
+   &lt;li&gt;요소3&lt;/li&gt;
+   &lt;li&gt;요소4&lt;/li&gt;
+   &lt;li&gt;요소5&lt;/li&gt;
+ &lt;/ul&gt;
+
+ .nth-child_test li:nth-child(2n+1){color:red;}
+				</pre>
+				<button type="button" class="result_btn">자세히보기</button>
+				<div class="result_box">
+					<ul class="nth-child_test">
+						<li>요소1</li>
+						<li>요소2</li>
+						<li>요소3</li>
+						<li>요소4</li>
+						<li>요소5</li>
+					 </ul>
+					 Q. 짝수는? <br/>
+					 A. (드래그→)<span style="color:#FFF"> 2n+2</span>
+				</div>
+			</div>
+			<div class="inner_content">
+				<p>
+					<strong>* an+b의 값이 음수인 경우</strong><br/>
+					<strong>:nth-child(2n-1)</strong>라면 n이 0일 때 -1입니다. 이 때는 선택할 요소가 없으므로 무시됩니다.<br/>
+					즉, :nth-child(2n+1) 과 같은 결과가 됩니다.<br/><br/><br/>
+
+					<strong>* an+b에서 a가 0인 경우</strong><br/>
+					an+b에서 a가 0이라면 b만 남습니다. n이 변해도 무조건 b이므로 하나의 요소만 선택합니다.<br/>
+					<strong>:nth-child(4)</strong>는 형제 요소 중 4번째 요소를 선택합니다.<br/><br/><br/>
+
+					<strong>even과 odd</strong><br/>
+					an+b 대신에 even 또는 odd를 넣을 수 있습니다. even은 짝수번째 요소를 선택하고, odd는 홀수번째 요소를 선택합니다.<br/>
+					 li:nth-child(odd) {color: red;} → 홀수<br/>
+					 li:nth-child(even) {color: red;} → 짝수
+				</p>
+			</div>
+			<!-- //content -->
+
+			<!-- content -->
+			<div class="inner_content">
+				<h3>&gt; :hover</h3>
+				<p>
+					:hover는 요소에 마우스를 올린 상태를 선택합니다.
+				</p>
+				<pre class="code_css">
+   &lt;span&gt;내용1&lt;/span&gt;
+   &lt;span class="hover_test"&gt;내용2&lt;/span&gt;
+
+  .hover_test:hover{color: red;}
+				</pre>
+				<button type="button" class="result_btn">자세히보기</button>
+				<div class="result_box">
+					<span>내용1</span>
+					<span class="hover_test">내용2</span>
+				</div>
+			</div>
+			<!-- //content -->
+
+			<!-- content -->
+			<div class="inner_content">
+				<h3>&gt; :not</h3>
+				<p>
+					:not은 특정한 요소를 제외하고 선택할 경우 사용<br/>
+					:not( s ) → s 자리에 부정요소나 가상요소는 올 수 없습니다.
+				</p>
+				<a href="http://10.100.0.65/buh_work/css_selector.html" target="_blank">자세히보기 (백운호님 자료)</a>
+			</div>
+			<!-- //content -->
+		</div>
+
+		<div class="content">
+			<h2>3. 선택자 브라우저 지원</h2>
+			<div class="inner_content">
+				<h3>선택자 브라우저 지원 현황표</h3>
+
+					<table class="css_tb" border="1" cellspacing="0" cellpadding="0" width="100%">
+						<thead>
+							<tr>
+								<th class="pattern" width="84">Pattern</th>
+								<th class="meaning" width="194">Meaning</th>
+								<th width="26">S5</th>
+								<th width="24">C8</th>
+								<th width="25">F3.6</th>
+								<th width="25">O11</th>
+								<th width="25">I9b</th>
+								<th width="21">I8</th>
+								<th width="19">I7</th>
+								<th width="19">I6</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<th class="pattern" width="84">#id</th>
+								<td class="meaning" width="194">id로 지정된 요소 선택</td>
+								<td width="26">O</td>
+								<td width="24">O</td>
+								<td width="25">O</td>
+								<td width="25">O</td>
+								<td width="25">O</td>
+								<td width="21">O</td>
+								<td width="19">O</td>
+								<td width="19">O</td>
+							</tr>
+							<tr>
+								<th class="pattern" width="84">.class</th>
+								<td class="meaning" width="194">class로 지정된 요소 선택</td>
+								<td width="26">O</td>
+								<td width="24">O</td>
+								<td width="25">O</td>
+								<td width="25">O</td>
+								<td width="25">O</td>
+								<td width="21">O</td>
+								<td width="19">O</td>
+								<td width="19">O</td>
+							</tr>
+							<tr>
+								<th class="pattern" width="84">E</th>
+								<td class="meaning" width="194">E&nbsp;요소를 선택</td>
+								<td width="26">O</td>
+								<td width="24">O</td>
+								<td width="25">O</td>
+								<td width="25">O</td>
+								<td width="25">O</td>
+								<td width="21">O</td>
+								<td width="19">O</td>
+								<td width="19">O</td>
+							</tr>
+							<tr>
+								<th class="pattern" width="84">E:link</th>
+								<td class="meaning" width="194">방문하지 않은&nbsp;E를 선택</td>
+								<td width="26">O</td>
+								<td width="24">O</td>
+								<td width="25">O</td>
+								<td width="25">O</td>
+								<td width="25">O</td>
+								<td width="21">O</td>
+								<td width="19">O</td>
+								<td width="19">O</td>
+							</tr>
+							<tr>
+								<th class="pattern" width="84">E:visited</th>
+								<td class="meaning" width="194">방문한&nbsp;E를 선택</td>
+								<td width="26">O</td>
+								<td width="24">O</td>
+								<td width="25">O</td>
+								<td width="25">O</td>
+								<td width="25">O</td>
+								<td width="21">O</td>
+								<td width="19">O</td>
+								<td width="19">O</td>
+							</tr>
+							<tr>
+								<th class="pattern" width="84">E:hover</th>
+								<td class="meaning" width="194">마우스가 올라가 있는 동안&nbsp;E를 선택</td>
+								<td width="26">O</td>
+								<td width="24">O</td>
+								<td width="25">O</td>
+								<td width="25">O</td>
+								<td width="25">O</td>
+								<td width="21">O</td>
+								<td width="19">O</td>
+								<td width="19">O</td>
+							</tr>
+							<tr>
+								<th class="pattern" width="84">E:active</th>
+								<td class="meaning" width="194">마우스 클릭 또는 키보드(enter)가 눌린 동안&nbsp;E를 선택</td>
+								<td width="26">O</td>
+								<td width="24">O</td>
+								<td width="25">O</td>
+								<td width="25">O</td>
+								<td width="25">O</td>
+								<td width="21">O</td>
+								<td width="19">O</td>
+								<td width="19"><span class="ns">X</span></td>
+							</tr>
+							<tr>
+								<th class="pattern" width="84">E:focus</th>
+								<td class="meaning" width="194">focus가 머물러 있는 동안&nbsp;E를 선택</td>
+								<td width="26">O</td>
+								<td width="24">O</td>
+								<td width="25">O</td>
+								<td width="25">O</td>
+								<td width="25">O</td>
+								<td width="21">O</td>
+								<td width="19"><span class="ns">X</span></td>
+								<td width="19"><span class="ns">X</span></td>
+							</tr>
+							<tr>
+								<th class="pattern" width="84">E:first-line</th>
+								<td class="meaning" width="194">E&nbsp;요소의 첫 번째 라인 선택</td>
+								<td width="26">O</td>
+								<td width="24">O</td>
+								<td width="25">O</td>
+								<td width="25">O</td>
+								<td width="25">O</td>
+								<td width="21">O</td>
+								<td width="19">O</td>
+								<td width="19"><span class="ns">X</span></td>
+							</tr>
+							<tr>
+								<th class="pattern" width="84">E:first-letter</th>
+								<td class="meaning" width="194">E&nbsp;요소의 첫 번째 문자 선택</td>
+								<td width="26">O</td>
+								<td width="24">O</td>
+								<td width="25">O</td>
+								<td width="25">O</td>
+								<td width="25">O</td>
+								<td width="21">O</td>
+								<td width="19">O</td>
+								<td width="19"><span class="ns">X</span></td>
+							</tr>
+						</tbody>
+						<tbody class="css2">
+							<tr>
+								<th class="pattern" width="84">*</th>
+								<td class="meaning" width="194">모든 요소 선택</td>
+								<td width="26">O</td>
+								<td width="24">O</td>
+								<td width="25">O</td>
+								<td width="25">O</td>
+								<td width="25">O</td>
+								<td width="21">O</td>
+								<td width="19">O</td>
+								<td width="19">O</td>
+							</tr>
+							<tr>
+								<th class="pattern" width="84">E[foo]</th>
+								<td class="meaning" width="194">‘foo’&nbsp;속성이 포함된&nbsp;E를 선택</td>
+								<td width="26">O</td>
+								<td width="24">O</td>
+								<td width="25">O</td>
+								<td width="25">O</td>
+								<td width="25">O</td>
+								<td width="21">O</td>
+								<td width="19">O</td>
+								<td width="19"><span class="ns">X</span></td>
+							</tr>
+							<tr>
+								<th class="pattern" width="84">E[foo=”bar”]</th>
+								<td class="meaning" width="194">‘foo’&nbsp;속성의 값이&nbsp;‘bar’와 일치하는&nbsp;E를 선택</td>
+								<td width="26">O</td>
+								<td width="24">O</td>
+								<td width="25">O</td>
+								<td width="25">O</td>
+								<td width="25">O</td>
+								<td width="21">O</td>
+								<td width="19">O</td>
+								<td width="19"><span class="ns">X</span></td>
+							</tr>
+							<tr>
+								<th class="pattern" width="84">E[foo~=”bar”]</th>
+								<td class="meaning" width="194">‘foo’&nbsp;속성의 값에&nbsp;‘bar’가 포함되는&nbsp;E를 선택</td>
+								<td width="26">O</td>
+								<td width="24">O</td>
+								<td width="25">O</td>
+								<td width="25">O</td>
+								<td width="25">O</td>
+								<td width="21">O</td>
+								<td width="19">O</td>
+								<td width="19"><span class="ns">X</span></td>
+							</tr>
+							<tr>
+								<th class="pattern" width="84">E[foo|=”en”]</th>
+								<td class="meaning" width="194">‘foo’&nbsp;속성의 값이&nbsp;‘en’&nbsp;또는&nbsp;‘en-‘&nbsp;으로 시작되는&nbsp;&nbsp;E를 선택</td>
+								<td width="26">O</td>
+								<td width="24">O</td>
+								<td width="25">O</td>
+								<td width="25">O</td>
+								<td width="25">O</td>
+								<td width="21">O</td>
+								<td width="19">O</td>
+								<td width="19"><span class="ns">X</span></td>
+							</tr>
+							<tr>
+								<th class="pattern" width="84">E:first-child</th>
+								<td class="meaning" width="194">첫 번째 자식 요소가&nbsp;E라면 선택</td>
+								<td width="26">O</td>
+								<td width="24">O</td>
+								<td width="25">O</td>
+								<td width="25">O</td>
+								<td width="25">O</td>
+								<td width="21">O</td>
+								<td width="19">O</td>
+								<td width="19"><span class="ns">X</span></td>
+							</tr>
+							<tr>
+								<th class="pattern" width="84">E:lang(fr)</th>
+								<td class="meaning" width="194">HTML lang&nbsp;속성의 값이&nbsp;‘fr’로 지정된&nbsp;E를 선택</td>
+								<td width="26">O</td>
+								<td width="24">O</td>
+								<td width="25">O</td>
+								<td width="25">O</td>
+								<td width="25">O</td>
+								<td width="21">O</td>
+								<td width="19"><span class="ns">X</span></td>
+								<td width="19"><span class="ns">X</span></td>
+							</tr>
+							<tr>
+								<th class="pattern" width="84">E::before</th>
+								<td class="meaning" width="194">E&nbsp;요소 전에 생성된 요소 선택</td>
+								<td width="26">O</td>
+								<td width="24">O</td>
+								<td width="25">O</td>
+								<td width="25">O</td>
+								<td width="25">O</td>
+								<td width="21">O</td>
+								<td width="19"><span class="ns">X</span></td>
+								<td width="19"><span class="ns">X</span></td>
+							</tr>
+							<tr>
+								<th class="pattern" width="84">E::after</th>
+								<td class="meaning" width="194">E&nbsp;요소 후에 생성된 요소 선택</td>
+								<td width="26">O</td>
+								<td width="24">O</td>
+								<td width="25">O</td>
+								<td width="25">O</td>
+								<td width="25">O</td>
+								<td width="21">O</td>
+								<td width="19"><span class="ns">X</span></td>
+								<td width="19"><span class="ns">X</span></td>
+							</tr>
+							<tr>
+								<th class="pattern" width="84">E&gt;F</th>
+								<td class="meaning" width="194">E&nbsp;요소의 자식인&nbsp;F&nbsp;요소 선택</td>
+								<td width="26">O</td>
+								<td width="24">O</td>
+								<td width="25">O</td>
+								<td width="25">O</td>
+								<td width="25">O</td>
+								<td width="21">O</td>
+								<td width="19">O</td>
+								<td width="19"><span class="ns">X</span></td>
+							</tr>
+							<tr>
+								<th class="pattern" width="84">E+F</th>
+								<td class="meaning" width="194">E&nbsp;요소를 뒤의&nbsp;F&nbsp;요소 선택</td>
+								<td width="26">O</td>
+								<td width="24">O</td>
+								<td width="25">O</td>
+								<td width="25">O</td>
+								<td width="25">O</td>
+								<td width="21">O</td>
+								<td width="19">O</td>
+								<td width="19"><span class="ns">X</span></td>
+							</tr>
+						</tbody>
+						<tbody class="css3">
+							<tr>
+								<th class="pattern" width="84">E[foo^=”bar”]</th>
+								<td class="meaning" width="194">‘foo’&nbsp;속성의 값이&nbsp;‘bar’로 정확하게 시작하는 요소 선택</td>
+								<td width="26">O</td>
+								<td width="24">O</td>
+								<td width="25">O</td>
+								<td width="25">O</td>
+								<td width="25">O</td>
+								<td width="21">O</td>
+								<td width="19">O</td>
+								<td width="19"><span class="ns">X</span></td>
+							</tr>
+							<tr>
+								<th class="pattern" width="84">E[foo$=”bar”]</th>
+								<td class="meaning" width="194">‘foo’&nbsp;속성의 값이&nbsp;‘bar’로 정확하게 끝나는 요소 선택</td>
+								<td width="26">O</td>
+								<td width="24">O</td>
+								<td width="25">O</td>
+								<td width="25">O</td>
+								<td width="25">O</td>
+								<td width="21">O</td>
+								<td width="19">O</td>
+								<td width="19"><span class="ns">X</span></td>
+							</tr>
+							<tr>
+							<th class="pattern" width="84">E[foo*=”bar”]</th>
+							<td class="meaning" width="194">‘foo’&nbsp;속성의 값에&nbsp;‘bar’를 포함하는 요소 선택</td>
+							<td width="26">O</td>
+							<td width="24">O</td>
+							<td width="25">O</td>
+							<td width="25">O</td>
+							<td width="25">O</td>
+							<td width="21">O</td>
+							<td width="19">O</td>
+							<td width="19"><span class="ns">X</span></td>
+							</tr>
+							<tr>
+							<th class="pattern" width="84">E:root</th>
+							<td class="meaning" width="194">문서의 최상위 루트 요소 선택</td>
+							<td width="26">O</td>
+							<td width="24">O</td>
+							<td width="25">O</td>
+							<td width="25">O</td>
+							<td width="25">O</td>
+							<td width="21"><span class="ns">X</span></td>
+							<td width="19"><span class="ns">X</span></td>
+							<td width="19"><span class="ns">X</span></td>
+							</tr>
+							<tr>
+							<th class="pattern" width="84">E:nth-child(n)</th>
+							<td class="meaning" width="194">그 부모의&nbsp;n번째 자식이 앞으로부터 지정된 순서와 일치하는&nbsp;E&nbsp;라면 선택</td>
+							<td width="26">O</td>
+							<td width="24">O</td>
+							<td width="25">O</td>
+							<td width="25">O</td>
+							<td width="25">O</td>
+							<td width="21"><span class="ns">X</span></td>
+							<td width="19"><span class="ns">X</span></td>
+							<td width="19"><span class="ns">X</span></td>
+							</tr>
+							<tr>
+							<th class="pattern" width="84">E:nth-last-child(n)</th>
+							<td class="meaning" width="194">n번째 자식이 뒤로부터 지정된 순서와 일치하는 요소가&nbsp;E&nbsp;라면 선택</td>
+							<td width="26">O</td>
+							<td width="24">O</td>
+							<td width="25">O</td>
+							<td width="25">O</td>
+							<td width="25">O</td>
+							<td width="21"><span class="ns">X</span></td>
+							<td width="19"><span class="ns">X</span></td>
+							<td width="19"><span class="ns">X</span></td>
+							</tr>
+							<tr>
+							<th class="pattern" width="84">E:nth-of-type(n)</th>
+							<td class="meaning" width="194">E&nbsp;요소 중 앞으로부터 순서가 일치하는&nbsp;n번째&nbsp;E&nbsp;요소 선택</td>
+							<td width="26">O</td>
+							<td width="24">O</td>
+							<td width="25">O</td>
+							<td width="25">O</td>
+							<td width="25">O</td>
+							<td width="21"><span class="ns">X</span></td>
+							<td width="19"><span class="ns">X</span></td>
+							<td width="19"><span class="ns">X</span></td>
+							</tr>
+							<tr>
+							<th class="pattern" width="84">E:nth-last-of-type(n)</th>
+							<td class="meaning" width="194">E&nbsp;요소 중 끝으로부터 순서가 일치하는&nbsp;n번째&nbsp;E&nbsp;요소 선택</td>
+							<td width="26">O</td>
+							<td width="24">O</td>
+							<td width="25">O</td>
+							<td width="25">O</td>
+							<td width="25">O</td>
+							<td width="21"><span class="ns">X</span></td>
+							<td width="19"><span class="ns">X</span></td>
+							<td width="19"><span class="ns">X</span></td>
+							</tr>
+							<tr>
+							<th class="pattern" width="84">E:last-child</th>
+							<td class="meaning" width="194">E&nbsp;요소 중 마지막 자식이라면&nbsp;E&nbsp;선택</td>
+							<td width="26">O</td>
+							<td width="24">O</td>
+							<td width="25">O</td>
+							<td width="25">O</td>
+							<td width="25">O</td>
+							<td width="21"><span class="ns">X</span></td>
+							<td width="19"><span class="ns">X</span></td>
+							<td width="19"><span class="ns">X</span></td>
+							</tr>
+							<tr>
+							<th class="pattern" width="84">E:first-of-type</th>
+							<td class="meaning" width="194">E&nbsp;요소 중 첫번째&nbsp;E&nbsp;선택</td>
+							<td width="26">O</td>
+							<td width="24">O</td>
+							<td width="25">O</td>
+							<td width="25">O</td>
+							<td width="25">O</td>
+							<td width="21"><span class="ns">X</span></td>
+							<td width="19"><span class="ns">X</span></td>
+							<td width="19"><span class="ns">X</span></td>
+							</tr>
+							<tr>
+							<th class="pattern" width="84">E:last-of-type</th>
+							<td class="meaning" width="194">E&nbsp;요소 중 마지막&nbsp;E&nbsp;선택</td>
+							<td width="26">O</td>
+							<td width="24">O</td>
+							<td width="25">O</td>
+							<td width="25">O</td>
+							<td width="25">O</td>
+							<td width="21"><span class="ns">X</span></td>
+							<td width="19"><span class="ns">X</span></td>
+							<td width="19"><span class="ns">X</span></td>
+							</tr>
+							<tr>
+							<th class="pattern" width="84">E:only-child</th>
+							<td class="meaning" width="194">E&nbsp;요소가 유일한 자식이면 선택</td>
+							<td width="26">O</td>
+							<td width="24">O</td>
+							<td width="25">O</td>
+							<td width="25">O</td>
+							<td width="25">O</td>
+							<td width="21"><span class="ns">X</span></td>
+							<td width="19"><span class="ns">X</span></td>
+							<td width="19"><span class="ns">X</span></td>
+							</tr>
+							<tr>
+							<th class="pattern" width="84">E:only-of-type</th>
+							<td class="meaning" width="194">E&nbsp;요소가 같은 타입이면 선택</td>
+							<td width="26">O</td>
+							<td width="24">O</td>
+							<td width="25">O</td>
+							<td width="25">O</td>
+							<td width="25">O</td>
+							<td width="21"><span class="ns">X</span></td>
+							<td width="19"><span class="ns">X</span></td>
+							<td width="19"><span class="ns">X</span></td>
+							</tr>
+							<tr>
+							<th class="pattern" width="84">E:empty</th>
+							<td class="meaning" width="194">텍스트 및 공백을 포함하여 빈 자식을 가진&nbsp;E를 선택</td>
+							<td width="26">O</td>
+							<td width="24">O</td>
+							<td width="25">O</td>
+							<td width="25">O</td>
+							<td width="25">O</td>
+							<td width="21"><span class="ns">X</span></td>
+							<td width="19"><span class="ns">X</span></td>
+							<td width="19"><span class="ns">X</span></td>
+							</tr>
+							<tr>
+							<th class="pattern" width="84">E:target</th>
+							<td class="meaning" width="194">E의&nbsp;URI의 대상이 되면 선택</td>
+							<td width="26">O</td>
+							<td width="24">O</td>
+							<td width="25">O</td>
+							<td width="25">O</td>
+							<td width="25">O</td>
+							<td width="21"><span class="ns">X</span></td>
+							<td width="19"><span class="ns">X</span></td>
+							<td width="19"><span class="ns">X</span></td>
+							</tr>
+							<tr>
+							<th class="pattern" width="84">E:enabled</th>
+							<td class="meaning" width="194">활성화된 폼 컨트롤&nbsp;E요소 선택</td>
+							<td width="26">O</td>
+							<td width="24">O</td>
+							<td width="25">O</td>
+							<td width="25">O</td>
+							<td width="25">O</td>
+							<td width="21"><span class="ns">X</span></td>
+							<td width="19"><span class="ns">X</span></td>
+							<td width="19"><span class="ns">X</span></td>
+							</tr>
+							<tr>
+							<th class="pattern" width="84">E:disabled</th>
+							<td class="meaning" width="194">비활성화된 폼 컨트롤&nbsp;E요소 선택</td>
+							<td width="26">O</td>
+							<td width="24">O</td>
+							<td width="25">O</td>
+							<td width="25">O</td>
+							<td width="25">O</td>
+							<td width="21"><span class="ns">X</span></td>
+							<td width="19"><span class="ns">X</span></td>
+							<td width="19"><span class="ns">X</span></td>
+							</tr>
+							<tr>
+							<th class="pattern" width="84">E:checked</th>
+							<td class="meaning" width="194">선택된 폼 컨트롤(라디오버튼,체크박스)을 선택</td>
+							<td width="26">O</td>
+							<td width="24">O</td>
+							<td width="25">O</td>
+							<td width="25">O</td>
+							<td width="25">O</td>
+							<td width="21"><span class="ns">X</span></td>
+							<td width="19"><span class="ns">X</span></td>
+							<td width="19"><span class="ns">X</span></td>
+							</tr>
+							<tr>
+							<th class="pattern" width="84">E:not(s)</th>
+							<td class="meaning" width="194">s가 아닌&nbsp;E&nbsp;요소 선택</td>
+							<td width="26">O</td>
+							<td width="24">O</td>
+							<td width="25">O</td>
+							<td width="25">O</td>
+							<td width="25">O</td>
+							<td width="21"><span class="ns">X</span></td>
+							<td width="19"><span class="ns">X</span></td>
+							<td width="19"><span class="ns">X</span></td>
+							</tr>
+							<tr>
+							<th class="pattern" width="84">E~F</th>
+							<td class="meaning" width="194">E&nbsp;요소가 앞에 존재하면&nbsp;F를 선택</td>
+							<td width="26">O</td>
+							<td width="24">O</td>
+							<td width="25">O</td>
+							<td width="25">O</td>
+							<td width="25">O</td>
+							<td width="21">O</td>
+							<td width="19">O</td>
+							<td width="19"><span class="ns">X</span></td>
+							</tr>
+						</tbody>
+					</table>
+	
+			</div>
+		</div>
+
+
+		<div class="content">
+			<h2>참고 url</h2>
+			<div class="inner_content">
+				<ul>
+					<li><a href="https://www.cmsfactory.net/node/20745" target="_blank">https://www.cmsfactory.net/node/20745</a></li>
+					<li><a href="http://www.clearboth.org/css3_1_by_isdn386/" target="_blank">http://www.clearboth.org/css3_1_by_isdn386/</a></li>
+					<li><a href="http://aboooks.tistory.com/251" target="_blank">http://aboooks.tistory.com/251</a></li>
+					<li><a href="http://freejoy14.cafe24.com/program_tip/1118" target="_blank">http://freejoy14.cafe24.com/program_tip/1118</a></li>
+				</ul>
+			</div>
+		</div>
+
+	</div>
+</body>
+</html>

@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="Generator" content="EditPlus®">
+  <meta name="Author" content="">
+  <meta name="Keywords" content="">
+  <meta name="Description" content="">
+  <title>selecter_css</title>
+	<style type="text/css">
+		body>div{width:800px;margin:0 auto;border:5px solid #ccc;padding:20px;}
+		.inner{margin-bottom:70px;}
+	</style>
+ </head>
+ <body>
+ <div>
+	<h1>
+		CSS Selector
+	</h1>
+	<div class="inner">
+		<h2>[attributename^="value"] *css3</h2>
+		<p>
+			p[class^="abc"]{background:blue;} <br />
+			p태그에 class abc로 시작하는 것 <br />
+			abc 이기만 하면 됨 뒤에 어떤 문자가 달라 붙어도 상관X
+		</p>
+		<style type="text/css">
+				p{font-size:20px;}
+			 .con1 p[class^="abc"]{background:#1cb9d0;}
+		</style>
+		<div class="con1">
+			<p class="abc xyz">class="abc xyz" </p>
+			<p class="abc-xyz">class="abc-xyz"</p>
+			<p class="xyz-abc">class="xyz-abc"</p>
+			<p class="abcd">class="abcd"</p>
+		</div>
+	</div>
+	<div class="inner">
+		<h2>[attributename$="value"] *css3</h2>
+		<p>
+			p[class$="abc"]{background:orange;} <br />
+			p태그에 class abc로 끝나는 것 <br />
+			끝이 abc 이기만 하면 됨 앞에 어떤 문자가 달라 붙어도 상관X <br />
+			class가 많이 붙어도 끝이 abc이기만 하면 됨.!
+		</p>
+		<style type="text/css">
+				p{font-size:20px;}
+			 .con2 p[class$="abc"]{background:orange;}
+		</style>
+		<div class="con2">
+			<p class="abc xyz">class="abc xyz" </p>
+			<p class="abc-xyz">class="abc-xyz"</p>
+			<p class="xyz-abc">class="xyz-abc"</p>
+			<p class="abcd">class="abcd"</p>
+			<p class="ddddabc">class="ddddabc"</p>
+			<p class="xyz abc">class="xyz abc" </p>
+			<p class="xyz abc aaa ddd">class="xyz abc aaa ddd" </p>
+			<p class="xyz aaa ddd abc">class="xyz aaa ddd abc" </p>
+		</div>
+	</div>
+	<div class="inner">
+		<h2>가상 요소(Pseudo Element)</h2>
+		<p>
+			<strong>: 와 :: 차이는?</strong> <br />
+			::는 css3에서 가상 클래스와 가상 요소를 구분하기 위해 도입되었습니다.<br />
+			<span style="background:yellow">:: 콜론이 2개면 css 안먹힘 가상클래스에서</span> (-> first-child,last-child,nth-of-type)<br />
+			가상요소: 요소의 특정 부분을 선택하는 것 (::first-letter,::after...)
+		</p>
+
+		<div class="con3">
+			<style type="text/css">
+				.list li{font-weight:bold;font-size:18px;}
+				.list li:first-child{color:blue}
+				.list li:nth-of-type(2){color:red}
+				.list li:last-child{color:green}
+				.list li::first-letter{font-size:50px;}
+				.list2{border-top:2px solid #ccc;}
+				.list2 li{font-size:20px;margin-top:20px;}
+				.list2 li::before{content:"앞";background:skyblue;}
+				.list2 li::after{content:"뒤";background:yellowgreen;}
+			</style>
+			 <ul class="list">
+				<li>
+					나 1번 :first-child (blue)
+				</li>
+				<li>
+					나 2번 :nth-of-type(2) (red)
+				</li>
+				<li>
+					나 3번  ::first-letter(50px)
+				</li>
+				<li>
+					나 4번:last-child(green)
+				</li>
+			 </ul>
+			 <ul class="list2">
+				<li>
+					::before 사용 (ul li::before) -&gt;(content:"앞")
+				</li>
+				<li>
+					::after 사용 (ul li::after) -&gt;(content:"뒤")
+				</li>
+				
+			 </ul>
+		</div>
+	</div>
+</div>
+ </body>
+</html>

@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="utf-8">
+	<title>웹폰트 </title>
+	<link href="css/comon.css" rel="stylesheet">
+</head>
+<body>
+<section>
+	<h1>웹폰트 (Web Font)</h1>
+	<br />
+	<h3>목차</h3>
+	<div>
+		<ol>
+			<li><a href="#con1">웹폰트의 장점</a></li>
+			<li><a href="#con2">웹폰트의 단점</a></li>
+			<li><a href="#con3">폰트종류</a></li>
+			<li><a href="#con4">지원 범위</a></li>
+			<li><a href="#con5">사용 방법</a></li>
+			<li><a href="#con6">속도비교</a></li>
+			<li><a href="#con7">사이트점검사항 *</a></li>
+		</ol>
+	</div>
+	<p>
+		웹 사이트는 대부분 텍스트로 이루어져있습니다. <br />
+		font-family 속성은 <em>사이트 방문자의 컴퓨터에 <strong>같은서체</strong>가 설치되어있는 경우</em>에만 올바르제 동작하는 속성이었습니다.<br />
+		그렇지 않으면 브라우저가 지정한 기본 서체로 표시됩니다. 하지만 <em>웹 사이트에 폰트를 심어주고 그 폰트를 사이트에 불러오는 것을 <strong>웹폰트</strong></em>라고 하며, 최근들어서는 브라우저들이 웹 서체(Web Font)라는 것을 대부분 지원하기 시작하였습니다.<br /><br />
+
+		웹 폰트는 온라인에서 다운로드 됩니다. 크기, 굵기 등 font-family 글꼴 정보를 브라우저가 정보를 불러와 지정한 CSS방식대로 웹 브라우저에 불러와 주는 것 입니다. 다만 이 웹 폰트의 경우, 특히 한국어/중국어 부분에서 많은 글꼴이 있기에 로딩이 느려지는 경우가 있어 <em>웹폰트는 가벼워야합니다.</em> 사용 빈도 수가 낮은 문자들을 지워 <strong class="f_point">경량화</strong>시킬 수 있습니다. <br />
+			<a href="https://spoqa.github.io/spoqa-han-sans/ko-KR/" target="_blank">+ 경량화 참고 url 1</a> <br />
+			<a href="http://indivdot.github.io/%EC%9B%B9/2016/04/02/webfont.html" target="_blank">+ 경량화 참고 url 2</a>
+		<br />
+	</p>
+
+	<p>
+		기본 시스템 폰트가 아닌 일반 사용자 폰트로 웹을 표시해주는 것을 웹폰트를 적용한다라고 말합니다. <br />
+		웹폰트는 @font-face를 이용해 클라이언트가 서버의 폰트를 다운받아 표시해줌으로써 클라이언트 PC에 해당 폰트가 없어도 웹사이트에서 제작자가 원하는 폰트로 사용자에게 보여줄 수 있습니다. <br /><br />
+
+		클라이언트는 웹사이트의 텍스트를 읽어들이기위해 폰트파일을 다운로드 해야하고 그 사이동안은 텍스트가 보이지 않습니다. 이는 폰트파일의 용량이 크고 서버간의 통신 상태가 좋지 않다면 웹사이트를 사용자가 보는데 있어 많은 지연시간이 걸릴 수 있다는 얘기입니다.
+	</p>
+
+	<article>
+		<h2 id="con1">웹폰트의 장점</h2>
+		<div>
+			<ul>
+				<li>웹폰트를 적용하게 되면 시스템에 폰트가 없어도 된다.</li>
+				<li>이미지 폰트에 비해 웹접근성이 향상되며, 수정(유지보수)이 쉽다.</li>
+				<li>번역기를 통해 번역을 할수있다.</li>
+			</ul>
+		</div>
+
+		<h2 id="con2">웹폰트의 단점</h2>
+		<div>
+			<ul>
+				<li>다수의 웹폰트를 적용하게 되면 적용한 모든 폰트 파일을 다운 받기 때문에 <em><strong class="f_point">웹페이지의 성능을 저하</strong></em> 시킬 수 있다.</li>
+				<li>한문사용시 웹폰트를 최적화 시키기 위해 한문을 빼고 코드를 만드는 경우가 많아 웹폰트 안에 한문이 있는지 확인필요</li>
+			</ul>
+		</div>
+
+
+		<h2 id="con3">폰트종류</h2>
+		<h3>EOT(Embedded Open Type)</h3>
+		<div>
+			<ul>
+				<li>MS에서 제작 IE8이하 버전에서는 EOT 파일만 지원함</li>
+			</ul>
+		</div>
+
+		<h3>OTF(OpenType Font) / TTF(TrueType Font)</h3>
+		<div>
+			<ul>
+				<li>OTF/TTF 형식은 쉽게 복제될 수 있어(불법으로) 대신 WOFF 형식이 만들어짐</li>
+			</ul>
+		</div>
+
+		<h3>WOFF(Web Open Font Format)</h3>
+		<div>
+			<ul>
+				<li>moz 등 웹에서 사용할 목적으로 개발</li>
+				<li>OTF/TTF 를 이용한 구조의 압축된 버전으로, <em>다른 글꼴 형식보다 빠르게 로드됨.</em></li>
+				<li>파일안에 meta date & license 정보도 포함이 가능함.</li>
+				<li><em>개선된 WOFF2 버전이 있으나, 일부 브라우저 미지원</em></li>
+			</ul>
+		</div>
+
+		<h3>SVG/SVGZ (Scalable Vector Graphics (Font)</h3>
+		<div>
+			<ul>
+				<li>*SVGZ는 SVG의 압축된 버전</li>
+				<li><em>파일 크기를 훨씬 가볍게 해서 모바일 사용에 이상적으로 만들었습니다.</em></li>
+			</ul>
+		</div>
+
+		<h2 id="con4">지원 범위</h2>
+		<h3>1. 웹폰트 종류별 브라우져 지원 범위</h3>
+		<div>
+			<ul>
+				<li>*EOT : IE <em class="f_point">6/7/8</em>/9/10/11 (하위 대응 하지 않을 경우, EOT를 제거) [ <a href="http://caniuse.com/#search=eot" target="_blank">참고</a> ]</li>
+				<li>*WOFF : IE 9/10/11, Firefox, Chrome, Safari, Opera, iOS Safari, Android Browser, Chrome for Android [ <a href="http://caniuse.com/#search=woff" target="_blank">참고</a> ]</li>
+				<li>WOFF2 : Chrome, Opera, Chrome for Android (Firefox, Safari 도 최신버전은 지원함) [ <a href="http://caniuse.com/#search=woff2" target="_blank">참고</a> ]</li>
+				<li>TTF : IE 9/10/11, Firefox, Chrome, Safari, Opera, iOS Safari, Android Browser, Chrome for Android (폰트마다 용량이 다름) [ <a href="http://caniuse.com/#search=ttf" target="_blank">참고</a> ]</li>
+			</ul>
+		</div>
+
+		<h3>*2. 크로스브라우징을 위해서는 EOT 와 WOFF 만으로도 가능 (WOFF2가 용량은 더 작으나 하위 호환성을 위해 WOFF 사용)</h3>
+		<div>
+			<ul>
+				<li>파일사이즈 : WOFF2(696kb) < EOT(755kb) < WOFF(975kb) < TTF(2.4mb) : 나눔고딕 Regular 기준</li>
+			</ul>
+		</div>
+
+		<h2 id="con5">사용 방법</h2>
+		<div>
+			<ul>
+				<li>
+					웹폰트의 경우 라이센스 문제가 있기 때문에, 유료 폰트는 라이센스 획득 후 사용 가능합니다. <br />
+					보편적인 무료 폰트는 구글에서 서비스 하고 있습니다. (<a href="http://www.google.com/fonts/" target="_blank">http://www.google.com/fonts/)</a>
+				</li>
+				<li>
+					<strong class="f_point">
+						font-family 명이 같더라도 font-weight를 통하여 두께별로 설정이 가능합니다. (Light,bold,ExtraBold 등) 반대로 같은 폰트라도 font-family 명을 다르게 사용 하여 두께별로 사용 가능합니다.
+					</strong>
+				</li>
+			</ul>
+		</div>
+
+		<h3>1. 웹폰트 적용 방식 (예시)</h3>
+		<h4>1) CDN 링크방식 <a href="/sub/lhw_work/webfont_ex_link.html" target="_blank">+ 테스트 페이지</a></h4>
+		<!-- <div>
+			<ul>
+				<li>
+					이 방식은 자신의 웹서버내에 폰트가 없는 경우 구글이 제공하는 font 서비스를 이용해 적용하는 방법입니다. <br />
+					<strong>이 방법의 치명적인 단점은 로딩이 느리다는 것입니다.</strong> <br />
+					웹사이트를 사용자가 보기 위해서 웹서버 요청 후 구글 font 서비스 서버에서 폰트파일을 읽어와야하기 때문에 이중으로 부담이 생기게 되고 곧 웹	페이지를 여는데 시간이 걸리게 됩니다. <em>이 방법은 실제 운영하는 서비스에서는 그다지 권장하지 않습니다.</em>
+				</li>
+			</ul>
+		</div> -->
+		<pre>
+			&lt;link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"&gt;
+		</pre>
+
+		<h4>2) @import url 방식 <a href="/sub/lhw_work/webfont_ex.html" target="_blank">+ 테스트 페이지</a></h4>
+		<pre>
+			&lt;style&gt;
+				@import url('https://fonts.googleapis.com/css?family=Roboto');
+			&lt;/style&gt;
+		</pre>
+
+		<h3>2. @font-face 적용 <a href="http://naradesign.net/wp/2012/06/19/1830/" target="_blank">* 참고 url</a></h3>
+		<div>
+			<ul>
+				<li>이 코드는 브라우저 환경에 따라 필요한 폰트만을 다운로드 받게 해줍니다. <br />
+				브라우저 환경에 따라서 eot, woff, ttf 중 하나의 폰트파일을 받게되고 웹사이트에 적용하게 됩니다. <br />
+				<em>불필요한 파일을 받지 않음으로써 데이터의 부담은 줄고 모든 브라우저에 적용될 수 있는 최적의 코드입니다.</em></li>
+			</ul>
+		</div>
+<pre>
+@font-face {
+&nbsp;&nbsp;&nbsp;font-family: 'Nanum Gothic'; /* 폰트 명 */
+&nbsp;&nbsp;&nbsp;font-style: normal;/* 폰트 스타일 설정 */
+&nbsp;&nbsp;&nbsp;font-weight: 400; /* 폰트 굵기 */
+
+&nbsp;&nbsp;&nbsp;src: url(font/NanumGothic-Regular.eot);/* IE9 호환성 보기 */
+
+&nbsp;&nbsp;&nbsp;src: local("※"),/* 웹 브라우저가 지원하지 않는 불필요한 웹 폰트 호출을 막는데 사용 */
+
+&nbsp;&nbsp;&nbsp;url(font/NanumGothic-Regular.eot?#iefix) format('embedded-opentype'), /* IE6-IE8 */
+&nbsp;&nbsp;&nbsp;url(font/NanumGothic-Regular.woff) format('woff'), /* 표준 브라우저 */
+&nbsp;&nbsp;&nbsp;url(font/NanumGothic-Regular.woff2) format('woff2'), /* WOFF의 차기 포맷 */
+&nbsp;&nbsp;&nbsp;url(font/NanumGothic-Regular.ttf) format('truetype'),/* Safari, Android, iOS // IE를 제외한 대부분의 브라우저 */
+&nbsp;&nbsp;&nbsp;url(font/NanumGothic-Regular.svg#NanumGothicRegular) format('svg');/* TTF에서도 커버가 안되는 기기들에 대한 대응  // 구버전 모바일 브라우저 */
+}
+body {font-family:'Nanum Gothic'}
+/* 참고사항 : font-family 명이 같더라도 font-weight를 통하여 두께별로 설정이 가능합니다. (Light,bold,ExtraBold 등) 반대로 같은 폰트라도 font-family 명을 다르게 사용 하여 두께별로 사용 가능합니다 */
+</pre>
+		<h4>용어정의</h4>
+		<div>
+			<ul>
+				<li>
+					<strong>font-family: Nanum Gothic;</strong><br />
+					CSS 문서에서 사용 할 서체 이름입니다. 로컬 시스템에서 사용하는 서체명을 연상시키되, 이름은 다르게 짓는것이 좋습니다. <!-- 이유는 이후에 다시 설명합니다. -->
+				</li>
+				<li>
+					<strong>src: </strong><br />
+					src를 통해 로컬 컴퓨터에 설치 된 서체의 경로를 적는 <span class="bg_point">local()</span>과, 온라인 상의 서체 주소를 적는 <span class="bg_point">url()</span>이 사용됩니다. 이들은 각각 콤마(,)로 나누어 명시하며 여러번 중첩하여 사용할 수 있습니다. 그리고 맨 마지막에 오는 속성은 <strong class="f_point">세미콜론(;)</strong>으로 마무리합니다.
+				</li>
+				<!-- <li>
+					<strong>local(“NanumGothic-Regular”)</strong><br />
+					방문자의 컴퓨터에서 <strong class="f_point">NanumGothic-Regular</strong>라는 이름(폰트 그룹명)의 서체가 있는지 찾습니다.
+				</li> -->
+				<li>
+					<strong>local(“NanumGothic-Regular”)</strong><br />
+					그리고 다시 <strong class="f_point">NanumGothic-Regular</strong>라는 이름(단일 폰트명)의 서체가 있는지 찾습니다. (여기서는 같은 서체에 대해 다른 이름으로 호출하는 운영체제별 웹 브라우저 호환성을 예시로 하여 적은 것입니다.)
+				</li>
+				<li>
+					<strong>url(NanumGothic-Regular.ttf) format(‘truetype’)</strong><br />
+					만일 방문자의 컴퓨터에 위에 내용이 없다면(정확히 표현하자면, 못찾는다면) <strong class="f_point">NanumGothic-Regular.ttf</strong> 파일을 내려받습니다. <span class="bg_point">format('truetype')</span> 부분은, 참조 할 서체의 파일 포맷을 명시한 부분입니다. 웹 브라우저는 이 파일 포맷을 통해 자기가 지원 할 수 있는 파일만 다운로드 받습니다. <em>만일 파일 포맷을 명시하지 않고 <span class="bg_point">url(NanumGothic-Regular.ttf);</span>만 적을 경우에는, 사용중인 웹 브라우저가 화면에 표현도 못할 서체 파일까지 다운로드 받을 수 있습니다.</em>
+				</li>
+				<li>
+					<strong>font-style: normal; font-weight: normal</strong><br />
+					<strong class="f_point">NanumGothic-Regular.ttf</strong>가 가지게 될 스타일과 굵기을 정의합니다. 여기서 스타일과 굵기를 정하게 되면, 볼드, 이탤릭과 같이 여러개로 분리된 웹 폰트 파일을 별도의 서체 이름을 지어주지 않고도 스타일과 굵기 별로 로딩이 가능합니다. <!-- 이야기가 좀 난해하므로 밑에서 다시 설명합니다. -->
+				</li>
+			</ul>
+		</div>
+
+		<h4 id="font-face">* 여러사람들의 테스트와 검증을 거쳐 사용하는 보편적인방법</h4>
+<pre>
+@font-face {
+    font-family: Nanum Gothic;
+    src: url(NanumGothic-Regular.eot); /*IE9 호환성 보기*/
+    src: local("※"),
+         url(NanumGothic-Regular.eot?#iefix) format('embedded-opentype'), /*IE 6-8*/
+		 url(NanumGothic-Regular.woff2) format('woff2'), /* WOFF의 차기 포맷 */
+         url(NanumGothic-Regular.woff) format('woff'); /*표준 브라우저*/
+}
+body{font-family:나눔고딕, NanumGothic, Nanum Gothic}
+</pre>
+<div>
+	<strong>+ 설명</strong>
+	<ol>
+		<li>Nanum Gothic 라는 글꼴 이름을 한 번만 선언한 다음 eot 형식과 woff 형식을 순차적으로 참조 했습니다.</li>
+		<li>IE 6~8 브라우저는 eot 글꼴만 요청해서 화면에 표시합니다. eot 형식을 woff 형식보다 먼저 참조해야 합니다.</li>
+		<li>IE 9 브라우저와 Chrome, Safari, Firefox, Opera 브라우저는 woff 글꼴만 요청해서 화면에 표시합니다. @font-face 명세에 따르면 eot 글꼴에 대한 format(’embeded-opentyep’) 선언이 없기 때문에 브라우저가 eot 글꼴을 내려받아야 하지만 영리하게도 내려받지 않습니다.</li>
+		<li>local(※) 값은 외부 자원을 참조하기 이전에 시스템 글꼴을 우선 참조할 수 있도록 만들어 줍니다. 그러나 이 코드에서는 IE 6~8 브라우저가 local() 값을 처리하지 못하는 특징을 이용하여 woff 글꼴을 추가로 요청하지 않도록 해 줍니다.</li>
+		<li>local(※) 값의 괄호 안쪽에 포함된 ※ 기호는 사용자 시스템에 존재하지 않을만한 글꼴을 임의로 지정한 것입니다. 굳이 2 byte 짜리 특수문자를 사용한 이유는 Mac OS 에서 2 byte 짜리 문자열로 된 시스템 글꼴 이름은 아예 처리하지 않기 때문입니다.</li>
+		<li>format(‘woff’) 값을 명시적으로 작성하면 이 형식을 지원하는 브라우저만 글꼴을 내려받게 되어 있습니다. 값은 반드시 홀따옴표 또는 쌍따옴표 안에 있어야 합니다. 작성하지 않는 경우 지원 여부에 무관하게 모든 형식의 글꼴을 내려받는것이 명세입니다. 글꼴을 지원하지 않으면서도 내려받는 상황을 예방하기 위해 이 형식을 지원하는 경우에만 외부 글꼴을 내려받도록 명시적으로 코드를 작성한 것입니다. IE 7~8 브라우저는 이 코드를 해석하지 못하기 때문에 woff 글꼴을 추가로 요청하지 않도록 만들지만 여기서 그것이 목적은 아닙니다.</li>
+		<li>나눔고딕 시스템 글꼴의 이름을 한글과 영문으로 연거푸 두 번 적은 이유는 영문으로만 작성했을 때 제대로 표시하지 못하는 브라우저가 있기 때문입니다. 한글 이름이 있는 글꼴은 한글과 영문 모두 작성하는 것이 좋습니다.</li>
+	</ol>
+</div>
+
+
+
+<h3>* 상세 속성 정의</h3>
+<h4>1) local() 속성의 정의</h4>
+<div>
+	<p>웹 폰트를 참조하기 전에 방문자의 컴퓨터에 설치 된 서체를 찾아 표현하는 local() 속성에는 큰 문제가 따릅니다.</p>
+	<ul>
+		<li>로컬 서체를 로딩조차 못하는 웹 브라우저들이 존재한다. (예를들어 IE6-8은 src 속성을 지원 안함)</li>
+		<li>웹 브라우저 별로 참조하는 로컬 서체의 이름이 다르다.</li>
+		<li>운영체제별로 참조하는 로컬 서체의 이름이 다르다.</li>
+		<li>운영체제에 탑재된 웹 브라우저별로 참조하는 로컬 서체의 이름이 다르다.</li>
+	</ul>
+	<p>이 문제는 서체의 포맷 즉 OTF, TTF의 파일 포맷과 연관이 있고, 이 포맷에서 사용하는 Post Script Name, TTF Name과 같은 다양한 이름, 거기에 다국어 이름에 대한 웹 브라우저별 지원 여부까지 얽혀있습니다. <br /><br />
+	이렇다보니, <span class="bg_point">local()</span> 속성을 사용하지 않고  <span class="bg_point">url()</span> 속성으로 웹 폰트만 표현하는 경우가 많습니다. 로컬 서체를 지정하는 것은 @font-face 규칙 말고도 아이디나 클래스와 같은 선택자 내에서 사용하는 font-family 속성에서도 선언할 수 있기 때문입니다. <br /><br />
+
+	혹은, local() 속성에 ☺와 같은 2byte의 특수기호를 넣어 어떠한 서체도 참조하지 않도록 하거나, 웹 브라우저가 지원하지 않는 불필요한 웹 폰트 호출을 막는데 사용하기도 합니다. 아예 local() 속성 자체를 지우는 것과 다른 점은 없습니다. 굳이 사용하지도 않을 속성을 정의하는 것은, 흔히 <img> 태그에서 대체 텍스트를 일일이 적어주기 귀찮을 때 빈 alt="" 속성을 넣는 것과 같은 관습으로 해석해도 좋습니다. 이것이 규칙에 위배된다거나 오작동을 일으키는 일은 없으니 기호에 맞게 사용하세요. <br />
+	</p>
+</div>
+
+
+<h4>2) url() 속성에서의 문제</h4>
+<div>
+	<p>온라인 상의 서체에 접근하는 url() 속성도 만만치 않게 문제가 있습니다. 웹 브라우저마다 지원하는 파일 종류가 다릅니다. 위에서 언급했던 파일 포맷이 여기에 관련있습니다.</p>
+	<table>
+	  <caption><i class="fa fa-smile-o"></i> Mobile Friendly Table</caption>
+	  <tbody>
+	  <tr>
+		<th scope="col">&nbsp;</th>
+		<th scope="col">EOT</th>
+		<th scope="col">WOFF</th>
+		<th scope="col">SVG</th>
+		<th scope="col">OTF/TTF</th>
+	  </tr>
+	  <tr>
+		<th scope="row">IE 6-8</th>
+		<td>O</td>
+		<td>X</td>
+		<td>X</td>
+		<td>X</td>
+	  </tr>
+	  <tr>
+		<th scope="row">IE 9+</th>
+		<td>O</td>
+		<td>O</td>
+		<td>X</td>
+		<td>X</td>
+	  </tr>
+	  <tr>
+		<th scope="row">Firefox</th>
+		<td>X</td>
+		<td>O</td>
+		<td>X</td>
+		<td>O</td>
+	  </tr>
+	  <tr>
+		<th scope="row">Safari</th>
+		<td>X</td>
+		<td>O</td>
+		<td>O</td>
+		<td>O</td>
+	  </tr>
+	  <tr>
+		<th scope="row">Chrome</th>
+		<td>X</td>
+		<td>O</td>
+		<td>O</td>
+		<td>O</td>
+	  </tr>
+	  <tr>
+		<th scope="row">Opera</th>
+		<td>X</td>
+		<td>O</td>
+		<td>O</td>
+		<td>O</td>
+	  </tr>
+	</tbody>
+	</table>
+</div>
+
+
+<h4>2) 모던 브라우저 대응</h4>
+<div>
+	모질라 파이어폭스, 애플 사파리, 구글 크롬, 오페라와 같이 W3C의 표준을 비교적 빠르게 잘 반영하는 웹 브라우저들은 WOFF(Web Open Font Format)을 지원합니다.
+	<ul>
+		<li class="f_point">TTF(True Type Font)는 운영체제 시스템에 설치되는 화면용 서체여서 용량이 크기 때문에, 이 파일이 다운로드 되기 전에 WOFF 파일을 내려받을 수 있도록 먼저 선언해 줍니다.</li>
+	</ul>
+</div>
+<pre>
+	@font-face {
+    font-family: Nanum Gothic;
+    src: url(NanumGothic-Regular.woff) format('woff'),
+         url(NanumGothic-Regular.ttf) format('truetype');
+}
+</pre>
+
+
+<h4>3) IE 6-8 대응 **</h4>
+<div>
+	인터넷 익스플로러 6-8은 CSS3의 규칙이 공식화 되지 않았을 때 개발된 웹 브라우저인 만큼, 기존에 자사가 사용하던 웹 폰트 방식인 EOT(Embedded Open Type) 파일을 내려받도록 해야합니다. IE 6-8은 format('embedded-opentype')와 같은 포맷명을 해석하지 못하기 때문에 자기가 포함 된src의 다른 서체까지 모두 내려받으려고 시도하지만, EOT 포맷 외에는 해석을 못하므로 서체를 불러오지 못하거나 404 Not found가 발생하곤 합니다. 그래서 파일명 뒤에 물음표(?)를 추가해서 이후의 구문은 쿼리문으로 인식하여 해석하지 못하게끔 속임수를 사용합니다.
+
+	<ul>
+		<li>format('embedded-opentype')과 같이 해석도 못할 포맷명을 굳이 물음표 뒤에 적을 필요가 있겠냐만은, 다른 웹 브라우저들이 EOT 파일의 포맷을 해석하고 다운로드 하지 않도록 하기 위함입니다. 하지만 IE9을 포함한 대부분의 모던 브라우저들은 IE의 포맷명이 정의되어 있지 않은 상황에서도 EOT 파일은 다운로드 하지 않기 때문에, 그저 @font-face 규칙을 따르는 의미 정도로 여겨집니다.</li>
+	</ul>
+</div>
+<pre>
+	@font-face {
+    font-family: Nanum Gothic;
+	<strong>src: url(NanumGothic-Regular.eot?#iefix) format('embedded-opentype'),</strong>
+         url(NanumGothic-Regular.woff) format('woff'),
+         url(NanumGothic-Regular.ttf) format('truetype');
+}
+</pre>
+
+<h4>4) IE 9 이상 및 IE 9 호환성 보기 모드 대응</h4>
+<div>
+	IE 9 이상부터는 EOT와 함께 WOFF 포맷도 해석할 수 있게 됐습니다. 하지만 IE의 호환성 보기 모드(Compatible Mode)에서는 이전에 사용한 물음표 속임수를 사용할 수 없게 됐습니다. 물음표가 추가된 EOT 파일은 아예 인식이 되지 않도록 문서 모드가 수정됐기 때문입니다. 이럴 경우, 인식도 안될 EOT 구문이 다른 포맷들과 함께 src 속성에 묶여있으면 다른 포맷을 다운받기 위한 시도를 하기 때문에, 아예 src를 따로 구분하여 별도 정의해 줍니다. (지금 이야기하고 있는 것은 IE9이 아니라 IE9의 호환성 보기 모드를 이야기 하고 있습니다. 혼동해서는 안됩니다)
+	<ul>
+		<li>IE9 호환성 보기용 구문에는 같은 src 내에 참조할 만한 다른 파일포맷이 존재하지 않기 떄문에 굳이 파일 포맷을 명시하지 않았습니다.</li>
+	</ul>
+</div>
+<pre>
+	@font-face {
+    font-family: Nanum Gothic;
+   <strong> src: url(NanumGothic-Regular.eot);</strong>
+    src: url(NanumGothic-Regular.eot?#iefix) format('embedded-opentype'),
+         url(NanumGothic-Regular.woff) format('woff'),
+         url(NanumGothic-Regular.ttf) format('truetype');
+}
+</pre>
+
+<h4>5) 일부 구 버전 모바일용 웹 브라우저 대응</h4>
+<div>
+	WOFF나 TTF 포맷을 지원하지 않던 몇몇 구 버전 모바일 웹 브라우저(예를들어 Safari 4.3 이하, Android 4.3 이하, Opera Mobile 10 이하 등)들을 위해 CSS2에서 폰트로 활용할 수 있도록 명시 된 SVG(Scalable Vector Graphics) 포맷을 이용하기도 합니다. 본래 백터 이미지를 표현하는 포맷이지만, 이미지의 크기가 품질에 관여하지 않기 때문에 서체를 표현하는 용도로도 사용하는 것이죠. <br /><br />
+	SVG 포맷의 서체는 하나의 파일 안에 여러 서체를 넣고 ID(ex. #HelveticaNeueRegular)를 부여하여 개별적으로 호출 할 수 있고, SVG Viewer가 탑재된 모든 기기에서 표현 할 수 있는 장점이 있지만, 서체에 대한 폰트 힌팅 정보가 없기 때문에 작은 글씨를 표현할 때 가독성이 떨어지는 단점도 있습니다.
+	<ul>
+		<li>SVG는 시스템 포맷인 TTF에서도 커버가 안되는 기기들에 대한 대응이므로 맨 마지막에 호출합니다.</li>
+	</ul>
+</div>
+<pre>
+	@font-face {
+    font-family: Nanum Gothic;
+    src: url(NanumGothic-Regular.eot);
+    src: url(NanumGothic-Regular.eot?#iefix) format('embedded-opentype'),
+         url(NanumGothic-Regular.woff) format('woff'),
+         url(NanumGothic-Regular.ttf) format('truetype'),
+        <strong>url(NanumGothic-Regular.svg#HelveticaNeueRegular') format('svg'); </strong>
+}
+</pre>
+		<!-- <h3 class="f_b">**웹폰트를 빠르게 불러와서 깜빡이는 현상 방지하는 방법(웹폰트를 빠르게 불러오는 방법)</h3>
+		<div>
+			<ol>
+				<li>스크립트를 이용하여, 깜빡이는 현상을 방지</li>
+				<li>css를 따로 둬서 common.css보다 더 먼저 가져올수 있도록</li>
+				<li>폰트 사이트에 파일이 존재 VS 구글제공해주는 것 어떤게 빠른가?</li>
+			</ol>
+		</div> -->
+
+		<hr />
+		<br />
+		<h2 id="con6">* 속도 비교</h2>
+		<div>
+			<ol>
+				<li><a href="/sub/lhw_work/webfont_ex_link.html" target="_blank">CDN 링크방식</a></li>
+				<li><a href="/sub/lhw_work/webfont_ex.html" target="_blank">@import url 방식</a></li>
+				<li><a href="/sub/lhw_work/webfont_zip.html" target="_blank">경량화</a></li>
+			</ol>
+		</div>
+
+		<h3 class="f_b" id="con7">* 사이트 적용 (점검사항)</h3>
+		<div>
+			<ol>
+				<li>사이트에서 웹폰트사용 유무확인</li>
+				<li>웹폰트css 확인 <a href="#font-face">-> 웹폰트css 점검</a></li>
+				<li>웹폰트파일 사이트에 존재유무 확인 -> 사이트에 존재해야 빠름</li>
+			</ol>
+		</div>
+
+		<h3>참고 url</h3>
+		<div>
+			<ul>
+				<li>
+					<a href="https://fonts.google.com/?selection.family=Open+Sans" target="_blank">구글에서 정식으로 제공하는 웹폰트</a>
+				</li>
+				<li>
+					<a href="https://nolboo.kim/blog/2013/10/22/google-web-font-faster-tip/" target="_blank">구글 웹폰트를 빠르게 로드하는 팁 7가지</a>
+				</li>
+				<li>
+					<a href="http://blomari.tistory.com/83" target="_blank">구글 웹 폰트 빠르게 불어오는 방법</a>
+				</li>
+				<li>
+					<a href="https://github.com/typekit/webfontloader">Web Font Loader</a>
+				</li>
+				<li>
+					<a href="http://www.beautifulcss.com/archives/431">@font-face</a>
+				</li>
+			</ul>
+		</div>
+
+	</article>
+
+</section>
+</body>
+</html>

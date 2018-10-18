@@ -1,0 +1,705 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR" />
+<title>flex box</title>
+
+    <script type="text/javascript" src="http://www.hackers.ac/contents/_core/js/jquery.min.js?nFlag=20170518"></script>
+    <script type="text/javascript" src="http://www.hackers.ac/contents/_core/js/jquery.ui.datepicker.js?nFlag=20170518"></script>
+
+</head>
+<style>
+    a{text-decoration: none;}
+    .ex_content{margin-top:20px;}
+    .ex_content a{display:block;}
+    .flex_con_wrap{width:100%; margin:0 auto; font-size:14px; letter-spacing:-1px; line-height:20px;}
+    .flex_con{width:1000px; margin:0 auto;}
+    .flex_con strong{color:#df0101; font-size:16px; font-weight:bold;}
+    .flex_content_num{border:1px solid #ddd; padding:0 3% 2% 3%; margin-top:20px;}
+    .flex_content_num h3{font-size:18px; border-bottom:1px solid #ddd; padding-bottom:10px;}
+    .ex_content{padding:2% 3%; border:1px solid #ddd;}
+    .flex_content{background-color:#404040; padding:2% 2%; margin-bottom:2%;}
+    .flex_content{color:#be7e43;}
+    .flex_content span{font-size:18px;}
+    .flex_content em{color:#ffc662;}
+    .flex_direction_con ul{overflow:hidden;}
+    .flex_direction_con ul li{list-style:none; float:left; margin-left:20px;}
+    .flex_direction_con ul li:first-child{margin:none;}
+
+    .ex_content div{color:#fff; text-align:center; line-height:100px;}
+    .ex_content_flex{display:flex; flex-direction:row; margin-top:15px;}
+    .ex_content_reverse{display:flex; flex-direction:row-reverse; margin-top:15px;}
+    .ex_content_column{display:flex; flex-direction:Column; margin-top:15px;}
+    .ex_content_columnR{display:flex; flex-direction:column-reverse; margin-top:15px;}
+
+    .ex_content_nowrap{display:flex; flex-direction:row; flex-wrap:nowrap; margin-top:15px;}
+    .ex_content_wrap{display:flex; flex-direction:row; flex-wrap:wrap; margin-top:15px; width:400px;}
+    .ex_content_wrapR{display:flex; flex-direction:row; flex-wrap:wrap-reverse; margin-top:15px; width:400px}
+
+    .ex_content_start{display:flex; flex-direction:row; flex-wrap:nowrap; justify-content:flex-start; margin-top:15px;}
+    .ex_content_end{display:flex; flex-direction:row; flex-wrap:nowrap; justify-content:flex-end; margin-top:15px;}
+    .ex_content_center{display:flex; flex-direction:row; flex-wrap:nowrap; justify-content:center; margin-top:15px;}
+    .ex_content_space{display:flex; flex-direction:row; flex-wrap:nowrap; justify-content:space-between; margin-top:15px;}
+    .ex_content_around{display:flex; flex-direction:row; flex-wrap:nowrap; justify-content:space-around; margin-top:15px;}
+
+    .ex_content_align_star{display:flex; flex-direction:row; flex-wrap:nowrap; justify-content:flex-start; align-items:flex-start; margin-top:15px;}
+    .ex_content_align_end{display:flex; flex-direction:row; flex-wrap:nowrap; justify-content:flex-start;  align-items:flex-end; margin-top:15px;}
+    .ex_content_align_center{display:flex; flex-direction:row; flex-wrap:nowrap; justify-content:flex-start;  align-items:center; margin-top:15px;}
+    .ex_content_align_baseline{display:flex; flex-direction:row; flex-wrap:nowrap; justify-content:flex-start; align-items:baseline; margin-top:15px;}
+    .ex_content_align_stretch{display:flex; flex-direction:row; flex-wrap:nowrap; justify-content:flex-start;  align-items:stretch; margin-top:15px;}
+
+    .ex_content_align_star .icon3{font-size:40px; line-height:300px;}
+    .ex_content_align_end .icon3{font-size:40px; line-height:300px;}
+    .ex_content_align_center .icon3{font-size:40px; line-height:300px;}
+    .ex_content_align_baseline .icon3{font-size:40px; line-height:300px;}
+    .ex_content_align_stretch .icon3{font-size:40px; line-height:300px;}
+
+    .icon1{background-color:#2a80b9; width:100px;}
+    .icon2{background-color:#8f44ad; width:100px;}
+    .icon3{background-color:#16a086; width:100px;}
+    .icon4{background-color:#f1c40f; width:100px;}
+    .icon5{background-color:#e77e23; width:100px;}
+
+    .direction{display:none;}
+    .direction.on{display:block;}
+    .direction2{display:none;}
+    .direction2.on{display:block;}
+    .direction3{display:none;}
+    .direction3.on{display:block;}
+    .direction4{display:none;}
+    .direction4.on{display:block;}
+
+    .flex_explanation h4{padding:10px 0 !important; margin:0 !important;}
+</style>
+<script>
+    $(document).ready(function(){
+		flexContent('#flex_direction_con');
+		flexContent2('#flex_direction_con2');
+		flexContent3('#flex_direction_con3');
+		flexContent4('#flex_direction_con4');
+    })
+
+    function flexContent(sell){
+    	var sellection = $(sell),
+            $sell_list = sellection.find('li'),
+            $sell_content = sellection.find('.direction');
+
+		$sell_list.find('a').click(function(ev){
+			ev.preventDefault();
+			var $selecContent = $(this);
+			var id_num = $selecContent.attr('href');
+
+			$sell_content.hide();
+			$(id_num).show();
+
+			$sell_list.removeClass('on');
+			$selecContent.parents('li').addClass('on');
+        })
+    }
+
+	function flexContent2(sellected){
+		var sellection2 = $(sellected),
+			$sell_list2 = sellection2.find('li'),
+			$sell_content2 = sellection2.find('.direction2');
+
+		$sell_list2.find('a').click(function(ev){
+			ev.preventDefault();
+			var $selecContent2 = $(this);
+			var id_num = $selecContent2.attr('href');
+
+			$sell_content2.hide();
+			$(id_num).show();
+
+			$sell_list2.removeClass('on');
+			$selecContent2.parents('li').addClass('on');
+		})
+	}
+
+	function flexContent3(sellecteding){
+		var sellection3 = $(sellecteding),
+			$sell_list3 = sellection3.find('li'),
+			$sell_content3 = sellection3.find('.direction3');
+
+		$sell_list3.find('a').click(function(ev){
+			ev.preventDefault();
+			var $selecContent3 = $(this);
+			var id_num = $selecContent3.attr('href');
+
+			$sell_content3.hide();
+			$(id_num).show();
+
+			$sell_list3.removeClass('on');
+			$selecContent3.parents('li').addClass('on');
+		})
+	}
+
+	function flexContent4(sellectedinge){
+		var sellection4 = $(sellectedinge),
+			$sell_list4 = sellection4.find('li'),
+			$sell_content4 = sellection4.find('.direction4');
+
+		$sell_list4.find('a').click(function(ev){
+			ev.preventDefault();
+			var $selecContent3 = $(this);
+			var id_num = $selecContent3.attr('href');
+
+			$sell_content4.hide();
+			$(id_num).show();
+
+			$sell_list4.removeClass('on');
+			$selecContent3.parents('li').addClass('on');
+		})
+	}
+</script>
+<body>
+<div class="flex_con_wrap">
+    <div class="flex_con">
+        <h2>
+            display:flex;
+        </h2>
+        <p>
+            <strong>Flexbox Layout</strong>은, 새롭게 CSS3 명세에 반영된 레이아웃 모듈로서, 요소들이 수용된 공간을 어떻게 효과적으로 채워나갈지에 대한 아이디어에서 시작된 새로운 레이아웃 방식입니다.<br />
+            이 명세는 일부 IE 계열 브라우저에서 제조사 전용속성을 필요로 하며, 다소 버그가 발생할 수 있지만, 앞으로의 레이아웃 방식을 완전히 대체할 만한 기술이므로 반드시 학습하길 권합니다.
+        </p>
+        <div class="flex_content">
+                <span>
+                    .container{ <em>display</em> : flex }
+                </span>
+        </div>
+
+        <div class="flex_content_num">
+            <h3>
+                flex-direction
+            </h3>
+            <div class="flex_direction_wrap" id="flex_direction_wrap">
+                <div class="flex_direction_con" id="flex_direction_con">
+                    <div class="ex_content direction on" id="row">
+                <span>
+                    예제
+                </span>
+                        <div class="ex_content_flex">
+                            <div class="icon1">1</div>
+                            <div class="icon2">2</div>
+                            <div class="icon3">3</div>
+                            <div class="icon4">4</div>
+                            <div class="icon5">5</div>
+                        </div>
+                    </div>
+                    <div class="ex_content direction" id="row-reverse">
+                        <span>
+                            예제
+                        </span>
+                        <div class="ex_content_reverse">
+                            <div class="icon1">1</div>
+                            <div class="icon2">2</div>
+                            <div class="icon3">3</div>
+                            <div class="icon4">4</div>
+                            <div class="icon5">5</div>
+                        </div>
+                    </div>
+                    <div class="ex_content direction" id="Column">
+                        <span>
+                            예제
+                        </span>
+                        <div class="ex_content_column">
+                            <div class="icon1">1</div>
+                            <div class="icon2">2</div>
+                            <div class="icon3">3</div>
+                            <div class="icon4">4</div>
+                            <div class="icon5">5</div>
+                        </div>
+                    </div>
+                    <div class="ex_content direction" id="column-reverse">
+                        <span>
+                            예제
+                        </span>
+                        <div class="ex_content_columnR">
+                            <div class="icon1">1</div>
+                            <div class="icon2">2</div>
+                            <div class="icon3">3</div>
+                            <div class="icon4">4</div>
+                            <div class="icon5">5</div>
+                        </div>
+                    </div>
+                    <ul>
+                        <li>
+                            <a href="#row">
+                                <label for="row">
+                                    <input type="radio" id="row" value="row" name="flex-direction">
+                                    row
+                                </label>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#row-reverse">
+                                <label for="row-reverse">
+                                    <input type="radio" id="row-reverse" value="row-reverse" name="flex-direction">
+                                    row-reverse
+                                </label>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#Column">
+                                <label for="Column">
+                                    <input type="radio" id="Column" value="Column" name="flex-direction">
+                                    Column
+                                </label>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#column-reverse">
+                                <label for="column-reverse">
+                                    <input type="radio" id="column-reverse" value="column-reverse" name="flex-direction">
+                                    column-reverse
+                                </label>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="flex_content">
+                    <span>
+                        .container { <em>display</em> : flex;<em> &nbsp; flex-direction</em> : row;}
+                    </span>
+                </div>
+                <div class="flex_explanation">
+                    <h4>
+                        row
+                    </h4>
+                    기본 값, 좌에서 우로 진행됨
+                    <h4>
+                        row-reverse
+                    </h4>
+                    우에서 좌로 진행됨
+                    <h4>
+                        column
+                    </h4>
+                    수직방향으로 위에서 아래로 진행됨
+                    <h4>
+                        column-reverse
+                    </h4>
+                    수직 역방향
+                </div>
+            </div>
+        </div>
+
+        <div class="flex_content_num">
+            <h3>
+                flex-wrap
+            </h3>
+            <div class="flex_direction_wrap">
+                <div class="flex_direction_con" id="flex_direction_con2">
+                    <div class="ex_content direction2 on" id="nowrap">
+                    <span>
+                        예제
+                    </span>
+                        <div class="ex_content_nowrap">
+                            <div class="icon1">1</div>
+                            <div class="icon2">2</div>
+                            <div class="icon3">3</div>
+                            <div class="icon4">4</div>
+                            <div class="icon5">5</div>
+                        </div>
+                    </div>
+                    <div class="ex_content direction2" id="wrap">
+                        <span>
+                            예제
+                        </span>
+                        <div class="ex_content_wrap">
+                            <div class="icon1">1</div>
+                            <div class="icon2">2</div>
+                            <div class="icon3">3</div>
+                            <div class="icon4">4</div>
+                            <div class="icon5">5</div>
+                        </div>
+                    </div>
+                    <div class="ex_content direction2" id="wrap_reverse_Content">
+                        <span>
+                            예제
+                        </span>
+                        <div class="ex_content_wrapR">
+                            <div class="icon1">1</div>
+                            <div class="icon2">2</div>
+                            <div class="icon3">3</div>
+                            <div class="icon4">4</div>
+                            <div class="icon5">5</div>
+                        </div>
+                    </div>
+                    <ul>
+                        <li>
+                            <a href="#nowrap">
+                                <label for="nowrap_con">
+                                    <input type="radio" id="nowrap_con" value="nowrap" name="flex-wrap">
+                                    nowrap
+                                </label>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#wrap">
+                                <label for="wrap_con">
+                                    <input type="radio" id="wrap_con" value="wrap" name="flex-wrap">
+                                    wrap
+                                </label>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#wrap_reverse_Content">
+                                <label for="wrap_reverse_Con">
+                                    <input type="radio" id="wrap_reverse_Con" value="wrap-reverse" name="flex-wrap">
+                                    wrap-reverse
+                                </label>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="flex_content">
+                    <span>
+                        .container { <em>display</em> : flex;<em> &nbsp; flex-direction</em> : row; &nbsp; <em>flex-wrap</em> : nowrap; }
+                    </span>
+                </div>
+                <div class="flex_explanation">
+                    <h4>
+                        nowrap
+                    </h4>
+                    기본 값. 아이템을 한 줄에 모두 표현합니다.
+                    <h4>
+                        wrap
+                    </h4>
+                    아이템이 적정 길이 이상으로 길다면, 복수의 줄에 걸쳐 표현합니다.
+                    <h4>
+                        wrap-reverse
+                    </h4>
+                    역방향으로 줄 넘김이 발생합니다.
+                </div>
+            </div>
+        </div>
+
+        <div class="flex_content_num">
+            <h3>
+                justify-content
+            </h3>
+            <div class="flex_direction_wrap">
+                <div class="flex_direction_con" id="flex_direction_con3">
+                    <div class="ex_content direction3 on" id="start">
+                    <span>
+                        예제
+                    </span>
+                        <div class="ex_content_start">
+                            <div class="icon1">1</div>
+                            <div class="icon2">2</div>
+                            <div class="icon3">3</div>
+                            <div class="icon4">4</div>
+                            <div class="icon5">5</div>
+                        </div>
+                    </div>
+                    <div class="ex_content direction3" id="end">
+                        <span>
+                            예제
+                        </span>
+                        <div class="ex_content_end">
+                            <div class="icon1">1</div>
+                            <div class="icon2">2</div>
+                            <div class="icon3">3</div>
+                            <div class="icon4">4</div>
+                            <div class="icon5">5</div>
+                        </div>
+                    </div>
+                    <div class="ex_content direction3" id="center">
+                        <span>
+                            예제
+                        </span>
+                        <div class="ex_content_center">
+                            <div class="icon1">1</div>
+                            <div class="icon2">2</div>
+                            <div class="icon3">3</div>
+                            <div class="icon4">4</div>
+                            <div class="icon5">5</div>
+                        </div>
+                    </div>
+                    <div class="ex_content direction3" id="space">
+                        <span>
+                            예제
+                        </span>
+                        <div class="ex_content_space">
+                            <div class="icon1">1</div>
+                            <div class="icon2">2</div>
+                            <div class="icon3">3</div>
+                            <div class="icon4">4</div>
+                            <div class="icon5">5</div>
+                        </div>
+                    </div>
+                    <div class="ex_content direction3" id="around">
+                        <span>
+                            예제
+                        </span>
+                        <div class="ex_content_around">
+                            <div class="icon1">1</div>
+                            <div class="icon2">2</div>
+                            <div class="icon3">3</div>
+                            <div class="icon4">4</div>
+                            <div class="icon5">5</div>
+                        </div>
+                    </div>
+                    <ul>
+                        <li>
+                            <a href="#start">
+                                <label for="start_con">
+                                    <input type="radio" id="start_con" value="start" name="justify">
+                                    flex-start
+                                </label>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#end">
+                                <label for="end_con">
+                                    <input type="radio" id="end_con" value="end" name="justify">
+                                    flex-end
+                                </label>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#center">
+                                <label for="center_con">
+                                    <input type="radio" id="center_con" value="center" name="justify">
+                                    center
+                                </label>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#space">
+                                <label for="space_con">
+                                    <input type="radio" id="space_con" value="space" name="justify">
+                                    space-between
+                                </label>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#around">
+                                <label for="around_con">
+                                    <input type="radio" id="around_con" value="around" name="justify">
+                                    space-around
+                                </label>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="flex_content">
+                    <span>
+                        .container { <em>display</em> : flex;<em> &nbsp; flex-direction</em> : row; &nbsp; <em>flex-wrap</em> : nowrap; &nbsp; <em>justify-content</em> : flex-start; }
+                    </span>
+                </div>
+                <div class="flex_explanation">
+                    <h4>
+                        flex-start
+                    </h4>
+                    컨테이너를 정렬하는데 사용하며 flex-direction:row; 보여지는것은와같다. 좌에서 우로 진행됨.
+                    <h4>
+                        flex-enter
+                    </h4>
+                    컨텐츠가 우측으로 붙어서 진행됨.
+                    <h4>
+                        center
+                    </h4>
+                    말 그대로 센터정렬
+                    <h4>
+                        space-between
+                    </h4>
+                    아이템을 컨테이너의 양쪽 끝에 맞춰 정렬됨.
+                    <h4>
+                        space-around
+                    </h4>
+                    컨테이너의 양쪽 끝을 기준으로 각 아이템의 전, 후에 일정한 간격의 공간을 만들어 정렬합니다.
+                </div>
+            </div>
+        </div>
+
+        <div class="flex_content_num">
+            <h3>
+                align-items
+            </h3>
+            <div class="flex_direction_wrap">
+                <div class="flex_direction_con" id="flex_direction_con4">
+                    <div class="ex_content direction4 on" id="align_star">
+                    <span>
+                        예제
+                    </span>
+                        <div class="ex_content_align_star">
+                            <div class="icon1">1</div>
+                            <div class="icon2">2</div>
+                            <div class="icon3">3</div>
+                            <div class="icon4">4</div>
+                            <div class="icon5">5</div>
+                        </div>
+                    </div>
+                    <div class="ex_content direction4" id="align_end">
+                        <span>
+                            예제
+                        </span>
+                        <div class="ex_content_align_end">
+                            <div class="icon1">1</div>
+                            <div class="icon2">2</div>
+                            <div class="icon3">3</div>
+                            <div class="icon4">4</div>
+                            <div class="icon5">5</div>
+                        </div>
+                    </div>
+                    <div class="ex_content direction4" id="align_center">
+                        <span>
+                            예제
+                        </span>
+                        <div class="ex_content_align_center">
+                            <div class="icon1">1</div>
+                            <div class="icon2">2</div>
+                            <div class="icon3">3</div>
+                            <div class="icon4">4</div>
+                            <div class="icon5">5</div>
+                        </div>
+                    </div>
+                    <div class="ex_content direction4" id="align_baseline">
+                        <span>
+                            예제
+                        </span>
+                        <div class="ex_content_align_baseline">
+                            <div class="icon1">1</div>
+                            <div class="icon2">2</div>
+                            <div class="icon3">3</div>
+                            <div class="icon4">4</div>
+                            <div class="icon5">5</div>
+                        </div>
+                    </div>
+                    <div class="ex_content direction4" id="align_stretch">
+                        <span>
+                            예제
+                        </span>
+                        <div class="ex_content_align_stretch">
+                            <div class="icon1">1</div>
+                            <div class="icon2">2</div>
+                            <div class="icon3">3</div>
+                            <div class="icon4">4</div>
+                            <div class="icon5">5</div>
+                        </div>
+                    </div>
+                    <ul>
+                        <li>
+                            <a href="#align_star">
+                                <label for="align_star_con">
+                                    <input type="radio" id="align_star_con" value="start" name="justify">
+                                    flex-start
+                                </label>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#align_end">
+                                <label for="align_end_con">
+                                    <input type="radio" id="align_end_con" value="end" name="justify">
+                                    flex-end
+                                </label>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#align_center">
+                                <label for="align_center_con">
+                                    <input type="radio" id="align_center_con" value="center" name="justify">
+                                    center
+                                </label>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#align_baseline">
+                                <label for="align_naseline_con">
+                                    <input type="radio" id="align_naseline_con" value="space" name="justify">
+                                    baseline
+                                </label>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#align_stretch">
+                                <label for="align_stretch_con">
+                                    <input type="radio" id="align_stretch_con" value="around" name="justify">
+                                    stretch
+                                </label>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="flex_content">
+                    <span>
+                        .container { <em>display</em> : flex;<em> &nbsp; flex-direction</em> : row; &nbsp; <em>flex-wrap</em> : nowrap; &nbsp; <em>justify-content</em> : flex-start; &nbsp; <em>align-items</em> : flex-start;}
+                    </span>
+                </div>
+                <div class="flex_explanation">
+                    <h4>
+                        flex-start
+                    </h4>
+                    아이템을 한 덩어리로 묶어, 수직방향의 시작 점에 위치합니다.
+                    <h4>
+                        flex-enter
+                    </h4>
+                    아이템을 한 덩어리로 묶어, 수직방향의 끝 점에 위치합니다.
+                    <h4>
+                        center
+                    </h4>
+                    아이템을 한 덩어리로 묶어, 수직방향의 중앙에 위치합니다.
+                    <h4>
+                        baseline
+                    </h4>
+                    아이템을 컨테이너의 baseline에 맞춰 정렬합니다.
+                    <h4>
+                        stretch
+                    </h4>
+                    컨테이너의 양쪽 끝을 기준으로 각 아이템의 전, 후에 일정한 간격의 공간을 만들어 정렬합니다.
+                </div>
+            </div>
+        </div>
+
+        <div class="ex_content">
+            <h4>
+                벤치마킹 페이지
+            </h4>
+            <a href="http://www.beautifulcss.com/archives/2812" target="_blank">
+                http://www.beautifulcss.com/archives/2812
+            </a>
+            <a href="http://webdir.tistory.com/349" target="_blank">
+                 http://webdir.tistory.com/349
+            </a>
+
+            <h4>
+                적용 페이지
+            </h4>
+            <a href="http://m.hackers.ac/" target="_blank">
+                http://m.hackers.ac/
+            </a>
+            <a href="http://m.hackers.ac/dev/teacher/toeic.php" target="_blank">
+                http://m.hackers.ac/dev/teacher/toeic.php
+            </a>
+        </div>
+
+        <div class="ex_content">
+            <h4>
+                Webkit, Android 4.0~4.3 이슈
+            </h4>
+            <ul>
+                <li>
+                    웹킷 계열 브라우저(Chrome, Safari)
+                    <br/>
+                    display: -webkit-box;
+                </li>
+                <li>
+                    아이스크림 샌드위치(Ice Cream Sandwich)-Android 4.0
+                </li>
+                <li>
+                    젤리빈(Jelly Bean)-Android 4.1~4.3
+                </li>
+                <li>
+                    참고 url
+                    <a href="http://naradesign.net/wp/" target="_blank">
+                         http://naradesign.net/wp/
+                    </a>
+                </li>
+            </ul>
+
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

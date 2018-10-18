@@ -1,0 +1,147 @@
+.wrap{}
+.innerwrap{width:1000px;margin:0 auto;}
+.innerwrap:after{content:"";clear:both;display:block;}
+.sbox{margin-top: 10px;}
+.mainTop{background: url(http://gscdn.hackers.co.kr/publish/img/test2/top_bg.jpg);}
+.mainTop img{}
+.plus{float:right;width: 13px;height: 13px;background:url(http://gscdn.hackers.co.kr/publish/img/plus.jpg) no-repeat;}
+
+.header{    margin: 25px 0;}
+.header .logoiconL{}
+.header .logoiconR{margin-left: 15px;}
+.header .topMenu{float: right;font-size: 11px;margin-top: 35px;}
+.header .topMenu li{float: left;padding: 0 4px;border-left: 1px solid #cbcbcb;}
+.header .topMenu li:first-child{border-left:0;}
+.header .topMenu li a{    color: black;}
+
+.nav{background: #0e3b98;}
+.nav>div{}
+.nav .navL{font-size: 15px;font-weight: bold;}
+.nav .navL li{}
+.nav .navL li.nav5 a{padding: 0;position: relative;top: -10px;}
+.nav .navL li.nav9 a{background:#00287b;}
+.nav .navL li a{padding: 20px 0;float: left;width: 11%;text-align: center;color: white;}
+
+.mainBanner{overflow: hidden;margin-top: 30px;}
+.mainBanner .slider1{width:738px;height: 279px;    float: left;    border: 1px solid #d5d5d5;}
+
+.wrap .bx-wrapper .bx-pager, .bx-wrapper .bx-controls-auto{bottom:10px;}
+.mainBanner .bannerR{float: left;width: 250px;height: 280px;margin-left: 10px;text-align: center;}
+.mainBanner .bannerR .bannerRT{padding: 0px 25px;height: 148px;border: 1px solid #d5d5d5;}
+.mainBanner .bannerR .bannerRT dd:first-child{font-size: 18px;text-align: center;margin: 0;font-weight: bold;padding-top: 20px;}
+.mainBanner .bannerR .bannerRT dt{font-size: 35px;font-weight: bold;margin: 5px 0;color: #0e3b98;}
+.mainBanner .bannerR .bannerRT dd{font-size: 12px;text-align: left;margin: 0 0 0 35px;line-height: 17px;}
+.mainBanner .bannerR .bannerRT dd:first-child a{}
+.mainBanner .bannerR .bannerRT dt a{}
+.mainBanner .bannerR .bannerRT dd a{}
+.mainBanner .bannerR .bannerRB{height: 130px;background: #3c75cd;}
+.mainBanner .bannerR .bannerRB p{color: white;font-size: 27px;padding: 25px 0 0 0;margin-bottom: 23px;}
+.mainBanner .bannerR .bannerRB p font{color: #abf2ff;font-weight: bold;}
+.mainBanner .bannerR .bannerRB a{padding: 10px 35px;font-size: 12px;color: white;border: 1px solid white;}
+
+.section1{}
+.section1>div{overflow: hidden;border: 1px solid #d5d5d5;}
+.section1 img{float: left;padding: 0 15px 5px 15px;}
+.section1 p{float: left;font-size: 12px;margin: 20px 0;}
+.section1 p span{color: #3683c5;}
+.section1 a{color: #5f5f5f;font-size: 12px;float: right;padding: 5px 10px;margin:15px 15px 15px 0;background: #f6f6f6;border: 1px solid #d8d8d8;}
+
+.section2{}
+.section2 .innerwrap{border-top: 1px solid #d5d5d5;border-left: 1px solid #d5d5d5;}
+.section2 .sec2Br{    padding: 25px 20px;height: 159px;border-bottom: 1px solid #d5d5d5;border-right: 1px solid #d5d5d5;}
+.section2 .sec2slider{border-bottom: 1px solid #d5d5d5;
+    border-right: 1px solid #d5d5d5;}
+.sec2Br	.bx-wrapper .bx-pager, .bx-wrapper .bx-controls-auto{bottom:10px;}
+.sec2Br .bx-wrapper{margin-top:-1px;}
+.section2 .sec2_1{width: 250px;float: left;}
+.section2 .sec2_1 form{position:relative;}
+.section2 .sec2_1 form input.loginIdBox{font-size: 12px;padding: 10px;width: 126px;}
+.section2 .sec2_1 form input.loginpaBox{font-size: 12px;margin-top: -1px;padding: 10px;width: 126px;}
+.section2 .sec2_1 form input.loginSubmit{   position: absolute;right: 0;width: 60px;border: 0;height: 75px;top: 0;background: #3d76cf;color: white;font-weight: bold;}
+.section2 .sec2_1 ul{margin: 5px 0;overflow: hidden;}
+.section2 .sec2_1 ul li{float: left;}
+.section2 .sec2_1 .idsearch a{border-left: 1px solid #8a8a8a;}
+.section2 .sec2_1 ul li input{}
+.section2 .sec2_1 ul li:first-child a{}
+.section2 .sec2_1 ul li a{font-size:11px;color:#8a8a8a;padding:0 4px;}
+.section2 .sec2_1 a.bumSubmit{font-size: 12px;color: white;background: #708199;display: block;text-align: center;padding: 11px 0;}
+.section2 .sec2_1 a.regBtn{font-size: 11px;color: #8a8a8a;float: right;margin: 9px 0px 10px 0;border: 1px solid #8a8a8a;padding: 2px 10px;}
+.section2 .sec2_1 .grayLogo{margin-top: 5px;}
+
+.section2 .sec2_1 .phoneBox{color: white;text-align: center;background: #3d76cf;}
+.section2 .sec2_1 .phoneBoxTop{font-size: 18px;color: white;text-align: left;padding-bottom: 2px;border-bottom: 1px solid #5a8ad6;}
+.section2 .sec2_1 .phoneBoxTop font{color: #6dfffa;font-weight: bold;}
+.section2 .sec2_1 .phoneBoxP{font-size: 12px;color: white;line-height: 20px;margin: 11px 0;}
+.section2 .sec2_1 .phoneBox input{width: 40px;padding:6px 8px;text-align:center; }
+.section2 .sec2_1 .phoneBox a{font-size: 12px;color: white;display: block;padding: 10px 0;border: 1px solid;margin-top: 15px;}
+.section2 .sec2_2{width: 500px;float: left;}
+.section2 .sec2_2>div{text-align: center;padding:0;width: 500px;}
+.section2 .sec2_3{width: 250px;float: left;}
+.section2 .sec2_3 dl{}
+.section2 .sec2_3 dl dt{font-size: 18px;font-weight: bold;border-bottom: 1px solid #eaeaea;padding-bottom: 10px;}
+.section2 .sec2_3 dl dt div{width: 110px;font-size: 12px;float: right;padding: 3px 5px;border-radius: 52px;border: 1px solid #dddddd;margin: -2px 5px 0 0;text-align: center;}
+.section2 .sec2_3 dl dt div img{width: 5px;margin: 1px 3px;}
+.section2 .sec2_3 dl dt div img:first-child{}
+.section2 .sec2_3 dl dd{font-size: 12px;padding: 10px 0;border-bottom: 1px solid #eaeaea;}
+.section2 .sec2_3 dl dd:first-child{margin-top:10px; border-top:1px solid #eaeaea;}
+.section2 .sec2_3 dl dd strong{font-weight:bold;}
+.section2 .sec2_3 .sec2_3Video{}
+.section2 .sec2_3 .sec2_3Video p{}
+
+.section3{}
+.section3 img{}
+
+.section4{height: 150px;}
+.section4>div{position:relative;}
+.section4 .QnA{width: 328px;height: 108px;float: left;border: 1px solid #d5d5d5;padding: 20px;}
+.section4 .QnA:first-child{border-left: 1px solid #d5d5d5;}
+.section4 .QnA dt{font-size: 16px;border-bottom: 1px solid #eaeaea;padding-bottom: 5px;margin-bottom: 10px;}
+.section4 .QnA dt a:first-child{color: black;font-weight: bold;}
+.section4 .QnA dd{font-size: 12px;line-height: 20px;}
+.section4 .QnA dd a{background:url(http://gscdn.hackers.co.kr/publish/img/dist.jpg) left 4px no-repeat;padding-left:8px;color: black;}
+.section4 .QnA dd a:hover{font-weight:bold;text-decoration:underline;}
+.section4 .QnAlist{width:250px;overflow: hidden;position: absolute;right: 0;}
+.section4 .QnAlistT{border-top: 1px solid #d5d5d5;}
+.section4 .QnAlistT li{border: 1px solid #d5d5d5;border-top: 0;height: 45px;}
+.section4 .QnAlistT li img{}
+.section4 .QnAlistT li span{width: 40px;float: left;text-align: center;margin: -5px 0 0 10px;}
+.section4 .QnAlistT li a{font-size: 13px;color: black;padding: 16px 0 8px 0;float: left;width: 250px;}
+.section4 .QnAlistB{overflow: hidden;border-top: 1px solid #d2d2d2;border-left: 1px solid #d2d2d2;}
+.section4 .QnAlistB li{text-align: center;}
+.section4 .QnAlistB li a{background:#f3f3f3; font-size: 12px;padding: 18px 0;float: left;width: 123px;display: block;color: black;border-bottom: 1px solid #d2d2d2;border-right: 1px solid #d2d2d2;}
+
+.section5{}
+.section5 img{}
+
+.section6{margin-bottom: 50px;}
+.section6>div>div{width: 735px;float:left;border:1px solid #d5d5d5;}
+.section6 .tabListBtn{}
+.section6 .tabListBtn li{background:#ececec;width:105px;float:left;border-bottom: 1px solid #d5d5d5;}
+.section6 .tabListBtn li.on{background:white; border-bottom:0;}
+.section6 .tabListBtn li:after{content:'';clear:both;display:block;}
+.section6 .tabListBtn li a{position:relative;width: 104px;float: left;text-align: center;padding: 19px 0;font-size: 12px;border-left: 1px solid #d5d5d5;color: black;}
+.section6 .tabListBtn li a.allga{background:url(http://gscdn.hackers.co.kr/publish/img/test2/tab_icon.png) left top no-repeat ;}
+.section6 .tabListBtn li:first-child a{border-left:0;}
+.section6 .tabListSec{}
+.section6 .tabListSec>li{float: left;display:none;overflow: hidden;}
+.section6 .tabListSec>li:first-child{display:block;}
+.section6 .tabListSec li img{margin: 25px 25px 26px 25px;float: left;}
+.section6 .tabListSec li ul{float: left;margin-top: 20px;width: 135px;text-align: center;line-height: 17px;}
+.section6 .tabListSec li ul li{}
+.section6 .tabListSec li ul li a{background:url(http://gscdn.hackers.co.kr/publish/img/dist.jpg) left 5px no-repeat;padding-left:8px;font-size: 11px;color: black;}
+.section6 .tabListSec li ul li a:hover{font-weight:bold;text-decoration:underline;color:#0e3b98;}
+
+.footer1{background: #303135;}
+.footer .footer_1{}
+.footer .footer_2{}
+.footer .footer_3{}
+
+.rightBox{position: absolute;top: 250px;left: 50%;margin-left: 525px;}
+.rightBox img{}
+
+/*bxslider*/
+#banner_wrap { position: relative; width: 300px; margin: 0 auto; }
+#prevBtn { position: absolute; left: 0; top: 10px; }
+#nextBtn { position: absolute; right: 0; top: 10px; }
+.wrap .bx-wrapper .bx-prev{background:url(http://gscdn.hackers.co.kr/publish/img/test2/prev_btn.png) no-repeat;}
+.wrap .bx-wrapper .bx-next{background:url(http://gscdn.hackers.co.kr/publish/img/test2/next_btn.png) no-repeat;}

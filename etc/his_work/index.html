@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="utf-8">
+	<title>html/xhtml</title>
+	 <link href="http://13.124.101.236/his_work/css/comon.css" rel="stylesheet"> 
+	<style type="text/css">
+/* reset */
+@import url('webfont.css'); 
+
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,textarea,p,blockquote,th,td,input,select,textarea,button  {margin:0;padding:0}
+fieldset,img {border:0 none}
+blockquote, q {quotes:none}
+blockquote:before, blockquote:after,q:before, q:after {content:'';content:none}
+input,select,textarea,button {font-size:100%;vertical-align:middle}
+button {border:0 none;background-color:transparent;cursor:pointer}
+table {border-collapse:collapse;border-spacing:0}
+body {-webkit-text-size-adjust:none;} /* 뷰표트 변환시 폰트크기 자동확대 방지 */
+input[type='text'],input[type='password'],input[type='submit'],input[type='search'] {-webkit-appearance:none; border-radius:0}
+input:checked[type='checkbox'] {background-color:#666; -webkit-appearance:checkbox}
+button,input[type='button'],input[type='submit'],input[type='reset'],input[type='file'] {-webkit-appearance:button; border-radius:0;}
+input[type='search']::-webkit-search-cancel-button {-webkit-appearance:none}
+input, button, textarea {font-family:/*"맑은 고딕",*/"돋움", Dotum, sans-serif;}
+address,caption,cite,code,dfn,em,var {font-style:normal;font-weight:normal}
+header, footer, section, article, aside, nav, hgroup, details, menu, figure, figcaption, main {display:block;margin:0;padding:0;}
+img{width:100%;vertical-align:middle;}
+
+/* 아래 설정은 디자인가이드에 맞게사용 */
+body {font-family:Nanum Gothic,"돋움", Dotum, sans-serif;color:#333;font-size:16px;line-height:1.5;}
+body *{font-family:Nanum Gothic,"돋움", Dotum, sans-serif;}
+body,th,td,input,select,textarea,button {}
+a {color:#1b52b1;text-decoration:underline}
+a:active, a:hover {text-decoration:underline}
+
+:lang(zh) {font-family:"微软雅黑","Microsoft Yahei Font", Arial, Verdana, "宋体", "돋움", sans-serif;}
+:lang(en) {font-family: "Segoe UI", Verdana;}
+
+/* global */
+#skipNavi {overflow:hidden;position:absolute;left:-9999px;width:0;height:1px;margin:0;padding:0} /* 스킵네비게이션 */
+.ir-pm {display:block;overflow:hidden;font-size:0px;line-height:0;text-indent:-9999px} /* 사용된 이미지내 의미있는 텍스트의 대체텍스트를 제공할때 */
+.ir-wa {display:block;overflow:hidden;position:relative;z-index:-10;width:100%;height:100%} /* 중요한 이미지 대체텍스트로 이미지off시에도 대체 텍스 트를 보여주고자 할때 */
+.screen-out {overflow:hidden;position:absolute;width:0;height:0;line-height:0;text-indent:-9999px} /* 대체텍스트가 아닌 접근성을 위한 숨김텍스트를  제공할때 */
+
+.f-l {float:left}
+.f-r {float:right}
+.show {display:block}
+.none,.hide {display:none !important;}
+.tbl {border-collapse:collapse;border-spacing:0} /* 테이블 초기화 */
+.clear {display:block;overflow:visible;width:auto;clear:both;}
+.clear:after {display:block;visibility:hidden;height:0;font-size:0;clear:both;content:''}
+.fixed{position: fixed;}
+.of-h{overflow: hidden;}
+.of-a{overflow: auto;}
+.img_full{width:100%;}
+/* Background Image - common 요소 */
+.btn-comm {background:url() no-repeat} /* 버튼 */
+.ico-comm {background:url() no-repeat} /* 아이콘 */
+.tit-comm {background:url() no-repeat} /* 타이틀 */
+.line-comm {background:url() no-repeat} /* 라인 */
+
+/* font-color/background-color */
+.bg_point{background:pink;}
+.bg_type1{background:#a5baff;}
+.bg_type2{background:#41c522;}
+.bg_type3{background:#f262c8;}
+.bg_type4{background:#fff04e;}
+.bg_type5{background:#ff6161;}
+
+/* font-size */
+.fs_18{font-size:18px;}
+
+/* border round 3px button style */
+.bround {display:inline-block;padding:0;border:1px solid #d0d0d0;border-radius:3px;font-size:12px;text-decoration:none;text-align:center;}
+
+h1 {font-size:28px;padding-top:10px;}
+h2 {color:#000b72;font-size:24px;padding-bottom:10px;padding-top:10px;border-bottom:1px solid #d0d0d0;}
+h3 {font-size:18px;padding:10px 20px;background:#d0d0d0;}
+h4 {color:#000;padding:10px 20px;border:1px solid #d0d0d0;}
+
+section {padding:10px;}
+article {padding:20px;}
+xmp {margin:2%;background:#f1f1f1;white-space:pre-line;padding:0 2% 1% 2%;}
+pre{margin-bottom:20px;background:#f1f1f1;white-space:pre-line;padding:1% 2% 1% 2%;}
+
+div{margin-bottom:20px;border:1px solid #d0d0d0;padding:5px 30px;}
+ul {padding:10px 0;}
+ol {padding-left:20px;}
+p {padding-top:10px;}
+
+.tit {display:block;font-size:14px;padding:5px 0;}
+
+.scpt1 xmp {margin-bottom:5px;}
+.scpt1 p {margin:0 0 0 2%;font-size:14px;}
+
+em {display:inline-block;padding-bottom:1px;border-bottom:1px solid #666;}
+
+.f_point{color:#ff2165;}
+.f_b{color:blue;}
+
+.bg_point{background:#f9f2f4;color:#c7254e;}
+
+table{width:100%;border-top:1px solid #d0d0d0;border-right:1px solid #d0d0d0;}
+table tr th,
+table tr td{font-size:12px;border-bottom:1px solid #d0d0d0;border-left:1px solid #d0d0d0;padding:10px 0;text-align:center;}
+table tr th{background:#a7a7a7;color:#fff;}
+
+/* cdata css */
+.sub_container{font-size:20px;}
+.img_wrap{float:left;width:50%;}
+.txt_wrap{float:left;border:0;padding:10px 0 0 0;width:50%;}
+.inner_tit{display:block;padding:10px;background:#f1f1f1 }
+.tbl{margin:30px auto;border:0;width:500px}
+.tbl table{width:100%;}
+.tbl table tr{width:100%;}
+.tbl table thead tr td{background:#ccc0da;font-weight:bold;}
+.tbl table  tr td{font-size:18px;}
+	</style>
+</head>
+<body>
+<section class="sub_container">
+	<h1>· CDATA 선언문</h1>
+	<br />
+	<h3>목차</h3>
+	<div>
+		<ol> 
+			<li><a href="#con1">CDATA?</a></li>
+			<li><a href="#con2">CDATA 사용 방법</a></li>
+			<li><a href="#con3">CDATA 사용 환경</a></li>
+			<li><a href="#con4">DTD(Document Type Definition)</a></li>
+			<li><a href="#con5">CDATA 사용 예</a></li>
+		</ol>
+	</div>
+
+	<article>
+		<h2 id="con1">· CDATA(Character DATA)?</h2> 
+		<div>
+			<p>
+				<!-- 자바스크립트를 &lt;head&gt; 영역에 작성 시 자바스크립트에 태그가 포함되어 있으면 유효성 검사기는 &lt;head&gt;  영역에 문단 태그를 사용한 것으로 인식합니다. <br /> -->
+				자바스크립트를 html 문서 내 작성 시 자바스크립트에 태그가 포함되어 있으면 유효성 검사기는 태그를 사용한 것으로 인식합니다. <br />
+				하지만 CDATA 선언문을 선언하면 유효성 검사 시 태그들을 단순히 문자형 데이터로 간주하여 표준 문법으로 인식합니다. <br />
+				즉 <span class="bg_point">XHTML </span>내부에 자바스크립트를 작성할 때
+				태그를 사용하려면 CDATA 선언문을 작성해야 문법 오류가 나는 것을 막을 수 있습니다.
+			</p>
+		</div>
+
+		<h2 id="con2">· CDATA 사용 예</h2>
+		<div class="of-h">
+			<p class="img_wrap">
+				<!-- <img src="http://hackers.gscdn.com/publish/guide/img1.JPG" alt="cdata코드 이미지" class="img_full" />  -->
+				<img src="http://hackers.gscdn.com/publish/guide/img1.gif" alt="cdata코드 이미지" class="img_full" />
+			</p>
+			<div class="txt_wrap"> 
+<pre>
+	&lt;script&gt;
+	&nbsp;//&lt;![CDATA[
+	&nbsp;//html에서 '&lt;' (부등호)를 태그로 인식하기 때문에
+	&nbsp;// 유효성에 통과하기 위해 사용을 합니다.
+	&nbsp;//]]&gt;
+	&lt;/script&gt;
+</pre>
+			</div>
+		</div>
+
+		<div class="of-h">
+			<p class="img_wrap">
+				<img src="http://hackers.gscdn.com/publish/guide/img4.JPG" alt="cdata코드 이미지" class="img_full" />
+			</p>
+			<div class="txt_wrap">
+<pre>
+//&lt;![CDATA[
+	위와 같은 경우
+	var msg=&lt;h3&gt;Hello, World! today is '+dt'&lt;/h3&gt;';
+	여기서 그냥 html일 경우에는
+	아무런 오류가 없지만 
+	xhtml 해석기는 &lt;h3&gt;을 해석하여 운좋으면 넘어가지만 
+	유효성검사를 할 경우에는 에러가 출력됩니다.
+	그래서 스크립트의 내용은 해석하지 않기 위해 사용을 합니다.
+//]]&gt;
+</pre>
+			</div>
+		</div>
+
+		<h2 id="con3">· CDATA 사용 환경</h2>
+		<div>
+			<ul>
+				<li>HTML 에서는 CDATA섹션이 미작동 합니다. <br />
+					└ <span class="fs_18">CDATA라는 것은 HTML에서는 사용 할 수 없는 개념 입니다. HTML 의 경우는 HTML 4.01 spec의 DTD에 element 들 마다 사용해야 될 content type이 PCDATA인지 CDATA인지를 이미 지정해 놓았기 때문에 정해진 대로 쓰기만 할 뿐 입니다.</span> 
+				</li>
+				<li>XHTML 에서는 <![CDATA[ ]]> 이 표준적인 방법입니다.</li>
+				<li>XML 에서는 <![CDATA[ ]]> 이 표준적인 방법입니다.</li>
+				<li>HTML5 에서는 표준적인 방법이 아닙니다.</li>
+			</ul>
+		</div>
+
+		<h3>HTML</h3>
+		<div>
+			<strong class="bg_point">[요약] : 웹 문서를 만들기 위하여 사용하는 기본적인 프로그래밍 언어의 한 종류이다. 하이퍼텍스트를 작성하기 위해 개발되었다.</strong><br />
+			인터넷 서비스의 하나인 월드 와이드 웹을 통해 볼 수 있는 문서를 만들 때 사용하는 프로그래밍 언어의 한 종류이다. 특히 하이퍼텍스트를 작성하기 위해 개발되었으며, 인터넷에서 웹을 통해 접근되는 대부분의 웹 페이지들은 HTML로 작성된다.
+
+			HTML은 문서의 글자크기, 글자색, 글자모양, 그래픽, 문서이동(하이퍼링크) 등을 정의하는 명령어로서 홈페이지를 작성하는 데 쓰인다. HTML에서 사용하는 명령어는 태그(tag)라고 하는데 꺽쇠괄호"<>"를 사용하여 나타낸다. 일반적으로 태그는 시작과 끝을 표시하는 2개의 쌍으로 이루어져 있으나 "img", "br"등의 태그와 같이 시작태그만으로 그 영향을 나타내는 경우도 있으며, 종료 태그의 이름은 슬래시 문자[/]로 시작된다. 이와같이 HTML로 작성된 문서를 HTML문서라 하며 이 HTML로 작성된 문서를 웹 브라우저가 해석하여 이용자에게 보여주게 된다. HTML에서는 문서가 별도의 코드(code)를 인식하여 완벽한 하이퍼텍스트를 만들 뿐만 아니라 단어 또는 단문을 인터넷의 다른 장소나 파일로 연결시킬 수 있다.
+
+			HTML은 전자 문서의 서식을 정의하기 위해 만들어졌으며, 국제표준 SGML의 부분 집합으로 정의되었다. HTML은 SGML에서 특히 하이퍼텍스트를 강조하여 만들어진 언어이며, 아스키코드로 된 일반적인 텍스트로 구성되었다. 이 언어는 별도 컴파일러가 필요치 않으며, 웹 브라우저에서 해석이 가능한 사용하기 쉬운 언어로 각광을 받고 있다. <br />
+		</div>
+
+		<h3>XHTML</h3>
+		<div>
+			<strong class="bg_point">[요약] : XHTML은 HTML과 동등한 표현 능력을 지닌 마크업 언어로, HTML보다 엄격한 문법을 가진다. HTML이 SGML의 응용인 데 반해, 매우 유연한 마크업 언어인 XHTML은 SGML의 제한된 부분집합인 XML의 응용이다.(HTML+XML)</strong> <br />
+			XHTML은 HTML의 후속으로 많은 사람들이 XHTML을 HTML의 "최신 버전"으로 보고 있다. 하지만 HTML과 XHTML은 별개의 분리된 표준이다. W3C는 지속적으로 웹 출판에서 XHTML 1.1, XHTML 1.0, HTML 4.01 등을 이용하길 권장하고 있다. 그리고 HTML 4.01의 후속 버전으로 HTML 5가 개발 되었다. 좀 더 엄격한 버전의 HTML의 필요를 느끼게 된 가장 큰 이유는 웹 콘텐츠가 기존의 전통 컴퓨터에서 벗어나 여러 가지 이동 기기(모바일 컴퓨팅 등)에서 이용되기 시작하면서, 부정확한 HTML을 지원하는 데 필요한 자원이 부족한 환경이 생겨났기 때문이다. 문서가 검사될 수 있도록 문서형 정의(DTD)를 사용해 XHTML 문서를 규정한다. <br />
+
+			최신의 웹 브라우저들은 XHTML을 정확하게 표현해 주며, XHTML이 거의 HTML에 포함되기 때문에 구형의 브라우저에서도 별 문제가 없다. 마찬가지로 XHTML을 지원하는 거의 모든 브라우저들은 HTML 역시 정확하게 표현한다. 혹자는 바로 이점이 HTML에서 XHTML으로의 전환을 더디게 하는 이유라고 말한다.
+
+			XHTML의 특별히 유용한 기능은 MathML, SVG와 같은 다른 XML 이름 공간의 구성요소들과 섞어 쓸 수 있다는 점이다.
+
+			HTML에서 transitional XHTML으로의 변화는 미미하지만 완전한 XML 문서라는 주된 목적이 이루어진다. 가장 중요한 변화는 문서가 정형화(well formed)되고, 모든 HTML 요소(구성요소)들이 닫혀 있어야 한다는 점이다. 덧붙여, XHTML에서는 모든 태그들이 소문자로 작성되어야 한다. 이것은 HTML 2.0이 나오던 때에 대부분이 대문자를 사용하던 관습과는 완전히 대조적이다. XHTML에서는 수치를 포함한 모든 속성은 따옴표로 묶여야 한다. (이것은 SGML에서 강제 사항이 아니었기 때문에 HTML에서도 임의적이었다.) img와 br과 같은 빈 태그를 포함한 모든 요소들은 닫혀 있어야 한다. <span class="bg_point">빈 태그를 닫는 것은 시작 태그에 '/'를 추가함으로써 이루어진다(예: &lt;img … /&gt;, &lt;br /&gt;). 간소화된 속성의 사용 역시 금지된다(예: &lt;option selected&gt; 대신에 &lt;option selected="selected"&gt;). </span>
+		</div>
+
+		<h3>XML</h3>
+		<div>
+			<strong class="bg_point">[요약] : 인터넷 웹페이지를 만드는 HTML을 획기적으로 개선하여 만든 언어이다. 홈페이지 구축기능, 검색기능 등이 향상되었고, 웹 페이지의 추가와 작성이 편리해졌다.</strong> <br />
+			확장성 생성 언어(擴張性生成言語)로 번역되며, 1996년 W3C(World Wide Web Consortium)에서 제안하였다. HTML보다 홈페이지 구축 기능, 검색 기능 등이 향상되었고 클라이언트 시스템의 복잡한 데이터 처리를 쉽게 한다. 또한 인터넷 사용자가 웹에 추가할 내용을 작성, 관리하기에 쉽게 되어 있다. 
+			이밖에 HTML은 웹 페이지에서 데이터베이스처럼 구조화된 데이터를 지원할 수 없지만 XML은 사용자가 구조화된 데이터베이스를 뜻대로 조작할 수 있다. 구조적으로 XML 문서들은 SGML(standard generalized markup language) 문서 형식을 따르고 있다. XML은 SGML의 부분집합이라고도 할 수 있기 때문에 응용판 또는 축약된 형식의 SGML이라고 볼 수 있다. 1997년부터 마이크로소프트사(社)와 넷스케이프 커뮤니케이션스사(社)가 XML을 지원하는 브라우저 개발을 하고 있다.
+		</div>
+
+		<h3>HTML5</h3>
+		<div>
+			<strong class="bg_point">[요약] : 웹 문서를 제작하는 데 쓰이는 기본 프로그래밍 언어 HTML(hypertext markup language)의 최신규격</strong> <br />
+			웹 표준 기관인 월드와이드웹 컨소시엄(W3C)이 만들고 있는 차세대 웹 언어 규격이다. HTML5는 문서 작성 중심으로 구성된 기존 표준에 그림, 동영상, 음악 등을 실행하는 기능까지 포함시켰다.
+			HTML5를 이용해 웹사이트를 만들면 국내 전자상거래에서 많이 쓰이는 액티브X, 동영상이나 음악재생에 필요한 어도비 플래시와 같은 프러그인 기반의 각종 프로그램을 별도로 설치할 필요가 없어진다. HTML5는 모바일환경에서 아이폰이나 안드로이드 등의 운영체제를 가리지 않고 모두 호환된다.
+		</div>
+
+		<h2 id="con4">· DTD(Document Type Definition) - 문서형 정의 및 선언</h2>
+		<div>
+			마크업 문서를 작성하려면 문서의 첫머리에 문서형 정의(DTD)를 선언해야 합니다. HTML 이나 XHTML이라는 두 가지 마크업 언어 모두 세 가지의 문서형 정의가 있는데, 여기서 말하는 문서형 정의란, 마크업 문서의 요소와 속성 등을 어떤 규칙에 따라 기술해야 하는지에 대한 기준을 의미합니다.
+			간혹 마크업 문서에 DTD를 생략하는 경우가 있는데, 이것은 웹 브라우저가 표준모드가 아닌 쿽스모드로 렌더링되어 크로스브라우징 환경에서 각각의 문서가 다르게 표현되는 원인이 되기도 합니다.
+			 <span class="bg_point">브라우저는 웹 페이지 내에 포함된 DOCTYPE 선언을 분석해서 이 페이지가 어떤 DTD를 사용하는지, 어떤 버전의  (X)HTML을 사용하는지 알아냅니다.</span>
+		</div>
+
+		<div class="tbl">
+			<table cellspacing="0" cellpadding="0">
+				<col width="72">
+				<col width="92">
+				<col width="93">
+			<thead>
+				<tr>
+				<td width="72">대분류</td>
+				<td width="92">중분류</td>
+				<td width="93">소분류</td>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+				<td rowspan="3">HTML</td>
+				<td rowspan="3">HTML 4.01</td>
+				<td>Strict</td>
+				</tr>
+				<tr>
+				<td>Transitional</td>
+				</tr>
+				<tr>
+				<td>Frameset</td>
+				</tr>
+				<tr>
+				<td rowspan="4">XHTML</td>
+				<td rowspan="3">XHTML 1.0</td>
+				<td>Strict</td>
+				</tr>
+				<tr>
+				<td>Transitional</td>
+				</tr>
+				<tr>
+				<td>Frameset</td>
+				</tr>
+				<tr>
+				<td>XHTML 1.1</td>
+				<td>Strict</td>
+				</tr>
+			</tbody>
+			</table>
+		</div>
+
+		<pre>
+			① <strong> &lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 <span class="bg_type1">Strict</span>//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-<span class="bg_type1">strict</span>.dtd"&gt; </strong>
+
+			<strong>- Strict DTD(엄격모드)</strong> -&gt; 엄격한 HTML 문법과 구조 모두 정확히 맞아야하며 , &lt;font&gt;,&lt;iframe&gt; 태그 와 같은 사용이 금지된 요소와 <frameset>을 사용할 수 없습니다.
+			<p class="fs_18">
+			<strong>ex)</strong> strict DTD에는 target 속성이 존재하지 않는다.
+			사용자에게 미리 알리지 않고 뜨는 새창은 접근성을 떨어뜨리기에 되도록 피하는게 좋다.
+			하여 자바스크립트를 활용해 사용하는데 이는 접근성을 떨어뜨리고 사용자에게 불편함을 준다.
+			strict DTD사용 말고 transitional DTD를 사용해야 한다.
+			</p>
+			<hr />
+			② <strong> &lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 <span class="bg_type2">Transitional</span>//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-<span class="bg_type2">transitional</span>.dtd"&gt; </strong>
+
+			<strong>- Transitional DTD(호환 모드)</strong> -&gt; 어느정도 구버전의 속성 태그들을 허용합니다. 쉽게 생각하면 '어느정도는 눈 감아준다.' 라는 의미입니다.
+			<hr />
+			③ <strong>&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 <span class="bg_type3">Frameset</span>//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-<span class="bg_type3">frameset</span>.dtd"&gt;</strong>
+
+			<strong>- Frameset  DTD</strong> -&gt; 프레임을 나눌경우 프레임페이지에만 사용
+
+			<hr />
+			<strong>④ HTML5
+			<span class="bg_point">&lt;!DOCTYPE html&gt;</span></strong>
+			HTML에 가장 최신의 메이저 버전이며, 형식자체가 제일 간단하며 현재 가장 많이 사용되고있습니다. 
+			(이 형식이 가장 많이 사용되며, 웹 표준이라고 볼 수 있습니다)
+			<!--
+			④ &lt;!DOCTYPE html PUBLIC "-//W3C//DTD <span class="bg_type4">XHTML 1.1 Strict</span>//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1- <span class="bg_type4">strict</span>.dtd"&gt; 
+			<strong>Strict DTD(엄격모드)</strong> -&gt;  XHTML 1.0 Strict와 동일하지만 모듈을 추가 할 수 있습니다.(iframe 태그 제거 됨)
+			<hr />
+			-->
+			<!--
+			<strong>&lt;html lang="ko" xml:lang="ko" xmlns="http://www.w3.org/1999/xhtml"&gt;</strong>
+			작성된 페이지가 XHTML로 작성되었음을 알려주는 것으로 
+			XHTML 네임스페이스를 정해주는 겁니다.
+			 
+			HTML 문서는 &lt;html&gt;로 시작하지만,
+			XHTML문서는 &lt;html xmlns="http://www.w3.org/1999/xhtml"&gt;로 시작하죠
+			 
+			XHTML 네임스페이스를 지정해 줌으로서 확장성 있는 XML 형식의 문서를 지원할수 있게 됩니다.
+			-->
+		</pre>
+
+		<h3>DOCTYPE</h3>
+		<div>
+			<strong>&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"&gt;</strong><br />
+			<strong><span class="bg_type1">&lt;!DOCTYPE</span><span class="bg_type2"> html</span><span class="bg_type3"> PUBLIC</span><span class="bg_type4"> "-//W3C//DTD XHTML 1.0 Strict//EN"</span><span class="bg_type5"> "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"&gt;</span></strong><br /><br />
+			<pre>
+				<span class="bg_type1"><strong>&lt;!DOCTYPE</strong> </span>
+				이 문서는 
+
+				<span class="bg_type2"><strong>html </strong></span>
+				html이나 xhtml의 가장 최상위는 무조건 &lt;html&gt;태그이기 때문에 html로 작성합니다.
+				최상위 엘리먼트는 html이므로 html로 작성
+
+
+				<span class="bg_type3"><strong>PUBLIC</strong> </span>
+				PUBLIC or SYSTEM을 설정, PUBLIC(국제적 공용 문서) / SYSTEM(내부적, 제한적 문서)
+				(내부적일 경우에는 DTD든 최상위 엘리먼트든 작성자 마음대로 작성하거나 지정가능)
+
+
+				<span class="bg_type4"><strong>"-//W3C//DTD XHTML 1.0 Strict//EN"</strong></span>
+				비공인인증인 W3C기관에 의해 XHTML 1.0을 Strict 방식의 영어공용어로 출력하며
+				(공인인증기관일 경우 "+" , 비공인인증기관일경우 "-")
+
+
+				<span class="bg_type5"><strong>"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"</strong></span>
+				DTD가 어떤 타입으로 작성되어있는가 http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd 타입이다.
+			</pre>
+		</div>
+
+		<h3>휴먼 랭귀지</h3>
+		<div>
+			<strong>&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"&gt;<br /></strong>
+			<strong><span class="bg_point">&lt;html lang="ko" xml:lang="ko"</span> xmlns="http://www.w3.org/1999/xhtml"&gt;</strong><br /><br />
+				
+			<pre>
+				<strong>"이 웹문서의  콘텐츠는 한국어로 되어 있다."</strong>
+
+				웹 브라우저나 음성 브라우저와 같은 User Agents가 웹 문서에 쓰여진 언어를 올바로 해석할  수 있도록 (X)HTML 문서에 사용 언어를 선언할 수 있는데,
+				대표적 방법에는 휴먼 랭귀지 명시와 meta요소를 이용한 선언이 있습니다.
+				휴먼 랭귀지 명시는 한국어, 영어, 중국어 또는 독일어 등의 인간이 사용하는 언어를 HTML 문서에 선언하여 (X)HTML을 해석할 수 있는 소프트웨어들이 올바르게 
+				동작하도록 하는 것을 의미합니다.
+				휴먼 랭귀지 명시는 html요소에 선언할 수 있으며, 콘텐츠 안에서 다양한 휴먼 랭귀지를 사용하는 경우
+				특정 요소마다 각각 다시 선언할 수 있습니다.
+				<strong>
+				휴먼 랭귀지는 반드시 적용해야 하는 것은 아니며, 가급적이면 휴먼 랭귀지는 선언해주는 것이 좋지만 크로스 브라우징(Cross Browsing)이나 브라우저별 특성을 고려해서 콘텐츠 타입(meta) 방식으로 선언하는 것이 더 좋습니다.
+				</strong>
+
+				<strong>html에선</strong>
+				lang="ko"
+
+				<strong>xhtml에선</strong>
+				lang="ko" xml:lang="ko"
+			</pre>
+		</div>
+
+		<h3>네임스페이스</h3>
+		<div>
+			<strong>&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"&gt;<br />
+			&lt;html lang="ko" xml:lang="ko"<span class="bg_point"> xmlns="http://www.w3.org/1999/xhtml"&gt;</span></strong><br /><br />
+				
+			<pre>
+				- XHTML은 HTML을 XML로 재정의한 언어이기 때문에 XML이 가지는 확장성을 이용하여 다른 XML형식의 문서 표준을 네임 스페이스(xmlns)를 이용하여 지원할 수 있습니다.
+
+				- XHTML의 네임스페이스 http://www.w3.org/1999/xhtml로 정의되어 있어야합니다.
+			</pre>
+		</div>
+
+		
+		<h3>XHTML - DTD</h3>
+		<div>
+			<img src="http://hackers.gscdn.com/publish/guide/img5.gif" alt="cdata코드 이미지" class="img_full" />
+			<pre>
+				<strong>XHTML 1.0 버전의 Transitional (호환 모드) 사용</strong>
+			</pre>
+		</div>
+
+		<h3>HTML5 - DTD</h3>
+		<img src="http://hackers.gscdn.com/publish/guide/img6.gif" alt="cdata코드 이미지" style="width:800px;height:auto;" />
+		<pre>
+			<strong>&lt;!DOCTYPE html&gt;</strong>
+			HTML5 DOCTYPE사용
+		</pre>
+
+		<h2 id="con5">· CDATA 사용 예</h2>
+		<h3>CDATA 선언</h3>
+		
+		<img src="http://hackers.gscdn.com/publish/guide/img7.JPG" alt="data코드  xhtml사용 소스" />
+		<img src="http://hackers.gscdn.com/publish/guide/img2.JPG" alt="cdata코드  w3c 통과" />
+
+		<p style="margin:20px 0;"></p>
+
+		<h3>CDATA 미선언</h3>
+		<img src="http://hackers.gscdn.com/publish/guide/img8.JPG" alt="data코드  사용안한 xhtml" />
+		<img src="http://hackers.gscdn.com/publish/guide/img9.JPG" alt="cdata코드  w3c 오류" />
+
+	</article>
+
+</section>
+</body>
+</html>

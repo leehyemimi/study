@@ -1,0 +1,76 @@
+@charset "UTF-8";
+/*sass 파일은 영어밖에 인식하지 못한다. 한글을 사용하면 에러가 발생한다.*/
+header {
+  background-color: #ff6868;
+  display: block;
+  height: 100px; }
+  header nav ul {
+    list-style: none;
+    float: right; }
+    header nav ul li {
+      display: inline-block; }
+      header nav ul li a {
+        display: block;
+        padding: 5px 3px;
+        margin: 10px 20px;
+        text-decoration: none;
+        color: #000; }
+        header nav ul li a:hover {
+          border-bottom: 1px dotted #009ac8; }
+
+aside {
+  width: 250px;
+  float: left; }
+  aside nav ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 30px; }
+    aside nav ul li a {
+      display: block;
+      padding: 5px 10px;
+      text-decoration: none;
+      color: #000;
+      width: 100px; }
+      aside nav ul li a:hover {
+        border: 1px solid #382494;
+        color: #ff0000; }
+
+/*
+
+header {
+background-color: #eee;
+display: block;
+height: 100px; }
+header nav ul {
+list-style: none;
+float: right; }
+header nav ul li {
+display: inline-block; }
+header nav ul li a {
+display: block;
+padding: 5px 3px;
+margin: 10px 20px;
+text-decoration: none;
+color: #999; }
+header nav ul li a:hover {
+border-bottom: 1px dotted #009ac8; }
+
+aside {
+width: 250px;
+float: left; }
+aside nav ul {
+list-style: none;
+padding: 0;
+margin-top: 30px; }
+aside nav ul li a {
+  display: block;
+  padding: 5px 10px;
+  text-decoration: none;
+  color: #999;
+  width: 100px; }
+aside nav ul li a:hover {
+	border: 1px solid #382494;
+	color: #ff0000; }
+*/
+
+/*# sourceMappingURL=event.css.map */

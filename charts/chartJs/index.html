@@ -3,56 +3,49 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Title</title>
-	<!--<link rel="stylesheet" type="text/css" href="../assets/css/sub.css">&lt;!&ndash;메인에는 sub.css 호출하지않음&ndash;&gt;-->
 	<script src="Chart.js-2.7.3/dist/Chart.js"></script>
-	<style>
-		.myChart{
-			width:400px;
-			height:400px;
-		}
-	</style>
 </head>
 <body>
-	<canvas id="myChart" class="myChart" width="600" height="400"></canvas>
+<canvas id="popChart" width="600" height="400"></canvas>
 	<script>
-		var ctx = document.getElementById("myChart");
-		var myChart = new Chart(ctx, {
+		var popCanvas = document.getElementById("popChart");
+		var barChart = new Chart(popCanvas, {
 			type: 'bar',
 			data: {
-				labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+				labels: ["China", "India", "United States", "Indonesia", "Brazil", "Pakistan", "Nigeria", "Bangladesh", "Russia", "Japan"],
 				datasets: [{
-					label: '# of Votes',
-					data: [12, 19, 3, 5, 2, 3],
+					label: 'Population',
+					data: [1379302771, 1281935911, 326625791, 260580739, 207353391, 204924861, 190632261, 157826578, 142257519, 126451398],
 					backgroundColor: [
-						'rgba(255, 99, 132, 0.2)',
-						'rgba(54, 162, 235, 0.2)',
-						'rgba(255, 206, 86, 0.2)',
-						'rgba(75, 192, 192, 0.2)',
-						'rgba(153, 102, 255, 0.2)',
-						'rgba(255, 159, 64, 0.2)'
-					],
-					borderColor: [
-						'rgba(255,99,132,1)',
-						'rgba(54, 162, 235, 1)',
-						'rgba(255, 206, 86, 1)',
-						'rgba(75, 192, 192, 1)',
-						'rgba(153, 102, 255, 1)',
-						'rgba(255, 159, 64, 1)'
-					],
-					borderWidth: 1
+						'rgba(255, 99, 132, 0.6)',
+						'rgba(54, 162, 235, 0.6)',
+						'rgba(255, 206, 86, 0.6)',
+						'rgba(75, 192, 192, 0.6)',
+						'rgba(153, 102, 255, 0.6)',
+						'rgba(255, 159, 64, 0.6)',
+						'rgba(255, 99, 132, 0.6)',
+						'rgba(54, 162, 235, 0.6)',
+						'rgba(255, 206, 86, 0.6)',
+						'rgba(75, 192, 192, 0.6)',
+						'rgba(153, 102, 255, 0.6)'
+					]
 				}]
 			},
 			options: {
-				scales: {
-					yAxes: [{
-						ticks: {
-							beginAtZero:true
-						}
-					}]
+				legend: {
+					display: true,
+					position: 'bottom',
+					labels: {
+						boxWidth: 80,
+						fontColor: 'blue'
+					}
 				}
 			}
 		});
-		console.log(myChart.options);
+		console.log(Chart.defaults);
+		Chart.defaults.global.defaultFontFamily = "Lato";
+		Chart.defaults.global.defaultFontSize = 18;
+		Chart.defaults.global.defaultFontColor = 'blue';
 	</script>
 </body>
 </html>

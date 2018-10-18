@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="description" content="square to circle animation" />
+<meta charset="UTF-8">
+<title>CSS Animation</title>
+
+<style>
+body {padding:4em; background:#fcfcfc;}
+
+.wrap {width:200px; margin:auto;  z-index:1;}
+
+.msg {
+  color: whitesmoke;
+  text-align:center;
+  font-family: 'Bree Serif', Courier, monospaced;
+  font-size:3.5em;
+  width:200px;
+  position:absolute;
+  margin:55px 0 0 2px;
+  pointer-events: none; 
+}
+
+.sticker {
+  width:200px;
+  height:200px;
+  position:absolute;
+  background: url(https://dl.dropbox.com/u/1143870/i/sticker.png) top center no-repeat; 
+  animation: spin 10s linear infinite;
+  /*Set our animation play state to paused initially */
+  animation-play-state: paused; 
+}
+
+.sticker:hover {
+  /* Toggle our animation play state to running when we are hovering over our sticker */
+  animation-play-state: running;
+}
+
+
+@keyframes spin {
+  100% {transform: rotate(1turn); }
+}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <div class="sticker"></div>
+  <div class="msg">new!</div>
+</div>
+
+</body>
+</html>

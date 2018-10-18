@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"/>
+<title>CSS Selector</title>
+<!---css--->
+<link rel="stylesheet" type="text/css" href="./css/common.css">
+<link rel="stylesheet" type="text/css" href="css/gradient.css">
+<!---js--->
+<script src="https://code.jquery.com/jquery-1.9.1.min.js" integrity="sha256-wS9gmOZBqsqWxgIVgA8Y9WcQOa7PgSIX+rPA0VL2rbQ=" crossorigin="anonymous"></script>
+<script src="./js/test.js"></script>
+</body>
+</head>
+<body>
+<div class="wrap">
+	<h1>Gradient_test</h1>
+	<div>
+		<h2>*(참고 URL) Ultimate CSS Gradient Generator<br/>브라우저 별로 Gradient css 제공합니다. 사용하시기에 편리하실 듯 싶습니다.</h2>
+		<a href="http://www.colorzilla.com/gradient-editor/" target="_blank">http://www.colorzilla.com/gradient-editor/</a>
+	</div>
+	<div>
+		<!--test-->
+		<h2>_test</h2>
+		<div class="box_test">
+			 background: rgb(255,155,63); /* Old browsers */<br/>
+			background: -moz-linear-gradient(-135deg, rgba(255,155,63,1) 0%, rgba(108,25,168,1) 100%); /* FF3.6-15 */<br/>
+			background: -webkit-linear-gradient(-135deg, rgba(255,155,63,1) 0%,rgba(108,25,168,1) 100%); /* Chrome10-25,Safari5.1-6 */<br/>
+			background: linear-gradient(-135deg, rgba(255,155,63,1) 0%,rgba(108,25,168,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */<br/>
+			filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff9b3f', endColorstr='#6c19a8',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+		</div>
+	</div>
+</div>
+</body>
+</html>

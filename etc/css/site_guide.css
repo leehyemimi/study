@@ -1,0 +1,48 @@
+.site_guide {table-layout:fixed; border-top:1px solid #aaa; width:100%;}
+.site_guide tr th{background:#ddd; color:#444;}
+.site_guide thead tr th {border-right:1px solid #aaa; border-bottom:1px solid #aaa; background:#444; color:#fff; padding:7px 0px;}
+.site_guide thead tr:first-child th:first-child {border-left:1px solid #aaa;}
+.site_guide tbody tr td,
+.site_guide tbody tr th {line-height:1.5;border-right:1px solid #aaa; border-bottom:1px solid #aaa; text-align:center; padding:7px 7px;word-break: break-all;}
+.site_guide tbody tr th{background:#ddd; color:#444;}
+.site_guide tbody tr td:first-child,
+.site_guide tbody tr th:first-child {border-left:1px solid #aaa}
+.site_guide .t_l{text-align:left;}
+.site_guide tbody tr td a,
+a.link{color:#4059c5;}
+.site_guide tr th{font-weight:bold;}
+.site_guide tr td span{background:#ff9eb1;padding:0 5px;color:#000;}
+.site_guide tbody tr.old th{background:#eaeaea;color:#afafaf;}
+.site_guide tbody tr.old td,
+.site_guide tbody tr.old td *{color:#adadad;}
+
+.detail_con_box{border:1px solid #ddd; padding:10px; margin-bottom:10px;}
+.detail_con_box li{margin-bottom:10px;}
+.detail_con_box h2{margin-bottom:20px;}
+.inner_box{background:#eee;border:1px solid #ccc;padding:10px;padding-bottom:5px;}
+
+.f_l{float:left;}
+.f_r{float:right;}
+.f_both{overflow:hidden;}
+
+.data_box{background:#f8f9fa;border:1px solid #a2a9b1; padding:10px; margin-bottom:20px;}
+.data_box ul{overflow:hidden; padding:20px 10px;}
+.data_box li{margin-top:10px; line-height:22px; }
+.data_box li:first-child{margin:0;}
+.data_box h1{font-weight:bold; padding:5px 0 15px 10px; font-size:22px; border-bottom:1px solid #aaa;letter-spacing:-1px}
+.data_box h1 span{margin-left:5px;display:inline-block;*display:inline;*zoom:1;padding:2px 5px;background:#c69;color:#fff;font-size:12px;letter-spacing:0}
+.data_box h1 a span{background:#de1a40}
+.data_box h1 a:hover span{text-decoration:underline}
+.data_box a{text-decoration:underline;color:#de1a40;}
+
+h2.sub_tit{font-size:15px;font-weight:600;padding-left:10px;color:#000;}
+h2.sub_tit + ul{padding:10px 10px 20px 10px;}
+h2.sub_tit + ul.inner_box{padding:20px 10px;}
+
+.fc_blue{color:blue;}
+
+a.down_link{color:#fff;font-weight:bold;background:#000;display:inline-block;padding:2px 5px;}
+a.down_link:hover{text-decoration:underline;}
+
+.study_list{margin:50px;}
+.link_list{margin-right:-500px;top:50px}

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="description" content="square to circle animation" />
+<meta charset="UTF-8">
+<title>CSS Animation</title>
+
+<style>
+
+div{line-height:200px;font-size:20px;color:#fff;text-align:center;margin:0 auto;}
+div+div{margin-top:100px;}
+
+.box1{
+	width: 200px;
+	height:200px;
+	background-color: red;
+	animation: 
+	pulse 3s ease infinite alternate;
+}
+
+@keyframes pulse {
+	0%, 100% {
+	background-color: red;
+	}
+	25% {
+	background-color: orange;
+	}
+	50% {
+	background-color: yellow;
+	}
+	75% {
+	background-color: pink;
+	}
+}
+
+</style>
+</head>
+<body>
+
+<div class="box1">box1</div>
+
+</body>
+</html>

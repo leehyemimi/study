@@ -1,0 +1,451 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>jwplayer parameter</title>
+	<script src="https://code.jquery.com/jquery-1.9.1.min.js"
+	  integrity="sha256-wS9gmOZBqsqWxgIVgA8Y9WcQOa7PgSIX+rPA0VL2rbQ="
+	  crossorigin="anonymous"></script>
+	<style>
+		*{margin:0;padding:0;box-sizing:border-box;}
+		li{list-style:none;}
+		.o_h{overflow:hidden;}
+		.fl{float:left;}
+		.wrap{}
+		.wrap .inner{width:1200px;margin:0 auto;}
+		.wrap .inner .header{background:#f1f1f1;text-align:center;padding:50px 0;}
+		.wrap .inner .section{background:#f1f1f1;margin:5px 0;padding:50px;}
+		.wrap .inner .section img{width:100%;}
+		.wrap .inner .section .tit_sub{color: darkcyan;}
+		.wrap .inner .section .txt_sub{font-size: 18px;line-height: 30px;margin: 10px 0 10px 10px;}
+		.wrap .inner .section .txt_sub em{font-style:normal;background:#B93332;color:#fff;}
+		.wrap .inner .section .ex_sub{position:relative;background:white;width:100%;padding:50px;font-size:20px;}
+		.wrap .inner .section .ex_sub:after{content:"example";position:absolute;color:gray;left:10px;top:10px;}
+
+		#popup{display:none;position:fixed;width:100%;height:100%;left:0;top:0;z-index:100000;}
+		#popup .bg{position:fixed;background:black;opacity:0.3;left:0;top:0;width:100%;height:100%;opacity: 0.3;filter: Alpha(opacity=30);-webkit-filter: Alpha(opacity=30);}
+		#popup .con{position:fixed;margin-left:-250px;margin-top:-250px;background:#fff;width:500px;height:500px;left:50%;top:50%;text-align:center;font-size:50px;font-weight:bold;line-height:500px;}
+
+		.poiner{color:red;}
+		.line{text-decoration: line-through;}
+		.label{font-size:0.8em;color:#333;}
+
+		#default{ background:#fff;padding:30px;position:fixed;top:0px;border:3px solid #4D5559;right:50%;margin-right:-600px;z-index:100;}
+
+		pre{line-height:1.5;margin:20px 20px 20px 0;padding:20px;font-size:13px;background:#242a38;color:#cfd0d3;}
+	</style>
+
+	<!--인강-->
+	<script src="http://champ.hackers.com/plugins/jwplayer/8.0.1/jwplayer.js"></script>
+	<link href="http://champ.hackers.com/plugins/jwplayer/8.0.1/jwplayer.css" rel="stylesheet">
+	<script>jwplayer.key = 'Y+64W/8MQ0gfzEjZ08kw15uLcI1FSms/ACsTThls+O0=';</script>
+	<style>
+		.widget-movie.play .play-img{display:none;}
+		.play-img{position:absolute;left:0;top:0;z-index:5;}
+	</style>
+
+	<!--<script src="http://www.hackers.ac/js/jwplayer/z6oTREH8EeS+YSIACyaB8g.js"></script>-->
+
+</head>
+<body>
+	<div class="wrap">
+		<div class="inner">
+			<div class="header">
+				<h1>jwplayer API</h1>
+				<br>
+				<!--<a href="https://www.jwplayer.com/">관련링크</a><br>-->
+				<a href="https://developer.jwplayer.com/jw-player/docs/javascript-api-reference/">관련링크1</a> /
+				<a href="https://developer.jwplayer.com/jw-player/docs/developer-guide/customization/configuration-reference/#setup">관련링크2 /
+					<br><br><a href="https://developer.jwplayer.com/tools/player-event-inspector/" target="_blank">테스트 가능한 주소</a>
+			</div>
+
+			<!--시작-->
+			<div class="section">
+				<h2 class="tit_sub">JW Player 소개</h2>
+
+				<p class="txt_sub">
+					* Longtail Ad Solutions 사에서 개발한 웹 기반의 미디어 재생 솔루션 <br>
+					* JWPlayer는 가장 현재 인기있는 웹 기반 미디어 재생을 위한 라이브러리 솔루션입니다. <br>
+					* 현재 JW Player 8 까지 출시 <br>
+					* JW Player 의 생성(Setup)부터 사용까지 모두 Javascript 형태의 API를 사용하여 구현.
+				</p>
+			</div>
+
+			<div class="section">
+				<h2 class="tit_sub">JW Player 설치(기본준비)</h2>
+
+				<p class="txt_sub">
+					* JW Player는 다음의 2가지 타입의 형태로 서비스를 지원.
+				</p>
+				<div class="ex_sub">
+					<strong>1) JW Player Cloud Service (For Cloud-Hosted) [버전 7부턴 사용 불가능]</strong> <br>
+					-> No Setup!<br>
+					-> 사용자 계정의 토큰을 포함한 js URL Link 스크립트만 추가!<br><br>
+					<img src="http://gscdn.hackers.co.kr/publish/img/lhw/jwplayer/1.png" alt="" style="width:auto;"><br><br>
+
+					<strong>2) JW Player Download (For Self-Hosted)</strong> <br>
+					-> https://www.jwplayer.com/compare-plans/ 홈페이지에 가서 다운로드 받기<br>
+					-> 프로젝트의 적절한 경로에 저장 (e.g. project/js/…) <br><br>
+					<img src="http://gscdn.hackers.co.kr/publish/img/lhw/jwplayer/2.png" alt="" style="width:auto;"><br>
+
+				</div>
+			</div>
+
+			<div class="section">
+				<h2 class="tit_sub">JW Player 사용</h2>
+
+				<p class="txt_sub">
+					* 플레이어 레이아웃 구성 및 동작 제어를 위해 상당히 세밀한 구성 옵션을 제공.
+				</p>
+				<div class="ex_sub">
+					<strong>BasicPlayer</strong> <br>
+<pre>
+&lt;div id="myDiv"&gt;&lt;/div&gt;
+&lt;script type="text/javascript"&gt;
+	jwplayer("myDiv").setup({
+		"file": "http://down-hackersdn.x-cdn.com/oap/mp4/180202_Mar_free_viral.mp4",
+		"image": "http://image.hackers.ac/images/event/2018/mar_preregist/con04.png",
+		"height": 310,
+		"width": 500
+	});
+&lt;/script&gt;
+</pre>
+					<div id="default">
+						BasicPlayer
+						<div id="myDiv"></div>
+					</div>
+					<script type="text/javascript">
+						jwplayer("myDiv").setup({
+							"file": "http://down-hackersdn.x-cdn.com/oap/mp4/180202_Mar_free_viral.mp4",
+							"image": "http://image.hackers.ac/images/event/2018/mar_preregist/con04.png",
+							"height": 310,
+							"width": 500
+						});
+					</script>
+				</div>
+			</div>
+
+			<div class="section">
+				<h2 class="tit_sub">aspectratio (화면비율설정)</h2>
+
+				<p class="txt_sub">
+					* 화면의 비율 설정. 디바이스 웹 브라우저의 width 값 변화에 따라 자동으로 플레이어의 사이즈를 조절(Scaling). 이 옵션이 설정되어 있다면 height 속성 값은 무시
+					<br>
+					* 반응형 웹을 만들 때, 사용.
+				</p>
+				<div class="ex_sub">
+					<pre>
+&lt;div id="myDiv"&gt;&lt;/div&gt;
+&lt;script type="text/javascript"&gt;
+	jwplayer("myDiv1").setup({
+		"file": "http://down-hackersdn.x-cdn.com/oap/mp4/180202_Mar_free_viral.mp4",
+		"image": "http://image.hackers.ac/images/event/2018/mar_preregist/con04.png",
+		"width": "30%",
+		"aspectratio": "16:9"
+	});
+&lt;/script&gt;
+</pre>
+					<strong>적용전</strong>
+					<div id="myDiv1_test"></div>
+					<script type="text/javascript">
+						jwplayer("myDiv1_test").setup({
+							"file": "http://down-hackersdn.x-cdn.com/oap/mp4/180202_Mar_free_viral.mp4",
+							"image": "http://image.hackers.ac/images/event/2018/mar_preregist/con04.png",
+							"width": "30%"
+						});
+					</script>
+
+					<br><br>
+					<strong>적용후</strong>
+					<div id="myDiv1"></div>
+					<script type="text/javascript">
+						jwplayer("myDiv1").setup({
+							"file": "http://down-hackersdn.x-cdn.com/oap/mp4/180202_Mar_free_viral.mp4",
+							"image": "http://image.hackers.ac/images/event/2018/mar_preregist/con04.png",
+							"width": "30%",
+							"aspectratio": "16:9"
+						});
+					</script>
+				</div>
+			</div>
+
+			<div class="section">
+				<h2 class="tit_sub">autostart (자동재생)</h2>
+
+				<p class="txt_sub">
+					* JW Player가 포함된 페이지가 로드 완료되면 바로 재생 <br>
+					<!--* 모바일 디바이스에서는 미 지원.-->
+				</p>
+				<div class="ex_sub">
+					<pre>
+&lt;div id="myDiv"&gt;&lt;/div&gt;
+&lt;script type="text/javascript"&gt;
+	jwplayer("myDiv2").setup({
+		"file": "http://down-hackersdn.x-cdn.com/oap/mp4/180202_Mar_free_viral.mp4",
+		"image": "http://image.hackers.ac/images/event/2018/mar_preregist/con04.png",
+		"height": 310,
+		"width": 500,
+		"autostart" : true
+	});
+&lt;/script&gt;
+</pre>
+
+					<strong>적용후</strong>
+					<div id="myDiv2"></div>
+					<script type="text/javascript">
+						jwplayer("myDiv2").setup({
+							"file": "http://down-hackersdn.x-cdn.com/oap/mp4/180202_Mar_free_viral.mp4",
+							"image": "http://image.hackers.ac/images/event/2018/mar_preregist/con04.png",
+							"height": 310,
+							"width": 500,
+							"autostart" : true,
+							"mute" : true
+						});
+					</script>
+				</div>
+			</div>
+
+
+			<div class="section">
+				<h2 class="tit_sub">controls (미디어 컨트롤표시여부)</h2>
+
+				<p class="txt_sub">
+					* 미디어 컨트롤(Controlbar, Display Icon, Dock Buttons) 의 표시 여부. <br>
+					* True : 표시, False : 숨김
+				</p>
+				<div class="ex_sub">
+					<pre>
+&lt;div id="myDiv"&gt;&lt;/div&gt;
+&lt;script type="text/javascript"&gt;
+	jwplayer("myDiv1").setup({
+		"file": "http://down-hackersdn.x-cdn.com/oap/mp4/180202_Mar_free_viral.mp4",
+		"image": "http://image.hackers.ac/images/event/2018/mar_preregist/con04.png",
+		"height": 310,
+		"width": 500,
+		"autostart" : true
+	});
+&lt;/script&gt;
+</pre>
+					<strong>적용후</strong>
+					<div id="myDiv3"></div>
+					<script type="text/javascript">
+						jwplayer("myDiv3").setup({
+							"file": "http://down-hackersdn.x-cdn.com/oap/mp4/180202_Mar_free_viral.mp4",
+							"image": "http://image.hackers.ac/images/event/2018/mar_preregist/con04.png",
+							"height": 310,
+							"width": 500,
+							"mute" : true,
+							"controls" : false,
+							"autostart" : true
+						});
+					</script>
+				</div>
+			</div>
+
+
+			<div class="section">
+				<h2 class="tit_sub">height (플레이어의 높이) & Audio-Only 재생모드</h2>
+
+				<p class="txt_sub">
+					* 플레이어의 높이(픽셀 단위). 최소 180px 이상 권장. 기본 270px. <br>
+					<em>* 40px로 설정하는 경우 Audio-Only 재생 모드.</em>
+				</p>
+				<div class="ex_sub">
+					<pre>
+&lt;div id="myDiv"&gt;&lt;/div&gt;
+&lt;script type="text/javascript"&gt;
+	jwplayer("myDiv4").setup({
+		"file": "http://down-hackersdn.x-cdn.com/oap/mp4/180202_Mar_free_viral.mp4",
+		"image": "http://image.hackers.ac/images/event/2018/mar_preregist/con04.png",
+		"height": 40,
+		"width": 500
+	});
+&lt;/script&gt;
+</pre>
+					<strong>적용후</strong>
+					<div id="myDiv4"></div>
+					<script type="text/javascript">
+						jwplayer("myDiv4").setup({
+							"file": "http://down-hackersdn.x-cdn.com/oap/mp4/180202_Mar_free_viral.mp4",
+							"image": "http://image.hackers.ac/images/event/2018/mar_preregist/con04.png",
+							"height": 40,
+							"width": 500
+						});
+					</script>
+				</div>
+			</div>
+
+			<div class="section">
+				<h2 class="tit_sub">mute (음소거) / volume(볼륨)</h2>
+
+				<p class="txt_sub">
+					* 재생시 음소거 설정. <br>
+					* 기본값은 false 이며, 모바일 디바이스에서는 적용되지 않음.
+				</p>
+				<div class="ex_sub">
+					<pre>
+&lt;div id="myDiv"&gt;&lt;/div&gt;
+&lt;script type="text/javascript"&gt;
+	jwplayer("myDiv5").setup({
+		"file": "http://down-hackersdn.x-cdn.com/oap/mp4/180202_Mar_free_viral.mp4",
+		"image": "http://image.hackers.ac/images/event/2018/mar_preregist/con04.png",
+		"height": 310,
+		"width": 500,
+		"mute" : true
+	});
+
+	jwplayer("myDiv5_test").setup({
+		"file": "http://down-hackersdn.x-cdn.com/oap/mp4/180202_Mar_free_viral.mp4",
+		"image": "http://image.hackers.ac/images/event/2018/mar_preregist/con04.png",
+		"height": 310,
+		"width": 500,
+		"volume" : 30
+	});
+&lt;/script&gt;
+</pre>
+					<strong>volume </strong>
+					<div id="myDiv5_test"></div>
+					<script type="text/javascript">
+						jwplayer("myDiv5_test").setup({
+							"file": "http://down-hackersdn.x-cdn.com/oap/mp4/180202_Mar_free_viral.mp4",
+							"image": "http://image.hackers.ac/images/event/2018/mar_preregist/con04.png",
+							"height": 310,
+							"width": 500,
+							"volume" : 30
+						});
+					</script>
+
+					<br><br>
+					<strong>mute</strong>
+					<div id="myDiv5"></div>
+					<script type="text/javascript">
+						jwplayer("myDiv5").setup({
+							"file": "http://down-hackersdn.x-cdn.com/oap/mp4/180202_Mar_free_viral.mp4",
+							"image": "http://image.hackers.ac/images/event/2018/mar_preregist/con04.png",
+							"height": 310,
+							"width": 500,
+							"mute" : true
+						});
+					</script>
+				</div>
+			</div>
+
+			<div class="section">
+				<h2 class="tit_sub">repeat (재생반복)</h2>
+
+				<p class="txt_sub">
+					* 플레이 리스트의 재생 반복 모드 <br>
+					* true : 무한 반복, false : 한번 재생(기본 값)
+				</p>
+				<div class="ex_sub">
+					<pre>
+&lt;div id="myDiv"&gt;&lt;/div&gt;
+&lt;script type="text/javascript"&gt;
+	jwplayer("myDiv6").setup({
+		"file": "http://down-hackersdn.x-cdn.com/oap/mp4/180202_Mar_free_viral.mp4",
+		"image": "http://image.hackers.ac/images/event/2018/mar_preregist/con04.png",
+		"height": 310,
+		"width": 500,
+		"repeat" : true
+	});
+&lt;/script&gt;
+</pre>
+					<strong>적용후</strong>
+					<div id="myDiv6"></div>
+					<script type="text/javascript">
+						jwplayer("myDiv6").setup({
+							"file": "http://down-hackersdn.x-cdn.com/oap/mp4/180202_Mar_free_viral.mp4",
+							"image": "http://image.hackers.ac/images/event/2018/mar_preregist/con04.png",
+							"height": 310,
+							"width": 500,
+							"repeat" : true
+						});
+					</script>
+				</div>
+			</div>
+
+
+			<div class="section">
+				<h2 class="tit_sub">stretching (이미지와 영상을 디스플레이에 맞게 조절하는 방법)</h2>
+
+				<p class="txt_sub">
+					- none : 원래의 영상 사이즈를 그대로 출력 (Black borders)
+					- uniform : 원래 영상의 종횡비(Aspect Ratio) 유지하면서 JW Player 영역에 맞춤 (Black Bar)
+					- exactfit : 원래 영상의 종횡비를 무시하고 JW Player 영역에 맞춤.
+					- fill : 원래의 영상의 종횡비를 유지하면서 JW Plaer 화면 영역을 가득 채움 (Stretch + Zoom)
+				</p>
+				<img src="https://support-static.jwplayer.com/images/stretch-options.png" alt="" style="width:auto;">
+				<div class="ex_sub">
+					<pre>
+&lt;div id="myDiv"&gt;&lt;/div&gt;
+&lt;script type="text/javascript"&gt;
+	jwplayer("myDiv7").setup({
+		"file": "http://down-hackersdn.x-cdn.com/oap/mp4/180202_Mar_free_viral.mp4",
+		"image": "http://image.hackers.ac/images/event/2018/mar_preregist/con04.png",
+		"height": 40,
+		"width": 500,
+		"stretching" : "uniform",
+		"stretching" : "exactfit",
+		"stretching" : "fill"
+	});
+&lt;/script&gt;
+</pre>
+					<strong>적용전</strong>
+					<div id="myDiv7_test"></div>
+					<script type="text/javascript">
+						jwplayer("myDiv7_test").setup({
+							"file": "http://down-hackersdn.x-cdn.com/oap/mp4/180202_Mar_free_viral.mp4",
+							"image": "http://image.hackers.ac/images/event/2018/mar_preregist/con04.png",
+							"height": 200,
+							"width": 500,
+							"mute" : true
+						});
+					</script>
+
+					<br><br>
+					<strong>uniform (원래 영상의 종횡비(Aspect Ratio) 유지하면서 JW Player 영역에 맞춤 (Black Bar))</strong>
+					<div id="myDiv7"></div>
+					<script type="text/javascript">
+						jwplayer("myDiv7").setup({
+							"file": "http://down-hackersdn.x-cdn.com/oap/mp4/180202_Mar_free_viral.mp4",
+							"image": "http://image.hackers.ac/images/event/2018/mar_preregist/con04.png",
+							"height": 200,
+							"width": 500,
+							"mute" : true,
+							"stretching" : "uniform"
+						});
+					</script>
+					<br><br>
+					<strong>exactfit  (원래 영상의 종횡비를 무시하고 JW Player 영역에 맞춤.)</strong>
+					<div id="myDiv71"></div>
+					<script type="text/javascript">
+						jwplayer("myDiv71").setup({
+							"file": "http://down-hackersdn.x-cdn.com/oap/mp4/180202_Mar_free_viral.mp4",
+							"image": "http://image.hackers.ac/images/event/2018/mar_preregist/con04.png",
+							"height": 200,
+							"width": 500,
+							"mute" : true,
+							"stretching" : "exactfit"
+						});
+					</script>
+					<br><br>
+					<strong>fill (원래의 영상의 종횡비를 유지하면서 JW Plaer 화면 영역을 가득 채움 (Stretch + Zoom))</strong>
+					<div id="myDiv72"></div>
+					<script type="text/javascript">
+						jwplayer("myDiv72").setup({
+							"file": "http://down-hackersdn.x-cdn.com/oap/mp4/180202_Mar_free_viral.mp4",
+							"image": "http://image.hackers.ac/images/event/2018/mar_preregist/con04.png",
+							"height": 200,
+							"width": 500,
+							"mute" : true,
+							"stretching" : "fill"
+						});
+					</script>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</body>
+</html>
+

@@ -1,0 +1,284 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>vw/vh/vmin/vmav/calc</title>
+		<script src="https://code.jquery.com/jquery-1.9.1.min.js"
+		  integrity="sha256-wS9gmOZBqsqWxgIVgA8Y9WcQOa7PgSIX+rPA0VL2rbQ="
+		  crossorigin="anonymous"></script> 
+	</head>
+	<body>
+		<style>
+		*{margin:0;padding:0;box-sizing:border-box;}
+		li{list-style:none;}
+		.wrap{}
+		.wrap .inner{width:1200px;margin:0 auto;}
+		.wrap .inner .header{background:#f1f1f1;text-align:center;padding:50px 0;}
+		.wrap .inner .section{background:#f1f1f1;margin:5px 0;padding:50px;}
+		.wrap .inner .section .tit_sub{color: darkcyan;}
+		.wrap .inner .section .txt_sub{font-size: 20px;line-height: 30px;margin: 10px 0 10px 10px;}
+		.wrap .inner .section .txt_sub span{color:#f1f1f1;}
+		.wrap .inner .section .ex_sub{position:relative;background:white;width:100%;color:white;padding:50px;font-size:20px;}
+		.wrap .inner .section .ex_sub:after{content:"example";position:absolute;color:gray;left:10px;top:10px;}
+
+		/*section1*/
+		.section1{}
+		.section1 .ex_sub{}
+		.section1 .ex_sub > div{position:relative;display:block;background:gray;width:500px;height:500px;margin:20px auto;text-align:center;}
+		.section1 .ex_sub > div > div{position:absolute;left:0;bottom:0;background:black;margin:0 auto;}
+
+		.section1 .ex_box1 div{width:50%;height:50%;}
+		.section1 .ex_box2 div{width:50vw;height:50vh;}
+
+		.section2{}
+		.section2 .ex_sub{text-align:center;}
+		.section2 .ex_sub > p{color:blue;}
+		.section2 .ex_sub .ex_box1{width:640px;background:black;margin:20px auto;}
+		.section2 .ex_sub .ex_box1 p{font-size:20px;}
+		.section2 .ex_sub .ex_box1 > div{margin:0 auto;width:600px;height:250px;background:gray;}
+		.section2 .ex_sub .ex_box1 > div > div{margin:0 auto;width:50px;height:50px;background:white;}
+
+		.section2 .ex_sub .ex_box2{width:100%;max-width:640px;background:black;margin:20px auto;}
+		.section2 .ex_sub .ex_box2 p{font-size:20px;}
+		.section2 .ex_sub .ex_box2 > div{margin:0 auto;width:93.75%;height:250px;background:gray;}
+		.section2 .ex_sub .ex_box2 > div > div{margin:0 auto;width: 8.333333%;padding-bottom: 8.3333333%;background:white;}
+
+		.section2 .ex_sub .ex_box3{width:100vw;background:black;margin:20px auto;}
+		.section2 .ex_sub .ex_box3 p{font-size:20px;}
+		.section2 .ex_sub .ex_box3 > div{margin:0 auto;width:93.75vw;height:250px;background:gray;}
+		.section2 .ex_sub .ex_box3 > div > div{margin:0 auto;width:7.8125vw;height:7.8125vw;background:white;}
+
+		.section3{}
+		.section3 .ex_sub{text-align:center;}
+		.section3 .ex_sub > p{color:blue;}
+		.section3 .ex_sub .ex_box1{width:1000px;background:#28252e;;margin:20px auto;}
+		.section3 .ex_sub .ex_box1 p{font-size:20px;}
+		.section3 .ex_sub .ex_box1 > div{margin:0 auto;width:600px;height:250px;background:gray;}
+		.section3 .ex_sub .ex_box1 > div > div{margin:0 auto;width:50px;height:50px;background:red;}
+		
+
+		.section6 .ex_sub .ex_box1{background:gray;width: calc(100% - 50px);height: calc(500px - 50px);text-align: center;}
+		.section6 .ex_sub > p{color:blue;}
+
+		.wrap_calcu{margin-top: 50px;background: white;text-align: center;padding: 20px;}
+		.wrap_calcu ul{overflow:hidden;}
+		.wrap_calcu ul li{width:30%;text-align: center;float: left;}
+		.wrap_calcu ul li label{font-size: 30px;display: block;}
+		.wrap_calcu ul li div{font-size: 50px;font-weight: bold;height: 90px;line-height: 90px;text-align: left;}
+		.wrap_calcu ul li input[type="text"]{text-align: center;font-size: 20px;height: 40px;margin-top: 10px;}
+		.wrap_calcu button.calcu{width: 98%;margin-top: 20px;font-size: 20px;}
+		.wrap_calcu p.box_print{}
+		</style>
+		<script>
+		$(function(){
+			var btn=$('.calcu');
+			btn.on('click',function(){
+				var target=parseFloat($('.target_px').val());
+				var screen=parseFloat($('.screen_px').val());
+				var print=$('.box_print');
+				print.text(target/screen*100+'vw');
+			});
+		});
+		</script>
+		<div class="wrap">
+			<div class="inner">
+				<div class="header">
+					<h1> vw / vh / vmin / vmax / calc</h1>
+				</div>
+				<div class="section section1">
+					<h2 class="tit_sub">- vw / vh <span>(Viewport Width/Height)</span></h2>
+					<p class="txt_sub">
+						이 단위는 viewport(screen size) 값의 100/1을 뜻합니다. <br/>
+						즉 값에 해당하는 숫자는 0~100 까지 해당됩니다.<br/>
+						<br/>
+						예를 들자면 어느화면에 꽉차는 div를 만들고자 한다면 100vw / 100vh 단위가 들어갑니다.<br/>
+						이때,<br/>
+						%단위 차이점을 말하자면, %는 부모의 요소에 영향을 받습니다.<br/>
+						하지만 vw/vh는 아무리 감싸더라도 부모는 viewport(screen size)입니다.
+					</p>
+					<div class="ex_sub">
+						<div class="ex_box1">
+							<p>width:300px; height:300px;</p>
+							<div>width:50%;<br/>height:50%;</div>
+						</div>
+						<div class="ex_box2">
+							<p>width:300px; height:300px;</p>
+							<div>width:50vw<br/>height:50vh;</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="section section2">
+					<h2 class="tit_sub">어느 때 사용할까? ( 1 )</span></h2>
+					<p class="txt_sub">
+						vw/vh 단위를 어느때 사용 할까요?? <br/><br/>
+
+						width값에는 vw를 많이 사용하고,<br/>
+						height값에는 vh를 많이 사용합니다.(개인적으로 vh는 활용도가 떨어지는것 같습니다.)<br/><br/>
+						
+						보통<br/>
+						아래 이미지처럼 div만으로 반응형!!정사각형을 어떻게 만드시나요?? <br/><br/>
+					</p>
+					<div class="ex_sub">
+						<p>디자인안</p>
+						<div class="ex_box1">
+							<p>width : 640px;</p>
+							<div>
+								<br/>
+								<p>width : 600px;</p>
+								<br/>
+								<div></div>
+								<p>width : 50px; height : 50px;</p>
+							</div>
+						</div>
+						<p>퍼센트(%)</p>
+						<div class="ex_box2">
+							<p>width : 100%;</p>
+							<div>
+								<br/>
+								<p>width : 93.75%; ( 600 ÷ 640 = 93.75 )</p>
+								<br/>
+								<div></div>
+								<p>width : 8.33333....%;( 50 ÷ 600 * 100 = 8.3333..)<br/>height : 정할수없음..;<br/>padding-bottom : 8.33333....%;</p>
+							</div>
+						</div>
+						<p>vw/vh</p>
+						<div class="ex_box3">
+							<p>width : 100vw; ( 전체 스크린의 100% ) </p>
+							<div>
+								<br/>
+								<p>width:93.75vw; ( 전체 스크린의 93.75% )</p>
+								<br/>
+								<div></div>
+								<p>width : 7.8125vw; <br/>height : 7.8125vw; <br/>( 전체 스크린의 7.8125% )</p>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="section section3">
+					<h2 class="tit_sub">어느 때 사용할까? ( 2 )</span></h2>
+					<p class="txt_sub">
+						height 값에 vw를 적용하는방법<br/>
+						모바일에 탭을 넣으실때 어떻게 넣으시나요?<br/><br/>
+
+						아래는 vw를 이용하여,<br/>
+						탭 버튼을 이미지로 넣지 않고 백그라운드로 넣어 보았습니다.
+					</p>
+					<div class="ex_sub">
+
+						<div class="ex_box1">
+							<img src="tab_view.jpg">
+						</div>
+						<div>
+							<a href="tab2.html" target="_blank">2개의 탭</a>
+							<a href="tab3.html" target="_blank">3개의 탭</a>
+							<a href="tab4.html" target="_blank">4개의 탭</a>
+							<a href="tab5.html" target="_blank">5개의 탭</a>
+						</div>
+					</div>
+					<p class="txt_sub">
+						스크린사이즈 : 640px <br/>
+						탭 하나의 높이 : 100px ( 스크린사이즈 640px 일때 ) <br/> <br/>
+						
+						그럼 여기서 스크린 사이즈 640일때<br/><br/> 
+						1vw 는 몇px일까요?&nbsp;&nbsp;&nbsp;<span>6.4px</span><br/> <br/> 
+
+						100px는 몇vw일까요?&nbsp;&nbsp;&nbsp;<span>15.625vw</span><br/> 
+					</p>
+				</div>
+
+				<div class="section section4">
+					<h2 class="tit_sub">공식</span></h2>
+					<p class="txt_sub">
+						구하고자하는px(스크린사이즈에서) ÷ 스크린사이즈 × 100<br/>
+						<div class="wrap_calcu">
+							<ul>
+								<li>
+									<label>target_px</label><input type="text" class="target_px">
+								</li>
+								<li>
+									<label>screen_px</label><input type="text" class="screen_px" value="640px">
+								</li>
+								<li>
+									<div>
+									=<span class="box_print">?????</span>
+									</div>
+								</li>
+							</ul>
+							<button class="calcu">가자!</button>
+						</div>
+						<style>
+						
+						</style>
+					</p>
+				</div>
+
+				<div class="section section5">
+					<h2 class="tit_sub">- vmax / vmin <span>(Viewport Width/Height max / min)</span></h2>
+					<p class="txt_sub">
+						vmax - Viewprot height/width 값중 큰값을 screen size로 잡아라, <br/>
+						vmin - Viewprot height/width 값중 작은값을 screen size로 잡아라, <br/><br/>
+
+						대표적인 반응형 치수로 @media를 이용한 rem이 있습니다.<br/>
+						하지만 가로형 모드에 가려지는 취약한 단점이 있습니다.<br/><br/>
+						
+						vmin으로 가로형 모드에 rem의 취약한 단점을 잡아보았습니다.
+					</p>
+					<div class="ex_sub">
+						<a href="rem.html" target="_blank">rem</a><br/>
+						<a href="vmin.html" target="_blank">vmin</a>
+					</div>
+					<p class="txt_sub">
+						이를 응용하여 더욱 쉽고 간편한 코딩이 될것같습니다.
+					</p>
+				</div>
+
+				<div class="section section6">
+					<h2 class="tit_sub">-calc <span>(Viewport Width/Height max / min)</span></h2>
+					<p class="txt_sub">
+						calc는 css의 단위를 계산해주는 유일한 css입니다.
+					</p>
+						
+					<div class="ex_sub">
+						<p>부모 width:1000px;</p>
+						<div class="ex_box1">width:calc(100%-50px);<br/>height:calc(500px-50px);</div>
+					</div>
+
+					<p class="txt_sub">
+						이를 이용해 모바일의 탭의 버튼부분을 background로 또 잡을수있습니다.<br/>(위에서는 vw를 활용했었습니다.)<br/>
+						공식은 이렇습니다.<br/><br/>
+						padding-bottom : calc( ( 탭하나의 이미지 높이 ÷ 가로 fullsize ) × ( 탭개수 × 100% ) )<br/>
+						아래는 적용 url입니다.
+					</p>
+
+					<div class="ex_sub">
+						<a href="tab3_calc.html" target="_blank">calc_tab_button</a>
+					</div>
+
+					<p class="txt_sub">
+						만일 하위브라우져에서 사용하시겠다면 직접 계산하셔서 padding-bottom에 넣으시면 됩니다.
+					</p>
+				</div>
+
+				<div class="section section6">
+					<h2 class="tit_sub">어디까지 사용할수 있을까?</h2>
+					<p class="txt_sub">
+						Explorer 11이상<br/>
+						IOS(아이폰)  = 10.2이상<br/>
+						안드로이드(갤럭시) = 4.4이상<br/>
+						브라우져 별로 접두어를 사용해야함<br/>
+						ex) -webkit- / -moz-
+					</p>
+					<p class="txt_sub">
+					참고 URL<br/>
+						<a href="http://www.pxtovw.com/">VW 치수 변환 URL</a><br/>
+						<a href="https://webdesign.tutsplus.com/ko/articles/7-css-units-you-might-not-know-about--cms-22573">참고 URL</a>
+					</p>
+				</div>
+			</div>
+		</div>
+		
+	</body>
+</html>
+

@@ -1,0 +1,11 @@
+@font-face {
+		font-family: 'Nanum Gothic'; /* 폰트 명 */
+    	font-style: normal;/* 폰트 스타일 설정 */
+    	font-weight: 400; /* 폰트 굵기 */
+    	src: url(../font/NanumGothic-Regular.eot);/* IE9 호환성 보기 */
+    	src: local("※"),/* 웹 브라우저가 지원하지 않는 불필요한 웹 폰트 호출을 막는데 사용 */
+    	url(../font/NanumGothic-Regular.eot?#iefix) format('embedded-opentype'), /* IE6-IE8 */
+		url(../font/NanumGothic-Regular.woff2) format('woff2'), /* WOFF의 차기 포맷 */ 
+    	url(../font/NanumGothic-Regular.woff) format('woff'); /* 표준 브라우저 */
+		
+}
