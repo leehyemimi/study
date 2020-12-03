@@ -30,25 +30,21 @@
 		var last_date_day = last_date.getDay(); //마지막날 요일
 		last_date = last_date.getDate();//마지막날짜
 		var d = 1; //달력에 표시될 날짜
-		
+
 		document.write("<p class='month'>"+ year + "년 " + month + "월</p>");
 		var tr_length = Math.ceil((last_date + first_date_day) /7); //tr갯수 시작날짜 + 총 달 날짜*/
 		document.write('<table class="calendar"><colgroup><col width="14.2%" span="7"></colgroup><tr><th>일</th><th>월</th><th>화</th><th>수</th><th>목</th><th>금</th><th>토</th></tr><tr>');
 		document.write("<tr>");
 		for( var j = 0 ; j < tr_length*7 ; j++) {
-			if(j >= first_date_day){
-				if(d <= last_date){
-					if(Number.isInteger(j/7) === true){ //일
-						document.write("<tr><td class='sun'>"+d+"</td>");
-					}else if(Number.isInteger((j+1)/7) === true){ //토
-						document.write("<td class='sat'>"+d+"</td></tr>");
-					}else{
-						document.write("<td>"+d+"</td>");
-					}
-					d++;
+			if(j >= first_date_day && d <= last_date){
+				if(Number.isInteger(j/7) === true){ //일
+					document.write("<tr><td class='sun'>"+d+"</td>");
+				}else if(Number.isInteger((j+1)/7) === true){ //토
+					document.write("<td class='sat'>"+d+"</td></tr>");
 				}else{
-					document.write("<td></td>");
+					document.write("<td>"+d+"</td>");
 				}
+				d++;
 			}else{
 				document.write("<td></td>");
 			}
