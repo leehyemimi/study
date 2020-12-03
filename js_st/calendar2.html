@@ -19,36 +19,42 @@
 </style>
 <script>
 	var year_nm = 2020; //년도
+	
 	document.write('<div class="month_box">');
-	for(var month_nm = 0;month_nm<12;month_nm++ ){//0월부터시작
-		var today = new Date(year_nm,month_nm);
-		var year = today.getFullYear(); //년도
-		var month = today.getMonth() + 1;  //월
-		var first_date = new Date(year_nm,month_nm,1); //첫째날
-		var first_date_day = first_date.getDay(); //첫째날 요일
-		var last_date = new Date(year_nm,month,0); //마지막날
-		var last_date_day = last_date.getDay(); //마지막날 요일
-		last_date = last_date.getDate();//마지막날짜
-		var d = 1; //달력에 표시될 날짜
-
+	for(var month_nm = 0; month_nm<12; month_nm++ ){//0월부터시작
+		var today = new Date(year_nm,month_nm),
+			year = today.getFullYear(), //년도
+			month = today.getMonth() + 1,  //월
+			first_date = new Date(year_nm,month_nm,1), //첫째날
+			first_date_day = first_date.getDay(), //첫째날 요일
+			last_date = new Date(year_nm,month,0), //마지막날
+			last_date_day = last_date.getDay(), //마지막날 요일
+			last_date = last_date.getDate(),//마지막날짜
+			d = 1, //달력에 표시될 날짜
+			tr_length = Math.ceil((last_date + first_date_day) /7), //tr갯수 시작날짜 + 총 달 날짜*/
+			total_td = tr_length * 7;
+		
 		document.write("<p class='month'>"+ year + "년 " + month + "월</p>");
-		var tr_length = Math.ceil((last_date + first_date_day) /7); //tr갯수 시작날짜 + 총 달 날짜*/
 		document.write('<table class="calendar"><colgroup><col width="14.2%" span="7"></colgroup><tr><th>일</th><th>월</th><th>화</th><th>수</th><th>목</th><th>금</th><th>토</th></tr><tr>');
 		document.write("<tr>");
-		for( var j = 0 ; j < tr_length*7 ; j++) {
-			if(j >= first_date_day && d <= last_date){
-				if(Number.isInteger(j/7) === true){ //일
-					document.write("<tr><td class='sun'>"+d+"</td>");
-				}else if(Number.isInteger((j+1)/7) === true){ //토
-					document.write("<td class='sat'>"+d+"</td></tr>");
+		
+			for( var j = 0 ; j < total_td ; j++) {
+				var sun = Number.isInteger(j/7),
+					sat = Number.isInteger((j+1)/7),
+					td = "<td>"+d+"</td>";
+				if(j >= first_date_day && d <= last_date){
+					if(sun === true){ //일
+						td = "<tr><td class='sun'>"+d+"</td>";
+					}
+					if(sat === true){ //토
+						td = "<td class='sat'>"+d+"</td></tr>";
+					}
+					document.write(td);
+					d++;
 				}else{
-					document.write("<td>"+d+"</td>");
+					document.write("<td></td>");
 				}
-				d++;
-			}else{
-				document.write("<td></td>");
 			}
-		}
 		document.write("</tr></table>");
 	}
 	document.write('</div>');
