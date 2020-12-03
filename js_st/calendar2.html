@@ -18,8 +18,18 @@
 	.calendar td.sat{color:blue;}
 </style>
 <script>
+	//요일 클래스
+	function fnGetClassName(_now_day){
+		if(_now_day === 0){
+			class_name = "sun";
+		}
+		if(_now_day === 6){
+			class_name = "sat";
+		}
+		return class_name;
+	}
+	
 	var year_nm = 2020; //년도
-
 	document.write('<div class="month_box">');
 	for(var month_nm = 0; month_nm<12; month_nm++ ){//0월부터시작
 		var today = new Date(year_nm,month_nm),
@@ -44,19 +54,22 @@
 			if(j >= first_date_day && d <= last_date){
 				td = "<td>"+d+"</td>";
 				var day_date = new Date(year_nm,month_nm,d),
-					now_day = day_date.getDay(), //요일
+					now_day = day_date.getDay(),//요일
 					class_name = "",
 					open_tr = "",
 					close_tr = "";
+				
 				//요일 클래스
+				fnGetClassName(now_day);
+				
+				//여는 tr 닫는 tr처리
 				if(now_day === 0){
-					open_tr="<tr>",
-					class_name = "sun";
+					open_tr="<tr>";
 				}
 				if(now_day === 6){
 					close_tr="</tr>";
-					class_name = "sat";
 				}
+				
 				td = open_tr + "<td class='"+class_name+"'>"+d+"</td>"  + close_tr;
 				d++;
 			}
