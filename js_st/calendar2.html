@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<meta charset="utf-8">
 	<title>calendar</title>
 </head>
 <body>
@@ -17,29 +18,29 @@
 	.calendar td.sat{color:blue;}
 </style>
 <script>
-	var year_nm = 2020; //³âµµ
+	var year_nm = 2020; //ë…„ë„
 	document.write('<div class="month_box">');
-	for(var month_nm = 0;month_nm<12;month_nm++ ){//0¿ùºÎÅÍ½ÃÀÛ
+	for(var month_nm = 0;month_nm<12;month_nm++ ){//0ì›”ë¶€í„°ì‹œì‘
 		var today = new Date(year_nm,month_nm);
-		var year = today.getFullYear(); //³âµµ
-		var month = today.getMonth() + 1;  //¿ù
-		var first_date = new Date(year_nm,month_nm,1); //Ã¹Â°³¯
-		var first_date_day = first_date.getDay(); //Ã¹Â°³¯ ¿äÀÏ
-		var last_date = new Date(year_nm,month,0); //¸¶Áö¸·³¯
-		var last_date_day = last_date.getDay(); //¸¶Áö¸·³¯ ¿äÀÏ
-		last_date = last_date.getDate();//¸¶Áö¸·³¯Â¥
-		var d = 1; //´Ş·Â¿¡ Ç¥½ÃµÉ ³¯Â¥
+		var year = today.getFullYear(); //ë…„ë„
+		var month = today.getMonth() + 1;  //ì›”
+		var first_date = new Date(year_nm,month_nm,1); //ì²«ì§¸ë‚ 
+		var first_date_day = first_date.getDay(); //ì²«ì§¸ë‚  ìš”ì¼
+		var last_date = new Date(year_nm,month,0); //ë§ˆì§€ë§‰ë‚ 
+		var last_date_day = last_date.getDay(); //ë§ˆì§€ë§‰ë‚  ìš”ì¼
+		last_date = last_date.getDate();//ë§ˆì§€ë§‰ë‚ ì§œ
+		var d = 1; //ë‹¬ë ¥ì— í‘œì‹œë  ë‚ ì§œ
 		
-		document.write("<p class='month'>"+ year + "³â " + month + "¿ù</p>");
-		var tr_length = Math.ceil((last_date + first_date_day) /7); //tr°¹¼ö ½ÃÀÛ³¯Â¥ + ÃÑ ´Ş ³¯Â¥*/
-		document.write('<table class="calendar"><colgroup><col width="14.2%" span="7"></colgroup><tr><th>ÀÏ</th><th>¿ù</th><th>È­</th><th>¼ö</th><th>¸ñ</th><th>±İ</th><th>Åä</th></tr><tr>');
+		document.write("<p class='month'>"+ year + "ë…„ " + month + "ì›”</p>");
+		var tr_length = Math.ceil((last_date + first_date_day) /7); //trê°¯ìˆ˜ ì‹œì‘ë‚ ì§œ + ì´ ë‹¬ ë‚ ì§œ*/
+		document.write('<table class="calendar"><colgroup><col width="14.2%" span="7"></colgroup><tr><th>ì¼</th><th>ì›”</th><th>í™”</th><th>ìˆ˜</th><th>ëª©</th><th>ê¸ˆ</th><th>í† </th></tr><tr>');
 		document.write("<tr>");
 		for( var j = 0 ; j < tr_length*7 ; j++) {
 			if(j >= first_date_day){
 				if(d <= last_date){
-					if(Number.isInteger(j/7) === true){ //ÀÏ
+					if(Number.isInteger(j/7) === true){ //ì¼
 						document.write("<tr><td class='sun'>"+d+"</td>");
-					}else if(Number.isInteger((j+1)/7) === true){ //Åä
+					}else if(Number.isInteger((j+1)/7) === true){ //í† 
 						document.write("<td class='sat'>"+d+"</td></tr>");
 					}else{
 						document.write("<td>"+d+"</td>");
