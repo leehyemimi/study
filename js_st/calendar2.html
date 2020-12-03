@@ -44,13 +44,15 @@
 				if(j >= first_date_day && d <= last_date){
 					td = "<td>"+d+"</td>";
 					var day_date = new Date(year_nm,month_nm,d),
-						now_day = day_date.getDay(); //요일
-					if(now_day === 0){//일
-						td = "<tr><td class='sun'>"+d+"</td>";
+						now_day = day_date.getDay(), //요일
+						class_name = "";
+					if(now_day === 0){
+						class_name = "sun";
 					}
-					if(now_day === 6){//월
-						td = "<td class='sat'>"+d+"</td></tr>";
+					if(now_day === 6){
+						class_name = "sat";
 					}
+					td = "<td class='"+class_name+"'>"+d+"</td>";
 					d++;
 				}
 				document.write(td);
