@@ -39,16 +39,16 @@
 		document.write("<tr>");
 		
 			for(var j = 0 ; j < total_td ; j++) {
-				var td = "<td></td>",
-					sun = Number.isInteger(j/7),
-					sat = Number.isInteger((j+1)/7);
+				var td = "<td></td>";
 					
 				if(j >= first_date_day && d <= last_date){
 					td = "<td>"+d+"</td>";
-					if(sun === true){ //일
+					var day_date = new Date(year_nm,month_nm,d),
+						now_day = day_date.getDay(); //요일
+					if(now_day === 0){//일
 						td = "<tr><td class='sun'>"+d+"</td>";
 					}
-					if(sat === true){ //토
+					if(now_day === 6){//월
 						td = "<td class='sat'>"+d+"</td></tr>";
 					}
 					d++;
@@ -58,7 +58,6 @@
 		document.write("</tr></table>");
 	}
 	document.write('</div>');
-	console.log(year);
 </script>
 </body>
 </html>
