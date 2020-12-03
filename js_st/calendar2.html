@@ -20,6 +20,7 @@
 <script>
 	//요일 클래스
 	function fnGetClassName(_now_day){
+		var	class_name = "";
 		if(_now_day === 0){
 			class_name = "sun";
 		}
@@ -60,7 +61,7 @@
 					close_tr = "";
 				
 				//요일 클래스
-				fnGetClassName(now_day);
+				class_name = fnGetClassName(now_day);
 				
 				//여는 tr 닫는 tr처리
 				if(now_day === 0){
