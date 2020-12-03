@@ -39,22 +39,21 @@
 		document.write("<tr>");
 		
 			for(var j = 0 ; j < total_td ; j++) {
-				var td = "<td>"+d+"</td>",
+				var td = "<td></td>",
 					sun = Number.isInteger(j/7),
 					sat = Number.isInteger((j+1)/7);
 					
 				if(j >= first_date_day && d <= last_date){
+					td = "<td>"+d+"</td>";
 					if(sun === true){ //일
 						td = "<tr><td class='sun'>"+d+"</td>";
 					}
 					if(sat === true){ //토
 						td = "<td class='sat'>"+d+"</td></tr>";
 					}
-					document.write(td);
 					d++;
-				}else{
-					document.write("<td></td>");
 				}
+				document.write(td);
 			}
 		document.write("</tr></table>");
 	}
