@@ -36,6 +36,11 @@
 			return class_name;
 		}
 		
+		//클릭시 alert
+		function alert_day(_now_date){
+			alert(_now_date.toString());
+		}
+		
 		//달력생성
 		function fnCalendar(now_date){
 			var today = new Date(now_date),
@@ -65,8 +70,7 @@
 					if(j >= first_date_day && d <= last_date){
 						var day_date = new Date(year,month,d),
 							now_day = day_date.getDay(),//요일
-							//_now_date = year.toString() + "-" + (month+1).toString() + "-" + d.toString(),
-							//_now_date = _now_date.toString(),
+							_now_date = year.toString() + "-" + (month+1).toString() + "-" + d.toString(),
 							class_name = "",
 							open_tr = "",
 							close_tr = "";
@@ -85,8 +89,9 @@
 						if(now_day === 6){
 							close_tr='</tr>';
 						}
-						//onclick="alert('+ _now_date +')"
-						td = open_tr + '<td class="'+class_name+'"><a href="#;">'+d+'</a></td>' + close_tr;
+						
+						//**질문 _now_date : 2020-01-01 형식으로 되지 않고. 수식으로 변경되어버립...
+						td = open_tr + '<td class="'+class_name+'"><a href="javascript:alert_day('+_now_date+');">'+d+'</a></td>' + close_tr;
 						d++;
 					}
 					month_box = month_box + td;
@@ -96,6 +101,7 @@
 			
 			document.getElementById("calendar").innerHTML  = month_box;
 		}
+		
 	</script>
 
 	<div class="article">
