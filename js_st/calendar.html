@@ -4,24 +4,22 @@
 	<meta charset="utf-8">
 	<title>calendar</title>
 	<link type="text/css" rel="stylesheet" href="calendar.css" />
+	<script src="https://code.jquery.com/jquery-1.11.3.js"></script>
 	<script type="text/javascript" src="calendar.js"></script>
 	<script>
 		//이벤트
-		function MainView(_method,str) {
-			_method(str);
-		}
-
-		var method = function (str) {
+		var method = function(str) {
 			alert(str);
 		};
 		var method2= function (str) {
 			console.log(str);
 		};
 
-
-		function Main(str) {
-			MainView(method2,str);
+		var _method = method;
+		function Main(_method,str){
+			_method(str);
 		}
+		
 	</script>
 </head>
 <body>
