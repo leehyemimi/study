@@ -59,11 +59,16 @@ function fnCalendar(now_date,method){
 				close_tr='</tr>';
 			}
 
-			td = open_tr + '<td class="'+class_name+'"><a href="javascript:;" onclick="method(\'' +_now_date + '\');">'+d+'</a></td>' + close_tr;
+			td = open_tr + '<td class="'+class_name+'"><a href="javascript:;" id="'+_now_date+'">'+d+'</a></td>' + close_tr;
 			d++;
 		}
 		month_box = month_box + td;
 	}
 	month_box = month_box + '</tr></table>';
 	document.getElementById("calendar").innerHTML  = month_box;
+
+	var el = document.getElementsByTagName("a");
+	for(var i = 0 ; i < el.length ; i++){
+		el[i].addEventListener("click", function(){method(this.id)});
+	}
 }
