@@ -14,8 +14,6 @@
 		var method2= function (str) {
 			console.log(str);
 		};
-
-		var _method = method;
 		function Main(_method,str){
 			_method(str);
 		}
@@ -24,7 +22,7 @@
 </head>
 <body>
 <div class="article">
-	<input type="text" class="input_date" value="2020-12-01" onclick="fnCalendar(this.value);">
+	<input type="text" class="input_date" value="2020-12-01"  onclick="fnCalendar(this.value,method);">
 	<div id="calendar"></div>
 </div>
 </body>
