@@ -67,7 +67,7 @@ function fnCalendar(now_date,method){
 	month_box = month_box + '</tr></table>';
 	document.getElementById("calendar").innerHTML  = month_box;
 
-	var el = document.getElementsByTagName("a");
+	var el = document.getElementById("calendar").getElementsByTagName("a");
 	for(var i = 0 ; i < el.length ; i++){
 		el[i].addEventListener("click", function(){method(this.id)});
 	}
