@@ -11,7 +11,7 @@ function fnGetClassName(_now_day){
 }
 
 //달력생성
-function fnCalendar(now_date,method){
+function fnCalendar(now_date,_method){
 	var today = new Date(now_date),
 		year = today.getFullYear(), //년도
 		month = today.getMonth(), //월
@@ -59,7 +59,7 @@ function fnCalendar(now_date,method){
 				close_tr='</tr>';
 			}
 
-			td = open_tr + '<td class="'+class_name+'"><a href="javascript:Main(method,\'' + _now_date + '\');">'+d+'</a></td>' + close_tr;
+			td = open_tr + '<td class="'+class_name+'"><a href="javascript:Main(_method,\'' + _now_date + '\');">'+d+'</a></td>' + close_tr;
 			d++;
 		}
 		month_box = month_box + td;
