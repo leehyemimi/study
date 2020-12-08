@@ -10,16 +10,6 @@ function fnGetClassName(_now_day){
 	return class_name;
 }
 
-//이벤트
-function Event(_method,str) {
-	_method(str);
-}
-
-//메소드
-var Method = function(str) {
-	alert(str);
-};
-
 //달력생성
 function fnCalendar(now_date){
 	var today = new Date(now_date),
@@ -69,7 +59,7 @@ function fnCalendar(now_date){
 				close_tr='</tr>';
 			}
 
-			td = open_tr + '<td class="'+class_name+'"><a href="javascript:Event(Method,\''+_now_date+'\');" onclick="">'+d+'</a></td>' + close_tr;
+			td = open_tr + '<td class="'+class_name+'"><a href="javascript:Main(\''+_now_date+'\');">'+d+'</a></td>' + close_tr;
 			d++;
 		}
 		month_box = month_box + td;

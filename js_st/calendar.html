@@ -5,6 +5,24 @@
 	<title>calendar</title>
 	<link type="text/css" rel="stylesheet" href="calendar.css" />
 	<script type="text/javascript" src="calendar.js"></script>
+	<script>
+		//이벤트
+		function MainView(_method,str) {
+			_method(str);
+		}
+
+		var method = function (str) {
+			alert(str);
+		};
+		var method2= function (str) {
+			console.log(str);
+		};
+
+
+		function Main(str) {
+			MainView(method2,str);
+		}
+	</script>
 </head>
 <body>
 <div class="article">
