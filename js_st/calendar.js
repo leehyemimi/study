@@ -1,4 +1,3 @@
-
 //요일 클래스
 function fnGetClassName(_now_day){
 	var class_name = "";
@@ -27,7 +26,7 @@ class Calendar {
 		this.last_date_day = this.last_date.getDay(); //마지막날 요일
 		this.last_date = this.last_date.getDate(); //마지막날짜
 
-		this.d = 1, //달력에 표시될 날짜
+		this.d = 1; //달력에 표시될 날짜
 		this.tr_length = Math.ceil((this.last_date + this.first_date_day) /7); //tr갯수 시작날짜 + 총 달 날짜*!/
 		this.total_td = this.tr_length * 7;
 		this.DateOnClick = DateOnClick;
