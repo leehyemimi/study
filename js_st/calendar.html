@@ -4,22 +4,24 @@
 	<meta charset="utf-8">
 	<title>calendar</title>
 	<link type="text/css" rel="stylesheet" href="calendar.css" />
-	<script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+	<!--<script src="https://code.jquery.com/jquery-1.11.3.js"></script>-->
 	<script type="text/javascript" src="calendar.js"></script>
-	<script>
-		//이벤트
-		var method1 = function(str){
-			alert(str);
-		};
-		var method2 = function(str){
-			console.log(str);
-		};
-	</script>
+	
 </head>
 <body>
 <div class="article">
-	<input type="text" class="input_date" value="2020-12-01"  onclick="fnCalendar(this.value,method1);">
+	<input type="text" class="input_date" value="2020-12-01"><!-- onclick="fnCalendar(this.value,method1);"-->
 	<div id="calendar"></div>
 </div>
+<script>
+	//이벤트
+	var DateOnClick = function(str){
+		alert(str);
+	};
+	
+	var calendar = new Calendar('2020-12-01',DateOnClick);
+	calendar.tableMake();
+	
+</script>
 </body>
 </html>
