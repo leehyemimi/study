@@ -36,10 +36,6 @@ class Calendar {
 		this.DateOnClick = str;
 	}
 
-	set DataClick(str) {
-		this.DateOnClick = str;
-	}
-
 	tableMake(){
 		var calendarId = 'calendar' + this.inputid.slice(-1);
 		var DataClick = this.DateOnClick;
