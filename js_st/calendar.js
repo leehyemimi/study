@@ -11,9 +11,8 @@ function fnGetClassName(_now_day){
 }
 
 class Calendar {
-	constructor(now_date,DateOnClick) { //생성자 : class 인스턴스를 생성할때 초기화 하는 메소드
+	constructor(now_date) { //생성자 : class 인스턴스를 생성할때 초기화 하는 메소드
 		this.now_date = now_date;
-		this.DateOnClick = DateOnClick;
 		this.today = new Date(this.now_date);
 		this.year = this.today.getFullYear(); //년도
 		this.month = this.today.getMonth(); //월
@@ -24,7 +23,7 @@ class Calendar {
 		this.first_date_day = this.first_date.getDay(); //첫째날 요일
 
 		this.last_date = new Date(this.year,this.month+1,0); //마지막날
-		this.last_date_day = this.last_date.getDay(); //마지막날 요일
+		//this.last_date_day = this.last_date.getDay(); //마지막날 요일
 		this.last_date = this.last_date.getDate(); //마지막날짜
 
 		this.d = 1; //달력에 표시될 날짜
@@ -32,8 +31,12 @@ class Calendar {
 		this.total_td = this.tr_length * 7;
 	}
 
+	set DataClick(str) {
+		this.DateOnClick = str;
+	}
+
 	tableMake(){
-		var DatnClick = this.DateOnClick;
+		var DataClick = this.DateOnClick;
 		var month_box =	'<p class="month">'+ this.year + '년 ' + this.now_month + '월</p>' +
 			'<table class="calendar"><colgroup><col width="14.2%" span="7"></colgroup><tr><th>일</th><th>월</th><th>화</th><th>수</th><th>목</th><th>금</th><th>토</th></tr>' +
 			'<tr>';
@@ -74,7 +77,7 @@ class Calendar {
 
 		var el = document.getElementById("calendar").getElementsByTagName("a");
 		for(var i = 0 ; i < el.length ; i++){
-			el[i].addEventListener("click", function(){DatnClick(this.id)});
+			el[i].addEventListener("click", function(){DataClick(this.id)});
 		}
 	}
 }
