@@ -11,7 +11,7 @@ function fnGetClassName(_now_day){
 }
 
 class Calendar {
-	constructor(now_date,DateOnClick) {
+	constructor(now_date,DateOnClick) { //생성자 : class 인스턴스를 생성할때 초기화 하는 메소드
 		this.now_date = now_date;
 		this.today = new Date(this.now_date),
 		this.year = this.today.getFullYear(), //년도
@@ -29,10 +29,11 @@ class Calendar {
 		this.d = 1, //달력에 표시될 날짜
 		this.tr_length = Math.ceil((this.last_date + this.first_date_day) /7), //tr갯수 시작날짜 + 총 달 날짜*!/
 		this.total_td = this.tr_length * 7,
-		this.DateOnClick  = DateOnClick;
+		this.DateOnClick = DateOnClick;
 	}
 
 	tableMake(){
+		var DatnClick = this.DateOnClick;
 		var month_box =	'<p class="month">'+ this.year + '년 ' + this.now_month + '월</p>' +
 			'<table class="calendar"><colgroup><col width="14.2%" span="7"></colgroup><tr><th>일</th><th>월</th><th>화</th><th>수</th><th>목</th><th>금</th><th>토</th></tr>' +
 			'<tr>';
@@ -73,7 +74,7 @@ class Calendar {
 
 		var el = document.getElementById("calendar").getElementsByTagName("a");
 		for(var i = 0 ; i < el.length ; i++){
-			el[i].addEventListener("click", function(){DateOnClick(this.id)});
+			el[i].addEventListener("click", function(){DatnClick(this.id)});
 		}
 	}
 }

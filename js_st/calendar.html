@@ -15,13 +15,13 @@
 </div>
 <script>
 	//이벤트
-	var DateOnClick = function(str){
+	var DateOnClickMethod = function(str){
 		alert(str);
 	};
 	
-	var calendar = new Calendar('2020-12-01',DateOnClick);
+	var calendar = new Calendar('2020-12-01');
+	calendar.DateOnClick = DateOnClickMethod;
 	calendar.tableMake();
-	
 </script>
 </body>
 </html>
