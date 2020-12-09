@@ -13,6 +13,7 @@ function fnGetClassName(_now_day){
 class Calendar {
 	constructor(now_date,DateOnClick) { //생성자 : class 인스턴스를 생성할때 초기화 하는 메소드
 		this.now_date = now_date;
+		this.DateOnClick = DateOnClick;
 		this.today = new Date(this.now_date);
 		this.year = this.today.getFullYear(); //년도
 		this.month = this.today.getMonth(); //월
@@ -29,7 +30,6 @@ class Calendar {
 		this.d = 1; //달력에 표시될 날짜
 		this.tr_length = Math.ceil((this.last_date + this.first_date_day) /7); //tr갯수 시작날짜 + 총 달 날짜*!/
 		this.total_td = this.tr_length * 7;
-		this.DateOnClick = DateOnClick;
 	}
 
 	tableMake(){
