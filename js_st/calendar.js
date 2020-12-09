@@ -1,3 +1,4 @@
+
 //요일 클래스
 function fnGetClassName(_now_day){
 	var class_name = "";
@@ -13,22 +14,22 @@ function fnGetClassName(_now_day){
 class Calendar {
 	constructor(now_date,DateOnClick) { //생성자 : class 인스턴스를 생성할때 초기화 하는 메소드
 		this.now_date = now_date;
-		this.today = new Date(this.now_date),
-		this.year = this.today.getFullYear(), //년도
-		this.month = this.today.getMonth(), //월
-		this.now_month = this.today.getMonth() + 1, //월
-		this.date = this.today.getDate(), //일
+		this.today = new Date(this.now_date);
+		this.year = this.today.getFullYear(); //년도
+		this.month = this.today.getMonth(); //월
+		this.now_month = this.today.getMonth() + 1; //월
+		this.date = this.today.getDate(); //일
 
-		this.first_date = new Date(this.year,this.month ,1), //첫째날
-		this.first_date_day = this.first_date.getDay(), //첫째날 요일
+		this.first_date = new Date(this.year,this.month ,1); //첫째날
+		this.first_date_day = this.first_date.getDay(); //첫째날 요일
 
-		this.last_date = new Date(this.year,this.month+1,0), //마지막날
-		this.last_date_day = this.last_date.getDay(), //마지막날 요일
-		this.last_date = this.last_date.getDate(), //마지막날짜
+		this.last_date = new Date(this.year,this.month+1,0); //마지막날
+		this.last_date_day = this.last_date.getDay(); //마지막날 요일
+		this.last_date = this.last_date.getDate(); //마지막날짜
 
 		this.d = 1, //달력에 표시될 날짜
-		this.tr_length = Math.ceil((this.last_date + this.first_date_day) /7), //tr갯수 시작날짜 + 총 달 날짜*!/
-		this.total_td = this.tr_length * 7,
+		this.tr_length = Math.ceil((this.last_date + this.first_date_day) /7); //tr갯수 시작날짜 + 총 달 날짜*!/
+		this.total_td = this.tr_length * 7;
 		this.DateOnClick = DateOnClick;
 	}
 

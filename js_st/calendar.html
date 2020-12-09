@@ -6,7 +6,7 @@
 	<link type="text/css" rel="stylesheet" href="calendar.css" />
 	<!--<script src="https://code.jquery.com/jquery-1.11.3.js"></script>-->
 	<script type="text/javascript" src="calendar.js"></script>
-	
+
 </head>
 <body>
 <div class="article">
@@ -18,8 +18,8 @@
 	var DateOnClickMethod = function(str){
 		alert(str);
 	};
-	
-	var calendar = new Calendar('2020-12-01');
+
+	var calendar = new Calendar('2020-12-01','');
 	calendar.DateOnClick = DateOnClickMethod;
 	calendar.tableMake();
 </script>
