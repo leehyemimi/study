@@ -9,8 +9,12 @@
 </head>
 <body>
 <div class="article">
-	<input type="text" class="input_date" value="2020-12-01"><!-- onclick="fnCalendar(this.value,method1);"-->
-	<div id="calendar"></div>
+	<div class="input_calendar_area">
+		<input type="text" id="input_calendar1" class="input_date" value="2020-12-01">
+	</div>
+	<div class="input_calendar_area">
+		<input type="text" id="input_calendar2" class="input_date" value="2021-01-01">
+	</div>
 </div>
 <script>
 	//이벤트
@@ -18,9 +22,19 @@
 		alert(str);
 	};
 
-	var calendar = new Calendar('2020-12-01');
-	calendar.DateOnClick = DateOnClickMethod;
-	calendar.tableMake();
+	var DateOnClickMethod2 = function(str){
+		console.log(str);
+	};
+
+
+	var calendar1 = new Calendar('2020-12-01','input_calendar1');
+	calendar1.DateOnClick = DateOnClickMethod;
+	calendar1.tableMake();
+
+
+	var calendar2 = new Calendar('2020-01-01','input_calendar2');
+	calendar2.DateOnClick = DateOnClickMethod2;
+	calendar2.tableMake();
 </script>
 </body>
 </html>

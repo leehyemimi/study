@@ -1,7 +1,8 @@
 body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, fieldset, legend, textarea, p, blockquote, th, td, input, select, textarea, button{margin:0;padding:0;line-height:1.5}  fieldset, img{border:0 none}  dl, ul, ol, menu, li{list-style:none}  blockquote, q{quotes:none}  blockquote:before, blockquote:after, q:before, q:after{content:'';content:none}  input, select, textarea, button{vertical-align:middle}  input:focus, button:focus, textarea:focus{outline:none}  button{border:0 none;background-color:transparent;cursor:pointer}  body{background:#FFFFFF;-webkit-text-size-adjust:none}  body, th, td, input, select, textarea, button{font-size:13px;font-family: "맑은고딕","Malgun Gothic",'noto', Tahoma, sans-serif;font-weight:400;color:#010101}  a{color:#010101;text-decoration:none}  address, caption, cite, code, dfn, em, var{font-style:normal;font-weight:400}  figure{line-height:0}  table caption{display:none !important}  h1, h2, h3, h4, h5, h6, strong{font-weight:600}  table{table-layout:fixed;border-collapse:collapse;border-spacing:0;width:100%}
-.article{margin:10px;position:relative}
+.article{margin:10px;}
+.input_calendar_area{position:relative;float:left;margin-right:200px}
 .input_date{color:#545966;font-size:12px;padding:5px 0;text-align:center;border:1px solid #8b94a9;}
-#calendar{position:absolute;left:0;width:280px;}
+.calendar_box{position:absolute;left:0;width:280px;}
 
 .month{font-size:12px;margin:0;color:#fff;background:#98a0b3;text-align:center;font-weight:bold;padding:5px 0 7px}
 .month a{color:#000;}

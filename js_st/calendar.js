@@ -11,7 +11,8 @@ function fnGetClassName(_now_day){
 }
 
 class Calendar {
-	constructor(now_date) { //생성자 : class 인스턴스를 생성할때 초기화 하는 메소드
+	constructor(now_date,inputid) { //생성자 : class 인스턴스를 생성할때 초기화 하는 메소드
+		this.inputid = inputid;
 		this.now_date = now_date;
 		this.today = new Date(this.now_date);
 		this.year = this.today.getFullYear(); //년도
@@ -35,8 +36,18 @@ class Calendar {
 		this.DateOnClick = str;
 	}
 
+	set DataClick(str) {
+		this.DateOnClick = str;
+	}
+
 	tableMake(){
+		var calendarId = 'calendar' + this.inputid.slice(-1);
 		var DataClick = this.DateOnClick;
+		var div = document.createElement("div");
+		div.setAttribute("class","calendar_box");
+		div.setAttribute("id",calendarId);
+		document.getElementById(this.inputid).after(div);
+
 		var month_box =	'<p class="month">'+ this.year + '년 ' + this.now_month + '월</p>' +
 			'<table class="calendar"><colgroup><col width="14.2%" span="7"></colgroup><tr><th>일</th><th>월</th><th>화</th><th>수</th><th>목</th><th>금</th><th>토</th></tr>' +
 			'<tr>';
@@ -73,9 +84,9 @@ class Calendar {
 			month_box = month_box + td;
 		}
 		month_box = month_box + '</tr></table>';
-		document.getElementById("calendar").innerHTML  = month_box;
+		document.getElementById(calendarId).innerHTML  = month_box;
 
-		var el = document.getElementById("calendar").getElementsByTagName("a");
+		var el = document.getElementById(calendarId).getElementsByTagName("a");
 		for(var i = 0 ; i < el.length ; i++){
 			el[i].addEventListener("click", function(){DataClick(this.id)});
 		}
