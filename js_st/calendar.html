@@ -26,6 +26,7 @@
 		var calendarId = 'calendar' + inputId.slice(-1);
 		document.getElementById(calendarId).remove();
 		document.getElementById(inputId).setAttribute("class","input_date");
+		
 	};
 
 	var calendar1 = new Calendar('2020-12-01','input_calendar1');
@@ -37,7 +38,7 @@
 	var calendar2 = new Calendar('2020-01-01','input_calendar2');
 	calendar2.DataClick = DateOnClickMethod;
 	//calendar2.CalendarClose = CalendarCloseMethod;
-	calendar2.CalendarOpen();
+	//calendar2.CalendarOpen();
 </script>
 </body>
 </html>
