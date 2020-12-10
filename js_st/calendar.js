@@ -106,7 +106,9 @@ class Calendar {
 
 		var a_click = document.getElementById(_this.calendarId).getElementsByClassName('close_btn')[0];
 		a_click.addEventListener("click", function(){
-			_this.close(_this.inputId);
+			if(_this.close !== undefined){
+				_this.close(_this.inputId);
+			}
 		});
 	}
 
