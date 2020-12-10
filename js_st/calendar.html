@@ -30,13 +30,14 @@
 
 	var calendar1 = new Calendar('2020-12-01','input_calendar1');
 	calendar1.DataClick = DateOnClickMethod;
+	calendar1.CalendarClose = CalendarCloseMethod;
 	calendar1.CalendarOpen();
-	calendar1.CalendarClose = CalendarCloseMethod
+	
 
 	var calendar2 = new Calendar('2020-01-01','input_calendar2');
 	calendar2.DataClick = DateOnClickMethod;
+	calendar2.CalendarClose = CalendarCloseMethod;
 	calendar2.CalendarOpen();
-	//calendar1.CalendarClose();
 </script>
 </body>
 </html>
