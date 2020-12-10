@@ -102,7 +102,9 @@ class Calendar {
 			var el = tdTag[i].getElementsByTagName("a");
 			for(var h = 0 ; h < el.length ; h++){
 				el[h].addEventListener("click", function(){
+					//console.log(new Date(this.id));
 					_this.DateOnClick(this.id);
+
 				});
 			}
 		}
