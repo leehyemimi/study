@@ -10,7 +10,7 @@
 <body>
 <div class="article">
 	<div class="input_calendar_area">
-		<input type="text" id="input_calendar1" class="input_date" value="2020-12-01">
+		<input type="text" id="input_calendar1" class="input_date" value="2020-12-02">
 	</div>
 	<div class="input_calendar_area">
 		<input type="text" id="input_calendar2" class="input_date" value="2021-01-01">
@@ -22,21 +22,21 @@
 		alert(str);
 	};
 
-	var DateOnClickMethod2 = function(str){
-		console.log(str);
+	var CalendarCloseMethod = function(inputId){
+		var calendarId = 'calendar' + inputId.slice(-1);
+		document.getElementById(calendarId).remove();
+		document.getElementById(inputId).setAttribute("class","input_date");
 	};
 
-
 	var calendar1 = new Calendar('2020-12-01','input_calendar1');
-	calendar1.DateOnClick = DateOnClickMethod;
+	calendar1.DataClick = DateOnClickMethod;
 	calendar1.CalendarOpen();
-	//calendar1.CalendarClose();
-
+	calendar1.CalendarClose = CalendarCloseMethod
 
 	var calendar2 = new Calendar('2020-01-01','input_calendar2');
-	calendar2.DateOnClick = DateOnClickMethod2;
+	calendar2.DataClick = DateOnClickMethod;
 	calendar2.CalendarOpen();
-	//calendar2.CalendarClose();
+	//calendar1.CalendarClose();
 </script>
 </body>
 </html>

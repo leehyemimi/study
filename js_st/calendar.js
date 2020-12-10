@@ -1,119 +1,130 @@
 //요일 클래스
-function fnGetClassName(_now_day){
-	var class_name = "";
-	if(_now_day === 0){
-		class_name = "sun";
+function fnGetClassName(_nowDay){
+	var className = "";
+	if(_nowDay === 0){
+		className = "sun";
 	}
-	if(_now_day === 6){
-		class_name = "sat";
+	if(_nowDay === 6){
+		className = "sat";
 	}
-	return class_name;
+	return className;
 }
 
 class Calendar {
-	constructor(now_date,inputid) { //생성자 : class 인스턴스를 생성할때 초기화 하는 메소드
-		this.inputid = inputid;
-		this.now_date = now_date;
-		this.today = new Date(this.now_date);
+	constructor(nowDate,inputId) { //생성자 : class 인스턴스를 생성할때 초기화 하는 메소드
+		this.inputId = inputId;
+		this.nowDate = nowDate;
+		this.today = new Date(this.nowDate);
 		this.year = this.today.getFullYear(); //년도
 		this.month = this.today.getMonth(); //월
-		this.now_month = this.today.getMonth() + 1; //월
+		this.nowMonth = this.today.getMonth() + 1; //월
 		this.date = this.today.getDate(); //일
 
-		this.first_date = new Date(this.year,this.month ,1); //첫째날
-		this.first_date_day = this.first_date.getDay(); //첫째날 요일
+		this.firstDate = new Date(this.year,this.month ,1); //첫째날
+		this.firstDateDay = this.firstDate.getDay(); //첫째날 요일
 
-		this.last_date = new Date(this.year,this.month+1,0); //마지막날
-		//this.last_date_day = this.last_date.getDay(); //마지막날 요일
-		this.last_date = this.last_date.getDate(); //마지막날짜
+		this.lastDate = new Date(this.year,this.month+1,0); //마지막날
+		//this.lastDate_day = this.lastDate.getDay(); //마지막날 요일
+		this.lastDate = this.lastDate.getDate(); //마지막날짜
 
 		this.d = 1; //달력에 표시될 날짜
-		this.tr_length = Math.ceil((this.last_date + this.first_date_day) /7); //tr갯수 시작날짜 + 총 달 날짜*!/
-		this.total_td = this.tr_length * 7;
-		this.calendarId = 'calendar' + this.inputid.slice(-1);
+		this.trLength = Math.ceil((this.lastDate + this.firstDateDay) /7); //tr갯수 시작날짜 + 총 달 날짜*!/
+		this.totalTd = this.trLength * 7;
+		this.calendarId = 'calendar' + this.inputId.slice(-1);
+	}
+
+	tableMake(nowDate){ //달력레이어 만들기
+		var _this = this;
+
+		_this.nowDate = nowDate;
+		_this.today = new Date(_this.nowDate);
+		_this.year = _this.today.getFullYear(); //년도
+		_this.month = _this.today.getMonth(); //월
+		_this.nowMonth = _this.today.getMonth() + 1; //월
+		_this.date = _this.today.getDate(); //일
+
+		_this.firstDate = new Date(_this.year,_this.month ,1); //첫째날
+		_this.firstDateDay = _this.firstDate.getDay(); //첫째날 요일
+
+		_this.lastDate = new Date(_this.year,_this.month+1,0); //마지막날
+		_this.lastDate = _this.lastDate.getDate(); //마지막날짜
+
+		_this.d = 1;
+
+		var div = document.createElement("div");
+		div.setAttribute("class","calendar_box");
+		div.setAttribute("id",_this.calendarId);
+		document.getElementById(_this.inputId).after(div);
+
+		var monthBox =	'<p class="month">'+ _this.year + '년 ' + _this.nowMonth + '월<a href="javascript:;" class="close_btn"></a></p>' +
+			'<table class="calendar"><colgroup><col width="14.2%" span="7"></colgroup><tr><th>일</th><th>월</th><th>화</th><th>수</th><th>목</th><th>금</th><th>토</th></tr>' +
+			'<tr>';
+
+		for(var j = 0 ; j < _this.totalTd ; j++) {
+			var td = '<td></td>';
+
+			if(j >= _this.firstDateDay && _this.d <= _this.lastDate){
+				var day_date = new Date(_this.year,_this.month,_this.d),
+					nowDay = day_date.getDay(),//요일
+					_nowDate = _this.year + "-" + (_this.month+1) + "-" + _this.d,
+					className = "",
+					openTr = "",
+					closeTr = "";
+
+				//요일 클래스
+				className = fnGetClassName(nowDay);
+				//현재 날짜 클래스
+				if(day_date.getDate() === _this.date){
+					className = className + " bg";
+				}
+
+				//여는 tr 닫는 tr 처리
+				if(nowDay === 0){
+					openTr='<tr>';
+				}
+				if(nowDay === 6){
+					closeTr='</tr>';
+				}
+				td = openTr + '<td class="'+className+'"><a href="javascript:;" id="'+_nowDate+'">'+_this.d+'</a></td>' + closeTr;
+				_this.d++;
+			}
+			monthBox = monthBox + td;
+		}
+		monthBox = monthBox + '</tr></table>';
+		document.getElementById(_this.calendarId).innerHTML  = monthBox;
+		
+		//날짜에 이벤트
+		var tdTag = document.getElementById(_this.calendarId).getElementsByTagName("td");
+		for(var i = 0 ; i < tdTag.length ; i++){
+			var el = tdTag[i].getElementsByTagName("a");
+			for(var h = 0 ; h < el.length ; h++){
+				el[h].addEventListener("click", function(){
+					_this.DateOnClick(this.id);
+				});
+			}
+		}
+
+		var a_click = document.getElementById(_this.calendarId).getElementsByClassName('close_btn')[0];
+		a_click.addEventListener("click", function(){
+			_this.close(_this.inputId);
+		});
+	}
+
+	CalendarOpen() { //달력레이어 열기
+		var _this = this;
+		document.getElementById(_this.inputId).addEventListener("click", function(){
+			if(this.getAttribute('class') !== "input_date active"){
+				this.className += " active";
+				_this.tableMake(this.value); //this.value
+			}
+		});
 	}
 
 	set DataClick(str) {
 		this.DateOnClick = str;
 	}
 
-	CalendarOpen() {
-		var _this = this;
-		document.getElementById(this.inputid).addEventListener("click", function(){
-			if(this.getAttribute('class') !== "input_date active"){
-				this.className += " active";
-				_this.tableMake();
-			}
-		});
-	}
-
-	tableMake(){
-		var calendarId = this.calendarId;
-		var DataClick = this.DateOnClick;
-		var div = document.createElement("div");
-		div.setAttribute("class","calendar_box");
-		div.setAttribute("id",calendarId);
-		document.getElementById(this.inputid).after(div);
-
-		var month_box =	'<p class="month">'+ this.year + '년 ' + this.now_month + '월</p>' +
-			'<table class="calendar"><colgroup><col width="14.2%" span="7"></colgroup><tr><th>일</th><th>월</th><th>화</th><th>수</th><th>목</th><th>금</th><th>토</th></tr>' +
-			'<tr>';
-
-		for(var j = 0 ; j < this.total_td ; j++) {
-			var td = '<td></td>';
-
-			if(j >= this.first_date_day && this.d <= this.last_date){
-				var day_date = new Date(this.year,this.month,this.d),
-					now_day = day_date.getDay(),//요일
-					_now_date = this.year + "-" + (this.month+1) + "-" + this.d,
-					class_name = "",
-					open_tr = "",
-					close_tr = "";
-
-				//요일 클래스
-				class_name = fnGetClassName(now_day);
-				//현재 날짜 클래스
-				if(day_date.getDate() === this.date){
-					class_name = class_name + " bg";
-				}
-
-				//여는 tr 닫는 tr 처리
-				if(now_day === 0){
-					open_tr='<tr>';
-				}
-				if(now_day === 6){
-					close_tr='</tr>';
-				}
-
-				td = open_tr + '<td class="'+class_name+'"><a href="javascript:;" id="'+_now_date+'">'+this.d+'</a></td>' + close_tr;
-				this.d++;
-			}
-			month_box = month_box + td;
-		}
-		month_box = month_box + '</tr></table>';
-		document.getElementById(calendarId).innerHTML  = month_box;
-
-		var td = document.getElementById(calendarId).getElementsByTagName("td");
-		for(var i = 0 ; i < td.length ; i++){
-			var el = td[i].getElementsByTagName("a");
-			for(var h = 0 ; h < el.length ; h++){
-				el[h].addEventListener("click", function(){DataClick(this.id)});
-			}
-		}
-
-		var _this = this;
-		_this.CalendarClose();
-	}
-
-	CalendarClose() {
-		var a = document.createElement("a");
-		var _this = this;
-		a.setAttribute("class","close_btn");
-
-		var a_click = document.getElementById(this.calendarId).getElementsByClassName('month')[0].appendChild(a);
-		a_click.addEventListener("click", function(){
-			document.getElementById(_this.calendarId).remove();
-			document.getElementById(_this.inputid).setAttribute("class","input_date");
-		});
+	set CalendarClose(inputId){ //달력레이어 닫기
+		this.close = inputId;
 	}
 }
