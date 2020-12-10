@@ -31,6 +31,9 @@ class Calendar {
 		this.trLength = Math.ceil((this.lastDate + this.firstDateDay) /7); //tr갯수 시작날짜 + 총 달 날짜*!/
 		this.totalTd = this.trLength * 7;
 		this.calendarId = 'calendar' + this.inputId.slice(-1);
+
+		var _this = this;
+		_this.CalendarOpen();
 	}
 
 	tableMake(nowDate){ //달력레이어 만들기
@@ -106,9 +109,8 @@ class Calendar {
 
 		var a_click = document.getElementById(_this.calendarId).getElementsByClassName('close_btn')[0];
 		a_click.addEventListener("click", function(){
-			if(_this.close !== undefined){
-				_this.close(_this.inputId);
-			}
+			document.getElementById(_this.calendarId).remove();
+			document.getElementById(_this.inputId).setAttribute("class","input_date");
 		});
 	}
 
