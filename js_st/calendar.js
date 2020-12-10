@@ -33,7 +33,7 @@ class Calendar {
 		this.calendarId = 'calendar' + this.inputId.slice(-1);
 
 		var _this = this;
-		_this.CalendarOpen();
+		_this.CalendarClickOpen();
 	}
 
 	tableMake(nowDate){ //달력레이어 만들기
@@ -111,11 +111,13 @@ class Calendar {
 		a_click.addEventListener("click", function(){
 			document.getElementById(_this.calendarId).remove();
 			document.getElementById(_this.inputId).setAttribute("class","input_date");
-			_this.close('');
+			if(_this.CalendarOnClickClose !== undefined){
+				_this.CalendarOnClickClose(_this.nowDate);
+			}
 		});
 	}
 
-	CalendarOpen() { //달력레이어 열기
+	CalendarClickOpen() { //달력레이어 열기
 		var _this = this;
 		document.getElementById(_this.inputId).addEventListener("click", function(){
 			if(this.getAttribute('class') !== "input_date active"){
@@ -129,7 +131,7 @@ class Calendar {
 		this.DateOnClick = str;
 	}
 
-	set CalendarClose(str){ //달력레이어 닫기
-		this.close = str;
+	set CalendarClickClose(str){ //달력레이어 닫기
+		this.CalendarOnClickClose = str;
 	}
 }

@@ -22,14 +22,13 @@
 		alert(str);
 	};
 	
-	var CalendarCloseMethod = function(str){
-		var str = "닫기";
-		alert(str);
+	var CalendarCloseMethod = function(DateOb){
+		alert(DateOb);
 	};
 
 	var calendar1 = new Calendar('2020-12-01','input_calendar1');
 	calendar1.DataClick = DateOnClickMethod;
-	calendar1.CalendarClose = CalendarCloseMethod;
+	calendar1.CalendarClickClose = CalendarCloseMethod;
 	//calendar1.CalendarOpen();
 	
 
