@@ -30,14 +30,25 @@ class Calendar {
 		this.d = 1; //달력에 표시될 날짜
 		this.tr_length = Math.ceil((this.last_date + this.first_date_day) /7); //tr갯수 시작날짜 + 총 달 날짜*!/
 		this.total_td = this.tr_length * 7;
+		this.calendarId = 'calendar' + this.inputid.slice(-1);
 	}
 
 	set DataClick(str) {
 		this.DateOnClick = str;
 	}
 
+	CalendarOpen() {
+		var _this = this;
+		document.getElementById(this.inputid).addEventListener("click", function(){
+			if(this.getAttribute('class') !== "input_date active"){
+				this.className += " active";
+				_this.tableMake();
+			}
+		});
+	}
+
 	tableMake(){
-		var calendarId = 'calendar' + this.inputid.slice(-1);
+		var calendarId = this.calendarId;
 		var DataClick = this.DateOnClick;
 		var div = document.createElement("div");
 		div.setAttribute("class","calendar_box");
@@ -82,9 +93,27 @@ class Calendar {
 		month_box = month_box + '</tr></table>';
 		document.getElementById(calendarId).innerHTML  = month_box;
 
-		var el = document.getElementById(calendarId).getElementsByTagName("a");
-		for(var i = 0 ; i < el.length ; i++){
-			el[i].addEventListener("click", function(){DataClick(this.id)});
+		var td = document.getElementById(calendarId).getElementsByTagName("td");
+		for(var i = 0 ; i < td.length ; i++){
+			var el = td[i].getElementsByTagName("a");
+			for(var h = 0 ; h < el.length ; h++){
+				el[h].addEventListener("click", function(){DataClick(this.id)});
+			}
 		}
+
+		var _this = this;
+		_this.CalendarClose();
+	}
+
+	CalendarClose() {
+		var a = document.createElement("a");
+		var _this = this;
+		a.setAttribute("class","close_btn");
+
+		var a_click = document.getElementById(this.calendarId).getElementsByClassName('month')[0].appendChild(a);
+		a_click.addEventListener("click", function(){
+			document.getElementById(_this.calendarId).remove();
+			document.getElementById(_this.inputid).setAttribute("class","input_date");
+		});
 	}
 }
