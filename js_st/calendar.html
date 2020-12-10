@@ -22,16 +22,14 @@
 		alert(str);
 	};
 	
-	var CalendarCloseMethod = function(inputId){
-		var calendarId = 'calendar' + inputId.slice(-1);
-		document.getElementById(calendarId).remove();
-		document.getElementById(inputId).setAttribute("class","input_date");
-		
+	var CalendarCloseMethod = function(str){
+		var str = "닫기";
+		alert(str);
 	};
 
 	var calendar1 = new Calendar('2020-12-01','input_calendar1');
 	calendar1.DataClick = DateOnClickMethod;
-	//calendar1.CalendarClose = CalendarCloseMethod;
+	calendar1.CalendarClose = CalendarCloseMethod;
 	//calendar1.CalendarOpen();
 	
 

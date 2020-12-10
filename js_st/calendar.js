@@ -111,6 +111,7 @@ class Calendar {
 		a_click.addEventListener("click", function(){
 			document.getElementById(_this.calendarId).remove();
 			document.getElementById(_this.inputId).setAttribute("class","input_date");
+			_this.close('');
 		});
 	}
 
@@ -128,7 +129,7 @@ class Calendar {
 		this.DateOnClick = str;
 	}
 
-	set CalendarClose(inputId){ //달력레이어 닫기
-		this.close = inputId;
+	set CalendarClose(str){ //달력레이어 닫기
+		this.close = str;
 	}
 }
