@@ -153,6 +153,6 @@ class Calendar {
 		this.DateOnClick = str;
 	}
 	set CalendarCloseBtnClick(str){ //달력레이어 닫기버튼 클릭시 이벤트
-		this.CalendarOnClickClose = str;
+		this.CalendarCloseBtnClick = str;
 	}
 }
