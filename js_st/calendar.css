@@ -17,3 +17,4 @@ body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, fiel
 .calendar td.sat a{color:blue;}
 .calendar td.bg a{background:#2d317c;color:#fff;}
 .calendar td a:hover{background:#4c5467;color:#fff;}
+.calendar td a.on{background:#4c5467;color:#fff;}
