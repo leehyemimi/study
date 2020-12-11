@@ -15,7 +15,7 @@ function getFormatDate(date){ // 날짜포맷 yyyy-MM-dd 변환
 	month = month >= 10 ? month : '0' + month;
 	var day = date.getDate();
 	day = day >= 10 ? day : '0' + day;
-	return year + '-' + month + '-' + day;
+	return year + '.' + month + '.' + day;
 }
 
 class Calendar {
