@@ -32,6 +32,7 @@ class Calendar {
 		this.firstDateDay = this.firstDate.getDay(); //첫째날 요일
 
 		this.lastDate = new Date(this.year,this.month+1,0); //마지막날
+		//this.lastDate_day = this.lastDate.getDay(); //마지막날 요일
 		this.lastDate = this.lastDate.getDate(); //마지막날짜
 
 		this.d = 1; //달력에 표시될 날짜
@@ -59,6 +60,8 @@ class Calendar {
 		_this.lastDate = new Date(_this.year,_this.month+1,0); //마지막날
 		_this.lastDate = _this.lastDate.getDate(); //마지막날짜
 
+		console.log(_this.lastDate);
+
 		_this.d = 1;
 
 		var div = document.createElement("div");
@@ -66,13 +69,14 @@ class Calendar {
 		div.setAttribute("id",_this.calendarId);
 		document.getElementById(_this.inputId).after(div);
 
-		var monthBox =	'<p class="month">'+ _this.year + '년 ' + _this.nowMonth + '월<a href="javascript:;" class="close_btn"></a></p>' +
+		var monthBox =	'<p class="month"><a href="javascript:;" class="prev_btn"></a>'+
+			_this.year + '년 ' + _this.nowMonth + '월<a href="javascript:;" class="close_btn"></a><a href="javascript:;" class="next_btn"></a>' +
+			'</p>' +
 			'<table class="calendar"><colgroup><col width="14.2%" span="7"></colgroup><tr><th>일</th><th>월</th><th>화</th><th>수</th><th>목</th><th>금</th><th>토</th></tr>' +
 			'<tr>';
 
 		for(var j = 0 ; j < _this.totalTd ; j++) {
 			var td = '<td></td>';
-
 
 			if(j >= _this.firstDateDay && _this.d <= _this.lastDate){
 				var day_date = new Date(_this.year,_this.month,_this.d),
@@ -96,18 +100,28 @@ class Calendar {
 				if(nowDay === 6){
 					closeTr='</tr>';
 				}
-
 				td = openTr + '<td class="'+className+'"><a href="javascript:;" data-date="'+_nowDate+'">'+_this.d+'</a></td>' + closeTr;
-
-
 				_this.d++;
 			}
 			monthBox = monthBox + td;
 		}
 		monthBox = monthBox + '</tr></table>';
 		document.getElementById(_this.calendarId).innerHTML  = monthBox;
+
+		//이전달
+		var prev_btn = document.getElementById(_this.calendarId).getElementsByClassName('prev_btn')[0];
+		prev_btn.addEventListener("click", function(){
+			_this.CalendarClickClose();
+			_this.tableMake(getFormatDate(new Date(_this.year,_this.month-1,1)));
+		});
+		//다음달 
+		var next_btn = document.getElementById(_this.calendarId).getElementsByClassName('next_btn')[0];
+		next_btn.addEventListener("click", function(){
+			_this.CalendarClickClose();
+			_this.tableMake(getFormatDate(new Date(_this.year,_this.month+1,1)));
+		});
 		
-		//날짜에 이벤트
+		//날짜 이벤트
 		var tdTag = document.getElementById(_this.calendarId).getElementsByTagName("td");
 		for(var i = 0 ; i < tdTag.length ; i++){
 			var el = tdTag[i].getElementsByTagName("a");
@@ -117,16 +131,15 @@ class Calendar {
 					if(_this.DateOnClick !== undefined){ //날짜클릭시 이벤트
 						_this.DateOnClick(this.getAttribute('data-date'));
 					}
-
 					_this.CalendarClickClose(); //달력레이어 닫기
 				});
 			}
 		}
 
+		//달력레이어 닫기버튼
 		var a_click = document.getElementById(_this.calendarId).getElementsByClassName('close_btn')[0];
 		a_click.addEventListener("click", function(){
 			_this.CalendarClickClose(); //달력레이어 닫기
-
 			if(_this.CalendarCloseBtnOnClick !== undefined){ //달력레이어 닫기버튼 클릭시 이벤트
 				_this.CalendarCloseBtnOnClick(_this.nowDate);
 			}
