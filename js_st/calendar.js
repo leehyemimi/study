@@ -1,13 +1,21 @@
-//요일 클래스
-function fnGetClassName(_nowDay){
+function fnGetClassName(NowDay){ //요일 클래스
 	var className = "";
-	if(_nowDay === 0){
+	if(NowDay === 0){
 		className = "sun";
 	}
-	if(_nowDay === 6){
+	if(NowDay === 6){
 		className = "sat";
 	}
 	return className;
+}
+
+function getFormatDate(date){ // 날짜포맷 yyyy-MM-dd 변환
+	var year = date.getFullYear();
+	var month = (1 + date.getMonth());
+	month = month >= 10 ? month : '0' + month;
+	var day = date.getDate();
+	day = day >= 10 ? day : '0' + day;
+	return year + '-' + month + '-' + day;
 }
 
 class Calendar {
@@ -24,7 +32,6 @@ class Calendar {
 		this.firstDateDay = this.firstDate.getDay(); //첫째날 요일
 
 		this.lastDate = new Date(this.year,this.month+1,0); //마지막날
-		//this.lastDate_day = this.lastDate.getDay(); //마지막날 요일
 		this.lastDate = this.lastDate.getDate(); //마지막날짜
 
 		this.d = 1; //달력에 표시될 날짜
@@ -66,10 +73,11 @@ class Calendar {
 		for(var j = 0 ; j < _this.totalTd ; j++) {
 			var td = '<td></td>';
 
+
 			if(j >= _this.firstDateDay && _this.d <= _this.lastDate){
 				var day_date = new Date(_this.year,_this.month,_this.d),
-					nowDay = day_date.getDay(),//요일
-					_nowDate = _this.year + "-" + (_this.month+1) + "-" + _this.d,
+					nowDay = day_date.getDay();//요일
+				var _nowDate = getFormatDate(day_date),
 					className = "",
 					openTr = "",
 					closeTr = "";
@@ -88,7 +96,9 @@ class Calendar {
 				if(nowDay === 6){
 					closeTr='</tr>';
 				}
+
 				td = openTr + '<td class="'+className+'"><a href="javascript:;" data-date="'+_nowDate+'">'+_this.d+'</a></td>' + closeTr;
+
 
 				_this.d++;
 			}
@@ -103,17 +113,22 @@ class Calendar {
 			var el = tdTag[i].getElementsByTagName("a");
 			for(var h = 0 ; h < el.length ; h++){
 				el[h].addEventListener("click", function(){
-					_this.DateOnClick(this.getAttribute('data-date'));
+					document.getElementById(_this.inputId).setAttribute("value",this.getAttribute('data-date'));
+					if(_this.DateOnClick !== undefined){ //달력레이어 닫기버튼 클릭시 이벤트
+						_this.DateOnClick(this.getAttribute('data-date'));
+					}
+
+					_this.CalendarClickClose(); //달력레이어 닫기
 				});
 			}
 		}
 
 		var a_click = document.getElementById(_this.calendarId).getElementsByClassName('close_btn')[0];
 		a_click.addEventListener("click", function(){
-			document.getElementById(_this.calendarId).remove();
-			document.getElementById(_this.inputId).setAttribute("class","input_date");
-			if(_this.CalendarOnClickClose !== undefined){
-				_this.CalendarOnClickClose(_this.nowDate);
+			_this.CalendarClickClose(); //달력레이어 닫기
+
+			if(_this.CalendarCloseBtnClick !== undefined){ //달력레이어 닫기버튼 클릭시 이벤트
+				_this.CalendarCloseBtnClick(_this.nowDate);
 			}
 		});
 	}
@@ -128,11 +143,16 @@ class Calendar {
 		});
 	}
 
+	CalendarClickClose() { //달력레이어 닫기
+		var _this = this;
+		document.getElementById(_this.calendarId).remove();
+		document.getElementById(_this.inputId).setAttribute("class","input_date");
+	}
+
 	set DataClick(str) {
 		this.DateOnClick = str;
 	}
-
-	set CalendarClickClose(str){ //달력레이어 닫기
+	set CalendarCloseBtnClick(str){ //달력레이어 닫기버튼 클릭시 이벤트
 		this.CalendarOnClickClose = str;
 	}
 }
