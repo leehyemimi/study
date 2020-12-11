@@ -85,7 +85,7 @@ class Calendar {
 
 				//현재 날짜 클래스
 				if(day_date.getDate() === _this.date){
-					alert("day_date.toString() : " + day_date.toString());
+					//alert("day_date.toString() : " + day_date.toString());
 					className = className + " bg";
 				}
 
