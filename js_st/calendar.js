@@ -114,7 +114,7 @@ class Calendar {
 			for(var h = 0 ; h < el.length ; h++){
 				el[h].addEventListener("click", function(){
 					document.getElementById(_this.inputId).setAttribute("value",this.getAttribute('data-date'));
-					if(_this.DateOnClick !== undefined){ //달력레이어 닫기버튼 클릭시 이벤트
+					if(_this.DateOnClick !== undefined){ //날짜클릭시 이벤트
 						_this.DateOnClick(this.getAttribute('data-date'));
 					}
 
@@ -149,7 +149,7 @@ class Calendar {
 		document.getElementById(_this.inputId).setAttribute("class","input_date");
 	}
 
-	set DataClick(str) {
+	set DataClick(str) { //날짜클릭시 이벤트
 		this.DateOnClick = str;
 	}
 	set CalendarCloseBtnClick(str){ //달력레이어 닫기버튼 클릭시 이벤트
