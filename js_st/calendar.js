@@ -114,7 +114,7 @@ class Calendar {
 			_this.CalendarClickClose();
 			_this.tableMake(getFormatDate(new Date(_this.year,_this.month-1,1)));
 		});
-		//다음달 
+		//다음달
 		var next_btn = document.getElementById(_this.calendarId).getElementsByClassName('next_btn')[0];
 		next_btn.addEventListener("click", function(){
 			_this.CalendarClickClose();
