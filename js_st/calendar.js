@@ -27,14 +27,10 @@ class Calendar {
 		this.month = this.today.getMonth(); //월
 		this.nowMonth = this.today.getMonth() + 1; //월
 		this.date = this.today.getDate(); //일
-
 		this.firstDate = new Date(this.year,this.month ,1); //첫째날
 		this.firstDateDay = this.firstDate.getDay(); //첫째날 요일
-
 		this.lastDate = new Date(this.year,this.month+1,0); //마지막날
-		//this.lastDate_day = this.lastDate.getDay(); //마지막날 요일
 		this.lastDate = this.lastDate.getDate(); //마지막날짜
-
 		this.d = 1; //달력에 표시될 날짜
 		this.trLength = Math.ceil((this.lastDate + this.firstDateDay) /7); //tr갯수 시작날짜 + 총 달 날짜*!/
 		this.totalTd = this.trLength * 7;
@@ -53,23 +49,21 @@ class Calendar {
 		_this.month = _this.today.getMonth(); //월
 		_this.nowMonth = _this.today.getMonth() + 1; //월
 		_this.date = _this.today.getDate(); //일
-
 		_this.firstDate = new Date(_this.year,_this.month ,1); //첫째날
 		_this.firstDateDay = _this.firstDate.getDay(); //첫째날 요일
-
 		_this.lastDate = new Date(_this.year,_this.month+1,0); //마지막날
 		_this.lastDate = _this.lastDate.getDate(); //마지막날짜
-
-		console.log(_this.lastDate);
-
-		_this.d = 1;
+		_this.d = 1;//달력에 표시될 날짜
+		_this.trLength = Math.ceil((_this.lastDate + _this.firstDateDay) /7); //tr갯수 시작날짜 + 총 달 날짜*!/
+		_this.totalTd = _this.trLength * 7;
+		_this.calendarId = 'calendar' + _this.inputId.slice(-1);
 
 		var div = document.createElement("div");
 		div.setAttribute("class","calendar_box");
 		div.setAttribute("id",_this.calendarId);
 		document.getElementById(_this.inputId).after(div);
 
-		var monthBox =	'<p class="month"><a href="javascript:;" class="prev_btn"></a>'+
+		var monthBox = '<p class="month"><a href="javascript:;" class="prev_btn"></a>'+
 			_this.year + '년 ' + _this.nowMonth + '월<a href="javascript:;" class="close_btn"></a><a href="javascript:;" class="next_btn"></a>' +
 			'</p>' +
 			'<table class="calendar"><colgroup><col width="14.2%" span="7"></colgroup><tr><th>일</th><th>월</th><th>화</th><th>수</th><th>목</th><th>금</th><th>토</th></tr>' +
@@ -110,15 +104,21 @@ class Calendar {
 
 		//이전달
 		var prev_btn = document.getElementById(_this.calendarId).getElementsByClassName('prev_btn')[0];
-		prev_btn.addEventListener("click", function(){
+		prev_btn.addEventListener("click", function() {
 			_this.CalendarClickClose();
-			_this.tableMake(getFormatDate(new Date(_this.year,_this.month-1,1)));
+			_this.tableMake(getFormatDate(new Date(_this.year, _this.month-1,1)));
+			if(document.getElementById(_this.inputId).getAttribute('class') !== "input_date active"){
+				document.getElementById(_this.inputId).className += " active";
+			}
 		});
 		//다음달
 		var next_btn = document.getElementById(_this.calendarId).getElementsByClassName('next_btn')[0];
 		next_btn.addEventListener("click", function(){
 			_this.CalendarClickClose();
 			_this.tableMake(getFormatDate(new Date(_this.year,_this.month+1,1)));
+			if(document.getElementById(_this.inputId).getAttribute('class') !== "input_date active"){
+				document.getElementById(_this.inputId).className += " active";
+			}
 		});
 		
 		//날짜 이벤트
