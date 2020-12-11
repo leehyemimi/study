@@ -8,6 +8,10 @@ body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, fiel
 .month a{color:#000;}
 .month .close_btn{display:block;position:absolute;right:0;top:0;color:#fff;background:#000;width:30px;height:30px;line-height:30px;text-align:center;}
 .month .close_btn::after{content:"X";display:block}
+.month .prev_btn,
+.month .next_btn{display:inline-block;color:#fff;width:30px;text-align:center;}
+.month .prev_btn::after{content:"<";}
+.month .next_btn::after{content:">";}
 .calendar{margin-bottom:20px;width:100%;border-right:1px solid #bababa;border-top:1px solid #bababa;}
 .calendar th,
 .calendar td{color:#8e8e8e;font-size:12px;border-left:1px solid #bababa;border-bottom:1px solid #bababa;text-align:center;}
