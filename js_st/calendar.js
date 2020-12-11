@@ -149,10 +149,10 @@ class Calendar {
 		document.getElementById(_this.inputId).setAttribute("class","input_date");
 	}
 
-	set DataClick(str) { //날짜클릭시 이벤트
-		this.DateOnClick = str;
+	set OnDataClick(event) { //날짜클릭시 이벤트
+		this.DateOnClick = event;
 	}
-	set CalendarCloseBtnClick(str){ //달력레이어 닫기버튼 클릭시 이벤트
-		this.CalendarCloseBtnOnClick = str;
+	set OnCalendarCloseClick(event){ //달력레이어 닫기버튼 클릭시 이벤트
+		this.CalendarCloseBtnOnClick = event;
 	}
 }
