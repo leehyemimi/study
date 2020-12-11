@@ -127,8 +127,8 @@ class Calendar {
 		a_click.addEventListener("click", function(){
 			_this.CalendarClickClose(); //달력레이어 닫기
 
-			if(_this.CalendarCloseBtnClick !== undefined){ //달력레이어 닫기버튼 클릭시 이벤트
-				_this.CalendarCloseBtnClick(_this.nowDate);
+			if(_this.CalendarCloseBtnOnClick !== undefined){ //달력레이어 닫기버튼 클릭시 이벤트
+				_this.CalendarCloseBtnOnClick(_this.nowDate);
 			}
 		});
 	}
@@ -153,6 +153,6 @@ class Calendar {
 		this.DateOnClick = str;
 	}
 	set CalendarCloseBtnClick(str){ //달력레이어 닫기버튼 클릭시 이벤트
-		this.CalendarCloseBtnClick = str;
+		this.CalendarCloseBtnOnClick = str;
 	}
 }
