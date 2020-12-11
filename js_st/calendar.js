@@ -82,6 +82,8 @@ class Calendar {
 
 				//요일 클래스
 				className = fnGetClassName(nowDay);
+
+				alert("day_date.getDate() : " + day_date.getDate())
 				//현재 날짜 클래스
 				if(day_date.getDate() === _this.date){
 					className = className + " bg";
