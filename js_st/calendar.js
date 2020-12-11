@@ -88,7 +88,8 @@ class Calendar {
 				if(nowDay === 6){
 					closeTr='</tr>';
 				}
-				td = openTr + '<td class="'+className+'"><a href="javascript:;" id="'+_nowDate+'">'+_this.d+'</a></td>' + closeTr;
+				td = openTr + '<td class="'+className+'"><a href="javascript:;" data-date="'+_nowDate+'">'+_this.d+'</a></td>' + closeTr;
+
 				_this.d++;
 			}
 			monthBox = monthBox + td;
@@ -102,9 +103,7 @@ class Calendar {
 			var el = tdTag[i].getElementsByTagName("a");
 			for(var h = 0 ; h < el.length ; h++){
 				el[h].addEventListener("click", function(){
-					//console.log(new Date(this.id));
-					_this.DateOnClick(this.id);
-
+					_this.DateOnClick(this.getAttribute('data-date'));
 				});
 			}
 		}
