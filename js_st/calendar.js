@@ -27,6 +27,8 @@ class Calendar {
 		this.month = this.today.getMonth(); //월
 		this.nowMonth = this.today.getMonth() + 1; //월
 		this.date = this.today.getDate(); //일
+		this.today = new Date(this.year,this.month,this.date);
+
 		this.firstDate = new Date(this.year,this.month ,1); //첫째날
 		this.firstDateDay = this.firstDate.getDay(); //첫째날 요일
 		this.lastDate = new Date(this.year,this.month+1,0); //마지막날
@@ -45,9 +47,10 @@ class Calendar {
 
 		//input날짜
 		var selectDay = new Date(document.getElementById(_this.inputId).value),
-			 selectYear = selectDay.getFullYear(), //년도
-			 selectMonth = selectDay.getMonth() + 1, //월
-			 selectDate = selectDay.getDate(); //일
+			selectYear = selectDay.getFullYear(), //년도
+			selectMonth = selectDay.getMonth() + 1, //월
+			selectDate = selectDay.getDate(); //일
+			selectDay = new Date(selectYear,selectMonth,selectDate);
 
 		_this.nowDate = nowDate;
 		_this.today = new Date(_this.nowDate);
@@ -55,6 +58,8 @@ class Calendar {
 		_this.month = _this.today.getMonth(); //월
 		_this.nowMonth = _this.today.getMonth() + 1; //월
 		_this.date = _this.today.getDate(); //일
+		_this.today = new Date(_this.year,_this.month,_this.date);
+
 		_this.firstDate = new Date(_this.year,_this.month ,1); //첫째날
 		_this.firstDateDay = _this.firstDate.getDay(); //첫째날 요일
 		_this.lastDate = new Date(_this.year,_this.month+1,0); //마지막날
