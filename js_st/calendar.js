@@ -9,7 +9,7 @@ function fnGetClassName(NowDay){ //요일 클래스
 	return className;
 }
 
-function getFormatDate(date){ // 날짜포맷 yyyy-MM-dd 변환
+function getFormatDate(date){ // 날짜포맷 yyyy.MM.dd 변환
 	var year = date.getFullYear();
 	var month = (1 + date.getMonth());
 	month = month >= 10 ? month : '0' + month;
@@ -21,13 +21,16 @@ function getFormatDate(date){ // 날짜포맷 yyyy-MM-dd 변환
 class Calendar {
 	constructor(nowDate,inputId) { //생성자 : class 인스턴스를 생성할때 초기화 하는 메소드
 		this.inputId = inputId;
-		this.nowDate = nowDate;
-		this.today = new Date(this.nowDate);
+		this.nowDateY = nowDate.slice('0','4');
+		this.nowDateM = nowDate.slice('5','7');
+		this.nowDateD = nowDate.slice('8','10');
+		this.today = new Date(this.nowDateY,this.nowDateM,this.nowDateD);
+		this.nowDate = getFormatDate(this.today);
+
 		this.year = this.today.getFullYear(); //년도
 		this.month = this.today.getMonth(); //월
 		this.nowMonth = this.today.getMonth() + 1; //월
-		this.date = this.today.getDate(); //일
-		this.today = new Date(this.year,this.month,this.date);
+		this.date = this.today.getDate(); //
 
 		this.firstDate = new Date(this.year,this.month ,1); //첫째날
 		this.firstDateDay = this.firstDate.getDay(); //첫째날 요일
@@ -46,14 +49,21 @@ class Calendar {
 		var _this = this;
 
 		//input날짜
-		var selectDay = new Date(document.getElementById(_this.inputId).value),
+		var selectNowDay = document.getElementById(_this.inputId).value;
+		var selectNowDayY = selectNowDay.slice('0','4');
+		var selectNowDayM = selectNowDay.slice('5','7');
+		var selectNowDayD = selectNowDay.slice('8','10');
+		var selectDay = new Date(selectNowDayY,selectNowDayM-1,selectNowDayD),
 			selectYear = selectDay.getFullYear(), //년도
 			selectMonth = selectDay.getMonth() + 1, //월
 			selectDate = selectDay.getDate(); //일
-			selectDay = new Date(selectYear,selectMonth,selectDate);
 
 		_this.nowDate = nowDate;
-		_this.today = new Date(_this.nowDate);
+		_this.nowDateY = _this.nowDate.slice('0','4');
+		_this.nowDateM = _this.nowDate.slice('5','7');
+		_this.nowDateD = _this.nowDate.slice('8','10');
+		_this.today = new Date(_this.nowDateY,_this.nowDateM-1,_this.nowDateD);
+
 		_this.year = _this.today.getFullYear(); //년도
 		_this.month = _this.today.getMonth(); //월
 		_this.nowMonth = _this.today.getMonth() + 1; //월
