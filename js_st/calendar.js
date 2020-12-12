@@ -33,7 +33,7 @@ xhr.onload = function() {
 		}
 	}
 };
-xhr.open("GET", "data/calendar_data.json", true);
+xhr.open("GET", JsonUrl, true);
 xhr.send(null);
 
 class Calendar {
