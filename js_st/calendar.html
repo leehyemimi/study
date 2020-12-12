@@ -4,9 +4,6 @@
 	<meta charset="utf-8">
 	<title>calendar</title>
 	<link type="text/css" rel="stylesheet" href="calendar.css" />
-	<script>
-		var JsonUrl = 'data/calendar_data.json';
-	</script>
 	<script type="text/javascript" src="calendar.js"></script>
 </head>
 <body>
@@ -30,7 +27,11 @@
 	};
 	
 	var calendar1 = new Calendar('2020.12.01','input_calendar1');
+	calendar1.calendarJsonUrl = "data/calendar_data.json";
+	
 	var calendar2 = new Calendar('2020.01.01','input_calendar2');
+	//calendar2.JsonUrl = "data/caledar_data.json";
+	
 	//calendar2.OnDateClick = DateOnClickMethod;
 	//calendar2.OnCalendarCloseClick = CalendarCloseMethod;
 </script>
