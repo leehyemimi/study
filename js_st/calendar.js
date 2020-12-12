@@ -42,6 +42,12 @@ class Calendar {
 
 	tableMake(nowDate){ //달력레이어 만들기
 		var _this = this;
+		
+		//input날짜
+		var selectDay = new Date(document.getElementById(_this.inputId).value),
+			 selectYear = selectDay.getFullYear(), //년도
+			 selectMonth = selectDay.getMonth() + 1, //월
+			 selectDate = selectDay.getDate(); //일
 
 		_this.nowDate = nowDate;
 		_this.today = new Date(_this.nowDate);
@@ -83,10 +89,11 @@ class Calendar {
 				//요일 클래스
 				className = fnGetClassName(nowDay);
 
-				//현재 날짜 클래스
-				if(day_date.getDate() === _this.date){
-					//alert("day_date.toString() : " + day_date.toString());
-					className = className + " bg";
+				if(selectYear === _this.year && selectMonth === _this.nowMonth){
+					//현재 날짜 클래스
+					if(day_date.getDate() === selectDate){
+						className = className + " bg";
+					}
 				}
 
 				//여는 tr 닫는 tr 처리
