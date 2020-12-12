@@ -47,6 +47,7 @@ class Calendar {
 
 	tableMake(nowDate){ //달력레이어 만들기
 		try{
+			alert('a');
 			var _this = this;
 			//input날짜
 			var selectNowDay = document.getElementById(_this.inputId).value,
