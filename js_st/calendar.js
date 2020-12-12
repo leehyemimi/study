@@ -42,7 +42,7 @@ class Calendar {
 
 	tableMake(nowDate){ //달력레이어 만들기
 		var _this = this;
-		
+
 		//input날짜
 		var selectDay = new Date(document.getElementById(_this.inputId).value),
 			 selectYear = selectDay.getFullYear(), //년도
@@ -89,8 +89,8 @@ class Calendar {
 				//요일 클래스
 				className = fnGetClassName(nowDay);
 
+				//현재 날짜 클래스
 				if(selectYear === _this.year && selectMonth === _this.nowMonth){
-					//현재 날짜 클래스
 					if(day_date.getDate() === selectDate){
 						className = className + " bg";
 					}
