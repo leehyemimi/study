@@ -49,11 +49,11 @@ class Calendar {
 		var _this = this;
 
 		//input날짜
-		var selectNowDay = document.getElementById(_this.inputId).value;
-		var selectNowDayY = selectNowDay.slice('0','4');
-		var selectNowDayM = selectNowDay.slice('5','7');
-		var selectNowDayD = selectNowDay.slice('8','10');
-		var selectDay = new Date(selectNowDayY,selectNowDayM-1,selectNowDayD),
+		var selectNowDay = document.getElementById(_this.inputId).value,
+			selectNowDayY = selectNowDay.slice('0','4'),
+			selectNowDayM = selectNowDay.slice('5','7'),
+			selectNowDayD = selectNowDay.slice('8','10'),
+			selectDay = new Date(selectNowDayY,selectNowDayM-1,selectNowDayD),
 			selectYear = selectDay.getFullYear(), //년도
 			selectMonth = selectDay.getMonth() + 1, //월
 			selectDate = selectDay.getDate(); //일
