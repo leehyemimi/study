@@ -18,6 +18,24 @@ function getFormatDate(date){ // 날짜포맷 yyyy.MM.dd 변환
 	return year + '.' + month + '.' + day;
 }
 
+var xhr = new XMLHttpRequest();
+var newContent = [],
+	newContentTodo = [],
+	newContentHoliyday = [];
+
+xhr.onload = function() {
+	if(xhr.status===200){
+		responseObject = JSON.parse(xhr.responseText); //json가져와 js객체로 변경
+		for(var i=0; i<responseObject.TodoList.length; i++) {
+			newContent.push(responseObject.TodoList[i].date);
+			newContentTodo.push(responseObject.TodoList[i].dateTodo);
+			newContentHoliyday.push(responseObject.TodoList[i].holiyday);
+		}
+	}
+};
+xhr.open("GET", "data/calendar_data.json", true);
+xhr.send(null);
+
 class Calendar {
 	constructor(nowDate,inputId) { //생성자 : class 인스턴스를 생성할때 초기화 하는 메소드
 		this.inputId = inputId;
@@ -48,16 +66,17 @@ class Calendar {
 
 	tableMake(nowDate){ //달력레이어 만들기
 		var _this = this;
+
 		//input날짜
 		var selectNowDay = document.getElementById(_this.inputId).value,
-		selectNowDay = selectNowDay.split('.'),
-		selectNowDayY = selectNowDay[0],
-		selectNowDayM = selectNowDay[1],
-		selectNowDayD = selectNowDay[2],
-		selectDay = new Date(selectNowDayY, selectNowDayM - 1, selectNowDayD),
-		selectYear = selectDay.getFullYear(), //년도
-		selectMonth = selectDay.getMonth() + 1, //월
-		selectDate = selectDay.getDate(); //일
+			selectNowDay = selectNowDay.split('.'),
+			selectNowDayY = selectNowDay[0],
+			selectNowDayM = selectNowDay[1],
+			selectNowDayD = selectNowDay[2],
+			selectDay = new Date(selectNowDayY, selectNowDayM - 1, selectNowDayD),
+			selectYear = selectDay.getFullYear(), //년도
+			selectMonth = selectDay.getMonth() + 1, //월
+			selectDate = selectDay.getDate(); //일
 
 		_this.nowDate = nowDate;
 		_this.nowDate = _this.nowDate.split('.');
@@ -91,39 +110,53 @@ class Calendar {
 			'<table class="calendar"><colgroup><col width="14.2%" span="7"></colgroup><tr><th>일</th><th>월</th><th>화</th><th>수</th><th>목</th><th>금</th><th>토</th></tr>' +
 			'<tr>';
 
-		for (var j = 0; j < _this.totalTd; j++) {
-			var td = '<td></td>';
+			for (var j = 0; j < _this.totalTd; j++) {
+				var td = '<td></td>';
 
-			if (j >= _this.firstDateDay && _this.d <= _this.lastDate) {
-				var day_date = new Date(_this.year, _this.month, _this.d),
-					nowDay = day_date.getDay();//요일
-				var _nowDate = getFormatDate(day_date),
-					className = "",
-					openTr = "",
-					closeTr = "";
+				if (j >= _this.firstDateDay && _this.d <= _this.lastDate) {
+					var day_date = new Date(_this.year, _this.month, _this.d),
+						nowDay = day_date.getDay();//요일
+					var _nowDate = getFormatDate(day_date),
+						className = "",
+						openTr = "",
+						closeTr = "";
 
-				//요일 클래스
-				className = fnGetClassName(nowDay);
+					//요일 클래스
+					className = fnGetClassName(nowDay);
 
-				//현재 날짜 클래스
-				if (selectYear === _this.year && selectMonth === _this.nowMonth) {
-					if (day_date.getDate() === selectDate) {
-						className = className + " bg";
+					//현재 날짜 클래스
+					if (selectYear === _this.year && selectMonth === _this.nowMonth) {
+						if (day_date.getDate() === selectDate) {
+							className = className + " bg";
+						}
 					}
-				}
 
-				//여는 tr 닫는 tr 처리
-				if (nowDay === 0) {
-					openTr = '<tr>';
+					//여는 tr 닫는 tr 처리
+					if (nowDay === 0) {
+						openTr = '<tr>';
+					}
+					if (nowDay === 6) {
+						closeTr = '</tr>';
+					}
+
+					td = openTr + '<td class="' + className + '"><a href="javascript:;" data-date="' + _nowDate + '">' + _this.d + '</a></td>' + closeTr;
+					//todo날짜
+					for(var t = 0 ; t < newContent.length; t++) {
+						var todoDay = newContent[t].split('.'),
+							todoDayY = parseInt(todoDay[0]),
+							todoDayM = parseInt(todoDay[1]),
+							todoDayD = parseInt(todoDay[2]);
+						if (todoDayY === _this.year && todoDayM === _this.nowMonth && day_date.getDate() === todoDayD) {
+							if(newContentHoliyday[t] === "holiyday") {
+								className = className + " holiy";
+							}
+							td = openTr + '<td class="' + className + '"><a href="javascript:;" data-date="' + _nowDate + '">' + _this.d + '<span>' + newContentTodo[t] +'</span></a></td>' + closeTr;
+						}
+					}
+					_this.d++;
 				}
-				if (nowDay === 6) {
-					closeTr = '</tr>';
-				}
-				td = openTr + '<td class="' + className + '"><a href="javascript:;" data-date="' + _nowDate + '">' + _this.d + '</a></td>' + closeTr;
-				_this.d++;
+				monthBox = monthBox + td;
 			}
-			monthBox = monthBox + td;
-		}
 		monthBox = monthBox + '</tr></table>';
 		document.getElementById(_this.calendarId).innerHTML = monthBox;
 
@@ -205,3 +238,4 @@ class Calendar {
 		this.CalendarCloseBtnOnClick = event;
 	}
 }
+
