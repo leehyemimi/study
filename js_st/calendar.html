@@ -1,9 +1,11 @@
+
 <!DOCTYPE html>
 <html>
 <head>
 	<meta charset="utf-8">
 	<title>calendar</title>
 	<link type="text/css" rel="stylesheet" href="calendar.css" />
+	
 	<script type="text/javascript" src="calendar.js"></script>
 </head>
 <body>
@@ -13,7 +15,7 @@
 		<input type="text" id="input_calendar1" class="input_date" value="2020.12.12" placeholder="YYYY.MM.DD">
 	</div>
 	<div class="input_calendar_area">
-		<input type="text" id="input_calendar2" class="input_date" value="2021.01.01" placeholder="YYYY.MM.DD">
+		<input type="text" id="input_calendar2" class="input_date" value="2020.12.01" placeholder="YYYY.MM.DD">
 	</div>
 </div>
 <script>
@@ -21,17 +23,17 @@
 	var DateOnClickMethod = function(DateOb){
 		alert(DateOb);
 	};
-	
+
 	var CalendarCloseMethod = function(DateOb){
 		alert(DateOb);
 	};
-	
+
 	var calendar1 = new Calendar('2020.12.01','input_calendar1');
-	calendar1.calendarJsonUrl = "data/calendar_data.json";
-	
+	calendar1.GetJsonUrl = "data/calendar_data.json";
+
 	var calendar2 = new Calendar('2020.01.01','input_calendar2');
-	//calendar2.JsonUrl = "data/caledar_data.json";
-	
+	calendar2.GetJsonUrl = "data/calendar_data1.json";
+
 	//calendar2.OnDateClick = DateOnClickMethod;
 	//calendar2.OnCalendarCloseClick = CalendarCloseMethod;
 </script>
