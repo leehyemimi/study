@@ -21,7 +21,7 @@ function getFormatDate(date){ // 날짜포맷 yyyy.MM.dd 변환
 
 var newContent = [],
 	newContentTodo = [],
-	newContentHoliyday = [];
+	newContentHoliyday  = [];
 function JsonUrl(Jsonurl){
 	var xhr = new XMLHttpRequest();
 	xhr.onload = function() {
@@ -34,7 +34,6 @@ function JsonUrl(Jsonurl){
 			}
 		}
 	};
-
 	xhr.open("GET", Jsonurl , true);
 	xhr.send(null);
 }
@@ -68,8 +67,9 @@ class Calendar {
 
 	tableMake(nowDate){ //달력레이어 만들기
 		var _this = this;
-		_this.CalendarJsonUrl;
-
+		if(_this.CalendarJson !== ''){
+			_this.CalendarJson;
+		}
 		//input날짜
 		var selectNowDay = document.getElementById(_this.inputId).value,
 			selectNowDay = selectNowDay.split('.'),
@@ -240,8 +240,8 @@ class Calendar {
 	set OnCalendarCloseClick(event){ //달력레이어 닫기버튼 클릭시 이벤트
 		this.CalendarCloseBtnOnClick = event;
 	}
-	set GetJsonUrl(url){
-		this.CalendarJsonUrl = url;
+	set CalendarJsonUrl(url){
+		this.CalendarJson = url;
 		if(url){
 			JsonUrl(url);
 		}
