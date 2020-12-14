@@ -18,26 +18,6 @@ function getFormatDate(date){ // 날짜포맷 yyyy.MM.dd 변환
 	return year + '.' + month + '.' + day;
 }
 
-
-var newContent = [],
-	newContentTodo = [],
-	newContentHoliyday  = [];
-function JsonUrl(Jsonurl){
-	var xhr = new XMLHttpRequest();
-	xhr.onload = function() {
-		if(xhr.status===200){
-			responseObject = JSON.parse(xhr.responseText); //json가져와 js객체로 변경
-			for(var i=0; i<responseObject.TodoList.length; i++) {
-				newContent.push(responseObject.TodoList[i].date);
-				newContentTodo.push(responseObject.TodoList[i].dateTodo);
-				newContentHoliyday.push(responseObject.TodoList[i].holiyday);
-			}
-		}
-	};
-	xhr.open("GET", Jsonurl , true);
-	xhr.send(null);
-}
-
 class Calendar {
 	constructor(nowDate,inputId) { //생성자 : class 인스턴스를 생성할때 초기화 하는 메소드
 		this.inputId = inputId;
@@ -61,15 +41,17 @@ class Calendar {
 		this.trLength = Math.ceil((this.lastDate + this.firstDateDay) /7); //tr갯수 시작날짜 + 총 달 날짜*!/
 		this.totalTd = this.trLength * 7;
 		this.calendarId = 'calendar' + this.inputId.slice(-1);
+
+		this.newContent = [],
+		this.newContentTodo = [],
+		this.newContentHoliyday = [];
+
 		var _this = this;
 		_this.CalendarClickOpen();
 	}
 
 	tableMake(nowDate){ //달력레이어 만들기
 		var _this = this;
-		if(_this.CalendarJson !== ''){
-			_this.CalendarJson;
-		}
 		//input날짜
 		var selectNowDay = document.getElementById(_this.inputId).value,
 			selectNowDay = selectNowDay.split('.'),
@@ -144,16 +126,16 @@ class Calendar {
 
 				td = openTr + '<td class="' + className + '"><a href="javascript:;" data-date="' + _nowDate + '">' + _this.d + '</a></td>' + closeTr;
 				//todo날짜
-				for(var t = 0 ; t < newContent.length; t++) {
-					var todoDay = newContent[t].split('.'),
+				for(var t = 0 ; t < _this.newContent.length; t++) {
+					var todoDay = _this.newContent[t].split('.'),
 						todoDayY = parseInt(todoDay[0]),
 						todoDayM = parseInt(todoDay[1]),
 						todoDayD = parseInt(todoDay[2]);
 					if (todoDayY === _this.year && todoDayM === _this.nowMonth && day_date.getDate() === todoDayD) {
-						if(newContentHoliyday[t] === "holiyday") {
+						if(_this.newContentHoliyday[t] === "holiyday") {
 							className = className + " holiy";
 						}
-						td = openTr + '<td class="' + className + '"><a href="javascript:;" data-date="' + _nowDate + '">' + _this.d + '<span>' + newContentTodo[t] +'</span></a></td>' + closeTr;
+						td = openTr + '<td class="' + className + '"><a href="javascript:;" data-date="' + _nowDate + '">' + _this.d + '<span>' + _this.newContentTodo[t] +'</span></a></td>' + closeTr;
 					}
 				}
 				_this.d++;
@@ -207,6 +189,23 @@ class Calendar {
 		});
 	}
 
+	JsonUrl(Jsonurl){
+		var _this = this;
+		var xhr = new XMLHttpRequest();
+		xhr.onload = function() {
+			if(xhr.status===200){
+				var responseObject = JSON.parse(xhr.responseText); //json가져와 js객체로 변경
+				for(var i=0; i<responseObject.TodoList.length; i++) {
+					_this.newContent.push(responseObject.TodoList[i].date);
+					_this.newContentTodo.push(responseObject.TodoList[i].dateTodo);
+					_this.newContentHoliyday.push(responseObject.TodoList[i].holiyday);
+				}
+			}
+		};
+		xhr.open("GET", Jsonurl , true);
+		xhr.send(null);
+	}
+
 	CalendarClickOpen() { //달력레이어 열기
 		var _this = this;
 		document.getElementById(_this.inputId).addEventListener("click", function(){
@@ -239,11 +238,5 @@ class Calendar {
 	}
 	set OnCalendarCloseClick(event){ //달력레이어 닫기버튼 클릭시 이벤트
 		this.CalendarCloseBtnOnClick = event;
-	}
-	set CalendarJsonUrl(url){
-		this.CalendarJson = url;
-		if(url){
-			JsonUrl(url);
-		}
 	}
 }
