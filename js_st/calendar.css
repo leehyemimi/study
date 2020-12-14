@@ -3,7 +3,8 @@ body *{font-family:'맑은고딕',MalgunGothic,'돋움',Dotum,Helvetica,sans-ser
 .article{margin:10px;}
 .input_calendar_area{position:relative;float:left;margin-right:350px}
 .input_date{color:#545966;font-size:12px;padding:5px 0;text-align:center;border:1px solid #8b94a9;}
-.calendar_box{position:absolute;left:0;width:480px;}
+.calendar_box{position:absolute;left:0;width:480px;display:none;}
+.calendar_box.on{display:block}
 
 .month{position:relative;font-size:12px;margin:0;color:#fff;background:#98a0b3;text-align:center;font-weight:bold;padding:5px 0 7px}
 .month a{color:#000;}
