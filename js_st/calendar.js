@@ -47,6 +47,7 @@ class Calendar {
 		this.newContentHoliyday = [];
 
 		var _this = this;
+		_this.tableMake(nowDate);
 		_this.CalendarClickOpen();
 	}
 
@@ -124,20 +125,23 @@ class Calendar {
 					closeTr = '</tr>';
 				}
 
-				td = openTr + '<td class="' + className + '"><a href="javascript:;" data-date="' + _nowDate + '">' + _this.d + '</a></td>' + closeTr;
+				var todo = "";
+
 				//todo날짜
 				for(var t = 0 ; t < _this.newContent.length; t++) {
 					var todoDay = _this.newContent[t].split('.'),
 						todoDayY = parseInt(todoDay[0]),
 						todoDayM = parseInt(todoDay[1]),
 						todoDayD = parseInt(todoDay[2]);
-					if (todoDayY === _this.year && todoDayM === _this.nowMonth && day_date.getDate() === todoDayD) {
+					if(todoDayY === _this.year && todoDayM === _this.nowMonth && day_date.getDate() === todoDayD) {
 						if(_this.newContentHoliyday[t] === "holiyday") {
 							className = className + " holiy";
 						}
-						td = openTr + '<td class="' + className + '"><a href="javascript:;" data-date="' + _nowDate + '">' + _this.d + '<span>' + _this.newContentTodo[t] +'</span></a></td>' + closeTr;
+						todo = _this.newContentTodo[t];
 					}
 				}
+
+				td = openTr + '<td class="' + className + '"><a href="javascript:;" data-date="' + _nowDate + '">' + _this.d + '<span>' + todo +'</span></a></td>' + closeTr;
 				_this.d++;
 			}
 			monthBox = monthBox + td;
@@ -150,6 +154,7 @@ class Calendar {
 		prev_btn.addEventListener("click", function () {
 			_this.CalendarClickClose();
 			_this.tableMake(getFormatDate(new Date(_this.year, _this.month - 1, 1)));
+			document.getElementById(_this.calendarId).className += " on";
 			if (document.getElementById(_this.inputId).getAttribute('class') !== "input_date active") {
 				document.getElementById(_this.inputId).className += " active";
 			}
@@ -159,6 +164,7 @@ class Calendar {
 		next_btn.addEventListener("click", function () {
 			_this.CalendarClickClose();
 			_this.tableMake(getFormatDate(new Date(_this.year, _this.month + 1, 1)));
+			document.getElementById(_this.calendarId).className += " on";
 			if (document.getElementById(_this.inputId).getAttribute('class') !== "input_date active") {
 				document.getElementById(_this.inputId).className += " active";
 			}
@@ -190,20 +196,22 @@ class Calendar {
 	}
 
 	JsonUrl(url){
-		var _this = this;
-		var xhr = new XMLHttpRequest();
-		xhr.onload = function() {
-			if(xhr.status===200){
-				var responseObject = JSON.parse(xhr.responseText); //json가져와 js객체로 변경
-				for(var i=0; i<responseObject.TodoList.length; i++) {
-					_this.newContent.push(responseObject.TodoList[i].date);
-					_this.newContentTodo.push(responseObject.TodoList[i].dateTodo);
-					_this.newContentHoliyday.push(responseObject.TodoList[i].holiyday);
+		if(url){
+			var _this = this;
+			var xhr = new XMLHttpRequest();
+			xhr.onload = function() {
+				if(xhr.status===200){
+					var responseObject = JSON.parse(xhr.responseText); //json가져와 js객체로 변경
+					for(var i=0; i<responseObject.TodoList.length; i++) {
+						_this.newContent.push(responseObject.TodoList[i].date);
+						_this.newContentTodo.push(responseObject.TodoList[i].dateTodo);
+						_this.newContentHoliyday.push(responseObject.TodoList[i].holiyday);
+					}
 				}
-			}
-		};
-		xhr.open("GET", url , true);
-		xhr.send(null);
+			};
+			xhr.open("GET", url , true);
+			xhr.send(null);
+		}
 	}
 
 	CalendarClickOpen() { //달력레이어 열기
@@ -219,7 +227,11 @@ class Calendar {
 
 				if(inputDateDay  != 'Invalid Date' ){
 					this.className += " active";
-					_this.tableMake(this.value); //this.value
+					if(document.getElementById(_this.calendarId) === null){
+						_this.tableMake(this.value); //this.value
+					}
+					document.getElementById(_this.calendarId).className += " on";
+
 				}else{
 					alert('날짜를 형식에 맞게 넣어주세요.');
 				}
