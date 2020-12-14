@@ -42,8 +42,8 @@ class Calendar {
 		this.totalTd = this.trLength * 7;
 		this.calendarId = 'calendar' + this.inputId.slice(-1);
 
-		this.newContent = [],
-		this.newContentTodo = [],
+		this.newContent = [];
+		this.newContentTodo = [];
 		this.newContentHoliyday = [];
 
 		var _this = this;
@@ -189,7 +189,7 @@ class Calendar {
 		});
 	}
 
-	JsonUrl(Jsonurl){
+	JsonUrl(url){
 		var _this = this;
 		var xhr = new XMLHttpRequest();
 		xhr.onload = function() {
@@ -202,7 +202,7 @@ class Calendar {
 				}
 			}
 		};
-		xhr.open("GET", Jsonurl , true);
+		xhr.open("GET", url , true);
 		xhr.send(null);
 	}
 
