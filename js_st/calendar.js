@@ -19,7 +19,7 @@ function getFormatDate(date){ // 날짜포맷 yyyy.MM.dd 변환
 }
 
 class Calendar {
-	constructor(nowDate,inputId) { //생성자 : class 인스턴스를 생성할때 초기화 하는 메소드
+	constructor(nowDate,inputId,url) { //생성자 : class 인스턴스를 생성할때 초기화 하는 메소드
 		this.inputId = inputId;
 		this.nowDate = nowDate.split('.');
 		this.nowDateY = this.nowDate[0];
@@ -45,14 +45,15 @@ class Calendar {
 		this.newContent = [];
 		this.newContentTodo = [];
 		this.newContentHoliyday = [];
+		this.url = url;
 
 		var _this = this;
-		_this.tableMake(nowDate);
 		_this.CalendarClickOpen();
 	}
 
 	tableMake(nowDate){ //달력레이어 만들기
 		var _this = this;
+
 		//input날짜
 		var selectNowDay = document.getElementById(_this.inputId).value,
 			selectNowDay = selectNowDay.split('.'),
@@ -126,21 +127,22 @@ class Calendar {
 				}
 
 				var todo = "";
-
 				//todo날짜
-				for(var t = 0 ; t < _this.newContent.length; t++) {
-					var todoDay = _this.newContent[t].split('.'),
-						todoDayY = parseInt(todoDay[0]),
-						todoDayM = parseInt(todoDay[1]),
-						todoDayD = parseInt(todoDay[2]);
-					if(todoDayY === _this.year && todoDayM === _this.nowMonth && day_date.getDate() === todoDayD) {
-						if(_this.newContentHoliyday[t] === "holiyday") {
-							className = className + " holiy";
+				if(_this.url) {
+					_this.JsonUrl(_this.url);
+					for(var t = 0 ; t < _this.newContent.length; t++) {
+						var todoDay = _this.newContent[t].split('.'),
+							todoDayY = parseInt(todoDay[0]),
+							todoDayM = parseInt(todoDay[1]),
+							todoDayD = parseInt(todoDay[2]);
+						if(todoDayY === _this.year && todoDayM === _this.nowMonth && day_date.getDate() === todoDayD) {
+							if(_this.newContentHoliyday[t] === "holiyday") {
+								className = className + " holiy";
+							}
+							todo = _this.newContentTodo[t];
 						}
-						todo = _this.newContentTodo[t];
 					}
 				}
-
 				td = openTr + '<td class="' + className + '"><a href="javascript:;" data-date="' + _nowDate + '">' + _this.d + '<span>' + todo +'</span></a></td>' + closeTr;
 				_this.d++;
 			}
