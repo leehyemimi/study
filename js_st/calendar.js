@@ -128,19 +128,16 @@ class Calendar {
 
 				var todo = "";
 				//todo날짜
-				if(_this.url) {
-					_this.JsonUrl(_this.url);
-					for(var t = 0 ; t < _this.newContent.length; t++) {
-						var todoDay = _this.newContent[t].split('.'),
-							todoDayY = parseInt(todoDay[0]),
-							todoDayM = parseInt(todoDay[1]),
-							todoDayD = parseInt(todoDay[2]);
-						if(todoDayY === _this.year && todoDayM === _this.nowMonth && day_date.getDate() === todoDayD) {
-							if(_this.newContentHoliyday[t] === "holiyday") {
-								className = className + " holiy";
-							}
-							todo = _this.newContentTodo[t];
+				for(var t = 0 ; t < _this.newContent.length; t++) {
+					var todoDay = _this.newContent[t].split('.'),
+						todoDayY = parseInt(todoDay[0]),
+						todoDayM = parseInt(todoDay[1]),
+						todoDayD = parseInt(todoDay[2]);
+					if(todoDayY === _this.year && todoDayM === _this.nowMonth && day_date.getDate() === todoDayD) {
+						if(_this.newContentHoliyday[t] === "holiyday") {
+							className = className + " holiy";
 						}
+						todo = _this.newContentTodo[t];
 					}
 				}
 				td = openTr + '<td class="' + className + '"><a href="javascript:;" data-date="' + _nowDate + '">' + _this.d + '<span>' + todo +'</span></a></td>' + closeTr;
@@ -150,6 +147,10 @@ class Calendar {
 		}
 		monthBox = monthBox + '</tr></table>';
 		document.getElementById(_this.calendarId).innerHTML = monthBox;
+
+		if(_this.url) {
+			_this.JsonUrl(_this.url);
+		}
 
 		//이전달
 		var prev_btn = document.getElementById(_this.calendarId).getElementsByClassName('prev_btn')[0];
