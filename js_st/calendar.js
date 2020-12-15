@@ -139,6 +139,7 @@ class Calendar {
 
 		if(_this.url) {
 			_this.JsonUrl(_this.url).then(function(responseObject) {
+				console.log(responseObject.TodoList);
 				for (var i = 0; i < responseObject.TodoList.length; i++) {
 					var todoDay = responseObject.TodoList[i].date.split('.'),
 						todoDayY = parseInt(todoDay[0]),
