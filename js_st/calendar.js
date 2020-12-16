@@ -179,7 +179,7 @@ class Calendar {
 					if (_this.DateOnClick !== undefined) {
 						_this.DateOnClick(this.getAttribute('data-date'));
 					}
-					_this.CalendarClickClose();//날짜클릭시
+					_this.CalendarClickClose();//닫기버튼클릭시
 				});
 			}
 		}
@@ -213,7 +213,7 @@ class Calendar {
 		});
 	}
 
-	JsonUrl(url){
+	JsonUrl(url){ 	//JSon
 		return new Promise(function (resolve, reject) {
 			let xhr = new XMLHttpRequest();
 			xhr.open('GET', url);
@@ -231,7 +231,7 @@ class Calendar {
 		});
 	}
 
-	CalendarClickOpen() {
+	CalendarClickOpen() { //달력 열기
 		var _this = this;
 		document.getElementById(_this.inputId).addEventListener("click", function(){
 			if(this.getAttribute('class') !== "input_date active"){
@@ -256,16 +256,16 @@ class Calendar {
 		});
 	}
 
-	CalendarClickClose() {
+	CalendarClickClose() { //달력 닫기
 		var _this = this;
 		document.getElementById(_this.calendarId).remove();
 		document.getElementById(_this.inputId).setAttribute("class","input_date");
 	}
 
-	set OnDateClick(event) {
+	set OnDateClick(event) { //날짜클릭시 이벤트
 		this.DateOnClick = event;
 	}
-	set OnCalendarCloseClick(event){
+	set OnCalendarCloseClick(event){ //닫기버튼 이벤트
 		this.CalendarCloseBtnOnClick = event;
 	}
 }
