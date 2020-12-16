@@ -121,8 +121,12 @@ class Calendar {
 					openTr = "",
 					closeTr = "";
 
-				className = fnGetClassName(nowDay); //class
+				//날짜의 수만큼 루프를 돌면서 외부에서 정의한 메소드 호출
+				if (_this.OnMethod !== undefined) {
+					_this.OnMethod(_this.d);
+				}
 
+				className = fnGetClassName(nowDay); //class
 
 				if (selectYear === _this.year && selectMonth === _this.nowMonth) { //현재 날짜
 					if (day_date.getDate() === selectDate) {
@@ -268,4 +272,9 @@ class Calendar {
 	set OnCalendarCloseClick(event){ //닫기버튼 이벤트
 		this.CalendarCloseBtnOnClick = event;
 	}
+	//날짜의 수만큼 루프를 돌면서 외부에서 정의한 메소드 호출
+	set Method(obj){ //Json
+		this.OnMethod = obj;
+	}
 }
+
