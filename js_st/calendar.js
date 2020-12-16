@@ -169,26 +169,6 @@ class Calendar {
 			});
 		}
 
-		//이전달
-		var prev_btn = document.getElementById(_this.calendarId).getElementsByClassName('prev_btn')[0];
-		prev_btn.addEventListener("click", function () {
-			_this.CalendarClickClose();
-			_this.create(getFormatDate(new Date(_this.year, _this.month - 1, 1)));
-			document.getElementById(_this.calendarId).className += " on";
-			if (document.getElementById(_this.inputId).getAttribute('class') !== "input_date active") {
-				document.getElementById(_this.inputId).className += " active";
-			}
-		});
-		//다음달
-		var next_btn = document.getElementById(_this.calendarId).getElementsByClassName('next_btn')[0];
-		next_btn.addEventListener("click", function () {
-			_this.CalendarClickClose();
-			_this.create(getFormatDate(new Date(_this.year, _this.month + 1, 1)));
-			document.getElementById(_this.calendarId).className += " on";
-			if (document.getElementById(_this.inputId).getAttribute('class') !== "input_date active") {
-				document.getElementById(_this.inputId).className += " active";
-			}
-		});
 		//날짜클릭시
 		var tdTag = document.getElementById(_this.calendarId).getElementsByTagName("td");
 		for (var i = 0; i < tdTag.length; i++) {
@@ -203,7 +183,27 @@ class Calendar {
 				});
 			}
 		}
-		//날짜클릭시
+		//이전달버튼클릭시
+		var prev_btn = document.getElementById(_this.calendarId).getElementsByClassName('prev_btn')[0];
+		prev_btn.addEventListener("click", function () {
+			_this.CalendarClickClose();
+			_this.create(getFormatDate(new Date(_this.year, _this.month - 1, 1)));
+			document.getElementById(_this.calendarId).className += " on";
+			if (document.getElementById(_this.inputId).getAttribute('class') !== "input_date active") {
+				document.getElementById(_this.inputId).className += " active";
+			}
+		});
+		//다음달버튼클릭시
+		var next_btn = document.getElementById(_this.calendarId).getElementsByClassName('next_btn')[0];
+		next_btn.addEventListener("click", function () {
+			_this.CalendarClickClose();
+			_this.create(getFormatDate(new Date(_this.year, _this.month + 1, 1)));
+			document.getElementById(_this.calendarId).className += " on";
+			if (document.getElementById(_this.inputId).getAttribute('class') !== "input_date active") {
+				document.getElementById(_this.inputId).className += " active";
+			}
+		});
+		//닫기버튼클릭시
 		var close_btn = document.getElementById(_this.calendarId).getElementsByClassName('close_btn')[0];
 		close_btn.addEventListener("click", function () {
 			_this.CalendarClickClose();
