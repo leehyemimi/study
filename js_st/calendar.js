@@ -8,7 +8,6 @@ function fnGetClassName(NowDay){ //요일 클래스
 	}
 	return className;
 }
-
 function getFormatDate(date){ // 날짜포맷 yyyy.MM.dd 변환
 	var year = date.getFullYear();
 	var month = (1 + date.getMonth());
@@ -17,6 +16,10 @@ function getFormatDate(date){ // 날짜포맷 yyyy.MM.dd 변환
 	day = day >= 10 ? day : '0' + day;
 	return year + '.' + month + '.' + day;
 }
+
+//실행순서 ->
+	//1. -> 2. -> 3. -> 4. ->
+//
 
 class Calendar {
 	constructor(nowDate,inputId,url) { //생성자 : class 인스턴스를 생성할때 초기화 하는 메소드
@@ -47,13 +50,13 @@ class Calendar {
 		this.newContentHoliyday = [];
 		this.url = url;
 		this.todo = "";
-		//this.responseObject = "";
 
 		var _this = this;
 		_this.CalendarClickOpen();
+		_this.create(nowDate);
 	}
 
-	tableMake(nowDate){ //달력레이어 만들기
+	create(nowDate){ //달력레이어 만들기
 		var _this = this;
 
 		//input날짜
@@ -129,7 +132,7 @@ class Calendar {
 				}
 
 				//todo날짜 셋팅필요
-				td = openTr + '<td class="' + className + '"><a href="javascript:;" data-date="' + _nowDate + '">' + _this.d + '<span>' + _this.todo +'</span></a></td>' + closeTr;
+				td = openTr + '<td class="' + className + '"><a href="javascript:;" data-date="' + _nowDate + '">' + _this.d + '<span id="'+  _this.d +'"></span></a></td>' + closeTr;
 				_this.d++;
 			}
 			monthBox = monthBox + td;
@@ -137,21 +140,26 @@ class Calendar {
 		monthBox = monthBox + '</tr></table>';
 		document.getElementById(_this.calendarId).innerHTML = monthBox;
 
+
 		if(_this.url) {
 			_this.JsonUrl(_this.url).then(function(responseObject) {
-				console.log(responseObject.TodoList);
-				for (var i = 0; i < responseObject.TodoList.length; i++) {
-					var todoDay = responseObject.TodoList[i].date.split('.'),
-						todoDayY = parseInt(todoDay[0]),
-						todoDayM = parseInt(todoDay[1]),
-						todoDayD = parseInt(todoDay[2]);
-					if(todoDayY === _this.year && todoDayM === _this.nowMonth && day_date.getDate() === todoDayD) {
-						if(responseObject.TodoList[i].holiyday === "holiyday") {
-							className = className + " holiy";
+				for(var a = 0; a < _this.lastDate; a++){
+					var span = document.getElementById(_this.calendarId).getElementsByTagName("span");
+					var spanId = span[a].getAttribute("id");
+					for (var i = 0; i < responseObject.TodoList.length; i++) {
+						var todoDay = responseObject.TodoList[i].date.split('.'),
+							todoDayY = parseInt(todoDay[0]),
+							todoDayM = parseInt(todoDay[1]),
+							todoDayD = parseInt(todoDay[2]);
+							if(todoDayY === _this.year && todoDayM === _this.nowMonth && spanId === String(todoDayD)) {
+								/*if(responseObject.TodoList[i].holiyday === "holiyday") {
+									_this.className = _this.className + " holiy";
+								}*/
+								_this.todo = responseObject.TodoList[i].dateTodo;
+								span[a].innerHTML = _this.todo;
+							}
 						}
-						_this.todo = responseObject.TodoList[i].dateTodo;
 					}
-				}
 			});
 		}
 
@@ -160,7 +168,7 @@ class Calendar {
 		var prev_btn = document.getElementById(_this.calendarId).getElementsByClassName('prev_btn')[0];
 		prev_btn.addEventListener("click", function () {
 			_this.CalendarClickClose();
-			_this.tableMake(getFormatDate(new Date(_this.year, _this.month - 1, 1)));
+			_this.create(getFormatDate(new Date(_this.year, _this.month - 1, 1)));
 			document.getElementById(_this.calendarId).className += " on";
 			if (document.getElementById(_this.inputId).getAttribute('class') !== "input_date active") {
 				document.getElementById(_this.inputId).className += " active";
@@ -170,7 +178,7 @@ class Calendar {
 		var next_btn = document.getElementById(_this.calendarId).getElementsByClassName('next_btn')[0];
 		next_btn.addEventListener("click", function () {
 			_this.CalendarClickClose();
-			_this.tableMake(getFormatDate(new Date(_this.year, _this.month + 1, 1)));
+			_this.create(getFormatDate(new Date(_this.year, _this.month + 1, 1)));
 			document.getElementById(_this.calendarId).className += " on";
 			if (document.getElementById(_this.inputId).getAttribute('class') !== "input_date active") {
 				document.getElementById(_this.inputId).className += " active";
@@ -234,7 +242,7 @@ class Calendar {
 				if(inputDateDay  != 'Invalid Date' ){
 					this.className += " active";
 					if(document.getElementById(_this.calendarId) === null){
-						_this.tableMake(this.value); //this.value
+						_this.create(this.value); //this.value
 					}
 					document.getElementById(_this.calendarId).className += " on";
 
