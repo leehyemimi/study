@@ -17,9 +17,15 @@ function getFormatDate(date){ // 날짜포맷 yyyy.MM.dd 변환
 	return year + '.' + month + '.' + day;
 }
 
-//실행순서 ->
-	//1. -> 2. -> 3. -> 4. ->
-//
+/*
+
+실행순서
+1. constructor 생성자 생성
+2. create() 메서드 실행
+3. CalendarClickOpen() 메서드 실행
+4.
+
+*/
 
 class Calendar {
 	constructor(nowDate,inputId,url) { //생성자 : class 인스턴스를 생성할때 초기화 하는 메소드
@@ -52,8 +58,8 @@ class Calendar {
 		this.todo = "";
 
 		var _this = this;
-		_this.CalendarClickOpen();
 		_this.create(nowDate);
+		_this.CalendarClickOpen();
 	}
 
 	create(nowDate){ //달력레이어 만들기
@@ -151,15 +157,15 @@ class Calendar {
 							todoDayY = parseInt(todoDay[0]),
 							todoDayM = parseInt(todoDay[1]),
 							todoDayD = parseInt(todoDay[2]);
-							if(todoDayY === _this.year && todoDayM === _this.nowMonth && spanId === String(todoDayD)) {
-								/*if(responseObject.TodoList[i].holiyday === "holiyday") {
-									_this.className = _this.className + " holiy";
-								}*/
-								_this.todo = responseObject.TodoList[i].dateTodo;
-								span[a].innerHTML = _this.todo;
+						if(todoDayY === _this.year && todoDayM === _this.nowMonth && spanId === String(todoDayD)) {
+							if(responseObject.TodoList[i].holiyday === "holiyday") {
+								span[a].parentNode.parentNode.className += " holiy";
 							}
+							_this.todo = responseObject.TodoList[i].dateTodo;
+							span[a].innerHTML = _this.todo;
 						}
 					}
+				}
 			});
 		}
 
