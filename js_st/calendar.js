@@ -60,7 +60,7 @@ class Calendar {
 		this.todo = "";
 
 		var _this = this;
-		_this.create(nowDate);
+		//_this.create(nowDate); // 만들필요는 없지 않을까?? input을 클릭해서 달력나옴
 		_this.CalendarClickOpen();
 	}
 
