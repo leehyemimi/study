@@ -60,8 +60,10 @@ class Calendar {
 		this.todo = "";
 
 		var _this = this;
-		//_this.create(nowDate); // 만들필요는 없지 않을까?? input을 클릭해서 달력나옴
-		_this.CalendarClickOpen();
+		_this.create(nowDate); 
+		document.getElementById(_this.inputId).addEventListener("click", function() {
+			_this.CalendarClickOpen();
+		});
 	}
 
 	create(nowDate){
@@ -237,27 +239,25 @@ class Calendar {
 
 	CalendarClickOpen() { //달력 열기
 		var _this = this;
-		document.getElementById(_this.inputId).addEventListener("click", function(){
-			if(this.getAttribute('class') !== "input_date active"){
-				var inputDate = this.value;
-				inputDate = inputDate.split('.');
-				var inputDateY = inputDate[0];
-				var inputDateM = inputDate[1];
-				var inputDateD = inputDate[2];
-				var inputDateDay = new Date(inputDateY, inputDateM - 1, inputDateD);
+		if(this.getAttribute('class') !== "input_date active"){
+			var inputDate = this.value;
+			inputDate = inputDate.split('.');
+			var inputDateY = inputDate[0];
+			var inputDateM = inputDate[1];
+			var inputDateD = inputDate[2];
+			var inputDateDay = new Date(inputDateY, inputDateM - 1, inputDateD);
 
-				if(inputDateDay  != 'Invalid Date' ){
-					this.className += " active";
-					if(document.getElementById(_this.calendarId) === null){
-						_this.create(this.value);
-					}
-					document.getElementById(_this.calendarId).className += " on";
-
-				}else{
-					alert('날짜를 형식에 맞게 넣어주세요.');
+			if(inputDateDay  != 'Invalid Date' ){
+				this.className += " active";
+				if(document.getElementById(_this.calendarId) === null){
+					_this.create(this.value);
 				}
+				document.getElementById(_this.calendarId).className += " on";
+
+			}else{
+				alert('날짜를 형식에 맞게 넣어주세요.');
 			}
-		});
+		}
 	}
 
 	CalendarClickClose() { //달력 닫기
