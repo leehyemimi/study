@@ -60,10 +60,8 @@ class Calendar {
 		this.todo = "";
 
 		var _this = this;
-		_this.create(nowDate);
-		document.getElementById(_this.inputId).addEventListener("click", function() {
-			_this.CalendarClickOpen();
-		});
+		//_this.create(nowDate); // 만들필요는 없지 않을까?? input을 클릭해서 달력나옴
+		_this.CalendarClickOpen();
 	}
 
 	create(nowDate){
@@ -118,7 +116,7 @@ class Calendar {
 			if (j >= _this.firstDateDay && _this.d <= _this.lastDate) {
 				var day_date = new Date(_this.year, _this.month, _this.d),
 					nowDay = day_date.getDay(),
-					 _nowDate = getFormatDate(day_date),
+					_nowDate = getFormatDate(day_date),
 					className = "",
 					openTr = "",
 					closeTr = "";
@@ -163,15 +161,15 @@ class Calendar {
 							todoDayY = parseInt(todoDay[0]),
 							todoDayM = parseInt(todoDay[1]),
 							todoDayD = parseInt(todoDay[2]);
-							if(todoDayY === _this.year && todoDayM === _this.nowMonth && spanId === String(todoDayD)) {
-								if(responseObject.TodoList[i].holiyday === "holiyday") {
-									span[a].parentNode.parentNode.className += " holiy";
-								}
-								_this.todo = responseObject.TodoList[i].dateTodo;
-								span[a].innerHTML = _this.todo;
+						if(todoDayY === _this.year && todoDayM === _this.nowMonth && spanId === String(todoDayD)) {
+							if(responseObject.TodoList[i].holiyday === "holiyday") {
+								span[a].parentNode.parentNode.className += " holiy";
 							}
+							_this.todo = responseObject.TodoList[i].dateTodo;
+							span[a].innerHTML = _this.todo;
 						}
 					}
+				}
 			});
 		}
 
@@ -239,25 +237,27 @@ class Calendar {
 
 	CalendarClickOpen() { //달력 열기
 		var _this = this;
-		if(document.getElementById(_this.inputId).getAttribute('class') !== "input_date active"){
-			var inputDate = document.getElementById(_this.inputId).value;
-			inputDate = inputDate.split('.');
-			var inputDateY = inputDate[0];
-			var inputDateM = inputDate[1];
-			var inputDateD = inputDate[2];
-			var inputDateDay = new Date(inputDateY, inputDateM - 1, inputDateD);
+		document.getElementById(_this.inputId).addEventListener("click", function(){
+			if(this.getAttribute('class') !== "input_date active"){
+				var inputDate = this.value;
+				inputDate = inputDate.split('.');
+				var inputDateY = inputDate[0];
+				var inputDateM = inputDate[1];
+				var inputDateD = inputDate[2];
+				var inputDateDay = new Date(inputDateY, inputDateM - 1, inputDateD);
 
-			if(inputDateDay  != 'Invalid Date' ){
-				this.className += " active";
-				if(document.getElementById(_this.calendarId) === null){
-					_this.create(this.value);
+				if(inputDateDay  != 'Invalid Date' ){
+					this.className += " active";
+					if(document.getElementById(_this.calendarId) === null){
+						_this.create(this.value);
+					}
+					document.getElementById(_this.calendarId).className += " on";
+
+				}else{
+					alert('날짜를 형식에 맞게 넣어주세요.');
 				}
-				document.getElementById(_this.calendarId).className += " on";
-
-			}else{
-				alert('날짜를 형식에 맞게 넣어주세요.');
 			}
-		}
+		});
 	}
 
 	CalendarClickClose() { //달력 닫기
@@ -277,4 +277,3 @@ class Calendar {
 		this.OnMethod = obj;
 	}
 }
-
