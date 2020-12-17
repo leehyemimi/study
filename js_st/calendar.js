@@ -27,7 +27,7 @@ function getFormatDate(date){
 */
 
 class Calendar {
-	constructor(nowDate,inputId,url) { //생성자 생성 constructor('YYYY.MM.DD', 'input 아이디' , 'Jsonurl')
+	constructor(nowDate,inputId,url) { //생성자 생성 constructor('YYYY.MM.DD', 'input 아이디' , 'Jsonurl') //날짜만 둔다
 		this.inputId = inputId; //input 아이디
 
 		this.nowDate = nowDate.split('.');
@@ -250,7 +250,7 @@ class Calendar {
 			if(inputDateDay  != 'Invalid Date' ){
 				this.className += " active";
 				if(document.getElementById(_this.calendarId) === null){
-					_this.create(this.value);
+					_this.create(document.getElementById(_this.inputId).value);
 				}
 				document.getElementById(_this.calendarId).className += " on";
 
