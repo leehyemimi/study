@@ -60,7 +60,7 @@ class Calendar {
 		this.todo = "";
 
 		var _this = this;
-		_this.create(nowDate); 
+		_this.create(nowDate);
 		document.getElementById(_this.inputId).addEventListener("click", function() {
 			_this.CalendarClickOpen();
 		});
@@ -239,8 +239,8 @@ class Calendar {
 
 	CalendarClickOpen() { //달력 열기
 		var _this = this;
-		if(this.getAttribute('class') !== "input_date active"){
-			var inputDate = this.value;
+		if(document.getElementById(_this.inputId).getAttribute('class') !== "input_date active"){
+			var inputDate = document.getElementById(_this.inputId).value;
 			inputDate = inputDate.split('.');
 			var inputDateY = inputDate[0];
 			var inputDateM = inputDate[1];
