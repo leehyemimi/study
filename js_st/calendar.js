@@ -106,52 +106,90 @@ class Calendar {
 		div.setAttribute("id", _this.calendarId);
 		document.getElementById(_this.inputId).after(div);
 
-		var monthBox = '<p class="month"><a href="javascript:;" class="prev_btn"></a>' +
-			_this.year + '년 ' + _this.nowMonth + '월<a href="javascript:;" class="close_btn"></a><a href="javascript:;" class="next_btn"></a>' +
-			'</p>' +
-			'<table class="calendar"><colgroup><col width="14.2%" span="7"></colgroup><tr><th>일</th><th>월</th><th>화</th><th>수</th><th>목</th><th>금</th><th>토</th></tr>' +
-			'<tr>';
+		var p = document.createElement("p");
+		document.getElementById(_this.calendarId).appendChild(p);
+		p.setAttribute("class", "month");
+		p.innerHTML = '<a href="javascript:;" class="prev_btn"></a>' +
+			_this.year + '년 ' + _this.nowMonth + '월' +
+			'<a href="javascript:;" class="close_btn"></a>' +
+			'<a href="javascript:;" class="next_btn"></a>';
 
-		for(var j = 0; j < _this.totalTd; j++) {
-			var td = '<td></td>';
+		//table만들기
+		var table = document.createElement("table");
+		document.getElementById(_this.calendarId).appendChild(table);
+		table.setAttribute("class", "calendar");
 
-			if (j >= _this.firstDateDay && _this.d <= _this.lastDate) {
+		var colgroup = document.createElement("colgroup");
+		table.appendChild(colgroup);
+		colgroup.innerHTML = '<col width="14.2%" span="7"></colgroup>';
+
+		var thead = document.createElement("thead");
+		colgroup.after(thead);
+		thead.innerHTML = '<tr><th>일</th><th>월</th><th>화</th><th>수</th><th>목</th><th>금</th><th>토</th></tr>';
+
+		var tbody = document.createElement("tbody");
+		thead.after(tbody);
+		for(var t = 0; t < _this.trLength ; t++) {
+			var tr = document.createElement("tr");
+			tbody.appendChild(tr);
+			for(var j = 0; j < 7; j++) {
+				var td = document.createElement("td");
+				var cell = document.createTextNode(_this.d);
+				var span =document.createElement("span");
+				var a =document.createElement("a");
+				a.setAttribute("href","javascript:;");
+
 				var day_date = new Date(_this.year, _this.month, _this.d),
 					nowDay = day_date.getDay(),
-					_nowDate = getFormatDate(day_date),
-					className = "",
-					openTr = "",
-					closeTr = "";
+					_nowDate = getFormatDate(day_date);
 
-				//날짜의 수만큼 루프를 돌면서 외부에서 정의한 메소드 호출
-				if (_this.OnMethod !== undefined) {
-					_this.OnMethod(_this.d);
-				}
-
-				className = fnGetClassName(nowDay); //class
-
+				var className = fnGetClassName(nowDay); //class
 				if (selectYear === _this.year && selectMonth === _this.nowMonth) { //현재 날짜
 					if (day_date.getDate() === selectDate) {
 						className = className + " bg";
 					}
 				}
-				if (nowDay === 0) { //tr 여는 태그
-					openTr = '<tr>';
+				td.setAttribute("class",className);
+
+				if(t === 0){
+					if (j >= _this.firstDateDay) {
+						td.appendChild(a);
+						a.appendChild(span);
+						a.appendChild(cell);
+						a.setAttribute("data-date",_nowDate);
+						span.setAttribute("id",_this.d);
+						_this.d++;
+					}
+				}else if(t === _this.trLength  - 1){
+					if (_this.d <= _this.lastDate) {
+						td.appendChild(a);
+						a.appendChild(span);
+						a.appendChild(cell);
+						a.setAttribute("data-date",_nowDate);
+						span.setAttribute("id",_this.d);
+						_this.d++;
+					}
+				}else{
+					td.appendChild(a);
+					a.appendChild(span);
+					a.appendChild(cell);
+					a.setAttribute("data-date",_nowDate);
+					span.setAttribute("id",_this.d);
+					_this.d++;
 				}
 
-				if (nowDay === 6) { //tr 닫는 태그
-					closeTr = '</tr>';
-					closeTr = '</tr>';
-				}
-
-				//td 만들기
-				td = openTr + '<td class="' + className + '"><a href="javascript:;" data-date="' + _nowDate + '">' + _this.d + '<span id="'+  _this.d +'"></span></a></td>' + closeTr;
-				_this.d++;
+				tr.appendChild(td);
 			}
-			monthBox = monthBox + td;
 		}
-		monthBox = monthBox + '</tr></table>';
-		document.getElementById(_this.calendarId).innerHTML = monthBox;
+
+		//날짜의 수만큼 루프를 돌면서 외부에서 정의한 메소드 호출
+		/*var tdN = document.getElementById(_this.calendarId).getElementsByTagName("td").length;
+		for(var k = 0; k < _this.lastDate; k++){
+			console.log();
+			if (_this.OnMethod !== undefined) {
+				_this.OnMethod();
+			}
+		}*/
 
 		if(_this.url) { //JSon 호출
 			_this.JsonUrl(_this.url).then(function(responseObject) {
