@@ -78,7 +78,15 @@ class Calendar {
 			selectMonth = selectDay.getMonth() + 1,
 			selectDate = selectDay.getDate();
 
+
+		/*if(nowDate !== undefined){
+			_this.nowDate = nowDate;
+		}else{
+			console.log(_this.getInputId);
+			_this.nowDate = _this.getInputId;
+		}*/
 		_this.nowDate = nowDate;
+
 		_this.nowDate = _this.nowDate.split('.');
 		_this.nowDateY = _this.nowDate[0];
 		_this.nowDateM = _this.nowDate[1];
@@ -182,15 +190,6 @@ class Calendar {
 			}
 		}
 
-		//날짜의 수만큼 루프를 돌면서 외부에서 정의한 메소드 호출
-		/*var tdN = document.getElementById(_this.calendarId).getElementsByTagName("td").length;
-		for(var k = 0; k < _this.lastDate; k++){
-			console.log();
-			if (_this.OnMethod !== undefined) {
-				_this.OnMethod();
-			}
-		}*/
-
 		if(_this.url) { //JSon 호출
 			_this.JsonUrl(_this.url).then(function(responseObject) {
 				for(var a = 0; a < _this.lastDate; a++){
@@ -210,9 +209,25 @@ class Calendar {
 						}
 					}
 				}
+
+				//날짜의 수만큼 루프를 돌면서 외부에서 정의한 메소드 호출
+				var tdLength = document.getElementById(_this.calendarId).getElementsByTagName("td").length;
+				for(var k = 0; k < tdLength ; k++){
+					if (_this.OnMethod !== undefined) {
+						var td  = document.getElementById(_this.calendarId).getElementsByTagName("td")[k];
+						var a =  td.getElementsByTagName("a")[0];
+						if(a !== undefined){
+							var obj = {
+								id : a.getAttribute("data-date"),
+								span : a.getElementsByTagName("span")[0]
+							};
+							_this.OnMethod(obj);
+						}
+					}
+				}
 			});
 		}
-		
+
 		//날짜클릭시
 		var tdTag = document.getElementById(_this.calendarId).getElementsByTagName("td");
 		for (var i = 0; i < tdTag.length; i++) {
@@ -300,16 +315,21 @@ class Calendar {
 			}
 		}
 	}
-
 	set OnDateClick(event) { //날짜클릭시 이벤트
 		this.DateOnClick = event;
 	}
 	set OnCalendarCloseClick(event){ //닫기버튼 이벤트
 		this.CalendarCloseBtnOnClick = event;
 	}
+
+	//외부 프로퍼티
 	set SetInputId(id){
 		this.getInputId = id;
 	}
+	set SetJsonUrl(url){
+		this.getJsonUrl = url;
+	}
+
 	//날짜의 수만큼 루프를 돌면서 외부에서 정의한 메소드 호출
 	set Method(obj){ //Json
 		this.OnMethod = obj;
