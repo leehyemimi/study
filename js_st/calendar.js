@@ -27,8 +27,8 @@ function getFormatDate(date){
 */
 
 class Calendar {
-	constructor(nowDate,inputId) { //생성자 생성 constructor('YYYY.MM.DD', 'input 아이디' , 'Jsonurl') //날짜만 둔다
-		this.inputId = inputId; //input 아이디
+	constructor(nowDate,inputId) { //생성자 생성 constructor('YYYY.MM.DD', 'input 아이디')
+		this.inputId = inputId;
 
 		this.nowDate = nowDate.split('.');
 		this.nowDateY = this.nowDate[0]; //년
@@ -207,15 +207,15 @@ class Calendar {
 				//날짜의 수만큼 루프를 돌면서 외부에서 정의한 메소드 호출
 				var tdLength = document.getElementById(_this.calendarId).getElementsByTagName("td").length;
 				for(var k = 0; k < tdLength ; k++){
-					if (_this.OnMethod !== undefined) {
+					if (_this.OnDayMethod !== undefined) {
 						var td  = document.getElementById(_this.calendarId).getElementsByTagName("td")[k];
 						var a =  td.getElementsByTagName("a")[0];
 						if(a !== undefined){
-							var obj = {
+							var dayInfo = {
 								id : a.getAttribute("data-date"),
 								span : a.getElementsByTagName("span")[0]
 							};
-							_this.OnMethod(obj);
+							_this.OnDayMethod(dayInfo);
 						}
 					}
 				}
@@ -309,21 +309,18 @@ class Calendar {
 			}
 		}
 	}
+
 	set OnDateClick(event) { //날짜클릭시 이벤트
 		this.DateOnClick = event;
 	}
 	set OnCalendarCloseClick(event){ //닫기버튼 이벤트
 		this.CalendarCloseBtnOnClick = event;
 	}
-
-	//외부 프로퍼티
-	set SetJsonUrl(url){
+	set SetJsonUrl(url){//JsonUrl
 		this.getJsonUrl = url;
 	}
-
-	//날짜의 수만큼 루프를 돌면서 외부에서 정의한 메소드 호출
-	set Method(obj){ //Json
-		this.OnMethod = obj;
+	set SetDayMethod(dayInfo){//날짜접근 이벤트
+		this.OnDayMethod = dayInfo;
 	}
 }
 
