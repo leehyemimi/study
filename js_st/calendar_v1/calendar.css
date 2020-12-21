@@ -14,6 +14,8 @@ body *{font-family:'맑은고딕',MalgunGothic,'돋움',Dotum,Helvetica,sans-ser
 .month .next_btn{display:inline-block;color:#fff;width:30px;text-align:center;}
 .month .prev_btn::after{content:"<";}
 .month .next_btn::after{content:">";}
+
+#myTable{}
 .calendar{margin-bottom:20px;width:100%;border-right:1px solid #bababa;border-top:1px solid #bababa;}
 .calendar th,
 .calendar td{overflow:hidden;color:#8e8e8e;font-size:12px;border-left:1px solid #bababa;border-bottom:1px solid #bababa;text-align:center;}
