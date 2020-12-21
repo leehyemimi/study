@@ -27,12 +27,12 @@ function getFormatDate(date){
 */
 
 class Calendar {
-	constructor(nowDate,inputId,url) { //생성자 생성 constructor('YYYY.MM.DD', 'input 아이디' , 'Jsonurl') //날짜만 둔다
+	constructor(nowDate,inputId) { //생성자 생성 constructor('YYYY.MM.DD', 'input 아이디' , 'Jsonurl') //날짜만 둔다
 		this.inputId = inputId; //input 아이디
 
 		this.nowDate = nowDate.split('.');
 		this.nowDateY = this.nowDate[0]; //년
-		this.nowDateM = this.nowDate[1]; //월
+		this.nowDateM = this.nowDate[1] -  1; //월
 		this.nowDateD = this.nowDate[2]; //일
 		this.today = new Date(this.nowDateY,this.nowDateM,this.nowDateD);
 		this.nowDate = getFormatDate(this.today);  //날짜
@@ -53,7 +53,6 @@ class Calendar {
 		this.calendarId = 'calendar' + this.inputId.slice(-1); //calendar id
 
 		// Json
-		this.url = url; //Json url
 		this.newContent = [];
 		this.newContentTodo = [];
 		this.newContentHoliyday = [];
@@ -78,14 +77,9 @@ class Calendar {
 			selectMonth = selectDay.getMonth() + 1,
 			selectDate = selectDay.getDate();
 
-
-		/*if(nowDate !== undefined){
+		if(nowDate !== undefined){
 			_this.nowDate = nowDate;
-		}else{
-			console.log(_this.getInputId);
-			_this.nowDate = _this.getInputId;
-		}*/
-		_this.nowDate = nowDate;
+		}
 
 		_this.nowDate = _this.nowDate.split('.');
 		_this.nowDateY = _this.nowDate[0];
@@ -190,8 +184,8 @@ class Calendar {
 			}
 		}
 
-		if(_this.url) { //JSon 호출
-			_this.JsonUrl(_this.url).then(function(responseObject) {
+		if(_this.getJsonUrl) { //JSon 호출
+			_this.JsonUrl(_this.getJsonUrl).then(function(responseObject) {
 				for(var a = 0; a < _this.lastDate; a++){
 					var span = document.getElementById(_this.calendarId).getElementsByTagName("span");
 					var spanId = span[a].getAttribute("id");
@@ -323,9 +317,6 @@ class Calendar {
 	}
 
 	//외부 프로퍼티
-	set SetInputId(id){
-		this.getInputId = id;
-	}
 	set SetJsonUrl(url){
 		this.getJsonUrl = url;
 	}
