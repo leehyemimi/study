@@ -25,26 +25,26 @@
 	var CalendarCloseMethod = function(DateOb){ //DateOb => YYYY.MM.DD
 		alert(DateOb);
 	};
-	var VacationDay = function(obj){ //obj.id : 날짜 / obj.span : 달력할일
-		if(obj.id === "2020.12.26" || obj.id === "2020.12.27" || obj.id === "2020.12.28" || obj.id === "2020.12.29" || obj.id === "2020.12.30" || obj.id === "2020.12.31"){
-			obj.span.innerHTML = "박용재휴가";
+	var VacationDay = function(dayInfo){ //dayInfo.id : 날짜 / dayInfo.span : 달력할일
+		if(dayInfo.id === "2020.12.26" || dayInfo.id === "2020.12.27" || dayInfo.id === "2020.12.28" || dayInfo.id === "2020.12.29" || dayInfo.id === "2020.12.30" || dayInfo.id === "2020.12.31"){
+			dayInfo.span.innerHTML = "박용재휴가";
 		}
 
-		if(obj.id === "2021.01.02" || obj.id === "2021.01.03" || obj.id === "2021.01.04" || obj.id === "2021.01.05"){
-			obj.span.innerHTML = "이혜원휴가";
+		if(dayInfo.id === "2021.01.02" || dayInfo.id === "2021.01.03" || dayInfo.id === "2021.01.04" || dayInfo.id === "2021.01.05"){
+			dayInfo.span.innerHTML = "이혜원휴가";
 		}
 	};
-	var calendar1 = new Calendar('2020.12.12','input_calendar1');
-	calendar1.SetJsonUrl = 'data/calendar_data.json'; //jsonurl
-	calendar1.OnCalendarCloseClick = CalendarCloseMethod;
-	calendar1.Method = VacationDay;
 	
+	var calendar1 = new Calendar('2020.12.12','input_calendar1'); //'YYYY.MM.DD', 'input 아이디'
+	calendar1.SetJsonUrl = 'data/calendar_data.json'; //Jsonurl
+	calendar1.SetDayMethod = VacationDay;
+	calendar1.OnCalendarCloseClick = CalendarCloseMethod;
+	calendar1.OnDateClick = DateOnClickMethod;
 	calendar1.create();
 	
 	var calendar2 = new Calendar('2020.12.01','input_calendar2');
-	calendar2.SetJsonUrl = 'data/calendar_data1.json'; //jsonurl
-	calendar2.Method = VacationDay;
-	
+	calendar2.SetJsonUrl = 'data/calendar_data1.json'; //Jsonurl
+	calendar2.SetDayMethod = VacationDay;
 	calendar2.create();
 </script>
 </body>
