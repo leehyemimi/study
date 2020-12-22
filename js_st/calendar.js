@@ -22,7 +22,7 @@ function getFormatDate(date){
 1. constructor 생성자 생성
 2. create() 메서드 실행
 3. CalendarClickOpen() 메서드 실행
-4. constructor 생성자 매개변수중 url에 값이 있을경우 JsonUrl() 메서드 실행 //삭제
+4. constructor 생성자 매개변수중 url에 값이 있을경우 JsonUrl() 메서드 실행
 5. Calendar에 삭제 버튼 클릭시 CalendarClickClose() 메서드 실행
 */
 
@@ -246,6 +246,28 @@ class Calendar {
 		document.getElementById(_this.calendarId).remove();
 		document.getElementById(_this.inputId).setAttribute("class","input_date");
 	}
+	CalendarClickOpen() { //달력 열기
+		var _this = this;
+		if(document.getElementById(_this.inputId).getAttribute('class') !== "input_date active"){
+			var inputDate = document.getElementById(_this.inputId).value;
+			inputDate = inputDate.split('.');
+			var inputDateY = inputDate[0];
+			var inputDateM = inputDate[1];
+			var inputDateD = inputDate[2];
+			var inputDateDay = new Date(inputDateY, inputDateM - 1, inputDateD);
+
+			if(inputDateDay  != 'Invalid Date' ){
+				this.className += " active";
+				if(document.getElementById(_this.calendarId) === null){
+					_this.create(document.getElementById(_this.inputId).value);
+				}
+				document.getElementById(_this.calendarId).className += " on";
+
+			}else{
+				alert('날짜를 형식에 맞게 넣어주세요.');
+			}
+		}
+	}
 
 	set OnDateClick(event) { //날짜클릭시 이벤트
 		this.DateOnClick = event;
@@ -256,8 +278,8 @@ class Calendar {
 	set SetDayMethod(dayInfo){//날짜접근 이벤트
 		this.OnDayMethod = dayInfo;
 	}
-	set SetOnCalendarComplete(obj){//날짜접근 이벤트
-		this.OnCalendarComplete = obj;
+	set SetOnCalendarComplete(table){//날짜접근 이벤트
+		this.OnCalendarComplete = table;
 	}
 }
 
