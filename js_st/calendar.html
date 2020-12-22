@@ -34,11 +34,15 @@
 			dayInfo.span.innerHTML = "이혜원휴가";
 		}
 	};
+	var CalendarTable = function(table){
+		console.log(table);
+	};
 	
 	var calendar1 = new Calendar('2020.12.12','input_calendar1'); //'YYYY.MM.DD', 'input 아이디'
 	calendar1.SetDayMethod = VacationDay;
 	calendar1.OnCalendarCloseClick = CalendarCloseMethod;
 	calendar1.OnDateClick = DateOnClickMethod;
+	calendar1.SetOnCalendarComplete = CalendarTable;
 	calendar1.create();
 	
 	var calendar2 = new Calendar('2020.12.01','input_calendar2');
