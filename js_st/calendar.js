@@ -183,6 +183,7 @@ class Calendar {
 				tr.appendChild(td);
 			}
 		}
+
 		//날짜의 수만큼 루프를 돌면서 외부에서 정의한 메소드 호출
 		var tdLength = document.getElementById(_this.calendarId).getElementsByTagName("td").length;
 		for(var k = 0; k < tdLength ; k++){
@@ -241,33 +242,15 @@ class Calendar {
 				_this.CalendarCloseBtnOnClick(_this.nowDate);
 			}
 		});
+
+		if(_this.OnCalendarComplete !== undefined ){
+			_this.OnCalendarComplete(table);
+		}
 	}
 	CalendarClickClose() { //달력 닫기
 		var _this = this;
 		document.getElementById(_this.calendarId).remove();
 		document.getElementById(_this.inputId).setAttribute("class","input_date");
-	}
-	CalendarClickOpen() { //달력 열기
-		var _this = this;
-		if(document.getElementById(_this.inputId).getAttribute('class') !== "input_date active"){
-			var inputDate = document.getElementById(_this.inputId).value;
-			inputDate = inputDate.split('.');
-			var inputDateY = inputDate[0];
-			var inputDateM = inputDate[1];
-			var inputDateD = inputDate[2];
-			var inputDateDay = new Date(inputDateY, inputDateM - 1, inputDateD);
-
-			if(inputDateDay  != 'Invalid Date' ){
-				this.className += " active";
-				if(document.getElementById(_this.calendarId) === null){
-					_this.create(document.getElementById(_this.inputId).value);
-				}
-				document.getElementById(_this.calendarId).className += " on";
-
-			}else{
-				alert('날짜를 형식에 맞게 넣어주세요.');
-			}
-		}
 	}
 
 	set OnDateClick(event) { //날짜클릭시 이벤트
@@ -278,6 +261,9 @@ class Calendar {
 	}
 	set SetDayMethod(dayInfo){//날짜접근 이벤트
 		this.OnDayMethod = dayInfo;
+	}
+	set SetOnCalendarComplete(obj){//날짜접근 이벤트
+		this.OnCalendarComplete = obj;
 	}
 }
 
