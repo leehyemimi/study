@@ -183,43 +183,20 @@ class Calendar {
 				tr.appendChild(td);
 			}
 		}
-
-		if(_this.getJsonUrl) { //JSon 호출
-			_this.JsonUrl(_this.getJsonUrl).then(function(responseObject) {
-				for(var a = 0; a < _this.lastDate; a++){
-					var span = document.getElementById(_this.calendarId).getElementsByTagName("span");
-					var spanId = span[a].getAttribute("id");
-					for (var i = 0; i < responseObject.TodoList.length; i++) {
-						var todoDay = responseObject.TodoList[i].date.split('.'),
-							todoDayY = parseInt(todoDay[0]),
-							todoDayM = parseInt(todoDay[1]),
-							todoDayD = parseInt(todoDay[2]);
-						if(todoDayY === _this.year && todoDayM === _this.nowMonth && spanId === String(todoDayD)) {
-							if(responseObject.TodoList[i].holiyday === "holiyday") {
-								span[a].parentNode.parentNode.className += " holiy";
-							}
-							_this.todo = responseObject.TodoList[i].dateTodo;
-							span[a].innerHTML = _this.todo;
-						}
-					}
+		//날짜의 수만큼 루프를 돌면서 외부에서 정의한 메소드 호출
+		var tdLength = document.getElementById(_this.calendarId).getElementsByTagName("td").length;
+		for(var k = 0; k < tdLength ; k++){
+			if (_this.OnDayMethod !== undefined) {
+				var td  = document.getElementById(_this.calendarId).getElementsByTagName("td")[k];
+				var a =  td.getElementsByTagName("a")[0];
+				if(a !== undefined){
+					var dayInfo = {
+						id : a.getAttribute("data-date"),
+						span : a.getElementsByTagName("span")[0]
+					};
+					_this.OnDayMethod(dayInfo);
 				}
-
-				//날짜의 수만큼 루프를 돌면서 외부에서 정의한 메소드 호출
-				var tdLength = document.getElementById(_this.calendarId).getElementsByTagName("td").length;
-				for(var k = 0; k < tdLength ; k++){
-					if (_this.OnDayMethod !== undefined) {
-						var td  = document.getElementById(_this.calendarId).getElementsByTagName("td")[k];
-						var a =  td.getElementsByTagName("a")[0];
-						if(a !== undefined){
-							var dayInfo = {
-								id : a.getAttribute("data-date"),
-								span : a.getElementsByTagName("span")[0]
-							};
-							_this.OnDayMethod(dayInfo);
-						}
-					}
-				}
-			});
+			}
 		}
 
 		//날짜클릭시
@@ -315,9 +292,6 @@ class Calendar {
 	}
 	set OnCalendarCloseClick(event){ //닫기버튼 이벤트
 		this.CalendarCloseBtnOnClick = event;
-	}
-	set SetJsonUrl(url){//JsonUrl
-		this.getJsonUrl = url;
 	}
 	set SetDayMethod(dayInfo){//날짜접근 이벤트
 		this.OnDayMethod = dayInfo;
