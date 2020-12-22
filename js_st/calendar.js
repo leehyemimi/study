@@ -22,7 +22,7 @@ function getFormatDate(date){
 1. constructor 생성자 생성
 2. create() 메서드 실행
 3. CalendarClickOpen() 메서드 실행
-4. constructor 생성자 매개변수중 url에 값이 있을경우 JsonUrl() 메서드 실행
+4. constructor 생성자 매개변수중 url에 값이 있을경우 JsonUrl() 메서드 실행 //삭제
 5. Calendar에 삭제 버튼 클릭시 CalendarClickClose() 메서드 실행
 */
 
@@ -51,12 +51,6 @@ class Calendar {
 		this.trLength = Math.ceil((this.lastDate + this.firstDateDay)/7); //tr갯수
 		this.totalTd = this.trLength * 7; //td갯수
 		this.calendarId = 'calendar' + this.inputId.slice(-1); //calendar id
-
-		// Json
-		this.newContent = [];
-		this.newContentTodo = [];
-		this.newContentHoliyday = [];
-		this.todo = "";
 
 		var _this = this;
 		document.getElementById(_this.inputId).addEventListener("click", function() {
