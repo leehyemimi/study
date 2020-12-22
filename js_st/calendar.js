@@ -242,23 +242,6 @@ class Calendar {
 			}
 		});
 	}
-	JsonUrl(url){ 	//JSon
-		return new Promise(function (resolve, reject) {
-			let xhr = new XMLHttpRequest();
-			xhr.open('GET', url);
-			xhr.onload = function () {
-				if (this.status >= 200 && this.status < 300) {
-					resolve(JSON.parse(xhr.responseText));
-				} else {
-					reject({
-						status: this.status,
-						statusText: xhr.statusText
-					});
-				}
-			};
-			xhr.send();
-		});
-	}
 	CalendarClickClose() { //달력 닫기
 		var _this = this;
 		document.getElementById(_this.calendarId).remove();
