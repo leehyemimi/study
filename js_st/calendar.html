@@ -36,14 +36,12 @@
 	};
 	
 	var calendar1 = new Calendar('2020.12.12','input_calendar1'); //'YYYY.MM.DD', 'input 아이디'
-	calendar1.SetJsonUrl = 'data/calendar_data.json'; //Jsonurl
 	calendar1.SetDayMethod = VacationDay;
 	calendar1.OnCalendarCloseClick = CalendarCloseMethod;
 	calendar1.OnDateClick = DateOnClickMethod;
 	calendar1.create();
 	
 	var calendar2 = new Calendar('2020.12.01','input_calendar2');
-	calendar2.SetJsonUrl = 'data/calendar_data1.json'; //Jsonurl
 	calendar2.SetDayMethod = VacationDay;
 	calendar2.create();
 </script>
