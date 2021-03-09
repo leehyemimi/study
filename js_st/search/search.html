@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>자동완성기능</title>
+	<link type="text/css" rel="stylesheet" href="search.css" />
+	<script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+	
+	<script type="text/javascript" src="search.js"></script>
+</head>
+<body>
+<!--
+	온키업시 ajax를 호출해서
+	관련된 데이터를 서버에서 받아 와서
+	레이어에 노출시켜주고
+	검색어를 사용자가 선택시
+	input 박스에 삽입 시켜주는게
+-->
+<!--https://jqueryui.com/autocomplete/-->
+<div class="article">
+	<style>
+		.auto_search_box{position:relative;}
+		.auto_search_con{display:none;width:130px;position:absolute;left:0;top:22px;background:#fff;border:1px solid #c5c5c5;}
+		.auto_search_con.on{display:block;}
+		.auto_search_con li{cursor:pointer;padding:5px}
+		.auto_search_con li:hover{background:#EFEFEF;}
+	</style>
+	<div class="auto_search_box">
+		<label class="auto_input"><input type="text" id="auto_input"></label>
+		<div class="auto_search_con" id="auto_search_con">
+			<ul>
+				<li>ActionScript</li>
+				<li>ActionScript1</li>
+				<li>ActionScript2</li>
+			</ul>
+		</div>
+	</div>
+	
+	<script>
+		document.getElementById('auto_input').addEventListener("keyup", function () {
+			if(document.getElementById('auto_search_con').className != "auto_search_con on"){
+				document.getElementById('auto_search_con').className += " " + "on";
+			}
+		});
+		
+		var el = document.getElementById('auto_search_con').childNodes[1].getElementsByTagName("li");
+		for (var i = 0; i < el.length; i++) {
+			el[i].addEventListener("click", function () {
+				document.getElementById('auto_input').value = this.innerText;
+				document.getElementById('auto_search_con').className = "auto_search_con";
+			});
+		}
+		/*$(document).ready(function () {
+			$("#auto_input").on("keyup",function(){
+				$(".auto_search_con").addClass("on");
+			});
+
+			$(".auto_search_con li p").on("click",function(){
+				$("#auto_input").val($(this).text());
+				$(".auto_search_con").removeClass("on");
+			});
+
+		});*/
+		/*$("#auto_input").on("click",function(){
+				$("#auto_input").val("");
+			});*/
+		/*$("#auto_input").on("click",function(){
+			$(".auto_search_con").addClass("on");
+		});*/
+	
+	</script>
+</div>
+</body>
+</html>
