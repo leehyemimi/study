@@ -16,59 +16,80 @@
 	검색어를 사용자가 선택시
 	input 박스에 삽입 시켜주는게
 -->
-<!--https://jqueryui.com/autocomplete/-->
+<!--https://jqueryui.com/autocomplete/  https://jqueryui.com/resources/demos/autocomplete/default.html-->
 <!--https://keycode.info/-->
 <div class="article">
 	<style>
 		.auto_search_box{position:relative;}
 		.auto_search_con{display:none;width:130px;position:absolute;left:0;top:22px;background:#fff;border:1px solid #c5c5c5;}
 		.auto_search_con.on{display:block;}
-		.auto_search_con li{cursor:pointer;padding:5px;tab-index:-1}
+		.auto_search_con li{cursor:pointer;padding:5px;}
 		.auto_search_con li:hover,
-		.auto_search_con li:focus{background:#EFEFEF;tab-index:0}
+		.auto_search_con li:focus,
+		.auto_search_con li.on{background:#EFEFEF;outline:0;border:0;}
 	</style>
 	<div class="auto_search_box">
-		<label class="auto_input"><input type="text" id="auto_input" onkeyup="keycheck(event)"></label>
-		<div class="auto_search_con on" id="auto_search_con">
-			<ul>
-				<li><a href=""></a>ActionScript</li>
-				<li>ActionScript1</li>
-				<li>ActionScript2</li>
-			</ul>
-		</div>
+		<label class="auto_input"><input type="text" id="auto_input"></label>
+		<ul class="auto_search_con" id="auto_search_con" tabindex="0">
+			<li tabindex="-1">ActionScrip</li>
+			<li tabindex="-1">ActionScript1</li>
+			<li tabindex="-1">ActionScript2</li>
+		</ul>
 	</div>
 	
 	<script>
 		
-		document.getElementById('auto_input').addEventListener("keyup", function () {
-			if(document.getElementById('auto_search_con').className != "auto_search_con on"){
-				document.getElementById('auto_search_con').className += " " + "on";
-			}
-		});
-		document.getElementById('auto_input').addEventListener("click", function () {
-			if(document.getElementById('auto_search_con').className != "auto_search_con on"){
-				document.getElementById('auto_search_con').className += " " + "on";
-			}
-		});
-		
-		var el = document.getElementById('auto_search_con').childNodes[1].getElementsByTagName("li");
-		for (var i = 0; i < el.length; i++) {
+		//자동완성 레이어
+		//var el = document.querySelectorAll('#auto_search_con li');
+		var el = document.querySelector('.auto_search_con').getElementsByTagName("li");
+		var currentIndex = 0;
+		for(var i=0 ; i<el.length; i++){
 			el[i].addEventListener("click", function () {
-				document.getElementById('auto_input').value = this.innerText;
-				document.getElementById('auto_search_con').className = "auto_search_con";
+				document.querySelector('#auto_input').value = this.innerText;
+				document.querySelector('.auto_search_con').classList.remove('on');
+			});
+			
+			el[i].addEventListener("keydown", function () {
+				if(event.keyCode === 40){
+					currentIndex = currentIndex + 1;
+					el[currentIndex].focus();
+					document.querySelector('#auto_input').value = el[currentIndex].innerText;
+				}else if(event.keyCode === 38) {
+					currentIndex = currentIndex - 1;
+					el[currentIndex].focus();
+					document.querySelector('#auto_input').value =  el[currentIndex].innerText;
+				}
 			});
 		}
 		
-	
-		function keycheck(evt){
+
+
+		//input박스에 단어 입력
+		document.querySelector('#auto_input').addEventListener("keydown", function () {
+			if(document.querySelector('.auto_search_con').className != "auto_search_con on"){
+				document.querySelector('.auto_search_con').classList.add('on');
+			}
+			//방향키 위아래
+			if(event.keyCode === 40){
+				document.querySelector('#auto_input').value = el[0].innerText;
+				//el[0].classList.add('on');
+				el[0].focus();
+			}else if(event.keyCode === 38) {
+				el[0].focusout();
+				//원래 문자
+			}
+		});
+
+		
+		/*function keycheck(evt){
 			var keyCode = evt.which?evt.which:event.keyCode;
 			if(keyCode === 40){ // 아래 화살표
-				document.getElementById('auto_input').value = el[0].innerText;
+				document.querySelector('#auto_input').value = el[0].innerText;
 			}else if(keyCode === 38){ // 위 화살표
 				el[0].className = "";
-				document.getElementById('auto_search_con').className = "auto_search_con";
+				document.querySelector('#auto_search_con').className = "auto_search_con";
 			}
-		}
+		}*/
 		/*$(document).ready(function () {
 			$("#auto_input").on("keyup",function(){
 				$(".auto_search_con").addClass("on");
