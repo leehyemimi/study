@@ -70,3 +70,11 @@ class Search {
 		this.input.value = inputText;
 	}
 }
+
+
+/*
+	* 남은기능
+	1. input박스 한글입력
+	2. 자동완성리스트 json으로 가져오기
+	3. input박스 입력 문자랑 리스트 비교
+*/
