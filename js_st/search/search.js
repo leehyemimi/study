@@ -2,9 +2,10 @@ class Search {
 	constructor(input,ul) {
 		this.ul = document.querySelector(ul);
 		this.li = this.ul.getElementsByTagName("li");
+
+		this.input = document.querySelector(input);
 		this.currentIndex = 0;
 		this.inputTxt = null; //input유저가 입력하는 값
-		this.input = document.querySelector(input);
 	}
 	init(){
 		this.initEvent();
@@ -26,7 +27,7 @@ class Search {
 		});
 	}
 
-	//input
+	//input에 키보드접근시
 	InputActive(){
 		if(this.ul.className !== "on"){ //레이어열림
 			this.ul.classList.add('on');
@@ -38,10 +39,12 @@ class Search {
 			this.inputTxt = this.input.value;
 		}
 	}
+	//li_list show
 	ActiveCon(){
 		this.input.value = this.innerText;
 		this.ul.classList.remove('on');
 	}
+	//li_list 선택
 	SelectItem(){
 		if(event.keyCode === 40){ //아래
 			if(this.currentIndex < this.li.length-1){
