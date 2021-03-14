@@ -4,8 +4,6 @@
 	<meta charset="utf-8">
 	<title>자동완성기능</title>
 	<link type="text/css" rel="stylesheet" href="search.css" />
-	<script src="https://code.jquery.com/jquery-1.11.3.js"></script>
-	
 	<script type="text/javascript" src="search.js"></script>
 </head>
 <body>
@@ -17,97 +15,82 @@
 	input 박스에 삽입 시켜주는게
 -->
 <!--https://jqueryui.com/autocomplete/  https://jqueryui.com/resources/demos/autocomplete/default.html-->
+<!--https://jsfiddle.net/E7MSN/118/-->
 <!--https://keycode.info/-->
 <div class="article">
-	<style>
-		.auto_search_box{position:relative;}
-		.auto_search_con{display:none;width:130px;position:absolute;left:0;top:22px;background:#fff;border:1px solid #c5c5c5;}
-		.auto_search_con.on{display:block;}
-		.auto_search_con li{cursor:pointer;padding:5px;}
-		.auto_search_con li:hover,
-		.auto_search_con li:focus,
-		.auto_search_con li.on{background:#EFEFEF;outline:0;border:0;}
-	</style>
 	<div class="auto_search_box">
 		<label class="auto_input"><input type="text" id="auto_input"></label>
-		<ul class="auto_search_con" id="auto_search_con" tabindex="0">
-			<li tabindex="-1">ActionScrip</li>
+		<ul class="auto_search_con" tabindex="0">
+			<li tabindex="-1">ActionScript</li>
 			<li tabindex="-1">ActionScript1</li>
 			<li tabindex="-1">ActionScript2</li>
+			<li tabindex="-1">ActionScript3</li>
+			<li tabindex="-1">ActionScript4</li>
+			<li tabindex="-1">ActionScript5</li>
+			<li tabindex="-1">ActionScript6</li>
+			<li tabindex="-1">ActionScript7</li>
+			<li tabindex="-1">ActionScript8</li>
+			<li tabindex="-1">ActionScript9</li>
 		</ul>
 	</div>
 	
 	<script>
+		var Search_box = new Search('#auto_input','.auto_search_con');
+		Search_box.init();
 		
 		//자동완성 레이어
-		//var el = document.querySelectorAll('#auto_search_con li');
-		var el = document.querySelector('.auto_search_con').getElementsByTagName("li");
-		var currentIndex = 0;
+		/*var el = document.querySelector('.auto_search_con').getElementsByTagName("li");
+		var currentIndex = 0;*/
+		
+		/*//li 리스트
 		for(var i=0 ; i<el.length; i++){
 			el[i].addEventListener("click", function () {
 				document.querySelector('#auto_input').value = this.innerText;
 				document.querySelector('.auto_search_con').classList.remove('on');
 			});
-			
-			el[i].addEventListener("keydown", function () {
-				if(event.keyCode === 40){
-					currentIndex = currentIndex + 1;
-					el[currentIndex].focus();
+			el[i].addEventListener("keyup", function () {
+				if(event.keyCode === 40){ //아래
+					if(currentIndex < el.length-1){
+						currentIndex = currentIndex + 1;
+						el[currentIndex].focus();
+						document.querySelector('#auto_input').value = el[currentIndex].innerText;
+					}else{
+						document.querySelector('#auto_input').focus();
+						document.querySelector('#auto_input').value = inputTxt;
+						currentIndex = 0;
+					}
+				}else if(event.keyCode === 38) { //위
+					if(currentIndex > 0){
+						currentIndex = currentIndex - 1;
+						el[currentIndex].focus();
+						document.querySelector('#auto_input').value =  el[currentIndex].innerText;
+					}else{ //첫번째
+						document.querySelector('#auto_input').focus();
+						document.querySelector('#auto_input').value = inputTxt;//원래 문자
+					}
+				}else if(event.keyCode === 13){ //엔터
+					document.querySelector('.auto_search_con').classList.remove('on');
+					document.querySelector('#auto_input').focus();
 					document.querySelector('#auto_input').value = el[currentIndex].innerText;
-				}else if(event.keyCode === 38) {
-					currentIndex = currentIndex - 1;
-					el[currentIndex].focus();
-					document.querySelector('#auto_input').value =  el[currentIndex].innerText;
+					currentIndex = 0;
 				}
 			});
-		}
+		}*/
 		
-
-
 		//input박스에 단어 입력
-		document.querySelector('#auto_input').addEventListener("keydown", function () {
-			if(document.querySelector('.auto_search_con').className != "auto_search_con on"){
+		/*var inputTxt; //input유저가 입력하는 값
+		document.querySelector('#auto_input').addEventListener("keyup", function () {
+			if(document.querySelector('.auto_search_con').className !== "on"){ //레이어열림
 				document.querySelector('.auto_search_con').classList.add('on');
 			}
 			//방향키 위아래
-			if(event.keyCode === 40){
+			if(event.keyCode === 40){ //아래
 				document.querySelector('#auto_input').value = el[0].innerText;
-				//el[0].classList.add('on');
 				el[0].focus();
-			}else if(event.keyCode === 38) {
-				el[0].focusout();
-				//원래 문자
+			}else if((64 < event.keyCode && event.keyCode < 91)){ //영문 + 국문 // ****국문해야함 모르겠음
+				inputTxt = document.querySelector('#auto_input').value;
 			}
-		});
-
-		
-		/*function keycheck(evt){
-			var keyCode = evt.which?evt.which:event.keyCode;
-			if(keyCode === 40){ // 아래 화살표
-				document.querySelector('#auto_input').value = el[0].innerText;
-			}else if(keyCode === 38){ // 위 화살표
-				el[0].className = "";
-				document.querySelector('#auto_search_con').className = "auto_search_con";
-			}
-		}*/
-		/*$(document).ready(function () {
-			$("#auto_input").on("keyup",function(){
-				$(".auto_search_con").addClass("on");
-			});
-
-			$(".auto_search_con li p").on("click",function(){
-				$("#auto_input").val($(this).text());
-				$(".auto_search_con").removeClass("on");
-			});
-
 		});*/
-		/*$("#auto_input").on("click",function(){
-				$("#auto_input").val("");
-			});*/
-		/*$("#auto_input").on("click",function(){
-			$(".auto_search_con").addClass("on");
-		});*/
-	
 	</script>
 </div>
 </body>

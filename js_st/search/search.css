@@ -1,29 +1,11 @@
 body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, fieldset, legend, textarea, p, blockquote, th, td, input, select, textarea, button{margin:0;padding:0;line-height:1.5}  fieldset, img{border:0 none}  dl, ul, ol, menu, li{list-style:none}  blockquote, q{quotes:none}  blockquote:before, blockquote:after, q:before, q:after{content:'';content:none}  input, select, textarea, button{vertical-align:middle}  input:focus, button:focus, textarea:focus{outline:none}  button{border:0 none;background-color:transparent;cursor:pointer}  body{background:#FFFFFF;-webkit-text-size-adjust:none}  body, th, td, input, select, textarea, button{font-size:13px;font-family: "맑은고딕","Malgun Gothic",'noto', Tahoma, sans-serif;font-weight:400;color:#010101}  a{color:#010101;text-decoration:none}  address, caption, cite, code, dfn, em, var{font-style:normal;font-weight:400}  figure{line-height:0}  table caption{display:none !important}  h1, h2, h3, h4, h5, h6, strong{font-weight:600}  table{table-layout:fixed;border-collapse:collapse;border-spacing:0;width:100%}
 body *{font-family:'맑은고딕',MalgunGothic,'돋움',Dotum,Helvetica,sans-serif;}
-.article{margin:10px;}
-.input_calendar_area{position:relative;float:left;margin-right:350px}
-.input_date{color:#545966;font-size:12px;padding:5px 0;text-align:center;border:1px solid #8b94a9;}
-.calendar_box{position:absolute;left:0;width:480px;display:none;}
-.calendar_box.on{display:block}
 
-.month{position:relative;font-size:12px;margin:0;color:#fff;background:#98a0b3;text-align:center;font-weight:bold;padding:5px 0 7px}
-.month a{color:#000;}
-.month .close_btn{display:block;position:absolute;right:0;top:0;color:#fff;background:#000;width:30px;height:30px;line-height:30px;text-align:center;}
-.month .close_btn::after{content:"X";display:block}
-.month .prev_btn,
-.month .next_btn{display:inline-block;color:#fff;width:30px;text-align:center;}
-.month .prev_btn::after{content:"<";}
-.month .next_btn::after{content:">";}
-.calendar{margin-bottom:20px;width:100%;border-right:1px solid #bababa;border-top:1px solid #bababa;}
-.calendar th,
-.calendar td{overflow:hidden;color:#8e8e8e;font-size:12px;border-left:1px solid #bababa;border-bottom:1px solid #bababa;text-align:center;}
-.calendar th{color:#8b94a9;padding:5px;}
-.calendar td a{text-align:left;display:block;padding:5px;height:60px;position:relative}
-.calendar td.sun a{color:red;}
-.calendar td.holiy a{color:red !important;}
-.calendar td.sat a{color:blue;}
-.calendar td.bg a,
-.calendar td.bg a:hover{background:#2d317c;color:#fff;}
-.calendar td a:hover,
-.calendar td a.on{background:#d5d5d5;}
-.calendar td a span{position:absolute;left:5px;top:24px;text-align:left;font-size:11px;letter-spacing:-.5px;}/*color:#6c6c6c;*/
+.article{margin:10px;}
+.auto_search_box{position:relative;}
+.auto_search_con{display:none;width:130px;position:absolute;left:0;top:22px;background:#fff;border:1px solid #c5c5c5;}
+.auto_search_con.on{display:block;}
+.auto_search_con li{cursor:pointer;padding:5px;}
+.auto_search_con li:hover,
+.auto_search_con li:focus,
+.auto_search_con li.on{background:#EFEFEF;outline:0;border:0;}
