@@ -19,7 +19,7 @@ class Search {
 		//자동완성리스트
 		for(var i=0 ; i<_this.li.length; i++){
 			_this.li[i].addEventListener("click", function () {
-				_this.ActiveCon();
+				_this.ActiveCon(this);
 			});
 			_this.li[i].addEventListener("keyup", function () {
 				_this.SelectItem();
@@ -30,6 +30,7 @@ class Search {
 			_this.InputActive();
 		});
 	}
+<<<<<<< HEAD
 	create(url){
 		var _this = this;
 		var ul = _this.ul;
@@ -65,22 +66,31 @@ class Search {
 		}
 	}*/
 	//}
+=======
+>>>>>>> c3e8cc7e5eae81edd89b957d3bad8fc227ac9c56
 
 	InputActive(){ //input에 키보드입력시
-		if(this.ul.className !== "on"){ //자동완성리스트 레이어열림
-			this.ul.classList.add('on');
+		/*function onlyNumberKey(keyCode) {
+			return /[]|\./.test(String.fromCharCode(keyCode))
 		}
+		var isNumberKey = onlyNumberKey(event.keyCode);
+		console.log(isNumberKey);*/
+
+		//event.keyCode<48||(event.keyCode>57&&event.keyCode<96)||event.keyCode>105
 		//방향키
 		if(event.keyCode === 40){ //아래
 			this.FocusView(this.li[0],this.li[0].innerText);
-		}else if((64 < event.keyCode && event.keyCode < 91)){ //영문 + 국문 // ****국문해야함 모르겠음
+		}else if((keycode < 48 || keycode >57) && (keycode < 65 || keycode > 90) && (keycode < 97 || keycode > 122)){ //숫자
+			if(this.ul.className !== "on"){ //자동완성리스트 레이어열림
+				this.ul.classList.add('on');
+			}
 			this.inputTxt = this.input.value;
 		}
-	}	
-	ActiveCon(){ //자동완성리스트 show
-		this.input.value = this.innerText;
+	}
+	ActiveCon(li){ //자동완성리스트 show
+		this.input.value = li.innerText;
 		this.ul.classList.remove('on');
-	}	
+	}
 	SelectItem(){ //자동완성리스트 선택
 		if(event.keyCode === 40){ //down
 			if(this.currentIndex < this.li.length-1){
