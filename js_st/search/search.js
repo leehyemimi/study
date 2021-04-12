@@ -1,11 +1,15 @@
 class Search {
-	constructor(input,ul) {
+	constructor(input,ul,url) {
+		var _this = this;
 		this.ul = document.querySelector(ul);
 		this.li = this.ul.getElementsByTagName("li");
 
 		this.input = document.querySelector(input);
 		this.currentIndex = 0;
 		this.inputTxt = null; //input유저가 입력하는 값
+
+		this.url = url;
+		_this.create(url);
 	}
 	init(){
 		this.initEvent();
@@ -26,7 +30,42 @@ class Search {
 			_this.InputActive();
 		});
 	}
-	
+	create(url){
+		var _this = this;
+		var ul = _this.ul;
+		var li = document.createElement('li');
+		var li_list = "";
+
+		_this.JsonUrl(this.url).then(function(responseObject) {
+			for(var i = 0; i < responseObject.searchList.length; i++){
+				li.setAttribute("tabindex",-1);
+				li.innerHTML = responseObject.searchList[i].date;
+				li_list = li_list + li;
+				console.log(li);
+			}
+		});
+
+		ul.append(li_list);
+	}
+
+
+	/*var span = document.getElementById(_this.calendarId).getElementsByTagName("span");
+	var spanId = span[a].getAttribute("id");
+	for (var i = 0; i < responseObject.TodoList.length; i++) {
+		var todoDay = responseObject.TodoList[i].date.split('.'),
+			todoDayY = parseInt(todoDay[0]),
+			todoDayM = parseInt(todoDay[1]),
+			todoDayD = parseInt(todoDay[2]);
+		if(todoDayY === _this.year && todoDayM === _this.nowMonth && spanId === String(todoDayD)) {
+			if(responseObject.TodoList[i].holiyday === "holiyday") {
+				span[a].parentNode.parentNode.className += " holiy";
+			}
+			_this.todo = responseObject.TodoList[i].dateTodo;
+			span[a].innerHTML = _this.todo;
+		}
+	}*/
+	//}
+
 	InputActive(){ //input에 키보드입력시
 		if(this.ul.className !== "on"){ //자동완성리스트 레이어열림
 			this.ul.classList.add('on');
@@ -64,10 +103,26 @@ class Search {
 			this.currentIndex = 0;
 		}
 	}
-
 	FocusView(focus,inputText){ //포커스 및 input값 변경
 		focus.focus();
 		this.input.value = inputText;
+	}
+	JsonUrl(url){ //Json
+		return new Promise(function (resolve, reject) {
+			let xhr = new XMLHttpRequest();
+			xhr.open('GET', url);
+			xhr.onload = function () {
+				if (this.status >= 200 && this.status < 300) {
+					resolve(JSON.parse(xhr.responseText));
+				} else {
+					reject({
+						status: this.status,
+						statusText: xhr.statusText
+					});
+				}
+			};
+			xhr.send();
+		});
 	}
 }
 

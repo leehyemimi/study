@@ -11,21 +11,10 @@
 	<div class="auto_search_box">
 		<label class="auto_input"><input type="text" id="auto_input"></label>
 		<ul class="auto_search_con" tabindex="0">
-			<li tabindex="-1">ActionScript</li>
-			<li tabindex="-1">ActionScript1</li>
-			<li tabindex="-1">ActionScript2</li>
-			<li tabindex="-1">ActionScript3</li>
-			<li tabindex="-1">ActionScript4</li>
-			<li tabindex="-1">ActionScript5</li>
-			<li tabindex="-1">ActionScript6</li>
-			<li tabindex="-1">ActionScript7</li>
-			<li tabindex="-1">ActionScript8</li>
-			<li tabindex="-1">ActionScript9</li>
 		</ul>
 	</div>
-	
 	<script>
-		var SearchBox = new Search('#auto_input','.auto_search_con');
+		var SearchBox = new Search('#auto_input','.auto_search_con','search_data.json');
 		SearchBox.init();
 	</script>
 </div>
